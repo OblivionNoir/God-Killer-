@@ -1,4 +1,6 @@
-
+//initial stats
+phase_1_hp = 3000; //global for now, tighten scope if it becomes problematic
+player_hp = 2000;
 //add listener to wait for initial enter to start game
 var check = true;
 document.addEventListener("keyup", function(event) {
