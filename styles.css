@@ -3,9 +3,13 @@
     src: url('valium.ttf');
 }
 html{
-    background-image: url("background169.png");
-    background-size:cover;
-    background-repeat: no-repeat; /*remove?*/
+    background-image: url("background169.png"); 
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    overflow-y: hidden;
+
+     /*remove?*/
     
 }
 
@@ -19,10 +23,9 @@ html{
     left: 50%;
     transform: translate(-50%, -50%);
     height: 85vh;
-
-
-
-
+    box-shadow: -0.9vw -0.9vh 0.5vh rgba(0,0,0,0.8);
+    border-radius: 1%;
+    border: solid rgba(0,0,0,0.8);
 
 }
 #box{
@@ -40,7 +43,7 @@ html{
 
 }
 #battle_menu{
-    background-image: url('texture2.jpg');
+    background-image: url('obsidian2.jpg');
     max-width: fit-content;
     padding-bottom: 1vh;
     max-height: 90vh;
@@ -56,12 +59,22 @@ html{
     flex-direction: row;
     max-width: 10vw;
     border-radius: 8%;
-    font-family: 'Franklin Gothic Medium';
+
 
 
 
 }
 
+#warrior_name, #d_mage_name, #l_mage_name{
+    font-size: 1em;
+    font-weight: bold;
+    background-color: white;
+}
+
+#knight_img:hover, #d_mage_img:hover, #l_mage_img:hover{
+    border:0.15em solid rgb(4, 47, 129) ;
+
+}
 #HP_bar{
     display: flex;
     justify-content: center;
@@ -75,10 +88,14 @@ html{
     color: white;
 }
 
+#battle_menu >div >button:hover{
+    border: 0.15em solid rgba(4, 47, 129, 0.8)
+}
+
 #battle_menu >div >button{
     font-size: 1.5em;
     border-radius: 15%;
-    font-family: 'Franklin Gothic Medium';
+    font-family: 'valium';
 }
 #battle_menu > div >img{
     display: flex;
