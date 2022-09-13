@@ -5,15 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boss Battle</title>
-    <script src = "main.js"></script>
+    <script src = "main.js" async></script>
     <link rel = "stylesheet" href = "styles.css">
 </head>
 <body>
     <div id = "parent">
         <img src = "MONSTER.jpg" id = "boss_img" class = "child">
 
-        <div id = "box" class = "child"><textarea name = "txt" rows = "12" cols="80" placeholder="Type your name and press Enter to start..." id = "txt_"></textarea></div> <!--ask for name, so boss addresses you by name-->
+    <div id = "box" class = "child">
+        <textarea id = "txt_" disabled rows="4" cols="32">Face the great beast of wrath! Press enter to begin...</textarea> <!--remember that this becomes invisible!-->
     </div>
+
+    <!--treat this similarly to the og textarea, css-wise-->
+        <div id = "battle_menu">
+            <div><button>Attack</button></div>
+            <div><button>Spells</button></div>
+            <div><button>Items</button></div>
+            <div><img src = "knight.jpg"></div>
+            <div><textarea id = "warrior_name" disabled></textarea></div>
+            <div><img src = "dmage1.jpg"></div> <!--character portraits, names-->
+            <div><textarea id = "d_mage_name" disabled></textarea></div>
+            <div><img src = "lmage.jpg"></div>
+            <div><textarea id = "l_mage_name" disabled></textarea></div>
+        </div>    
+    
+
+
+
+
+    <div id = "credit">All images created with <a href = https://www.midjourney.com/home target = "_blank">Midjourney AI</div>
+
+    <textarea id = ost_box disabled rows = "3">Now playing:</textarea> <!--updates in real time!-->
+
+    <span id = HP_bar>
+        <span id = "hp">3000/3000</span>
+        <div></div>
+    </span>
+
+
    
 
 
