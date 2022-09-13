@@ -69,6 +69,8 @@ html{
     font-size: 1em;
     font-weight: bold;
     background-color: white;
+    resize: none;
+    overflow: hidden;
 }
 
 #knight_img:hover, #d_mage_img:hover, #l_mage_img:hover{
