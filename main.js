@@ -80,7 +80,7 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
     document.getElementById("txt_").value = `GREETINGS, PATHETIC MORTALS. WHAT ARE YOUR NAMES AGAIN? ${warrior_name.replace('\n', '')}, ${dmage_name.replace('\n', '')}, and ${lmage_name.replace('\n', '')}? WHATEVER. TIME TO DIE...`;
     setTimeout(() =>{
         window.alert("SHOWTIME!");
-        const phase1_theme = new Audio('phase1.mp3');
+        const phase1_theme = new Audio('gael.mp3');
         phase1_theme.play();
         phase1_theme.loop =true;
         document.getElementById("ost_box").value = "Now playing: \n Bloodborne OST - Cleric Beast";
