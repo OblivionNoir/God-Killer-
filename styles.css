@@ -1,0 +1,30 @@
+html{
+    background-image: url("background169.png");
+    background-size:cover;
+    background-repeat: no-repeat; /*remove?*/
+    
+}
+
+#parent{
+    position: relative;
+}
+
+#boss_img{
+    position: absolute;
+    margin-top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 85vh;
+
+
+
+
+
+}
+#box{
+    position: absolute;
+    margin-top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
