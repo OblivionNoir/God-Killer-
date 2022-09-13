@@ -52,6 +52,7 @@ html{
     padding-bottom: 1vh;
     max-height: 90vh;
     border-radius: 2%;
+    margin-top: 2vh;
     font-size: large;
 
   
@@ -89,6 +90,7 @@ html{
     height: 3vh;
     background-color: red;
     position: relative;
+    opacity: 0.8;
 }
 #hp{
     color: white;
