@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boss Battle</title>
+    <script src = "spells.js" async></script>
     <script src = "main.js" async></script>
     <link rel = "stylesheet" href = "styles.css">
 </head>
@@ -21,12 +22,13 @@
             <div><button>Attack</button></div>
             <div><button>Spells</button></div>
             <div><button>Items</button></div>
-            <div><img src = "knight.jpg"></div>
+            <div><img src = "knight.jpg" id = "knight_img"></div>
             <div><textarea id = "warrior_name" disabled></textarea></div>
-            <div><img src = "dmage1.jpg"></div> <!--character portraits, names-->
+            <div><img src = "dmage1.jpg" id = "d_mage_img"></div> <!--character portraits, names-->
             <div><textarea id = "d_mage_name" disabled></textarea></div>
-            <div><img src = "lmage.jpg"></div>
+            <div><img src = "lmage.jpg" id = "l_mage_img"></div>
             <div><textarea id = "l_mage_name" disabled></textarea></div>
+            <div><textarea id = "ultima_charge">charge meter goes here</textarea></div>
         </div>    
     
 
@@ -38,9 +40,42 @@
     <textarea id = ost_box disabled rows = "3">Now playing:</textarea> <!--updates in real time!-->
 
     <span id = HP_bar>
-        <span id = "hp">3000/3000</span>
+        <span id = "hp">3000/3000</span> <!--update with js-->
         <div></div>
     </span>
+
+
+<!--attacks, hidden then shown when needed-->
+
+        <img src = "polarity.jpg" id = "polarity"> <!--attempts to lower all defense stats, 20% hit rate for each-->
+        <img src = "HellsGate.jpeg" id = "HellsGate"> <!--moderate black magic spell-->
+        <img src = "SpacialRift.jpeg" id = "SpacialRift"> <!--randomly removes 1 of your party members temporarily-->
+        <img src = "bleedingsunpart1.jpg" id = "bSun1"> <!--no damage, just charges then uses part 2 for MAXIMUM DESTRUCTION MWAHAHA--> <!--todo: add "defend" mechanic-->
+        <img src = "bleedingsunpart2.jpg" id = "bSun2"> <!--ultimate, only uses near the end and after part 1-->
+ 
+
+        <img src = "RadiantSupernova.jpeg" id = "RadiantSupernova"> <!--her ultimate, massively powerful spell that temporarily reduces enemy attack and defense-->
+        <img src = "MirageBlade.jpg" id = "MirageBlade"> <!--high crit rate, cannot miss-->
+        <img src = "Entrapment.jpg" id = "Entrapment"> <!--prevents boss from moving for 2 turns-->
+
+ 
+
+
+        <img src = "ThousandMen.jpg" id = "ThousandMen"> <!--his ultimate, deals heavy damage for several turns-->
+        <img src = "ShadowSelf.jpg" id = "ShadowSelf"> <!--x2 dmg of next atk, does NOT stack with Whims of Fate - that would be broken-->
+        <img src = "WhimsofFate.jpg" id = "WhimsofFate"> <!--50% chance of missing, 3 50% chances at a critical if no miss. 12.5% chance of triple crit-->
+
+
+
+ 
+        <img src = "PierceEvil.jpg" id = "PierceEvil"> <!--ray of light, moderate damage-->
+        <img src = "AngelsGrace.jpg" id = "AngelsGrace"> <!--basic healing spell-->
+        <img src= "SupremeAltar.jpg" id = "SupremeAltar"> <!--her ult, completely restores party to default healthy state regardless of condition-->
+
+
+
+ 
+
 
 
    
