@@ -83,7 +83,7 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
         const phase1_theme = new Audio('gael.mp3');
         phase1_theme.play();
         phase1_theme.loop =true;
-        document.getElementById("ost_box").value = "Now playing: \n Bloodborne OST - Cleric Beast";
+        document.getElementById("ost_box").value = "Now playing: \n Dark Souls 3 OST - Slave Knight Gael";
         del_box()
     }, 5000);
 
