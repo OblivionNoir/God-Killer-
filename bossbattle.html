@@ -11,7 +11,7 @@
 </head>
 <body>
     <div id = "parent">
-        <img src = "MONSTER.jpg" id = "boss_img" class = "child">
+        <img src = "AKUMU2.0.jpeg" id = "boss_img" class = "child">
 
     <div id = "box" class = "child">
         <textarea id = "txt_" disabled rows="4" cols="32">Face the great beast of wrath! Press enter to begin...</textarea> <!--remember that this becomes invisible!-->
@@ -37,16 +37,23 @@
 
     <div id = "credit">All images created with <a href = https://www.midjourney.com/home target = "_blank">Midjourney AI</a></div>
 
-    <textarea id = ost_box disabled rows = "3">Now playing:</textarea> <!--updates in real time!-->
+    <textarea id = ost_box disabled rows = "5">Now playing:</textarea> <!--updates in real time!-->
 
     <span id = HP_bar>
-        <span id = "hp">3000/3000</span> <!--update with js-->
+        <span id = "hp">Akumu, Origin of the Nightmare</span> <!--update with js-->
         <div></div>
     </span>
+    <style>
+        #hp{
+            font-family: 'optimus princeps' ;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+    </style>
 
 
 <!--attacks, hidden then shown when needed-->
-
+        <img src = "spheres.jpeg" id = "spheresofInsanity"> <!--weak black magic spell-->
         <img src = "polarity.jpg" id = "polarity"> <!--attempts to lower all defense stats, 20% hit rate for each-->
         <img src = "HellsGate.jpeg" id = "HellsGate"> <!--moderate black magic spell-->
         <img src = "SpacialRift.jpeg" id = "SpacialRift"> <!--randomly removes 1 of your party members temporarily-->

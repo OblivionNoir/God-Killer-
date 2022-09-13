@@ -1,4 +1,8 @@
 //boss attacks
+var spheresofInsanity = document.getElementById("spheresofInsanity");
+spheresofInsanity.style.visibility = "hidden";
+var polarity = document.getElementById("polarity");
+polarity.style.visibility = "hidden";
 var polarity = document.getElementById("polarity");
 polarity.style.visibility = "hidden";
 var hellsGate = document.getElementById("HellsGate");

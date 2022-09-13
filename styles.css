@@ -2,8 +2,12 @@
     font-family: 'valium';
     src: url('valium.ttf');
 }
+@font-face {
+    font-family: 'optimus princeps' ;
+    src: url('OptimusPrinceps.ttf');
+}
 html{
-    background-image: url("background169.png"); 
+    background-image: url("hellscape.png"); 
     background-size: contain;
     background-repeat: no-repeat;
 
@@ -109,14 +113,15 @@ html{
 }
 #credit{
    position: absolute;
-   top: 0px;
+   top: 2vh;
    right: 0px;
+
    color: grey;
 }
 
 #ost_box{
     position: absolute;
-    top: 2vh;
+    top: 4vh;
     right: 0px;
     color: grey;
 
