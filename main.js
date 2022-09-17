@@ -50,27 +50,27 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
     if (warrior_name.length >8 || warrior_name.length ===0){
         window.alert("Name cannot be longer than 8 characters or empty, sorry"); //todo: make custom window with only one option - no cancel! 
         var warrior_name = window.prompt("What is your (male) warrior's name?");
-    }else{
-        warrior_name = warrior_name.toUpperCase();
     };
+    warrior_name = warrior_name.toUpperCase();
+    
 
 
     var dmage_name = window.prompt("What is your (female) dark mage's name?");
     if (dmage_name.length >8 || dmage_name.length === 0 ){
         window.alert("Name cannot be longer than 8 characters or empty, sorry");
         var dmage_name = window.prompt("What is your (female) dark mage's name?");
-    }else{
-        dmage_name = dmage_name.toUpperCase();
-    }
+    };
+    dmage_name = dmage_name.toUpperCase();
+    
 
 
     var lmage_name = window.prompt("What is your (female) light mage's name?");
     if (lmage_name.length >8 || lmage_name.length === 0){
         window.alert("Name cannot be longer than 8 characters or empty, sorry");
         var lmage_name = window.prompt("What is your (female) light mage's name?");
-    }else{
-        lmage_name = lmage_name.toUpperCase();
-    };
+    }
+    lmage_name = lmage_name.toUpperCase();
+    
 
 
     document.getElementById("warrior_name").value = warrior_name + " " + "HP: "+ warrior_hp + "\n" +"MP: "+warrior_mp;
@@ -80,10 +80,10 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
     document.getElementById("txt_").value = `GREETINGS, PATHETIC MORTALS. WHAT ARE YOUR NAMES AGAIN? ${warrior_name.replace('\n', '')}, ${dmage_name.replace('\n', '')}, and ${lmage_name.replace('\n', '')}? WHATEVER. TIME TO DIE...`;
     setTimeout(() =>{
         window.alert("SHOWTIME!");
-        const phase1_theme = new Audio('gael.mp3');
+        const phase1_theme = new Audio('phase1.mp3');
         phase1_theme.play();
         phase1_theme.loop =true;
-        document.getElementById("ost_box").value = "Now playing: \n Dark Souls 3 OST - Slave Knight Gael";
+        document.getElementById("ost_box").value = "Now playing: \n Bloodborne OST - Cleric Beast";
         del_box()
     }, 5000);
 
@@ -94,5 +94,25 @@ function del_box(){ //START PHASE 1. Delete initial box and make menu appear
     init_box.style.display = "none"; 
     battle_menu.style.visibility = "visible";
     hp.style.visibility = "visible";
-
 };
+
+//Character selection. DO NOT TOUCH 
+document.addEventListener("DOMContentLoaded", function(event) { //this algorithm is disgusting but guess what it works
+    var element = document.querySelectorAll('.clickable');//this acts like an array
+        if (element){ //if it exists
+            element.forEach(function(curVal, lIndex){ //current value and index in the list
+                curVal.addEventListener('click', function () {
+                //console.log(lIndex);
+                curVal.classList.toggle("active");
+                element.forEach(function(x, sL){
+                if(lIndex !== sL) { //if list index is equal to the selected list element
+                    x.classList.remove('active');
+                     };
+                      //console.log(sL);
+                 });
+             });
+          });
+        };
+    });
+    
+ 
