@@ -19,16 +19,17 @@
 
     <!--treat this similarly to the og textarea, css-wise-->
         <div id = "battle_menu">
-            <div><button>Attack</button></div>
-            <div><button>Spells</button></div>
-            <div><button>Items</button></div>
-            <div><img src = "knight.jpg" id = "knight_img"></div>
-            <div><textarea id = "warrior_name" disabled></textarea></div>
-            <div><img src = "dmage1.jpg" id = "d_mage_img"></div> <!--character portraits, names-->
-            <div><textarea id = "d_mage_name" disabled></textarea></div>
-            <div><img src = "lmage.jpg" id = "l_mage_img"></div>
-            <div><textarea id = "l_mage_name" disabled></textarea></div>
-            <div><textarea id = "ultima_charge">charge meter goes here</textarea></div>
+            <div><button id = "atk_b">Attack</button></div>
+            <div><button id = "spells_b">Spells</button></div>
+            <div><button id = "items_b">Items</button></div>
+            <div><button id = "def_b">Defend</button></div>
+            <div><img src = "knight.jpg" id = "knight_img" class = "clickable"></div>
+            <div><textarea id = "warrior_name" disabled ></textarea></div>
+            <div><img src = "dmage1.jpg" id = "d_mage_img" class = "clickable"></div> <!--character portraits, names-->
+            <div><textarea id = "d_mage_name" disabled ></textarea></div>
+            <div><img src = "lmage.jpg" id = "l_mage_img" class = "clickable"></div>
+            <div><textarea id = "l_mage_name" disabled ></textarea></div>
+            <div><span id = "ultima_charge">Ultima</span></div>
         </div>    
     
 
@@ -39,7 +40,7 @@
 
     <textarea id = ost_box disabled rows = "5">Now playing:</textarea> <!--updates in real time!-->
 
-    <span id = HP_bar>
+    <span id = HP_bar> <!--make color inside linked to hp percentage-->
         <span id = "hp">Akumu, Origin of the Nightmare</span> <!--update with js-->
         <div></div>
     </span>
@@ -47,7 +48,7 @@
         #hp{
             font-family: 'optimus princeps' ;
             font-weight: bold;
-            font-size: 1.5em;
+            font-size: 2em;
         }
     </style>
 
@@ -65,7 +66,6 @@
         <img src = "MirageBlade.jpg" id = "MirageBlade"> <!--high crit rate, cannot miss-->
         <img src = "Entrapment.jpg" id = "Entrapment"> <!--prevents boss from moving for 2 turns-->
 
- 
 
 
         <img src = "ThousandMen.jpg" id = "ThousandMen"> <!--his ultimate, deals heavy damage for several turns-->
