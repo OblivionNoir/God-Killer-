@@ -20,6 +20,7 @@ white_mage_mp = 220;
 white_mage_def = 9;
 white_mage_mdef = 26; 
 
+
 //hide elements that get used later
 var p1_img = document.getElementById("boss_img");
 p1_img.style.visibility = "hidden";
@@ -38,6 +39,10 @@ document.addEventListener("keyup", function(event) {
     if (event.code === 'Enter' && check == true) {
         check = false; //so it can only happen once. Prevents event order from getting thrown out of wack
         p1_img.style.visibility = "visible";
+        const storm_bg = new Audio('stormnoises.mp3');
+        storm_bg.play();
+        storm_bg.loop =true;
+        storm_bg.volume = 0.3;
         write_message()
     }
 });
@@ -48,7 +53,7 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
    
     var warrior_name = window.prompt("What is your (male) warrior's name?"); 
     if (warrior_name.length >8 || warrior_name.length ===0){
-        window.alert("Name cannot be longer than 8 characters or empty, sorry"); //todo: make custom window with only one option - no cancel! 
+        window.alert("Name cannot be longer than 8 characters or empty, sorry"); 
         var warrior_name = window.prompt("What is your (male) warrior's name?");
     };
     warrior_name = warrior_name.toUpperCase();
@@ -79,7 +84,7 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
 
     document.getElementById("txt_").value = `GREETINGS, PATHETIC MORTALS. WHAT ARE YOUR NAMES AGAIN? ${warrior_name.replace('\n', '')}, ${dmage_name.replace('\n', '')}, and ${lmage_name.replace('\n', '')}? WHATEVER. TIME TO DIE...`;
     setTimeout(() =>{
-        window.alert("SHOWTIME!");
+        //window.alert("SHOWTIME!");
         const phase1_theme = new Audio('phase1.mp3');
         phase1_theme.play();
         phase1_theme.loop =true;
@@ -89,7 +94,7 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
 
 };
 
-function del_box(){ //START PHASE 1. Delete initial box and make menu appear
+function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     var init_box = document.getElementById("txt_");
     init_box.style.display = "none"; 
     battle_menu.style.visibility = "visible";
@@ -101,18 +106,18 @@ document.addEventListener("DOMContentLoaded", function(event) { //this algorithm
     var element = document.querySelectorAll('.clickable');//this acts like an array
         if (element){ //if it exists
             element.forEach(function(curVal, lIndex){ //current value and index in the list
-                curVal.addEventListener('click', function () {
+                curVal.addEventListener('click', function() {
                 //console.log(lIndex);
                 curVal.classList.toggle("active");
-                element.forEach(function(x, sL){
-                if(lIndex !== sL) { //if list index is equal to the selected list element
-                    x.classList.remove('active');
-                     };
+                element.forEach(function(x, sL){ 
+                    if(lIndex !== sL) { //if list index is NOT equal to the selected list element, aka one has already been picked
+                        x.classList.remove('active');
+                        };
                       //console.log(sL);
                  });
              });
-          });
-        };
-    });
+        });
+    };
+}); //use similar algo for battle menus, using stored index values. May want to use JS to create the box then format with css
     
  
