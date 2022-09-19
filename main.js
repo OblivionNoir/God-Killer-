@@ -105,19 +105,71 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
 document.addEventListener("DOMContentLoaded", function(event) { //this algorithm is disgusting but guess what it works
     var element = document.querySelectorAll('.clickable');//this acts like an array
         if (element){ //if it exists
-            element.forEach(function(curVal, lIndex){ //current value and index in the list
+            element.forEach(function getIndex(curVal, LIndex){ //current value and index in the list
                 curVal.addEventListener('click', function() {
                 //console.log(lIndex);
                 curVal.classList.toggle("active");
                 element.forEach(function(x, sL){ 
-                    if(lIndex !== sL) { //if list index is NOT equal to the selected list element, aka one has already been picked
+                    if(LIndex !== sL) { //if list index is NOT equal to the selected list element, aka one has already been picked
                         x.classList.remove('active');
                         };
-                      //console.log(sL);
+                        current_index = LIndex;
+                        console.log(current_index) //stores current index
+                        switch(current_index){ //get list index pertaining to character (0,1,2) and act accordingly
+                            case(0): //stuck in loop, works but each is going 3 times...
+                            warrior_menu()
+                            //do stuff
+                            break;
+                            case(1):
+                            d_mage_menu();
+                            //do stuff
+                            break;
+                            case(2):
+                            l_mage_menu();
+                            //do stuff
+                            break;
+                        }
                  });
-             });
+
+             });//move to picking menu based on character
+             //console.log(LIndex)
+        
         });
     };
 }); //use similar algo for battle menus, using stored index values. May want to use JS to create the box then format with css
-    
+
+var lastClick = 0; //fixes bounce glitch
+var delay = 20;
+
+
+function warrior_menu(){ //0
+    if (lastClick >= (Date.now() - delay)) //for some reason putting this in a function breaks it
+    return;
+    lastClick = Date.now();
+    console.log("test0")
  
+} 
+
+function d_mage_menu(){ //1
+    if (lastClick >= (Date.now() - delay))
+    return;
+    lastClick = Date.now();
+    console.log("test1")
+}
+
+function l_mage_menu(){ //2
+    if (lastClick >= (Date.now() - delay))
+    return;
+    lastClick = Date.now();
+    console.log("test2")
+}
+
+
+
+
+ //these will work by retrieving the character's list index and matching it 
+ //listener to check if any of them are clicked 
+
+
+//warrior is 0, lmage is 1, dmage is 2 
+
