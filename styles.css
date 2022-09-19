@@ -12,8 +12,6 @@ html{
     background-repeat: no-repeat;
 
     overflow-y: hidden;
-
-     /*remove?*/
     
 }
 
@@ -32,7 +30,7 @@ html{
     border: solid rgba(0,0,0,0.8);
 
 }
-#box{
+#box{/*is not responsive! Fix!*/
     position: absolute;
     margin-top: 40%;
     left: 50%;
@@ -64,24 +62,19 @@ html{
     flex-direction: row;
     max-width: 10vw;
     border-radius: 8%;
-
-
-
-
 }
 
 #warrior_name, #d_mage_name, #l_mage_name{
     font-size: 1em;
+    color: black;
     font-weight: bold;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.441);
     resize: none;
     overflow: hidden;
+    margin-top: -1vh;
 }
 
-#knight_img:hover, #d_mage_img:hover, #l_mage_img:hover{
-    border:0.15em solid rgb(4, 47, 129) ;
 
-}
 #HP_bar{
     display: flex;
     justify-content: center;
@@ -104,12 +97,14 @@ html{
     font-size: 1.5em;
     border-radius: 15%;
     font-family: 'valium';
+    z-index: 2;
 }
 #battle_menu > div >img{
     display: flex;
     flex-direction: row;
     max-width: 10vw;
     border-radius: 15%;
+    z-index: 2;
     
 
 }
@@ -117,7 +112,6 @@ html{
    position: absolute;
    top: 2vh;
    right: 0px;
-
    color: grey;
 }
 
@@ -129,3 +123,16 @@ html{
 
 }
 
+.clickable.active{
+    border:1px solid red;
+  }
+  
+  #rainbg {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: 1;
+    opacity: 0.5;
+  }
