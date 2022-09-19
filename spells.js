@@ -1,4 +1,6 @@
 //boss attacks
+var TendrilsoftheNight = document.getElementById("TendrilsoftheNight");
+TendrilsoftheNight.style.visibility = "hidden";
 var spheresofInsanity = document.getElementById("spheresofInsanity");
 spheresofInsanity.style.visibility = "hidden";
 var polarity = document.getElementById("polarity");
@@ -14,13 +16,6 @@ bSun1.style.visibility = "hidden";
 var bSun2 = document.getElementById("bSun2");
 bSun2.style.visibility = "hidden";
 
-//Dark mage attacks
-var radiantSupernova = document.getElementById("RadiantSupernova");
-radiantSupernova.style.visibility = "hidden";
-var mirageBlade = document.getElementById("MirageBlade");
-mirageBlade.style.visibility = "hidden";
-var entrapment = document.getElementById("Entrapment");
-entrapment.style.visibility = "hidden";
 
 //warrior attacks
 var thousandMen = document.getElementById("ThousandMen");
@@ -29,6 +24,14 @@ var shadowSelf = document.getElementById("ShadowSelf");
 shadowSelf.style.visibility = "hidden";
 var whimsofFate = document.getElementById("WhimsofFate");
 whimsofFate.style.visibility = "hidden";
+
+//Dark mage attacks
+var radiantSupernova = document.getElementById("RadiantSupernova");
+radiantSupernova.style.visibility = "hidden";
+var mirageBlade = document.getElementById("MirageBlade");
+mirageBlade.style.visibility = "hidden";
+var entrapment = document.getElementById("Entrapment");
+entrapment.style.visibility = "hidden";
 
 //light mage attacks
 
