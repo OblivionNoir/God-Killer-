@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function(event) { //this algorithm
                         current_index = LIndex;
                         console.log(current_index) //stores current index
                         switch(current_index){ //get list index pertaining to character (0,1,2) and act accordingly
-                            case(0): //stuck in loop, works but each is going 3 times...
+                            case(0): 
                             warrior_menu()
                             //do stuff
                             break;
