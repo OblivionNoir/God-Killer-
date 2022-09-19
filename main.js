@@ -1,3 +1,4 @@
+
 //initial stats
 phase_1_hp = 3000; //global for now, tighten scope if it becomes problematic
 phase_1_patk = 50;
@@ -100,7 +101,7 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     battle_menu.style.visibility = "visible";
     hp.style.visibility = "visible";
 };
-
+party_list = []//store for later usage
 //Character selection. DO NOT TOUCH 
 document.addEventListener("DOMContentLoaded", function(event) { //this algorithm is disgusting but guess what it works
     var element = document.querySelectorAll('.clickable');//this acts like an array
@@ -116,17 +117,17 @@ document.addEventListener("DOMContentLoaded", function(event) { //this algorithm
                         current_index = LIndex;
                         console.log(current_index) //stores current index
                         switch(current_index){ //get list index pertaining to character (0,1,2) and act accordingly
-                            case(0): //stuck in loop, works but each is going 3 times...
+                            case(0): 
                             warrior_menu()
-                            //do stuff
+                            party_list.push(0);
                             break;
                             case(1):
                             d_mage_menu();
-                            //do stuff
+                            party_list.push(1);
                             break;
                             case(2):
                             l_mage_menu();
-                            //do stuff
+                            party_list.push(2);
                             break;
                         }
                  });
@@ -137,17 +138,17 @@ document.addEventListener("DOMContentLoaded", function(event) { //this algorithm
         });
     };
 }); //use similar algo for battle menus, using stored index values. May want to use JS to create the box then format with css
-
 var lastClick = 0; //fixes bounce glitch
 var delay = 20;
+
 
 
 function warrior_menu(){ //0
     if (lastClick >= (Date.now() - delay)) //for some reason putting this in a function breaks it
     return;
     lastClick = Date.now();
-    console.log("test0")
- 
+    console.log("test0") //select atk, defend or spell, check what was clicked
+   
 } 
 
 function d_mage_menu(){ //1
@@ -166,10 +167,22 @@ function l_mage_menu(){ //2
 
 
 
+function atk(){
+    switch(true){
+        case (0):
+            console.log("made it");
+        break;
+        default:
+            console.log("WTF");
+        break;
+
+    }
+
+
+}
 
  //these will work by retrieving the character's list index and matching it 
  //listener to check if any of them are clicked 
 
 
 //warrior is 0, lmage is 1, dmage is 2 
-
