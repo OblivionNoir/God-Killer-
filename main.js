@@ -142,7 +142,6 @@ var lastClick = 0; //fixes bounce glitch
 var delay = 20;
 
 
-
 function warrior_menu(){ //0
     if (lastClick >= (Date.now() - delay)) //for some reason putting this in a function breaks it
     return;
