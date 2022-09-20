@@ -170,8 +170,5 @@ function l_mage_menu(){ //2
 
 
 
- //these will work by retrieving the character's list index and matching it 
- //listener to check if any of them are clicked 
 
-
-//warrior is 0, lmage is 1, dmage is 2 
+//warrior is 0, dmage is 1, lmage is 2 
