@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function(event) { //this algorithm
     };
 }); //use similar algo for battle menus, using stored index values. 
 var lastClick = 0; //fixes bounce glitch
-var delay = 25;
+var delay = 20;
 
 //disable buttons by default then active when a character is chosen
 
