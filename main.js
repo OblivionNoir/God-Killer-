@@ -8,7 +8,7 @@ phase_1_mdef = 80;
 
 warrior_hp = 2000;
 warrior_mp = 70;
-warrior_def = 18; //remove boss attacks file
+warrior_def = 18; 
 warrior_mdef = 9;
 
 black_mage_hp = 1400; 
