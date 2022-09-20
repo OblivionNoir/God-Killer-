@@ -101,25 +101,21 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     battle_menu.style.visibility = "visible";
     hp.style.visibility = "visible";
 };
-//DISABLE BUTTONS UNTIL ONE IS CLICKED
+party_list = []//store for later usage
 //Character selection. DO NOT TOUCH 
 document.addEventListener("DOMContentLoaded", function(event) { //this algorithm is disgusting but guess what it works
     var element = document.querySelectorAll('.clickable');//this acts like an array
         if (element){ //if it exists
             element.forEach(function getIndex(curVal, LIndex){ //current value and index in the list, add event listener to each
-                
                 curVal.addEventListener('click', function() {
                 //console.log(lIndex);
                 curVal.classList.toggle("active");
-
                 element.forEach(function(x, sL){ 
                     if(LIndex !== sL) { //if list index is NOT equal to the selected list element, aka one has already been picked
                         x.classList.remove('active');
                         };
-
                         current_index = LIndex;
                         console.log(current_index) //stores current index
-
                         switch(current_index){ //get list index pertaining to character (0,1,2) and act accordingly
                             case(0): 
                             warrior_menu()
@@ -145,45 +141,30 @@ document.addEventListener("DOMContentLoaded", function(event) { //this algorithm
 var lastClick = 0; //fixes bounce glitch
 var delay = 20;
 
-//DISABLE BUTTONS UNTIL ONE IS CLICKED //DISABLE BUTTONS UNTIL ONE IS CLICKED //DISABLE BUTTONS UNTIL ONE IS CLICKED
+//disable buttons by default then active when a character is chosen
 
 function warrior_menu(){ //0
     if (lastClick >= (Date.now() - delay)) //need to check if at least one is clicked
     return;
-    lastClick = Date.now();
-    atk_menu = document.getElementById('atk_b').onclick = function(){
-        alert("clicked")}
-    spells_menu = document.getElementById('spells_b').onclick = function(){
-        alert("clicked")}
-    def = document.getElementById('def_b').onclick = function(){
-        alert("clicked")}
+    lastClick = Date.now(); //note that any alert I put here gets run a million times...
     }
+
+        
+        
    
 
 
 function d_mage_menu(){ //1
     if (lastClick >= (Date.now() - delay))
     return;
-    lastClick = Date.now();
-    atk_menu = document.getElementById('atk_b').onclick = function(){
-        alert("clicked")}
-    spells_menu = document.getElementById('spells_b').onclick = function(){
-        alert("clicked")}
-    def = document.getElementById('def_b').onclick = function(){
-        alert("clicked")}
+    lastClick = Date.now()
     }
 
 
 function l_mage_menu(){ //2
     if (lastClick >= (Date.now() - delay))
     return;
-    lastClick = Date.now();
-    atk_menu = document.getElementById('atk_b').onclick = function(){
-        alert("clicked")}
-    spells_menu = document.getElementById('spells_b').onclick = function(){
-        alert("clicked")}
-    def = document.getElementById('def_b').onclick = function(){
-        alert("clicked")}
+    lastClick = Date.now()
     }
 
 
