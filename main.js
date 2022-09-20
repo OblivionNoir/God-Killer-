@@ -101,35 +101,39 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     battle_menu.style.visibility = "visible";
     hp.style.visibility = "visible";
 };
-party_list = []//store for later usage
+//DISABLE BUTTONS UNTIL ONE IS CLICKED
 //Character selection. DO NOT TOUCH 
 document.addEventListener("DOMContentLoaded", function(event) { //this algorithm is disgusting but guess what it works
     var element = document.querySelectorAll('.clickable');//this acts like an array
         if (element){ //if it exists
-            element.forEach(function getIndex(curVal, LIndex){ //current value and index in the list
+            element.forEach(function getIndex(curVal, LIndex){ //current value and index in the list, add event listener to each
+                
                 curVal.addEventListener('click', function() {
                 //console.log(lIndex);
                 curVal.classList.toggle("active");
+
                 element.forEach(function(x, sL){ 
                     if(LIndex !== sL) { //if list index is NOT equal to the selected list element, aka one has already been picked
                         x.classList.remove('active');
                         };
+
                         current_index = LIndex;
                         console.log(current_index) //stores current index
+
                         switch(current_index){ //get list index pertaining to character (0,1,2) and act accordingly
                             case(0): 
                             warrior_menu()
                             party_list.push(0);
                             break;
                             case(1):
-                            d_mage_menu();
+                            d_mage_menu()
                             party_list.push(1);
                             break;
                             case(2):
                             l_mage_menu();
                             party_list.push(2);
                             break;
-                        }
+                        };
                  });
 
              });//move to picking menu based on character
@@ -137,48 +141,53 @@ document.addEventListener("DOMContentLoaded", function(event) { //this algorithm
         
         });
     };
-}); //use similar algo for battle menus, using stored index values. May want to use JS to create the box then format with css
+}); //use similar algo for battle menus, using stored index values. 
 var lastClick = 0; //fixes bounce glitch
 var delay = 20;
 
+//DISABLE BUTTONS UNTIL ONE IS CLICKED //DISABLE BUTTONS UNTIL ONE IS CLICKED //DISABLE BUTTONS UNTIL ONE IS CLICKED
 
 function warrior_menu(){ //0
-    if (lastClick >= (Date.now() - delay)) //for some reason putting this in a function breaks it
+    if (lastClick >= (Date.now() - delay)) //need to check if at least one is clicked
     return;
     lastClick = Date.now();
-    console.log("test0") //select atk, defend or spell, check what was clicked
+    atk_menu = document.getElementById('atk_b').onclick = function(){
+        alert("clicked")}
+    spells_menu = document.getElementById('spells_b').onclick = function(){
+        alert("clicked")}
+    def = document.getElementById('def_b').onclick = function(){
+        alert("clicked")}
+    }
    
-} 
+
 
 function d_mage_menu(){ //1
     if (lastClick >= (Date.now() - delay))
     return;
     lastClick = Date.now();
-    console.log("test1")
-}
+    atk_menu = document.getElementById('atk_b').onclick = function(){
+        alert("clicked")}
+    spells_menu = document.getElementById('spells_b').onclick = function(){
+        alert("clicked")}
+    def = document.getElementById('def_b').onclick = function(){
+        alert("clicked")}
+    }
+
 
 function l_mage_menu(){ //2
     if (lastClick >= (Date.now() - delay))
     return;
     lastClick = Date.now();
-    console.log("test2")
-}
-
-
-
-function atk(){
-    switch(true){
-        case (0):
-            console.log("made it");
-        break;
-        default:
-            console.log("WTF");
-        break;
-
+    atk_menu = document.getElementById('atk_b').onclick = function(){
+        alert("clicked")}
+    spells_menu = document.getElementById('spells_b').onclick = function(){
+        alert("clicked")}
+    def = document.getElementById('def_b').onclick = function(){
+        alert("clicked")}
     }
 
 
-}
+
 
  //these will work by retrieving the character's list index and matching it 
  //listener to check if any of them are clicked 
