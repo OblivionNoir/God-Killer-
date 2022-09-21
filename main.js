@@ -32,6 +32,14 @@ battle_menu.style.visibility = "hidden";
 var hp = document.getElementById("HP_bar");
 hp.style.visibility = "hidden";
 
+//test hp bar 
+document.addEventListener("click", function(){
+    let health = document.getElementById("HP_bar")
+    health.value -= 10;
+
+})
+
+
  //buttons become visible when character is picked
  function removeButtons(){
     var btn = document.getElementsByClassName("btn"); //this produces a list, so need to loop to hide each item
@@ -76,8 +84,9 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
         window.alert("Name cannot be longer than 8 characters or empty, sorry"); 
         var warrior_name = window.prompt("What is your (male) warrior's name?");
     };
-    warrior_name = warrior_name.toUpperCase();
+    warrior_name = warrior_name.toUpperCase();//todo: prevent "cancel". cancel = null
     
+
 
 
     var dmage_name = window.prompt("What is your (female) dark mage's name?");
@@ -177,7 +186,6 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
         removeButtons()
 
     };
-
     
 };
 
