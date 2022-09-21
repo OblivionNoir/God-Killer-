@@ -14,6 +14,7 @@
 <source src = "redrain.mp4" type="video/mp4">
 
 
+
     </video>
     <div id = "parent">
         <img src = "AKUMU2.0.jpeg" id = "boss_img" class = "child">
@@ -44,15 +45,16 @@
 
     <textarea id = ost_box disabled rows = "5">Now playing:</textarea> <!--updates in real time!-->
 
-    <span id = HP_bar> <!--make color inside linked to hp percentage-->
-        <span id = "hp">Akumu, Origin of the Nightmare</span> <!--update with js-->
-        <div></div>
-    </span>
+    <div id = "boss_name">Akumu, Origin of the Nightmare</div>
+        <progress id = "HP_bar" value = "3000" max="3000">
+    </progress>
+ <!--make color inside linked to hp percentage-->
     <style>
-        #hp{
+        #boss_name{
             font-family: 'optimus princeps' ;
             font-weight: bold;
             font-size: 2em;
+            z-index: 2;
         }
     </style>
 
