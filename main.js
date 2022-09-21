@@ -21,7 +21,6 @@ white_mage_mp = 220;
 white_mage_def = 9;
 white_mage_mdef = 26; 
 
-
 //hide elements that get used later
 var p1_img = document.getElementById("boss_img");
 p1_img.style.visibility = "hidden";
@@ -37,8 +36,6 @@ var bn = document.getElementById("boss_name");
 bn.style.visibility = "hidden";
 var p2 = document.getElementById("txt_2");
 p2.style.display = "none";
-
-
 
 //test hp bar 
 document.addEventListener("click", function(){
@@ -64,6 +61,9 @@ phase2 = document.addEventListener("click", function(){ //PHASE 2!
                 phase2_theme = new Audio('phase2OST.mp3') //use hunter phase 2
                 phase2_theme.play();
                 phase2_theme.loop = true;
+                let roar = new Audio("roar.wav");
+                roar.play();
+                roar.loop = false();
                 document.getElementById("boss_name").innerHTML = "Akumu, Origin of the Nightmare"
                 document.getElementById("ost_box").value = "Now playing: \n Bloodborne OST: The Hunter - Phase 2";
             }, 5000);
@@ -72,14 +72,12 @@ phase2 = document.addEventListener("click", function(){ //PHASE 2!
 })
 
 
-
  //buttons become visible when character is picked
  function removeButtons(){
     var btn = document.getElementsByClassName("btn"); //this produces a list, so need to loop to hide each item
         for(let i = 0; i <btn.length; i++){
             btn[i].style.visibility = "hidden";
             };       
-
  };
  removeButtons()
 
@@ -88,12 +86,7 @@ function addButtons(){
     for(let i = 0; i <btn.length; i++){
         btn[i].style.visibility = "visible";
         };       
-
-
 };
-
-
-
 //add listener to wait for initial enter to start game
 var check = true;
 document.addEventListener("keyup", function(event) {
@@ -108,8 +101,6 @@ document.addEventListener("keyup", function(event) {
     }
 });
 
-
-
 function write_message(){ //Trigger when enter is pressed. Write custom message and begin battle 
    
     var warrior_name = window.prompt("What is your (male) warrior's name?"); 
@@ -119,9 +110,6 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
     };
     warrior_name = warrior_name.toUpperCase();//todo: prevent "cancel". cancel = null
     
-
-
-
     var dmage_name = window.prompt("What is your (female) dark mage's name?");
     if (dmage_name.length >8 || dmage_name.length === 0 ){
         window.alert("Name cannot be longer than 8 characters or empty, sorry");
@@ -129,8 +117,6 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
     };
     dmage_name = dmage_name.toUpperCase();
     
-
-
     var lmage_name = window.prompt("What is your (female) light mage's name?");
     if (lmage_name.length >8 || lmage_name.length === 0){
         window.alert("Name cannot be longer than 8 characters or empty, sorry");
@@ -139,8 +125,6 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
     lmage_name = lmage_name.toUpperCase();
     
     //hide buttons until character is selected 
-  
-
     document.getElementById("warrior_name").value = warrior_name + " " + "HP: "+ warrior_hp + "\n" +"MP: "+warrior_mp;
     document.getElementById("d_mage_name").value = dmage_name +  " " + "HP: " + black_mage_hp + "\n" +"MP: "+black_mage_mp;
     document.getElementById("l_mage_name").value = lmage_name +  " " + "HP: " + white_mage_hp + "\n" +"MP: "+white_mage_mp;
@@ -223,7 +207,6 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
     
 };
 
-    
 function d_mage_menu(){ //1
     if (lastClick >= (Date.now() - delay))
     return;
