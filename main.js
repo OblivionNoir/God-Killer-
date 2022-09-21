@@ -64,6 +64,7 @@ phase2 = document.addEventListener("click", function(){ //PHASE 2!
                 phase2_theme = new Audio('phase2OST.mp3') //use hunter phase 2
                 phase2_theme.play();
                 phase2_theme.loop = true;
+                document.getElementById("boss_name").innerHTML = "Akumu, Origin of the Nightmare"
                 document.getElementById("ost_box").value = "Now playing: \n Bloodborne OST: The Hunter - Phase 2";
             }, 5000);
     
