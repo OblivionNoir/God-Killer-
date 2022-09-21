@@ -11,17 +11,24 @@
 </head>
 <body>
     <video autoplay muted loop id = "rainbg">
-<source src = "redrain2.0.mp4" type="video/mp4">
-
-
+<source src = "rainbg.mp4" type="video/mp4"> <!--todo: add graphics settings. Potato and 4k60-->
 
     </video>
     <div id = "parent">
-        <img src = "AKUMU2.0.jpeg" id = "boss_img" class = "child">
+        <img src ="akumuphase1.jpg" id = "boss_img" class = "child">
 
     <div id = "box" class = "child">
         <textarea id = "txt_" disabled rows="4" cols="32">Face the great beast of wrath! Press enter to begin...</textarea> <!--remember that this becomes invisible!-->
     </div>
+    <button id = "settings">Settings</button>
+
+    <div id = "box2" class = "child2">
+        <textarea id = "txt_2" disabled rows="4" cols="32">
+
+        </textarea> 
+    </div>
+
+
 
     <!--treat this similarly to the og textarea, css-wise-->
         <div id = "battle_menu">
@@ -45,7 +52,7 @@
 
     <textarea id = ost_box disabled rows = "5">Now playing:</textarea> <!--updates in real time!-->
 
-    <div id = "boss_name">Akumu, Origin of the Nightmare</div>
+    <div id = "boss_name">Beast of Oblivion</div> <!--link this to JS-->
         <progress id = "HP_bar" value = "3000" max="3000">
     </progress>
  <!--make color inside linked to hp percentage-->
