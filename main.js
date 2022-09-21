@@ -32,6 +32,25 @@ battle_menu.style.visibility = "hidden";
 var hp = document.getElementById("HP_bar");
 hp.style.visibility = "hidden";
 
+ //buttons become visible when character is picked
+ function removeButtons(){
+    var btn = document.getElementsByClassName("btn"); //this produces a list, so need to loop to hide each item
+        for(let i = 0; i <btn.length; i++){
+            btn[i].style.visibility = "hidden";
+            };       
+
+ };
+ removeButtons()
+
+function addButtons(){
+    var btn = document.getElementsByClassName("btn"); //this produces a list, so need to loop to hide each item
+    for(let i = 0; i <btn.length; i++){
+        btn[i].style.visibility = "visible";
+        };       
+
+
+};
+
 
 
 //add listener to wait for initial enter to start game
@@ -77,7 +96,8 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
     }
     lmage_name = lmage_name.toUpperCase();
     
-
+    //hide buttons until character is selected 
+  
 
     document.getElementById("warrior_name").value = warrior_name + " " + "HP: "+ warrior_hp + "\n" +"MP: "+warrior_mp;
     document.getElementById("d_mage_name").value = dmage_name +  " " + "HP: " + black_mage_hp + "\n" +"MP: "+black_mage_mp;
@@ -100,6 +120,7 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     init_box.style.display = "none"; 
     battle_menu.style.visibility = "visible";
     hp.style.visibility = "visible";
+
 };
 party_list = []//store for later usage
 //Character selection. DO NOT TOUCH 
@@ -116,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function(event) { //this algorithm
                         };
                         current_index = LIndex;
                         console.log(current_index) //stores current index
-                        switch(current_index){ //get list index pertaining to character (0,1,2) and act accordingly
+                        switch(current_index){ 
                             case(0): 
                             warrior_menu()
                             party_list.push(0);
@@ -141,31 +162,62 @@ document.addEventListener("DOMContentLoaded", function(event) { //this algorithm
 var lastClick = 0; //fixes bounce glitch
 var delay = 20;
 
-//disable buttons by default then active when a character is chosen
+function warrior_menu(){ //0 //when this is reached, we know the warrior has been clicked
+    if (lastClick >= (Date.now() - delay)) //need to check if clicked
+    return; //returns undefined, false because it's a boolean
+    lastClick = Date.now(); 
+    ki = document.getElementById("knight_img"); //need to check if it has border or not
+    //if red, show menu. If null, hide menu
+    //active class = red
+    if (ki.classList.contains('active')){
+        console.log('made it -knight')
+        addButtons()
+    }else{
+        console.log("what")
+        removeButtons()
 
-function warrior_menu(){ //0
-    if (lastClick >= (Date.now() - delay)) //need to check if at least one is clicked
-    return;
-    lastClick = Date.now(); //note that any alert I put here gets run a million times...
-    }
+    };
 
-        
-        
-   
+    
+};
 
-
+    
 function d_mage_menu(){ //1
     if (lastClick >= (Date.now() - delay))
     return;
     lastClick = Date.now()
-    }
+    di = document.getElementById("d_mage_img"); //need to check if it has border or not
+    //if red, show menu. If null, hide menu
+    //active class = red
+    if (di.classList.contains('active')){
+        console.log('made it - dmage')
+        addButtons()
+    }else{
+        console.log("what")
+        removeButtons()
+
+    };
+
+    };
 
 
 function l_mage_menu(){ //2
     if (lastClick >= (Date.now() - delay))
     return;
     lastClick = Date.now()
-    }
+    li = document.getElementById("l_mage_img"); //need to check if it has border or not
+    //if red, show menu. If null, hide menu
+    //active class = red
+    if (li.classList.contains('active')){
+        console.log('made it- lmage')
+        addButtons()
+    }else{
+        console.log("what")
+        removeButtons()
+
+    };
+
+    };
 
 
 
@@ -174,4 +226,4 @@ function l_mage_menu(){ //2
  //listener to check if any of them are clicked 
 
 
-//warrior is 0, lmage is 1, dmage is 2 
+//warrior is 0, dmage is 1, lmage is 2 
