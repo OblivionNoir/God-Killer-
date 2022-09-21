@@ -230,7 +230,16 @@ function d_mage_menu(){ //1
     };
 
     };
-
+//atk lists 
+//use for loop to create custom menus for each character
+//use for loops to assign each of these a unique number to be called on that, or an object
+//with key/values
+boss_atks = ["Basic boss", "Spheres of Insanity", "Polarity", "Hell's Gate", "Spacial Rift"];
+boss_atks2 = ["Basic boss","Spheres of Insanity", "Polarity", "Hell's Gate", "Spacial Rift",
+"Tendrils of the Night", "Bleeding Sun Part 1", "Bleeding Sun Part 2"];
+warrior_atks = ["Basic warrior", "Thousand Men", "Shadow Self", "Whims of Fate"];
+dmage_atks = ["Basic dmage", "Radiant Supernova", "Mirage Blade", "Entrapment"];
+lmage_atks = ["Basic lmage", "Pierce Evil", "Angel's Grace", "Supreme Altar"];
 
 function l_mage_menu(){ //2
     if (lastClick >= (Date.now() - delay))
@@ -243,6 +252,7 @@ function l_mage_menu(){ //2
         console.log('made it- lmage')
         menu_sfx()
         addButtons()
+
     }else{
         console.log("what")
         removeButtons()
@@ -250,9 +260,84 @@ function l_mage_menu(){ //2
     };
 
     };
+                        //~~~~Below here is all movesets~~~\\
+    function Critical(){ //adds 5% chance of 2x damage for party moves
 
+    }
+    //going to need to keep track of turns in a list for some attacks to work 
 
+    //boss attacks
+    function basic_b(){
 
+    }
+    function SpheresofInsanity(){
+        var SpheresofInsanity = document.getElementById("SpheresofInsanity");
+    }
+    function Polarity(){
+        var Polarity = document.getElementById("Polarity");
+    }
+    function HellsGate(){
+        var HellsGate = document.getElementById("HellsGate");
+    }
+    function SpacialRift(){
+        var SpacialRift = document.getElementById("SpacialRift")
+    }
+    //only in phase 2\\
+    function TendrilsoftheNight(){
+        var TendrilsoftheNight = document.getElementById("TendrilsoftheNight");
+    }
+    function BleedingSun1(){ //turn 1 charge
+        var bSun1 = document.getElementById("bSun1");
+    }
+    function BleedingSun2(){ //massive damage to all, defend is borderline required
+        var bSun2 = document.getElementById("bSun2");
+    }
+
+    //warrior attacks
+    function basic_w(){ //basic attack, no mp used
+
+    }
+    function ThousandMen(){ //his ult
+        var ThousandMen = document.getElementById("ThousandMen");
+    }
+    function ShadowSelf(){
+        var ShadowSelf = document.getElementById("ShadowSelf");
+    }
+    function WhimsofFate(){
+        var WhimsofFate = document.getElementById("WhimsofFate");
+
+    }
+
+    //dark mage attacks
+    function basic_d(){
+ 
+    }
+    function RadiantSupernova(){ //her ult
+        var RadiantSupernova = document.getElementById("RadiantSupernova");
+
+    }
+    function MirageBlade(){
+        var MirageBlade = document.getElementById("MirageBlade");
+
+    }
+    function Entrapment(){
+        var Entrapment = document.getElementById("Entrapment");
+
+    }
+
+    //light mage attacks
+    function basic_l(){
+
+    }
+    function PierceEvil(){
+
+    }
+    function AngelsGrace(){
+
+    }
+    function SupremeAltar(){ //her ult
+
+    }
 
  //these will work by retrieving the character's list index and matching it 
  //listener to check if any of them are clicked 
