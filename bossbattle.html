@@ -11,7 +11,7 @@
 </head>
 <body>
     <video autoplay muted loop id = "rainbg">
-<source src = "rainbg.mp4" type="video/mp4">
+<source src = "redrain.mp4" type="video/mp4">
 
 
     </video>
@@ -24,10 +24,9 @@
 
     <!--treat this similarly to the og textarea, css-wise-->
         <div id = "battle_menu">
-            <div><button id = "atk_b">Attack</button></div>
-            <div><button id = "spells_b">Spells</button></div>
-            <div><button id = "items_b">Items</button></div>
-            <div><button id = "def_b">Defend</button></div> <!--triples defense for next turn-->
+            <div><button id = "atk_b" class = "btn">Attack</button></div>
+            <div><button id = "spells_b" class = "btn">Spells</button></div>
+            <div><button id = "def_b" class = "btn">Defend</button></div> <!--triples defense for next turn-->
             <div><img src = "knight.jpg" id = "knight_img" class = "clickable"></div>
             <div><textarea id = "warrior_name" disabled ></textarea></div>
             <div><img src = "dmage1.jpg" id = "d_mage_img" class = "clickable"></div> <!--character portraits, names-->
@@ -64,7 +63,7 @@
         <img src = "polarity.jpg" id = "polarity"> <!--attempts to lower all defense stats, 20% hit rate for each-->
         <img src = "HellsGate.jpeg" id = "HellsGate"> <!--moderate black magic spell-->
         <img src = "SpacialRift.jpeg" id = "SpacialRift"> <!--randomly removes 1 of your party members temporarily-->
-        <img src = "bleedingsunpart1.jpg" id = "bSun1"> <!--no damage, just charges then uses part 2 for MAXIMUM DESTRUCTION MWAHAHA--> <!--todo: add "defend" mechanic-->
+         <!--no damage, just charges then uses part 2 for MAXIMUM DESTRUCTION MWAHAHA--> <!--todo: add "defend" mechanic-->
         <img src = "bleedingsunpart2_hor.jpg" id = "bSun2"> <!--ultimate, only uses near the end and after part 1-->
  
 
@@ -76,7 +75,7 @@
 
         <img src = "ThousandMen.jpg" id = "ThousandMen"> <!--his ultimate, deals heavy damage for several turns-->
         <img src = "ShadowSelf.jpg" id = "ShadowSelf"> <!--x2 dmg of next atk, does NOT stack with Whims of Fate - that would be broken-->
-        <img src = "WhimsofFate.jpg" id = "WhimsofFate"> <!--50% chance of missing, 3 50% chances at a critical if no miss. 12.5% chance of triple crit-->
+         <!--50% chance of missing, 3 50% chances at a critical if no miss. 12.5% chance of triple crit-->
 
 
 
@@ -85,13 +84,6 @@
         <img src = "AngelsGrace.jpg" id = "AngelsGrace"> <!--basic healing spell-->
         <img src= "SupremeAltar.jpg" id = "SupremeAltar"> <!--her ult, completely restores party to default healthy state regardless of condition-->
 
-
-
- 
-
-
-
-   
 
 
 </body>
