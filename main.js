@@ -63,8 +63,8 @@ phase2 = document.addEventListener("click", function(){ //PHASE 2!
                 phase2_theme.loop = true;
                 let roar = new Audio("roar.wav");
                 roar.play();
-                roar.loop = false();
-                document.getElementById("boss_name").innerHTML = "Akumu, Origin of the Nightmare"
+                roar.loop = false;
+                document.getElementById("boss_name").innerHTML = "Akumu, Origin of the Nightmare";
                 document.getElementById("ost_box").value = "Now playing: \n Bloodborne OST: The Hunter - Phase 2";
             }, 5000);
     
@@ -188,7 +188,11 @@ document.addEventListener("DOMContentLoaded", function(event) { //this algorithm
 }); //use similar algo for battle menus, using stored index values. 
 var lastClick = 0; //fixes bounce glitch
 var delay = 20;
-
+function menu_sfx(){
+    menusfx_ = new Audio("menuclick.wav");
+    menusfx_.play()
+    menusfx_.loop = false;
+}
 function warrior_menu(){ //0 //when this is reached, we know the warrior has been clicked
     if (lastClick >= (Date.now() - delay)) //need to check if clicked
     return; //returns undefined, false because it's a boolean
@@ -198,6 +202,7 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
     //active class = red
     if (ki.classList.contains('active')){
         console.log('made it -knight')
+        menu_sfx()
         addButtons()
     }else{
         console.log("what")
@@ -216,6 +221,7 @@ function d_mage_menu(){ //1
     //active class = red
     if (di.classList.contains('active')){
         console.log('made it - dmage')
+        menu_sfx()
         addButtons()
     }else{
         console.log("what")
@@ -235,6 +241,7 @@ function l_mage_menu(){ //2
     //active class = red
     if (li.classList.contains('active')){
         console.log('made it- lmage')
+        menu_sfx()
         addButtons()
     }else{
         console.log("what")
