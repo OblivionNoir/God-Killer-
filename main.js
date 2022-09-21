@@ -46,10 +46,11 @@ document.addEventListener("click", function(){
     health.value -= 700;
 
 })
-
-document.addEventListener("click", function(){ //PHASE 2!
+var clickCheck = true;
+phase2 = document.addEventListener("click", function(){ //PHASE 2!
         console.log(health)
-        if (health.value <1501){
+        if (health.value <1501 && clickCheck == true){
+            clickCheck = false;
             p2.style.display = "initial"; //add timeout
             p2.value = "Oh no...";
             setTimeout(() =>{
@@ -67,8 +68,8 @@ document.addEventListener("click", function(){ //PHASE 2!
             }, 5000);
     
         }
-
 })
+
 
 
  //buttons become visible when character is picked
