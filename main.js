@@ -31,11 +31,42 @@ battle_menu.style.visibility = "hidden";
 
 var hp = document.getElementById("HP_bar");
 hp.style.visibility = "hidden";
+var hp = document.getElementById("HP_bar");
+hp.style.visibility = "hidden";
+var bn = document.getElementById("boss_name");
+bn.style.visibility = "hidden";
+var p2 = document.getElementById("txt_2");
+p2.style.display = "none";
+
+
 
 //test hp bar 
 document.addEventListener("click", function(){
-    let health = document.getElementById("HP_bar")
-    health.value -= 10;
+    health = document.getElementById("HP_bar")
+    health.value -= 700;
+
+})
+
+document.addEventListener("click", function(){ //PHASE 2!
+        console.log(health)
+        if (health.value <1501){
+            p2.style.display = "initial"; //add timeout
+            p2.value = "Oh no...";
+            setTimeout(() =>{
+                document.getElementById("rainbg").src = "redrain.mp4"
+                p2.style.display = "none";
+                document.getElementById("boss_img").src = "AKUMU2.0.jpeg";
+                let hellnaw = new Audio("hellnaw.mp3");
+                hellnaw.play()
+                hellnaw.loop = false;
+                phase1_theme.pause();
+                phase2_theme = new Audio('phase2OST.mp3') //use hunter phase 2
+                phase2_theme.play();
+                phase2_theme.loop = true;
+                document.getElementById("ost_box").value = "Now playing: \n Bloodborne OST: The Hunter - Phase 2";
+            }, 5000);
+    
+        }
 
 })
 
@@ -115,10 +146,10 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
     document.getElementById("txt_").value = `GREETINGS, PATHETIC MORTALS. WHAT ARE YOUR NAMES AGAIN? ${warrior_name.replace('\n', '')}, ${dmage_name.replace('\n', '')}, and ${lmage_name.replace('\n', '')}? WHATEVER. TIME TO DIE...`;
     setTimeout(() =>{
         //window.alert("SHOWTIME!");
-        const phase1_theme = new Audio('phase1.mp3');
+        phase1_theme = new Audio('phase1OST.mp3'); //user hunter phase 1
         phase1_theme.play();
         phase1_theme.loop =true;
-        document.getElementById("ost_box").value = "Now playing: \n Bloodborne OST - Cleric Beast";
+        document.getElementById("ost_box").value = "Now playing: \n BBloodborne OST: The Hunter - Phase 1";
         del_box()
     }, 5000);
 
@@ -129,6 +160,7 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     init_box.style.display = "none"; 
     battle_menu.style.visibility = "visible";
     hp.style.visibility = "visible";
+    bn.style.visibility = "visible";
 
 };
 party_list = []//store for later usage
