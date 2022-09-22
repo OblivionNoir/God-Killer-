@@ -8,7 +8,7 @@ phase_1_mdef = 80;
 
 warrior_hp = 2000;
 warrior_mp = 70;
-warrior_def = 18; //remove boss attacks file
+warrior_def = 18; 
 warrior_mdef = 9;
 
 black_mage_hp = 1400; 
@@ -43,13 +43,19 @@ document.addEventListener("click", function(){
     health.value -= 700;
 
 })
-var clickCheck = true;
+var clickCheck = true; //todo: add fade out of phase 1 with for loop
 phase2 = document.addEventListener("click", function(){ //PHASE 2!
         console.log(health)
         if (health.value <1501 && clickCheck == true){
             clickCheck = false;
             p2.style.display = "initial"; //add timeout
             p2.value = "Oh no...";
+            setTimeout(() =>{
+                let dotheroar = new Audio('dotheroar.mp3')
+                dotheroar.play()
+                dotheroar.loop = false;
+            },2000);
+            
             setTimeout(() =>{
                 document.getElementById("rainbg").src = "redrain.mp4"
                 p2.style.display = "none";
@@ -66,8 +72,16 @@ phase2 = document.addEventListener("click", function(){ //PHASE 2!
                 roar.loop = false;
                 document.getElementById("boss_name").innerHTML = "Akumu, Origin of the Nightmare";
                 document.getElementById("ost_box").value = "Now playing: \n Bloodborne OST: The Hunter - Phase 2";
-            }, 5000);
+            }, 4000);
+            setTimeout(() =>{
+                let chv = new Audio('computerhasvirus.mp3')
+                chv.play()
+                chv.loop = false;
+            },10000);
     
+        }else if (health.value ==0){
+            phase2_theme.pause()
+            window.open('gigachad.html', "_self")
         }
 })
 
@@ -93,10 +107,13 @@ document.addEventListener("keyup", function(event) {
     if (event.code === 'Enter' && check == true) {
         check = false; //so it can only happen once. Prevents event order from getting thrown out of wack
         p1_img.style.visibility = "visible";
+        let boom = new Audio('vineboom.mp3')
+        boom.play()
+        boom.loop = false;
         const storm_bg = new Audio('stormnoises.mp3');
         storm_bg.play();
         storm_bg.loop =true;
-        storm_bg.volume = 0.3;
+        storm_bg.volume = 0.3; 
         write_message()
     }
 });
@@ -131,11 +148,16 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
 
     document.getElementById("txt_").value = `GREETINGS, PATHETIC MORTALS. WHAT ARE YOUR NAMES AGAIN? ${warrior_name.replace('\n', '')}, ${dmage_name.replace('\n', '')}, and ${lmage_name.replace('\n', '')}? WHATEVER. TIME TO DIE...`;
     setTimeout(() =>{
+        let bruh = new Audio('bruh.mp3')
+        bruh.play()
+        bruh.loop = false;
+    }, 3000);
+    setTimeout(() =>{
         //window.alert("SHOWTIME!");
         phase1_theme = new Audio('phase1OST.mp3'); //user hunter phase 1
         phase1_theme.play();
         phase1_theme.loop =true;
-        document.getElementById("ost_box").value = "Now playing: \n BBloodborne OST: The Hunter - Phase 1";
+        document.getElementById("ost_box").value = "Now playing: \n Bloodborne OST: The Hunter - Phase 1";
         del_box()
     }, 5000);
 
@@ -189,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function(event) { //this algorithm
 var lastClick = 0; //fixes bounce glitch
 var delay = 20;
 function menu_sfx(){
-    menusfx_ = new Audio("menuclick.wav");
+    let menusfx_ = new Audio("menuclick.wav");
     menusfx_.play()
     menusfx_.loop = false;
 }
@@ -230,8 +252,9 @@ function d_mage_menu(){ //1
     };
 
     };
+    turn_counter = 0; //increment with each action taken
 //atk lists 
-//use for loop to create custom menus for each character
+//use for loop to create custom menus for each character, test in seperate file
 //use for loops to assign each of these a unique number to be called on that, or an object
 //with key/values
 boss_atks = ["Basic boss", "Spheres of Insanity", "Polarity", "Hell's Gate", "Spacial Rift"];
@@ -330,12 +353,15 @@ function l_mage_menu(){ //2
 
     }
     function PierceEvil(){
+        var PierceEvil = document.getElementById("PierceEvil");
 
     }
     function AngelsGrace(){
+        var AngelsGrace = document.getElementById("AngelsGrace");
 
     }
     function SupremeAltar(){ //her ult
+        var SupremeAltar = document.getElementById("SupremeAltar");
 
     }
 
