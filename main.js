@@ -387,61 +387,65 @@ function l_mage_menu(){ //2
     })*/
                         //~~~~Below here is all movesets~~~\\
     //going to need to keep track of turns in a list for some attacks to work 
-
+    function counter(){
+        UC = document.getElementById("ultima_charge")
+        UC.value +=5
+        turn_counter +=1;
+    }
     //boss attacks
     function basic_b(){
-        turn_counter +=1;
+        counter()
 
     };
     function SpheresofInsanity(){
         var SpheresofInsanity = document.getElementById("SpheresofInsanity");
-        turn_counter +=1;
+        counter()
     };
     function Polarity(){
         var Polarity = document.getElementById("Polarity");
-        turn_counter +=1;
+        counter()
     };
     function HellsGate(){
         var HellsGate = document.getElementById("HellsGate");
-        turn_counter +=1;
+        counter()
     };
     function SpacialRift(){
         var SpacialRift = document.getElementById("SpacialRift")
-        turn_counter +=1;
+        counter()
     };
     //only in phase 2\\
     function TendrilsoftheNight(){
         var TendrilsoftheNight = document.getElementById("TendrilsoftheNight");
-        turn_counter +=1;
+        counter()
     };
     function BleedingSun1(){ //turn 1 charge
         var bSun1 = document.getElementById("bSun1");
-        turn_counter +=1;
+        counter()
     };
     function BleedingSun2(){ //massive damage to all, defend is borderline required
         var bSun2 = document.getElementById("bSun2");
         let NANI = new Audio("omaewa.mp3");
         NANI.play()
         NANI.loop = false;
-        turn_counter +=1;
+        counter()
     };
 
     //warrior attacks
     function basic_w(){ //basic attack, no mp used
-        turn_counter +=1;
+        counter()
 
     };
     function ThousandMen(){ //his ult
         var ThousandMen = document.getElementById("ThousandMen");
-        turn_counter +=1;
+        counter()
     };
     function ShadowSelf(){
         var ShadowSelf = document.getElementById("ShadowSelf");
-        turn_counter +=1;
+        counter()
     };
     function WhimsofFate(){
         var WhimsofFate = document.getElementById("WhimsofFate");
-        turn_counter +=1;
+        counter()
 
     };
 
@@ -451,23 +455,23 @@ function l_mage_menu(){ //2
     };
     function RadiantSupernova(){ //her ult
         var RadiantSupernova = document.getElementById("RadiantSupernova");
-        turn_counter +=1;
+        counter()
 
     };
     function MirageBlade(){
         var MirageBlade = document.getElementById("MirageBlade");
-        turn_counter +=1;
+        tcounter()
 
     };
     function Entrapment(){
         var Entrapment = document.getElementById("Entrapment");
-        turn_counter +=1;
+        counter()
 
     };
 
     //light mage attacks
     function basic_l(){
-        turn_counter +=1;
+        counter()
 
     };
     function PierceEvil(){
@@ -503,6 +507,7 @@ function l_mage_menu(){ //2
                 turn_counter +=1;
                 console.log(turn_counter)
                 i_menu.style.display = "none"
+                counter()
             }, 3000);
             
 
