@@ -39,6 +39,8 @@ p2.style.display = "none";
 
 var b_menu = document.getElementById("menu_template")
 b_menu.style.display = "none"
+var i_menu = document.getElementById("img_template")
+i_menu.style.display = "none"
 //test hp bar 
 /*document.addEventListener("click", function(){
     health = document.getElementById("HP_bar")
@@ -374,22 +376,15 @@ function l_mage_menu(){ //2
     
     turn_counter = 0; //increment with each action taken
     //add event listener for odd turn numbers to trigger boss attacks
-    document.addEventListener("click", function (){
+    /*document.addEventListener("click", function (){
         if (turn_counter % 2 !==0){
             setTimeout(()=>{
                 window.alert("MY TURN BITCH")
             }, 2000)
         }
 
-    })
+    })*/
                         //~~~~Below here is all movesets~~~\\
-    function Critical(){ //adds 5% chance of 2x damage for party moves
-        crit = Math.floor(Math.random() * 11);
-        if (crit == 10){
-            window.alert("Critical hit!")
-            dmg = dmg*1.5; //deal 50% more
-        }
-    }
     //going to need to keep track of turns in a list for some attacks to work 
 
     //boss attacks
@@ -479,20 +474,31 @@ function l_mage_menu(){ //2
         if (white_mage_mp <10){
             window.alert("Not enough mp!")
         }else{ //assuming phase 1 for now
-            health.value -= 80/phase_1_def;
-            let l_crit = Math.floor(Math.random() * 16);
-            if (l_crit == 15){
-                health.value -= 160/phase_1_def;
-            }
-            white_mage_mp -= 10;
-            document.getElementById('l_mage_name').value = lmage_name + " " + "HP: " + white_mage_hp + "\n" +"MP: "+white_mage_mp;
-            turn_counter +=1;
-            console.log(turn_counter)
+            //display image for 3 seconds, then turn it off
+            
+            document.getElementById("img_template").src = "PierceEvil.jpg"
+            i_menu.style.display = "initial"
+            i_menu.style.borderColor = "gold"
+            setTimeout(()=>{
+                health.value -= 80/phase_1_def;
+                let l_crit = Math.floor(Math.random() * 16);
+                if (l_crit == 15){
+                    health.value -= 160/phase_1_def;
+                    window.alert("Critical hit!")
+                }
+                white_mage_mp -= 10;
+                document.getElementById('l_mage_name').value = lmage_name + " " + "HP: " + white_mage_hp + "\n" +"MP: "+white_mage_mp;
+                turn_counter +=1;
+                console.log(turn_counter)
+                i_menu.style.display = "none"
+            }, 3000)
+            
+         
 
         }
     
     }
-    
+
        
 
     
