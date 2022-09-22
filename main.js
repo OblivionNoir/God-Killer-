@@ -1,25 +1,25 @@
 
 //initial stats
-phase_1_hp = 3000; //global for now, tighten scope if it becomes problematic
-phase_1_patk = 50;
-phase1_matk = 50;
-phase_1_def = .8; //divide by this number 
-phase_1_mdef = .6;
+ //global for now, tighten scope if it becomes problematic
+phase_1_def = 12; //divide by this number 
+phase_1_mdef = 10;
+phase_2_def = 17;
+phase_2_mdef = 15;
 
 warrior_hp = 2000;
 warrior_mp = 70;
-warrior_def = .9; 
-warrior_mdef = .5;
+warrior_def = 10; //edit these
+warrior_mdef = 6;
 
 black_mage_hp = 1400; 
 black_mage_mp = 220;
-black_mage_def = .6;
-black_mage_mdef = .9;
+black_mage_def = 7;
+black_mage_mdef = 16;
 
 white_mage_hp = 1200;
 white_mage_mp = 220;
-white_mage_def = .5;
-white_mage_mdef = .8; 
+white_mage_def = 6;
+white_mage_mdef = 17; 
 
 //hide elements that get used later
 var p1_img = document.getElementById("boss_img");
@@ -48,12 +48,13 @@ i_menu.style.display = "none"
 
 })*/
 var clickCheck = true; //todo: add fade out of phase 1 with for loop
-phase2 = document.addEventListener("click", function(){ //PHASE 2!
+document.addEventListener("click", function(){ //PHASE 2!
         //console.log(health)
         if (health.value <1501 && clickCheck == true){
             clickCheck = false;
             p2.style.display = "initial"; //add timeout
             p2.value = "Oh no...";
+            phase2 = true; //trigger to reference phase 2 later on
             setTimeout(() =>{
                 let dotheroar = new Audio('dotheroar.mp3')
                 dotheroar.play()
@@ -391,84 +392,84 @@ function l_mage_menu(){ //2
     function basic_b(){
         turn_counter +=1;
 
-    }
+    };
     function SpheresofInsanity(){
         var SpheresofInsanity = document.getElementById("SpheresofInsanity");
         turn_counter +=1;
-    }
+    };
     function Polarity(){
         var Polarity = document.getElementById("Polarity");
         turn_counter +=1;
-    }
+    };
     function HellsGate(){
         var HellsGate = document.getElementById("HellsGate");
         turn_counter +=1;
-    }
+    };
     function SpacialRift(){
         var SpacialRift = document.getElementById("SpacialRift")
         turn_counter +=1;
-    }
+    };
     //only in phase 2\\
     function TendrilsoftheNight(){
         var TendrilsoftheNight = document.getElementById("TendrilsoftheNight");
         turn_counter +=1;
-    }
+    };
     function BleedingSun1(){ //turn 1 charge
         var bSun1 = document.getElementById("bSun1");
         turn_counter +=1;
-    }
+    };
     function BleedingSun2(){ //massive damage to all, defend is borderline required
         var bSun2 = document.getElementById("bSun2");
         let NANI = new Audio("omaewa.mp3");
         NANI.play()
         NANI.loop = false;
         turn_counter +=1;
-    }
+    };
 
     //warrior attacks
     function basic_w(){ //basic attack, no mp used
         turn_counter +=1;
 
-    }
+    };
     function ThousandMen(){ //his ult
         var ThousandMen = document.getElementById("ThousandMen");
         turn_counter +=1;
-    }
+    };
     function ShadowSelf(){
         var ShadowSelf = document.getElementById("ShadowSelf");
         turn_counter +=1;
-    }
+    };
     function WhimsofFate(){
         var WhimsofFate = document.getElementById("WhimsofFate");
         turn_counter +=1;
 
-    }
+    };
 
     //dark mage attacks
     function basic_d(){
  
-    }
+    };
     function RadiantSupernova(){ //her ult
         var RadiantSupernova = document.getElementById("RadiantSupernova");
         turn_counter +=1;
 
-    }
+    };
     function MirageBlade(){
         var MirageBlade = document.getElementById("MirageBlade");
         turn_counter +=1;
 
-    }
+    };
     function Entrapment(){
         var Entrapment = document.getElementById("Entrapment");
         turn_counter +=1;
 
-    }
+    };
 
     //light mage attacks
     function basic_l(){
         turn_counter +=1;
 
-    }
+    };
     function PierceEvil(){
         document.getElementById("PierceEvil");
         if (white_mage_mp <10){
@@ -478,40 +479,47 @@ function l_mage_menu(){ //2
             
             document.getElementById("img_template").src = "PierceEvil.jpg"
             i_menu.style.display = "initial"
-            i_menu.style.borderColor = "gold"
+            let PE = new Audio("pierceevil.wav");
+            PE.play()
+            PE.loop = false;
             setTimeout(()=>{
-                health.value -= 80/phase_1_def;
-                let l_crit = Math.floor(Math.random() * 16);
-                if (l_crit == 15){
-                    health.value -= 160/phase_1_def;
-                    window.alert("Critical hit!")
-                }
+                if (phase2 = true){
+                    health.value -= 80 - phase_2_mdef;
+                    let l_crit = Math.floor(Math.random() * 16);
+                    if (l_crit == 15){
+                        health.value -= 160 - phase_2_mdef;
+                        window.alert("Critical hit!")
+                    };
+                }else{
+                    health.value -= 80 - phase_1_def;
+                    let l_crit = Math.floor(Math.random() * 16);
+                    if (l_crit == 15){
+                        health.value -= 160 - phase_1_def;
+                        window.alert("Critical hit!")
+                    };
+                }   
                 white_mage_mp -= 10;
                 document.getElementById('l_mage_name').value = lmage_name + " " + "HP: " + white_mage_hp + "\n" +"MP: "+white_mage_mp;
                 turn_counter +=1;
                 console.log(turn_counter)
                 i_menu.style.display = "none"
-            }, 3000)
+            }, 3000);
             
-         
 
-        }
+        };
     
-    }
+    };
 
-       
-
-    
     function AngelsGrace(){
-        var AngelsGrace = document.getElementById("AngelsGrace");
+        document.getElementById("AngelsGrace");
         turn_counter +=1;
 
-    }
+    };
     function SupremeAltar(){ //her ult
-        var SupremeAltar = document.getElementById("SupremeAltar");
+        document.getElementById("SupremeAltar");
         turn_counter +=1;
 
-    }
+    };
 
  //these will work by retrieving the character's list index and matching it 
  //listener to check if any of them are clicked 
