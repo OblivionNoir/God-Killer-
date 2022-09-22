@@ -3,23 +3,23 @@
 phase_1_hp = 3000; //global for now, tighten scope if it becomes problematic
 phase_1_patk = 50;
 phase1_matk = 50;
-phase_1_def = 100;
-phase_1_mdef = 80;
+phase_1_def = .8; //divide by this number 
+phase_1_mdef = .6;
 
 warrior_hp = 2000;
 warrior_mp = 70;
-warrior_def = 18; 
-warrior_mdef = 9;
+warrior_def = .9; 
+warrior_mdef = .5;
 
 black_mage_hp = 1400; 
 black_mage_mp = 220;
-black_mage_def = 10;
-black_mage_mdef = 25;
+black_mage_def = .6;
+black_mage_mdef = .9;
 
 white_mage_hp = 1200;
 white_mage_mp = 220;
-white_mage_def = 9;
-white_mage_mdef = 26; 
+white_mage_def = .5;
+white_mage_mdef = .8; 
 
 //hide elements that get used later
 var p1_img = document.getElementById("boss_img");
@@ -46,7 +46,7 @@ b_menu.style.display = "none"
 
 })*/
 var clickCheck = true; //todo: add fade out of phase 1 with for loop
-/*phase2 = document.addEventListener("click", function(){ //PHASE 2!
+phase2 = document.addEventListener("click", function(){ //PHASE 2!
         //console.log(health)
         if (health.value <1501 && clickCheck == true){
             clickCheck = false;
@@ -85,7 +85,7 @@ var clickCheck = true; //todo: add fade out of phase 1 with for loop
             phase2_theme.pause()
             window.open('gigachad.html', "_self")
         }
-})*/
+})
 
 
  //buttons become visible when character is picked
@@ -136,10 +136,10 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
     };
     dmage_name = dmage_name.toUpperCase();
     
-    var lmage_name = window.prompt("What is your (female) light mage's name?");
+    lmage_name = window.prompt("What is your (female) light mage's name?");
     if (lmage_name.length >8 || lmage_name.length === 0){
         window.alert("Name cannot be longer than 8 characters or empty, sorry");
-        var lmage_name = window.prompt("What is your (female) light mage's name?");
+        lmage_name = window.prompt("What is your (female) light mage's name?");
     }
     lmage_name = lmage_name.toUpperCase();
     
@@ -265,6 +265,7 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
     
 };
 
+
 function d_mage_menu(){ //1
     if (lastClick >= (Date.now() - delay))
     return;
@@ -281,9 +282,12 @@ function d_mage_menu(){ //1
           click_counter_d = 1;
           show_s_d.addEventListener("click", function(){ //use math to check for every second click.
               //every second click (2,4,6 etc)will turn it off
-              document.getElementById("btn_1").innerHTML = "Radiant Supernova"
-              document.getElementById("btn_2").innerHTML = "Mirage Blade"
-              document.getElementById("btn_3").innerHTML = "Entrapment"
+              let btn1 = document.getElementById("btn_1").innerHTML = "Radiant Supernova"
+              btn1.innerHTML = "Radiant Supernova"
+              let btn2 = document.getElementById("btn_2")
+              btn2.innerHTML = "Mirage Blade"
+              let btn3 = document.getElementById("btn_3")
+              btn3.innerHTML = "Entrapment"
   
               if (lastClick >= (Date.now() - delay)) //fixes bounce
               return; 
@@ -310,6 +314,7 @@ function d_mage_menu(){ //1
     };
 
     };
+
 function l_mage_menu(){ //2
     if (lastClick >= (Date.now() - delay))
     return;
@@ -326,9 +331,12 @@ function l_mage_menu(){ //2
           click_counter_l = 1;
           show_s_l.addEventListener("click", function(){ //use math to check for every second click.
               //every second click (2,4,6 etc)will turn it off
-              let btn1 = document.getElementById("btn_1").innerHTML = "Pierce Evil"
-              let btn2 = document.getElementById("btn_2").innerHTML = "Angel's Grace"
-              let btn3 = document.getElementById("btn_3").innerHTML = "Supreme Altar"
+              let btn1 = document.getElementById("btn_1")
+              btn1.innerHTML = "Pierce Evil"
+              let btn2 = document.getElementById("btn_2")
+              btn2.innerHTML = "Angel's Grace"
+              let btn3 = document.getElementById("btn_3")
+              btn3.innerHTML = "Supreme Altar"
   
               if (lastClick >= (Date.now() - delay)) //fixes bounce
               return; 
@@ -340,7 +348,10 @@ function l_mage_menu(){ //2
                   console.log(click_counter_l)
                   var b_menu = document.getElementById("menu_template")
                   b_menu.style.display = "initial";
-                  btn1.onclick = PierceEvil()
+
+                  btn1.addEventListener("click", function (){
+                    PierceEvil()
+                  })
 
               }else{
                   console.log("even number");
@@ -358,58 +369,83 @@ function l_mage_menu(){ //2
     };
     
     };
+    health = document.getElementById("HP_bar")
+
     
     turn_counter = 0; //increment with each action taken
+    //add event listener for odd turn numbers to trigger boss attacks
+    document.addEventListener("click", function (){
+        if (turn_counter % 2 !==0){
+            setTimeout(()=>{
+                window.alert("MY TURN BITCH")
+            }, 2000)
+        }
 
-
+    })
                         //~~~~Below here is all movesets~~~\\
     function Critical(){ //adds 5% chance of 2x damage for party moves
-
+        crit = Math.floor(Math.random() * 11);
+        if (crit == 10){
+            window.alert("Critical hit!")
+            dmg = dmg*1.5; //deal 50% more
+        }
     }
     //going to need to keep track of turns in a list for some attacks to work 
 
     //boss attacks
     function basic_b(){
+        turn_counter +=1;
 
     }
     function SpheresofInsanity(){
         var SpheresofInsanity = document.getElementById("SpheresofInsanity");
+        turn_counter +=1;
     }
     function Polarity(){
         var Polarity = document.getElementById("Polarity");
+        turn_counter +=1;
     }
     function HellsGate(){
         var HellsGate = document.getElementById("HellsGate");
+        turn_counter +=1;
     }
     function SpacialRift(){
         var SpacialRift = document.getElementById("SpacialRift")
+        turn_counter +=1;
     }
     //only in phase 2\\
     function TendrilsoftheNight(){
         var TendrilsoftheNight = document.getElementById("TendrilsoftheNight");
+        turn_counter +=1;
     }
     function BleedingSun1(){ //turn 1 charge
         var bSun1 = document.getElementById("bSun1");
+        turn_counter +=1;
     }
     function BleedingSun2(){ //massive damage to all, defend is borderline required
         var bSun2 = document.getElementById("bSun2");
         let NANI = new Audio("omaewa.mp3");
         NANI.play()
         NANI.loop = false;
+        turn_counter +=1;
     }
 
     //warrior attacks
     function basic_w(){ //basic attack, no mp used
+        turn_counter +=1;
 
     }
     function ThousandMen(){ //his ult
         var ThousandMen = document.getElementById("ThousandMen");
+        turn_counter +=1;
     }
     function ShadowSelf(){
         var ShadowSelf = document.getElementById("ShadowSelf");
+        turn_counter +=1;
     }
     function WhimsofFate(){
         var WhimsofFate = document.getElementById("WhimsofFate");
+        turn_counter +=1;
 
     }
 
@@ -419,32 +455,55 @@ function l_mage_menu(){ //2
     }
     function RadiantSupernova(){ //her ult
         var RadiantSupernova = document.getElementById("RadiantSupernova");
+        turn_counter +=1;
 
     }
     function MirageBlade(){
         var MirageBlade = document.getElementById("MirageBlade");
+        turn_counter +=1;
 
     }
     function Entrapment(){
         var Entrapment = document.getElementById("Entrapment");
+        turn_counter +=1;
 
     }
 
     //light mage attacks
     function basic_l(){
+        turn_counter +=1;
 
     }
     function PierceEvil(){
-        var PierceEvil = document.getElementById("PierceEvil");
-        window.alert('success!')
+        document.getElementById("PierceEvil");
+        if (white_mage_mp <10){
+            window.alert("Not enough mp!")
+        }else{ //assuming phase 1 for now
+            health.value -= 80/phase_1_def;
+            let l_crit = Math.floor(Math.random() * 16);
+            if (l_crit == 15){
+                health.value -= 160/phase_1_def;
+            }
+            white_mage_mp -= 10;
+            document.getElementById('l_mage_name').value = lmage_name + " " + "HP: " + white_mage_hp + "\n" +"MP: "+white_mage_mp;
+            turn_counter +=1;
+            console.log(turn_counter)
 
+        }
+    
     }
+    
+       
+
+    
     function AngelsGrace(){
         var AngelsGrace = document.getElementById("AngelsGrace");
+        turn_counter +=1;
 
     }
     function SupremeAltar(){ //her ult
         var SupremeAltar = document.getElementById("SupremeAltar");
+        turn_counter +=1;
 
     }
 
