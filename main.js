@@ -37,15 +37,17 @@ bn.style.visibility = "hidden";
 var p2 = document.getElementById("txt_2");
 p2.style.display = "none";
 
+var b_menu = document.getElementById("menu_template")
+b_menu.style.display = "none"
 //test hp bar 
-document.addEventListener("click", function(){
+/*document.addEventListener("click", function(){
     health = document.getElementById("HP_bar")
     health.value -= 700;
 
-})
+})*/
 var clickCheck = true; //todo: add fade out of phase 1 with for loop
-phase2 = document.addEventListener("click", function(){ //PHASE 2!
-        console.log(health)
+/*phase2 = document.addEventListener("click", function(){ //PHASE 2!
+        //console.log(health)
         if (health.value <1501 && clickCheck == true){
             clickCheck = false;
             p2.style.display = "initial"; //add timeout
@@ -83,7 +85,7 @@ phase2 = document.addEventListener("click", function(){ //PHASE 2!
             phase2_theme.pause()
             window.open('gigachad.html', "_self")
         }
-})
+})*/
 
 
  //buttons become visible when character is picked
@@ -225,7 +227,36 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
     if (ki.classList.contains('active')){
         console.log('made it -knight')
         menu_sfx()
-        addButtons()
+        addButtons() //consider refactoring the below
+
+        //add listener for click on spells 
+        let show_s_k = document.getElementById("spells_b"); //needs on and off state
+        click_counter = 1;
+        show_s_k.addEventListener("click", function(){ //use math to check for every second click.
+            //every second click (2,4,6 etc)will turn it off
+            document.getElementById("btn_1").innerHTML = "Thousand Men"
+            document.getElementById("btn_2").innerHTML = "Shadow Self"
+            document.getElementById("btn_3").innerHTML = "Whims of Fate"
+
+            if (lastClick >= (Date.now() - delay)) //fixes bounce
+            return; 
+            lastClick = Date.now(); 
+            if (click_counter % 2 !==0){ //make menu appear if odd
+                //odd number
+                console.log("odd number");
+                click_counter +=1;
+                console.log(click_counter)
+                var b_menu = document.getElementById("menu_template")
+                b_menu.style.display = "initial"
+            }else{
+                console.log("even number");
+                click_counter +=1
+                var b_menu = document.getElementById("menu_template")
+                b_menu.style.display = "none"
+            }
+      
+        })
+     
     }else{
         console.log("what")
         removeButtons()
@@ -245,44 +276,92 @@ function d_mage_menu(){ //1
         console.log('made it - dmage')
         menu_sfx()
         addButtons()
-    }else{
+          //add listener for click on spells 
+          let show_s_d = document.getElementById("spells_b"); //needs on and off state
+          click_counter_d = 1;
+          show_s_d.addEventListener("click", function(){ //use math to check for every second click.
+              //every second click (2,4,6 etc)will turn it off
+              document.getElementById("btn_1").innerHTML = "Radiant Supernova"
+              document.getElementById("btn_2").innerHTML = "Mirage Blade"
+              document.getElementById("btn_3").innerHTML = "Entrapment"
+  
+              if (lastClick >= (Date.now() - delay)) //fixes bounce
+              return; 
+              lastClick = Date.now(); 
+              if (click_counter_d % 2 !==0){ //make menu appear if odd
+                  //odd number
+                  console.log("odd number");
+                  click_counter_d +=1;
+                  console.log(click_counter_d)
+                  var b_menu = document.getElementById("menu_template")
+                  b_menu.style.display = "initial"
+              }else{
+                  console.log("even number");
+                  click_counter_d +=1
+                  var b_menu = document.getElementById("menu_template")
+                  b_menu.style.display = "none"
+              }
+        
+          })
+    }else{ 
         console.log("what")
         removeButtons()
 
     };
 
     };
-    turn_counter = 0; //increment with each action taken
-//atk lists 
-//use for loop to create custom menus for each character, test in seperate file
-//use for loops to assign each of these a unique number to be called on that, or an object
-//with key/values
-boss_atks = ["Basic boss", "Spheres of Insanity", "Polarity", "Hell's Gate", "Spacial Rift"];
-boss_atks2 = ["Basic boss","Spheres of Insanity", "Polarity", "Hell's Gate", "Spacial Rift",
-"Tendrils of the Night", "Bleeding Sun Part 1", "Bleeding Sun Part 2"];
-warrior_atks = ["Basic warrior", "Thousand Men", "Shadow Self", "Whims of Fate"];
-dmage_atks = ["Basic dmage", "Radiant Supernova", "Mirage Blade", "Entrapment"];
-lmage_atks = ["Basic lmage", "Pierce Evil", "Angel's Grace", "Supreme Altar"];
-
 function l_mage_menu(){ //2
     if (lastClick >= (Date.now() - delay))
     return;
     lastClick = Date.now()
     li = document.getElementById("l_mage_img"); //need to check if it has border or not
-    //if red, show menu. If null, hide menu
-    //active class = red
+        //if red, show menu. If null, hide menu
+        //active class = red
     if (li.classList.contains('active')){
         console.log('made it- lmage')
         menu_sfx()
         addButtons()
+          //add listener for click on spells 
+          let show_s_l = document.getElementById("spells_b"); //needs on and off state
+          click_counter_l = 1;
+          show_s_l.addEventListener("click", function(){ //use math to check for every second click.
+              //every second click (2,4,6 etc)will turn it off
+              let btn1 = document.getElementById("btn_1").innerHTML = "Pierce Evil"
+              let btn2 = document.getElementById("btn_2").innerHTML = "Angel's Grace"
+              let btn3 = document.getElementById("btn_3").innerHTML = "Supreme Altar"
+  
+              if (lastClick >= (Date.now() - delay)) //fixes bounce
+              return; 
+              lastClick = Date.now(); 
+              if (click_counter_l % 2 !==0){ //make menu appear if odd
+                  //odd number
+                  console.log("odd number");
+                  click_counter_l +=1;
+                  console.log(click_counter_l)
+                  var b_menu = document.getElementById("menu_template")
+                  b_menu.style.display = "initial";
+                  btn1.onclick = PierceEvil()
 
+              }else{
+                  console.log("even number");
+                  click_counter_l +=1
+                  var b_menu = document.getElementById("menu_template")
+                  b_menu.style.display = "none";
+              }
+        
+          })
+    
     }else{
         console.log("what")
         removeButtons()
-
+    
     };
-
+    
     };
+    
+    turn_counter = 0; //increment with each action taken
+
+
                         //~~~~Below here is all movesets~~~\\
     function Critical(){ //adds 5% chance of 2x damage for party moves
 
@@ -314,6 +393,9 @@ function l_mage_menu(){ //2
     }
     function BleedingSun2(){ //massive damage to all, defend is borderline required
         var bSun2 = document.getElementById("bSun2");
+        let NANI = new Audio("omaewa.mp3");
+        NANI.play()
+        NANI.loop = false;
     }
 
     //warrior attacks
@@ -354,6 +436,7 @@ function l_mage_menu(){ //2
     }
     function PierceEvil(){
         var PierceEvil = document.getElementById("PierceEvil");
+        window.alert('success!')
 
     }
     function AngelsGrace(){
