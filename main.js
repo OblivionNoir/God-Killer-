@@ -225,6 +225,7 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
         addButtons() //consider refactoring the below
 
         //add listener for click on spells 
+
         let show_s_k = document.getElementById("spells_b"); //needs on and off state
         show_s_k.addEventListener("click", function(){ //use math to check for every second click.
             //every second click (2,4,6 etc)will turn it off
@@ -275,7 +276,7 @@ function d_mage_menu(){ //1
           let show_s_d = document.getElementById("spells_b"); //needs on and off state
           
           show_s_d.addEventListener("click", function(){ //use math to check for every second click.
-              //every second click (2,4,6 etc)will turn it off
+           
               let btn1 = document.getElementById("btn_1")
               btn1.innerHTML = "Radiant Supernova"
               let btn2 = document.getElementById("btn_2")
@@ -366,6 +367,54 @@ function l_mage_menu(){ //2
     };
     
     };
+    document.addEventListener("DOMContentLoaded", function(event) { //this algorithm is disgusting but guess what it works
+        var buttons = document.querySelectorAll('.btn');//this acts like an array
+            if (buttons){ //if it exists
+                buttons.forEach(function getIndex(curVal2, LIndex2){ //current value and index in the list, add event listener to each
+                    curVal2.addEventListener('click', function() {
+                    //console.log(lIndex);
+                    curVal2.classList.toggle("active2");
+                    buttons.forEach(function(x, sL2){ 
+                        if(LIndex2 !== sL2) { //if list index is NOT equal to the selected list element, aka one has already been picked
+                            x.classList.remove('active2');
+                            };
+                            current_index2 = LIndex2;
+                            console.log(current_index2) //stores current index
+                            switch(current_index2){ 
+                                case(0): 
+                                console.log("test1") //from here, call the menus
+                                break;
+                                case(1): //this one is spells
+                                //use listener to execute the matching spell
+                                btn1.addEventListener("click", function(){
+
+                                })
+                                btn2.addEventListener("click", function(){
+                                    if(btn2.innerHTML == "Mirage Blade"){
+                                        MirageBlade()
+                                    }
+
+                                })
+                                btn3.addEventListener("click", function(){
+
+                                })
+
+                                console.log('test2')
+
+                                break;
+                                case(2):
+                                console.log('test3')
+                                break;
+                            };
+                     });
+    
+                 });//move to picking menu based on character
+                 //console.log(LIndex)
+            
+            });
+        };
+    }); //use similar algo for battle menus, using stored index v
+
     health = document.getElementById("HP_bar")
 
     
