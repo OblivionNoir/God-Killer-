@@ -36,6 +36,12 @@ html{
     left: 50%;
     transform: translate(-50%, -50%);
 }
+#box2{/*is not responsive! Fix!*/
+    position: absolute;
+    margin-top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 #txt_{
     font-size: 4em; 
     color: rgb(145, 13, 13);
@@ -44,7 +50,16 @@ html{
     border-radius: 2%;
 
 }
+#txt_2{
+    font-size: 4em; 
+    color: white;
+    font-family: 'valium';
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 2%;
+
+}
 #battle_menu{
+    
     background-image: url('obsidian2.jpg');
     max-width: fit-content;
     padding-bottom: 1vh;
@@ -53,15 +68,36 @@ html{
     margin-top: 2vh;
     font-size: large;
 
-  
 }
 
 #battle_menu > div{
     padding-top: 1vh;
     display: flex;
     flex-direction: row;
-    max-width: 10vw;
+    width: 10vw;
     border-radius: 8%;
+}
+
+#menu_template{
+    background-image: url('obsidian2.jpg');
+    position: absolute;
+    max-width: 25vw;
+    padding-bottom: 1vh;
+    max-height: 10vh;
+    border-radius: 2%;
+    margin-top: -80vh;
+    margin-left: 10vw;
+    font-size: large;
+    z-index: 4;
+}
+
+#menu_template>div{
+    padding-top: 1vh;
+    display: flex;
+    flex-direction: row;
+    width: 10vw;
+    border-radius: 8%;
+    z-index: 4;
 }
 
 #warrior_name, #d_mage_name, #l_mage_name{
@@ -99,9 +135,7 @@ progress::-webkit-progress-value { /*only tested in Chrome*/
     opacity: 0.8;
 }
 
-#battle_menu >div >button:hover{
-    border: 0.15em solid rgba(4, 47, 129, 0.8)
-}
+
 
 #battle_menu >div >button{
     font-size: 1.5em;
@@ -109,10 +143,56 @@ progress::-webkit-progress-value { /*only tested in Chrome*/
     font-family: 'valium';
     z-index: 2;
 }
+#secret_container{
+    max-width: 5vw;
+    max-height: 10vh;
+    background-color: black;
+}
+#secret{
+    position: absolute;
+    top: 12vh;
+    right: 2vw;
+    padding-top: 1.5vh;
+    padding-left: 2vw;
+    font-size: 1.4em;
+    color: black;
+    z-index: 2;
+    width: 8vw;
+    height: 6vh;
+
+}
+#secret::before{
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    left: -1vmin;
+    top: -1vh;
+    background: linear-gradient(30deg, red, orange, green, purple, blue,white, yellow);
+    background-size: 400%;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    animation: glower 20s linear infinite;
+  }
+  
+  @keyframes glower {
+    0% {
+      background-position: 0 0;
+    }
+    
+    50% {
+      background-position: 400% 0;
+    }
+    
+    100% {
+      background-position: 0 0;
+    }
+  }
+  
 #battle_menu > div >img{
     display: flex;
     flex-direction: row;
-    max-width: 10vw;
+    width: 10vw;
     border-radius: 15%;
     z-index: 2;
     
@@ -123,7 +203,21 @@ progress::-webkit-progress-value { /*only tested in Chrome*/
    top: 2vh;
    right: 0px;
    color: grey;
+   z-index: 2;
 }
+
+#fps{
+    position: absolute;
+    top: 12vh;
+    right: 1vw;
+    color: red;
+
+
+}
+#settings{
+    z-index: 2;
+}
+
 
 #ost_box{
     position: absolute;
@@ -136,6 +230,9 @@ progress::-webkit-progress-value { /*only tested in Chrome*/
 .clickable.active{
     border:1px solid red;
   }
+.btn.active2{
+    border:1px solid red;
+}
   
   #rainbg{
     position: fixed;
@@ -146,3 +243,4 @@ progress::-webkit-progress-value { /*only tested in Chrome*/
     z-index: 1;
     opacity: 0.5;
   }
+

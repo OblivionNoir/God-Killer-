@@ -33,9 +33,9 @@
 
     <!--treat this similarly to the og textarea, css-wise-->
         <div id = "battle_menu">
-            <div><button id = "atk_b" class = "btn">Attack</button></div>
-            <div><button id = "spells_b" class = "btn">Spells</button></div>
-            <div><button id = "def_b" class = "btn">Defend</button></div> <!--triples defense for next turn-->
+            <div><button id = "atk_b" class = "btn" >Attack</button></div>
+            <div><button id = "spells_b" class = "btn" >Spells</button></div>
+            <div><button id = "def_b" class = "btn" >Defend</button></div> <!--triples defense for next turn-->
             <div><img src = "knight.jpg" id = "knight_img" class = "clickable"></div>
             <div><textarea id = "warrior_name" disabled ></textarea></div>
             <div><img src = "dmage1.jpg" id = "d_mage_img" class = "clickable"></div> <!--character portraits, names-->
@@ -43,18 +43,27 @@
             <div><img src = "lmage.jpg" id = "l_mage_img" class = "clickable"></div>
             <div><textarea id = "l_mage_name" disabled ></textarea></div>
             <div><progress id = "ultima_charge" value = "0" max = "100"></progress></div>
+        </div>  
+    
+        <div id = "menu_template">
+                <div><button id = "btn_1">1</button></div> <!--link these to atk function-->
+                <div><button id = "btn_2">2</button></div>
+                <div><button id = "btn_3">3</button></div>
         </div>    
     
+        <!--teacher click this button-->
+        <div id = "secret_container">
+        <a href = "https://youtu.be/dQw4w9WgXcQ"><div id = "secret">Click me to give Benjamin an A</div></a>
+        </div>
 
-
-
+        <img src = "bleedingsunpart2.jpg" id = "img_template">
 
     <div id = "credit">All images created with <a href = https://www.midjourney.com/home target = "_blank">Midjourney AI</a></div>
-
+   
     <textarea id = ost_box disabled rows = "5">Now playing:</textarea> <!--updates in real time!-->
-
+ 
     <div id = "boss_name">Beast of Oblivion</div> <!--link this to JS-->
-        <progress id = "HP_bar" value = "3000" max="3000">
+        <progress id = "HP_bar" value = "10000" max="10000">
     </progress>
  <!--make color inside linked to hp percentage-->
     <style>
@@ -64,6 +73,23 @@
             font-size: 2em;
             z-index: 2;
         }
+    </style>
+    <style>
+        #img_template{
+            position: absolute;
+            margin-top: -25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 80vh;
+            width: 40vw;
+            z-index: 2;
+            border: solid rgba(0,0,0,0.8);
+            opacity: 0.7;
+         
+        }
+
+
+
     </style>
 
 
