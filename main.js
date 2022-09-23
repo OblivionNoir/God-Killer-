@@ -1,8 +1,8 @@
 
 //initial stats
  //global for now, tighten scope if it becomes problematic
-phase_def = 12; //divide by this number 
-phase_mdef = 10;
+phase_def = 1.2; //divide by this number 
+phase_mdef = 1.1;
 
 
 warrior_hp = 2000;
@@ -47,15 +47,15 @@ i_menu.style.display = "none"
 
 })*/
 var clickCheck = true; //todo: add fade out of phase 1 with for loop
-document.addEventListener("click", function(){ //PHASE 2!
+document.addEventListener("click", function phase2(){ //PHASE 2!
         //console.log(health)
-        if (health.value <5001 && clickCheck == true){
+        if (health.value <10000 && health.value > 5001 && clickCheck == true){
             clickCheck = false;
             p2.style.display = "initial"; //add timeout
             p2.value = "Oh no...";
             phase2 = true; //trigger to reference phase 2 later on
-            phase_def = 17; //update stats for phase 2
-            phase_mdef = 15;
+            phase_def = 1.3; //update stats for phase 2
+            phase_mdef = 1.2;
             setTimeout(() =>{
                 let dotheroar = new Audio('dotheroar.mp3')
                 dotheroar.play()
@@ -77,16 +77,60 @@ document.addEventListener("click", function(){ //PHASE 2!
                 roar.play();
                 roar.loop = false;
                 document.getElementById("boss_name").innerHTML = "Akumu, Origin of the Nightmare";
-                document.getElementById("ost_box").value = "Now playing: \n Bloodborne OST: The Hunter - Phase 2";
+                let ostbox = document.getElementById("ost_box")
+                ostbox.value = "Now playing: \n Bloodborne OST: The Hunter - Phase 2";
             }, 4000);
             setTimeout(()=>{
                 let xtraThunder = new Audio("xtrathunder.mp3")
                 xtraThunder.play();
                 xtraThunder.loop = true;
+                p2.value = ""
             }, 5000);
     
         }else if (health.value ==0){
             phase2_theme.pause()
+           //display victory window
+        }
+})
+var clickCheck2 = true; 
+document.addEventListener("click", function phase3(){ //PHASE 3!
+        if (health.value <5001 && clickCheck2 == true){
+            clickCheck2 = false;
+            p2.style.display = "initial"; //add timeout
+            setTimeout(()=>{
+                phase2_theme.pause();
+                p2.value = "...";
+            },5000)
+            setTimeout(() =>{
+                p2.value = "...\n...";
+            },5000)
+            phase3_ = true; //trigger to reference phase 3 later on
+            phase_def = 1.3; //update stats for phase 3
+            phase_mdef = 1.5;
+     
+            document.getElementById("boss_name").innerHTML = "Purveyor of Nascency";
+            setTimeout(() =>{
+                document.getElementById("rainbg").src = "redrain3.mp4"
+                p2.style.display = "none";
+                document.getElementById("boss_img").src = "phase3.jpg";
+                phase3_theme = new Audio('phase3ost.mp3') //use hunter phase 2
+                phase3_theme.play();
+                phase3_theme.loop = true;
+                let roar = new Audio("roar.wav");
+                roar.play();
+                roar.loop = false;
+                document.body.style.backgroundImage = "url('firegate.jpg')"
+                document.body.style.backgroundSize = "contain";
+                let ostbox = document.getElementById("ost_box")
+                ostbox.value = "Now playing: \n Dark Souls 3 OST: Yhorm the Giant";
+            }, 4000);
+
+            let roar = new Audio("roar.wav");
+            roar.play();
+            roar.loop = false;
+         
+        }else if (health.value ==0){
+            phase3_theme.pause()
            //display victory window
         }
 })
@@ -156,7 +200,8 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
         phase1_theme = new Audio('phase1OST.mp3'); //user hunter phase 1
         phase1_theme.play();
         phase1_theme.loop =true;
-        document.getElementById("ost_box").value = "Now playing: \n Bloodborne OST: The Hunter - Phase 1";
+        let ostbox = document.getElementById("ost_box")
+        ostbox.value = "Now playing: \n Bloodborne OST: The Hunter - Phase 1";
         del_box()
     }, 5000);
 
@@ -517,9 +562,9 @@ function l_mage_menu(){ //2
                     let d_crit = Math.floor(Math.random() * 9); //higher crit rate
                     if (d_crit == 8){
                         health.value -= 1200 - phase_def;
-                        window.alert("Critical hit!")
+                        window.alert("Critical hit!") //note that this is NOT running 3 times. 
                     };    
-                black_mage_mp -= 50;
+                black_mage_mp -= 10;
                 document.getElementById("d_mage_name").value = dmage_name +  " " + "HP: " + black_mage_hp + "\n" +"MP: "+black_mage_mp;
                 turn_counter +=1;
                 console.log(turn_counter)
