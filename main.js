@@ -1,10 +1,9 @@
 
 //initial stats
  //global for now, tighten scope if it becomes problematic
-phase_1_def = 12; //divide by this number 
-phase_1_mdef = 10;
-phase_2_def = 17;
-phase_2_mdef = 15;
+phase_def = 12; //divide by this number 
+phase_mdef = 10;
+
 
 warrior_hp = 2000;
 warrior_mp = 70;
@@ -50,11 +49,13 @@ i_menu.style.display = "none"
 var clickCheck = true; //todo: add fade out of phase 1 with for loop
 document.addEventListener("click", function(){ //PHASE 2!
         //console.log(health)
-        if (health.value <1501 && clickCheck == true){
+        if (health.value <5001 && clickCheck == true){
             clickCheck = false;
             p2.style.display = "initial"; //add timeout
             p2.value = "Oh no...";
             phase2 = true; //trigger to reference phase 2 later on
+            phase_def = 17; //update stats for phase 2
+            phase_mdef = 15;
             setTimeout(() =>{
                 let dotheroar = new Audio('dotheroar.mp3')
                 dotheroar.play()
@@ -78,15 +79,15 @@ document.addEventListener("click", function(){ //PHASE 2!
                 document.getElementById("boss_name").innerHTML = "Akumu, Origin of the Nightmare";
                 document.getElementById("ost_box").value = "Now playing: \n Bloodborne OST: The Hunter - Phase 2";
             }, 4000);
-            setTimeout(() =>{
-                let chv = new Audio('computerhasvirus.mp3')
-                chv.play()
-                chv.loop = false;
-            },10000);
+            setTimeout(()=>{
+                let xtraThunder = new Audio("xtrathunder.mp3")
+                xtraThunder.play();
+                xtraThunder.loop = true;
+            }, 5000);
     
         }else if (health.value ==0){
             phase2_theme.pause()
-            window.open('gigachad.html', "_self")
+           //display victory window
         }
 })
 
@@ -112,9 +113,6 @@ document.addEventListener("keyup", function(event) {
     if (event.code === 'Enter' && check == true) {
         check = false; //so it can only happen once. Prevents event order from getting thrown out of wack
         p1_img.style.visibility = "visible";
-        let boom = new Audio('vineboom.mp3')
-        boom.play()
-        boom.loop = false;
         const storm_bg = new Audio('stormnoises.mp3');
         storm_bg.play();
         storm_bg.loop =true;
@@ -125,17 +123,17 @@ document.addEventListener("keyup", function(event) {
 
 function write_message(){ //Trigger when enter is pressed. Write custom message and begin battle 
    
-    var warrior_name = window.prompt("What is your (male) warrior's name?"); 
+    warrior_name = window.prompt("What is your (male) warrior's name?"); 
     if (warrior_name.length >8 || warrior_name.length ===0){
         window.alert("Name cannot be longer than 8 characters or empty, sorry"); 
-        var warrior_name = window.prompt("What is your (male) warrior's name?");
+        warrior_name = window.prompt("What is your (male) warrior's name?");
     };
     warrior_name = warrior_name.toUpperCase();//todo: prevent "cancel". cancel = null
     
-    var dmage_name = window.prompt("What is your (female) dark mage's name?");
+    dmage_name = window.prompt("What is your (female) dark mage's name?");
     if (dmage_name.length >8 || dmage_name.length === 0 ){
         window.alert("Name cannot be longer than 8 characters or empty, sorry");
-        var dmage_name = window.prompt("What is your (female) dark mage's name?");
+        dmage_name = window.prompt("What is your (female) dark mage's name?");
     };
     dmage_name = dmage_name.toUpperCase();
     
@@ -152,11 +150,7 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
     document.getElementById("l_mage_name").value = lmage_name +  " " + "HP: " + white_mage_hp + "\n" +"MP: "+white_mage_mp;
 
     document.getElementById("txt_").value = `GREETINGS, PATHETIC MORTALS. WHAT ARE YOUR NAMES AGAIN? ${warrior_name.replace('\n', '')}, ${dmage_name.replace('\n', '')}, and ${lmage_name.replace('\n', '')}? WHATEVER. TIME TO DIE...`;
-    setTimeout(() =>{
-        let bruh = new Audio('bruh.mp3')
-        bruh.play()
-        bruh.loop = false;
-    }, 3000);
+
     setTimeout(() =>{
         //window.alert("SHOWTIME!");
         phase1_theme = new Audio('phase1OST.mp3'); //user hunter phase 1
@@ -176,7 +170,7 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     bn.style.visibility = "visible";
 
 };
-party_list = []//store for later usage
+
 //Character selection. DO NOT TOUCH 
 document.addEventListener("DOMContentLoaded", function(event) { //this algorithm is disgusting but guess what it works
     var element = document.querySelectorAll('.clickable');//this acts like an array
@@ -194,15 +188,12 @@ document.addEventListener("DOMContentLoaded", function(event) { //this algorithm
                         switch(current_index){ 
                             case(0): 
                             warrior_menu()
-                            party_list.push(0);
                             break;
                             case(1):
                             d_mage_menu()
-                            party_list.push(1);
                             break;
                             case(2):
                             l_mage_menu();
-                            party_list.push(2);
                             break;
                         };
                  });
@@ -220,6 +211,7 @@ function menu_sfx(){
     menusfx_.play()
     menusfx_.loop = false;
 }
+let click_counter = 0;
 function warrior_menu(){ //0 //when this is reached, we know the warrior has been clicked
     if (lastClick >= (Date.now() - delay)) //need to check if clicked
     return; //returns undefined, false because it's a boolean
@@ -234,7 +226,6 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
 
         //add listener for click on spells 
         let show_s_k = document.getElementById("spells_b"); //needs on and off state
-        click_counter = 1;
         show_s_k.addEventListener("click", function(){ //use math to check for every second click.
             //every second click (2,4,6 etc)will turn it off
             document.getElementById("btn_1").innerHTML = "Thousand Men"
@@ -282,31 +273,36 @@ function d_mage_menu(){ //1
         addButtons()
           //add listener for click on spells 
           let show_s_d = document.getElementById("spells_b"); //needs on and off state
-          click_counter_d = 1;
+          
           show_s_d.addEventListener("click", function(){ //use math to check for every second click.
               //every second click (2,4,6 etc)will turn it off
-              let btn1 = document.getElementById("btn_1").innerHTML = "Radiant Supernova"
+              let btn1 = document.getElementById("btn_1")
               btn1.innerHTML = "Radiant Supernova"
               let btn2 = document.getElementById("btn_2")
               btn2.innerHTML = "Mirage Blade"
               let btn3 = document.getElementById("btn_3")
               btn3.innerHTML = "Entrapment"
-  
               if (lastClick >= (Date.now() - delay)) //fixes bounce
               return; 
               lastClick = Date.now(); 
-              if (click_counter_d % 2 !==0){ //make menu appear if odd
+              
+              if (click_counter % 2 !==0){ //make menu appear if odd
                   //odd number
                   console.log("odd number");
-                  click_counter_d +=1;
-                  console.log(click_counter_d)
+                  click_counter +=1;
+                  console.log(click_counter)
                   var b_menu = document.getElementById("menu_template")
                   b_menu.style.display = "initial"
               }else{
-                  console.log("even number");
-                  click_counter_d +=1
-                  var b_menu = document.getElementById("menu_template")
-                  b_menu.style.display = "none"
+                  console.log("even number"); //this area is the problem, change to one big 
+                  //counter and track it like the battle turns
+                  var b_menu = document.getElementById("menu_template") 
+                  b_menu.style.display = "initial";
+
+                  btn2.addEventListener("click", function (){
+                    MirageBlade()
+                    click_counter +=1
+                  })
               }
         
           })
@@ -331,7 +327,6 @@ function l_mage_menu(){ //2
         addButtons()
           //add listener for click on spells 
           let show_s_l = document.getElementById("spells_b"); //needs on and off state
-          click_counter_l = 1;
           show_s_l.addEventListener("click", function(){ //use math to check for every second click.
               //every second click (2,4,6 etc)will turn it off
               let btn1 = document.getElementById("btn_1")
@@ -344,21 +339,21 @@ function l_mage_menu(){ //2
               if (lastClick >= (Date.now() - delay)) //fixes bounce
               return; 
               lastClick = Date.now(); 
-              if (click_counter_l % 2 !==0){ //make menu appear if odd
+              if (click_counter % 2 !==0){ //make menu appear if odd
                   //odd number
                   console.log("odd number");
-                  click_counter_l +=1;
-                  console.log(click_counter_l)
+                  console.log(click_counter)
                   var b_menu = document.getElementById("menu_template")
                   b_menu.style.display = "initial";
 
                   btn1.addEventListener("click", function (){
                     PierceEvil()
+                    click_counter +=1;
                   })
 
               }else{
                   console.log("even number");
-                  click_counter_l +=1
+                  click_counter +=1
                   var b_menu = document.getElementById("menu_template")
                   b_menu.style.display = "none";
               }
@@ -368,7 +363,6 @@ function l_mage_menu(){ //2
     }else{
         console.log("what")
         removeButtons()
-    
     };
     
     };
@@ -388,8 +382,8 @@ function l_mage_menu(){ //2
                         //~~~~Below here is all movesets~~~\\
     //going to need to keep track of turns in a list for some attacks to work 
     function counter(){
-        UC = document.getElementById("ultima_charge")
-        UC.value +=5
+        UC = document.getElementById("ultima_charge");
+        UC.value +=5;
         turn_counter +=1;
     }
     //boss attacks
@@ -459,10 +453,39 @@ function l_mage_menu(){ //2
 
     };
     function MirageBlade(){
-        var MirageBlade = document.getElementById("MirageBlade");
-        tcounter()
+        console.log("in function");
+        document.getElementById("MirageBlade");
+        if (black_mage_mp <50){
+            window.alert("Not enough mp!")
+        }else{ 
+            //display image for 3 seconds, then turn it off
+            
+            document.getElementById("img_template").src = "MirageBlade.jpg"
+            i_menu.style.display = "initial"
+            let PE = new Audio("pierceevil.wav");
+            PE.play()
+            PE.loop = false;
+            setTimeout(()=>{
+                    health.value -= 600 - phase_def;
+                    let d_crit = Math.floor(Math.random() * 9); //higher crit rate
+                    if (d_crit == 8){
+                        health.value -= 1200 - phase_def;
+                        window.alert("Critical hit!")
+                    };    
+                black_mage_mp -= 50;
+                document.getElementById("d_mage_name").value = dmage_name +  " " + "HP: " + black_mage_hp + "\n" +"MP: "+black_mage_mp;
+                turn_counter +=1;
+                console.log(turn_counter)
+                i_menu.style.display = "none"
+                counter()
+            }, 3000);
+            
 
+        };
+    
     };
+
+    
     function Entrapment(){
         var Entrapment = document.getElementById("Entrapment");
         counter()
@@ -474,11 +497,12 @@ function l_mage_menu(){ //2
         counter()
 
     };
+    phase2 = undefined; //this gets set to true when phase 2 begins
     function PierceEvil(){
         document.getElementById("PierceEvil");
         if (white_mage_mp <10){
             window.alert("Not enough mp!")
-        }else{ //assuming phase 1 for now
+        }else{ 
             //display image for 3 seconds, then turn it off
             
             document.getElementById("img_template").src = "PierceEvil.jpg"
@@ -487,21 +511,12 @@ function l_mage_menu(){ //2
             PE.play()
             PE.loop = false;
             setTimeout(()=>{
-                if (phase2 = true){
-                    health.value -= 80 - phase_2_mdef;
+                    health.value -= 200 - phase_mdef;
                     let l_crit = Math.floor(Math.random() * 16);
                     if (l_crit == 15){
-                        health.value -= 160 - phase_2_mdef;
+                        health.value -= 400 - phase_mdef;
                         window.alert("Critical hit!")
-                    };
-                }else{
-                    health.value -= 80 - phase_1_def;
-                    let l_crit = Math.floor(Math.random() * 16);
-                    if (l_crit == 15){
-                        health.value -= 160 - phase_1_def;
-                        window.alert("Critical hit!")
-                    };
-                }   
+                    };    
                 white_mage_mp -= 10;
                 document.getElementById('l_mage_name').value = lmage_name + " " + "HP: " + white_mage_hp + "\n" +"MP: "+white_mage_mp;
                 turn_counter +=1;
