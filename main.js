@@ -323,7 +323,7 @@ function l_mage_menu(){ //2
     
     };
 
-    //Everything is being called multiple times. Fix bounce glitch
+    //Everything is being called multiple
     document.addEventListener("DOMContentLoaded", function(event) { 
         var buttons = document.querySelectorAll('.btn');//this acts like an array
             if (buttons){ //if it exists
@@ -410,7 +410,6 @@ function l_mage_menu(){ //2
 
     health = document.getElementById("HP_bar")
 
-    
     turn_counter = 0; //increment with each action taken
     //add event listener for odd turn numbers to trigger boss attacks
     /*document.addEventListener("click", function (){
