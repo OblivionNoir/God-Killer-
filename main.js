@@ -227,7 +227,7 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
         //add listener for click on spells 
 
         let show_s_k = document.getElementById("spells_b"); //needs on and off state
-        show_s_k.addEventListener("click", function(){ //use math to check for every second click.
+        show_s_k.addEventListener("click", function k_custom(){ //use math to check for every second click.
             //every second click (2,4,6 etc)will turn it off
             document.getElementById("btn_1").innerHTML = "Thousand Men"
             document.getElementById("btn_2").innerHTML = "Shadow Self"
@@ -239,7 +239,8 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
                 var b_menu = document.getElementById("menu_template")
                 b_menu.style.display = "initial"
       
-        })
+        }
+    )
      
     }else{
         console.log("what")
@@ -249,7 +250,7 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
     
 };
 
-
+//remove custom menus AFTER they are called, then add back as needed
 function d_mage_menu(){ //1
     if (lastClick >= (Date.now() - delay))
     return;
@@ -264,21 +265,21 @@ function d_mage_menu(){ //1
           //add listener for click on spells 
           let show_s_d = document.getElementById("spells_b"); //needs on and off state
           
-          show_s_d.addEventListener("click", function(){ //use math to check for every second click.
+          show_s_d.addEventListener("click", function d_custom(){ //use math to check for every second click.
            
-              let btn1 = document.getElementById("btn_1")
-              btn1.innerHTML = "Radiant Supernova"
-              let btn2 = document.getElementById("btn_2")
-              btn2.innerHTML = "Mirage Blade"
-              let btn3 = document.getElementById("btn_3")
-              btn3.innerHTML = "Entrapment"
+              document.getElementById("btn_1").innerHTML = "Radiant Supernova"
+              document.getElementById("btn_2").innerHTML = "Mirage Blade"
+              document.getElementById("btn_3").innerHTML = "Entrapment"
+
               if (lastClick >= (Date.now() - delay)) //fixes bounce
               return; 
               lastClick = Date.now(); 
                   var b_menu = document.getElementById("menu_template") 
                   b_menu.style.display = "initial";
 
-                  })
+                  }
+                )
+            
             
     }else{ 
         console.log("what")
@@ -301,20 +302,19 @@ function l_mage_menu(){ //2
         addButtons()
           //add listener for click on spells 
           let show_s_l = document.getElementById("spells_b"); //needs on and off state
-          show_s_l.addEventListener("click", function(){ //use math to check for every second click.
+          show_s_l.addEventListener("click", function l_custom(){ //use math to check for every second click.
               //every second click (2,4,6 etc)will turn it off
-              let btn1 = document.getElementById("btn_1")
-              btn1.innerHTML = "Supreme Altar"
-              let btn2 = document.getElementById("btn_2")
-              btn2.innerHTML = "Pierce Evil"
-              let btn3 = document.getElementById("btn_3")
-              btn3.innerHTML = "Angel's Grace"
+              document.getElementById("btn_1").innerHTML = "Supreme Altar"
+              document.getElementById("btn_2").innerHTML = "Pierce Evil"
+              document.getElementById("btn_3").innerHTML = "Angel's Grace"
                 if (lastClick >= (Date.now() - delay)) //fixes bounce
                     return; 
                 lastClick = Date.now(); 
                 var b_menu = document.getElementById("menu_template")
                 b_menu.style.display = "initial";
-          })
+          }
+        )
+ //TURN THIS LISTENER OFF AFTER IT IS USED, THEN BACK ON AS NECESSARY
     
     }else{
         console.log("what")
@@ -322,6 +322,7 @@ function l_mage_menu(){ //2
     };
     
     };
+    //Some kind of general "click" listener is the culprit
 
     //Everything is being called multiple
     document.addEventListener("DOMContentLoaded", function(event) { 
@@ -337,10 +338,10 @@ function l_mage_menu(){ //2
                             };
                             current_index2 = LIndex2;
                             console.log(current_index2) //stores current index
+
                             switch(current_index2){ 
-                                case(0): //basic attack. Could try and link it to the character, 
-                                //or simply add a 4th button
-                                console.log("test1") //from here, call the menus
+                                case(0): //basic attack. 
+                                console.log("you attacked") //from here, call the menus
                                 break;
 
                                 case(1): //this one is spells
@@ -371,9 +372,7 @@ function l_mage_menu(){ //2
                                         };
 
                                     };
-
-
-                                })
+                                }) 
                                 let btn2 = document.getElementById("btn_2")
                                 btn2.addEventListener("click", function(){
                                     if(btn2.innerHTML == "Mirage Blade"){
@@ -383,20 +382,27 @@ function l_mage_menu(){ //2
                                         PierceEvil();
                                     }
                                     else if (btn2.innerHTML == "Shadow Self"){
-                                        ShadowSelf()
+                                        ShadowSelf();
                                     };
-
                                 });
                                 let btn3 = document.getElementById("btn_3")
                                 btn3.addEventListener("click", function(){
+                                    if(btn3.innerHTML == "Angel's Grace"){
+                                        AngelsGrace();
+                                    }
+                                    else if(btn3.innerHTML == "Entrapment"){
+                                        Entrapment();
+                                    }
+                                    else if (btn3.innerHTML == "Whims of Fate"){
+                                        WhimsofFate();
+
+                                    }
 
                                 })
-
-                                console.log('test2')
-
                                 break;
+
                                 case(2): //defend
-                                console.log('test3')
+                                console.log('you defended')
                                 break;
                             };
                      });
