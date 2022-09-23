@@ -236,19 +236,8 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
             if (lastClick >= (Date.now() - delay)) //fixes bounce
             return; 
             lastClick = Date.now(); 
-            if (click_counter % 2 !==0){ //make menu appear if odd
-                //odd number
-                console.log("odd number");
-                click_counter +=1;
-                console.log(click_counter)
                 var b_menu = document.getElementById("menu_template")
                 b_menu.style.display = "initial"
-            }else{
-                console.log("even number");
-                click_counter +=1
-                var b_menu = document.getElementById("menu_template")
-                b_menu.style.display = "none"
-            }
       
         })
      
@@ -286,27 +275,11 @@ function d_mage_menu(){ //1
               if (lastClick >= (Date.now() - delay)) //fixes bounce
               return; 
               lastClick = Date.now(); 
-              
-              if (click_counter % 2 !==0){ //make menu appear if odd
-                  //odd number
-                  console.log("odd number");
-                  click_counter +=1;
-                  console.log(click_counter)
-                  var b_menu = document.getElementById("menu_template")
-                  b_menu.style.display = "initial"
-              }else{
-                  console.log("even number"); //this area is the problem, change to one big 
-                  //counter and track it like the battle turns
                   var b_menu = document.getElementById("menu_template") 
                   b_menu.style.display = "initial";
 
-                  btn2.addEventListener("click", function (){
-                    MirageBlade()
-                    click_counter +=1
                   })
-              }
-        
-          })
+            
     }else{ 
         console.log("what")
         removeButtons()
@@ -331,34 +304,16 @@ function l_mage_menu(){ //2
           show_s_l.addEventListener("click", function(){ //use math to check for every second click.
               //every second click (2,4,6 etc)will turn it off
               let btn1 = document.getElementById("btn_1")
-              btn1.innerHTML = "Pierce Evil"
+              btn1.innerHTML = "Supreme Altar"
               let btn2 = document.getElementById("btn_2")
-              btn2.innerHTML = "Angel's Grace"
+              btn2.innerHTML = "Pierce Evil"
               let btn3 = document.getElementById("btn_3")
-              btn3.innerHTML = "Supreme Altar"
-  
-              if (lastClick >= (Date.now() - delay)) //fixes bounce
-              return; 
-              lastClick = Date.now(); 
-              if (click_counter % 2 !==0){ //make menu appear if odd
-                  //odd number
-                  console.log("odd number");
-                  console.log(click_counter)
-                  var b_menu = document.getElementById("menu_template")
-                  b_menu.style.display = "initial";
-
-                  btn1.addEventListener("click", function (){
-                    PierceEvil()
-                    click_counter +=1;
-                  })
-
-              }else{
-                  console.log("even number");
-                  click_counter +=1
-                  var b_menu = document.getElementById("menu_template")
-                  b_menu.style.display = "none";
-              }
-        
+              btn3.innerHTML = "Angel's Grace"
+                if (lastClick >= (Date.now() - delay)) //fixes bounce
+                    return; 
+                lastClick = Date.now(); 
+                var b_menu = document.getElementById("menu_template")
+                b_menu.style.display = "initial";
           })
     
     }else{
@@ -367,7 +322,9 @@ function l_mage_menu(){ //2
     };
     
     };
-    document.addEventListener("DOMContentLoaded", function(event) { //this algorithm is disgusting but guess what it works
+
+    //Everything is being called multiple times. Fix bounce glitch
+    document.addEventListener("DOMContentLoaded", function(event) { 
         var buttons = document.querySelectorAll('.btn');//this acts like an array
             if (buttons){ //if it exists
                 buttons.forEach(function getIndex(curVal2, LIndex2){ //current value and index in the list, add event listener to each
@@ -381,20 +338,56 @@ function l_mage_menu(){ //2
                             current_index2 = LIndex2;
                             console.log(current_index2) //stores current index
                             switch(current_index2){ 
-                                case(0): 
+                                case(0): //basic attack. Could try and link it to the character, 
+                                //or simply add a 4th button
                                 console.log("test1") //from here, call the menus
                                 break;
+
                                 case(1): //this one is spells
                                 //use listener to execute the matching spell
+                                let btn1 = document.getElementById("btn_1")
                                 btn1.addEventListener("click", function(){
+                                    if(btn1.innerHTML == "Supreme Altar"){
+                                        let ultima = document.getElementById('ultima_charge');
+                                        if (ultima.value != 100){
+                                            window.alert("Ultima not charged!");
+                                        }else{
+                                            SupremeAltar()
+                                        }
+                                    }
+                                    else if (btn1.innerHTML == "Radiant Supernova"){
+                                        let ultima = document.getElementById('ultima_charge');
+                                        if (ultima.value != 100){
+                                            window.alert("Ultima not charged!"); //we have a bounce error here
+                                        }else{
+                                            RadiantSupernova()
+                                        }
+                                    }else if (btn1.innerHTML == "Thousand Men"){
+                                        let ultima = document.getElementById('ultima_charge');
+                                        if (ultima.value != 100){
+                                            window.alert("Ultima not charged!");
+                                        }else{
+                                            ThousandMen()
+                                        };
+
+                                    };
+
 
                                 })
+                                let btn2 = document.getElementById("btn_2")
                                 btn2.addEventListener("click", function(){
                                     if(btn2.innerHTML == "Mirage Blade"){
-                                        MirageBlade()
+                                        MirageBlade();
                                     }
+                                    else if (btn2.innerHTML == "Pierce Evil"){
+                                        PierceEvil();
+                                    }
+                                    else if (btn2.innerHTML == "Shadow Self"){
+                                        ShadowSelf()
+                                    };
 
-                                })
+                                });
+                                let btn3 = document.getElementById("btn_3")
                                 btn3.addEventListener("click", function(){
 
                                 })
@@ -402,7 +395,7 @@ function l_mage_menu(){ //2
                                 console.log('test2')
 
                                 break;
-                                case(2):
+                                case(2): //defend
                                 console.log('test3')
                                 break;
                             };
