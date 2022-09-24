@@ -164,36 +164,49 @@ document.addEventListener("keyup", function(event) {
         write_message()
     }
 });
-
+//todo: swap all window alerts for text boxes
 function write_message(){ //Trigger when enter is pressed. Write custom message and begin battle 
    
-    warrior_name = window.prompt("What is your (male) warrior's name?"); 
-    if (warrior_name.length >8 || warrior_name.length ===0){
-        window.alert("Name cannot be longer than 8 characters or empty, sorry"); 
-        warrior_name = window.prompt("What is your (male) warrior's name?");
-    };
-    warrior_name = warrior_name.toUpperCase();//todo: prevent "cancel". cancel = null
-    
+    let warrior_name = window.prompt("What is your (male) warrior's name?"); 
+    if (warrior_name.length >8 || warrior_name.length === 0){
+        let txt = document.getElementById("txt_")
+        txt.style.display = "initial";
+        txt.value = "Name cannot be longer than 8 characters or empty, sorry";
+        setTimeout(()=>{
+            write_message()
+        }, 2000)
+        txt.style.display = "none"
+    }
+    warrior_name = warrior_name.toUpperCase();
+
+
+    //only move onto this if warrior is confirmed to be correct
     dmage_name = window.prompt("What is your (female) dark mage's name?");
-    if (dmage_name.length >8 || dmage_name.length === 0 ){
+    if (dmage_name.length >8 || dmage_name.length === 0){
         window.alert("Name cannot be longer than 8 characters or empty, sorry");
         dmage_name = window.prompt("What is your (female) dark mage's name?");
-    };
+    }
     dmage_name = dmage_name.toUpperCase();
-    
+
+
     lmage_name = window.prompt("What is your (female) light mage's name?");
     if (lmage_name.length >8 || lmage_name.length === 0){
         window.alert("Name cannot be longer than 8 characters or empty, sorry");
         lmage_name = window.prompt("What is your (female) light mage's name?");
     }
     lmage_name = lmage_name.toUpperCase();
+}
+
+
+
+    
     
     //hide buttons until character is selected 
-    document.getElementById("warrior_name").value = warrior_name + " " + "HP: "+ warrior_hp + "\n" +"MP: "+warrior_mp;
-    document.getElementById("d_mage_name").value = dmage_name +  " " + "HP: " + black_mage_hp + "\n" +"MP: "+black_mage_mp;
-    document.getElementById("l_mage_name").value = lmage_name +  " " + "HP: " + white_mage_hp + "\n" +"MP: "+white_mage_mp;
+    //document.getElementById("warrior_name").value = warrior_name + " " + "HP: "+ warrior_hp + "\n" +"MP: "+warrior_mp;
+    //document.getElementById("d_mage_name").value = dmage_name +  " " + "HP: " + black_mage_hp + "\n" +"MP: "+black_mage_mp;
+    //document.getElementById("l_mage_name").value = lmage_name +  " " + "HP: " + white_mage_hp + "\n" +"MP: "+white_mage_mp;
 
-    document.getElementById("txt_").value = `GREETINGS, PATHETIC MORTALS. WHAT ARE YOUR NAMES AGAIN? ${warrior_name.replace('\n', '')}, ${dmage_name.replace('\n', '')}, and ${lmage_name.replace('\n', '')}? WHATEVER. TIME TO DIE...`;
+    //document.getElementById("txt_").value = `GREETINGS, PATHETIC MORTALS. WHAT ARE YOUR NAMES AGAIN? ${warrior_name.replace('\n', '')}, ${dmage_name.replace('\n', '')}, and ${lmage_name.replace('\n', '')}? WHATEVER. TIME TO DIE...`;
 
     setTimeout(() =>{
         //window.alert("SHOWTIME!");
@@ -205,7 +218,7 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
         del_box()
     }, 5000);
 
-};
+//};
 
 function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     var init_box = document.getElementById("txt_");
@@ -386,7 +399,7 @@ function l_mage_menu(){ //2
 
                             switch(current_index2){ 
                                 case(0): //basic attack. 
-                                console.log("you attacked") //from here, call the menus
+                                basic()
                                 break;
 
                                 case(1): //this one is spells
@@ -478,11 +491,12 @@ function l_mage_menu(){ //2
         UC.value +=5;
         turn_counter +=1;
     }
-    //boss attacks
-    function basic_b(){
-        counter()
 
-    };
+    function randNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) ) + min;
+      }
+
+    //boss attacks
     function SpheresofInsanity(){
         var SpheresofInsanity = document.getElementById("SpheresofInsanity");
         counter()
@@ -536,9 +550,35 @@ function l_mage_menu(){ //2
     };
 
     //dark mage attacks
-    function basic_d(){
- 
-    };
+    function basic(){
+        let txt = document.getElementById("txt_")
+        txt.style.display = "initial";
+        setTimeout(()=>{
+           let rand_dmg = randNumber(50,70) ; //random value between 50 and 70
+           let final_dmg = rand_dmg/phase_def;
+            health.value -= final_dmg;
+
+            let l_crit = Math.floor(Math.random() * 16);
+            if (l_crit == 15){
+                let rand_dmg = randNumber(60,80) ; //adds second attack
+                let final_dmg = rand_dmg/phase_def;
+                health.value -= final_dmg;
+                txt.style.display = "initial";
+                txt.value = "Critical hit! Extra attack!"
+                setTimeout(2000)
+                txt.value = `Your second attack did ${final_dmg.toFixed(1)} damage.`;
+             
+                
+            };    
+            txt.style.display = "none";
+        turn_counter +=1;
+        txt.value = `You attacked the monster. Did ${final_dmg.toFixed(1)} damage.`;
+        console.log(turn_counter)
+        counter()
+    }, 2000);
+
+};
+
     function RadiantSupernova(){ //her ult
         var RadiantSupernova = document.getElementById("RadiantSupernova");
         counter()
@@ -558,14 +598,14 @@ function l_mage_menu(){ //2
             PE.play()
             PE.loop = false;
             setTimeout(()=>{
-                    health.value -= 600 - phase_def;
+                    health.value -= 600/phase_def;
                     let d_crit = Math.floor(Math.random() * 9); //higher crit rate
                     if (d_crit == 8){
-                        health.value -= 1200 - phase_def;
+                        health.value -= 1200/phase_def;
                         window.alert("Critical hit!") //note that this is NOT running 3 times. 
                     };    
                 black_mage_mp -= 10;
-                document.getElementById("d_mage_name").value = dmage_name +  " " + "HP: " + black_mage_hp + "\n" +"MP: "+black_mage_mp;
+                document.getElementById("d_mage_name_mp").value -=50;
                 turn_counter +=1;
                 console.log(turn_counter)
                 i_menu.style.display = "none"
@@ -585,11 +625,7 @@ function l_mage_menu(){ //2
     };
 
     //light mage attacks
-    function basic_l(){
-        counter()
-
-    };
-    phase2 = undefined; //this gets set to true when phase 2 begins
+    
     function PierceEvil(){
         document.getElementById("PierceEvil");
         if (white_mage_mp <10){
@@ -610,7 +646,7 @@ function l_mage_menu(){ //2
                         window.alert("Critical hit!")
                     };    
                 white_mage_mp -= 10;
-                document.getElementById('l_mage_name').value = lmage_name + " " + "HP: " + white_mage_hp + "\n" +"MP: "+white_mage_mp;
+                document.getElementById("l_mage_name_mp").value -=10;
                 turn_counter +=1;
                 console.log(turn_counter)
                 i_menu.style.display = "none"
