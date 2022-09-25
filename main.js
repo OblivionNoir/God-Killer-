@@ -161,53 +161,7 @@ document.addEventListener("keyup", function(event) {
         storm_bg.play();
         storm_bg.loop =true;
         storm_bg.volume = 0.3; 
-        write_message()
     }
-});
-//todo: swap all window alerts for text boxes
-function write_message(){ //Trigger when enter is pressed. Write custom message and begin battle 
-   
-    let warrior_name = window.prompt("What is your (male) warrior's name?"); 
-    if (warrior_name.length >8 || warrior_name.length === 0){
-        let txt = document.getElementById("txt_")
-        txt.style.display = "initial";
-        txt.value = "Name cannot be longer than 8 characters or empty, sorry";
-        setTimeout(()=>{
-            write_message()
-        }, 2000)
-        txt.style.display = "none"
-    }
-    warrior_name = warrior_name.toUpperCase();
-
-
-    //only move onto this if warrior is confirmed to be correct
-    dmage_name = window.prompt("What is your (female) dark mage's name?");
-    if (dmage_name.length >8 || dmage_name.length === 0){
-        window.alert("Name cannot be longer than 8 characters or empty, sorry");
-        dmage_name = window.prompt("What is your (female) dark mage's name?");
-    }
-    dmage_name = dmage_name.toUpperCase();
-
-
-    lmage_name = window.prompt("What is your (female) light mage's name?");
-    if (lmage_name.length >8 || lmage_name.length === 0){
-        window.alert("Name cannot be longer than 8 characters or empty, sorry");
-        lmage_name = window.prompt("What is your (female) light mage's name?");
-    }
-    lmage_name = lmage_name.toUpperCase();
-}
-
-
-
-    
-    
-    //hide buttons until character is selected 
-    //document.getElementById("warrior_name").value = warrior_name + " " + "HP: "+ warrior_hp + "\n" +"MP: "+warrior_mp;
-    //document.getElementById("d_mage_name").value = dmage_name +  " " + "HP: " + black_mage_hp + "\n" +"MP: "+black_mage_mp;
-    //document.getElementById("l_mage_name").value = lmage_name +  " " + "HP: " + white_mage_hp + "\n" +"MP: "+white_mage_mp;
-
-    //document.getElementById("txt_").value = `GREETINGS, PATHETIC MORTALS. WHAT ARE YOUR NAMES AGAIN? ${warrior_name.replace('\n', '')}, ${dmage_name.replace('\n', '')}, and ${lmage_name.replace('\n', '')}? WHATEVER. TIME TO DIE...`;
-
     setTimeout(() =>{
         //window.alert("SHOWTIME!");
         phase1_theme = new Audio('phase1OST.mp3'); //user hunter phase 1
@@ -217,6 +171,9 @@ function write_message(){ //Trigger when enter is pressed. Write custom message 
         ostbox.value = "Now playing: \n Bloodborne OST: The Hunter - Phase 1";
         del_box()
     }, 5000);
+
+});
+
 
 //};
 
@@ -230,7 +187,9 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
 };
 
 //Character selection. DO NOT TOUCH 
-document.addEventListener("DOMContentLoaded", function(event) { //this algorithm is disgusting but guess what it works
+document.addEventListener("keyup", function(event) { 
+    if (check == false && event.code === 'Enter'){ 
+     //this algorithm is disgusting but guess what it works
     var element = document.querySelectorAll('.clickable');//this acts like an array
         if (element){ //if it exists
             element.forEach(function getIndex(curVal, LIndex){ //current value and index in the list, add event listener to each
@@ -261,7 +220,7 @@ document.addEventListener("DOMContentLoaded", function(event) { //this algorithm
         
         });
     };
-}); //use similar algo for battle menus, using stored index values. 
+}}); //use similar algo for battle menus, using stored index values. 
 var lastClick = 0; //fixes bounce glitch
 var delay = 20;
 function menu_sfx(){
@@ -270,6 +229,10 @@ function menu_sfx(){
     menusfx_.loop = false;
 }
 let click_counter = 0;
+
+
+
+
 function warrior_menu(){ //0 //when this is reached, we know the warrior has been clicked
     if (lastClick >= (Date.now() - delay)) //need to check if clicked
     return; //returns undefined, false because it's a boolean
@@ -298,14 +261,10 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
                 b_menu.style.display = "initial"
       
         }
-    )
-     
+    )  
     }else{
-        console.log("what")
         removeButtons()
-
-    };
-    
+    };    
 };
 
 //remove custom menus AFTER they are called, then add back as needed
@@ -317,7 +276,6 @@ function d_mage_menu(){ //1
     //if red, show menu. If null, hide menu
     //active class = red
     if (di.classList.contains('active')){
-        console.log('made it - dmage')
         menu_sfx()
         addButtons()
           //add listener for click on spells 
@@ -337,15 +295,12 @@ function d_mage_menu(){ //1
 
                   }
                 )
-            
-            
     }else{ 
-        console.log("what")
         removeButtons()
 
-    };
+};
 
-    };
+};
 
 function l_mage_menu(){ //2
     if (lastClick >= (Date.now() - delay))
@@ -355,7 +310,6 @@ function l_mage_menu(){ //2
         //if red, show menu. If null, hide menu
         //active class = red
     if (li.classList.contains('active')){
-        console.log('made it- lmage')
         menu_sfx()
         addButtons()
           //add listener for click on spells 
@@ -401,7 +355,6 @@ function l_mage_menu(){ //2
                                 case(0): //basic attack. 
                                 basic()
                                 break;
-
                                 case(1): //this one is spells
                                 //use listener to execute the matching spell
                                 let btn1 = document.getElementById("btn_1")
@@ -409,7 +362,12 @@ function l_mage_menu(){ //2
                                     if(btn1.innerHTML == "Supreme Altar"){
                                         let ultima = document.getElementById('ultima_charge');
                                         if (ultima.value != 100){
-                                            window.alert("Ultima not charged!");
+                                            let txt = document.getElementById("txt_")
+                                            txt.style.display = "initial";
+                                            txt.value = "Ultima not charged!"
+                                            setTimeout(()=>{
+                                                txt.style.display = "none"
+                                            },2000)
                                         }else{
                                             SupremeAltar()
                                         }
@@ -417,14 +375,24 @@ function l_mage_menu(){ //2
                                     else if (btn1.innerHTML == "Radiant Supernova"){
                                         let ultima = document.getElementById('ultima_charge');
                                         if (ultima.value != 100){
-                                            window.alert("Ultima not charged!"); //we have a bounce error here
+                                            let txt = document.getElementById("txt_")
+                                            txt.style.display = "initial";
+                                            txt.value = "Ultima not charged!"
+                                            setTimeout(()=>{
+                                                txt.style.display = "none"
+                                            },2000) 
                                         }else{
                                             RadiantSupernova()
                                         }
                                     }else if (btn1.innerHTML == "Thousand Men"){
                                         let ultima = document.getElementById('ultima_charge');
                                         if (ultima.value != 100){
-                                            window.alert("Ultima not charged!");
+                                            let txt = document.getElementById("txt_")
+                                            txt.style.display = "initial";
+                                            txt.value = "Ultima not charged!"
+                                            setTimeout(()=>{
+                                                txt.style.display = "none"
+                                            },2000)
                                         }else{
                                             ThousandMen()
                                         };
@@ -588,7 +556,12 @@ function l_mage_menu(){ //2
         console.log("in function");
         document.getElementById("MirageBlade");
         if (black_mage_mp <50){
-            window.alert("Not enough mp!")
+            let txt = document.getElementById("txt_")
+            txt.style.display = "initial";
+            txt.value = "Not enough MP!"
+            setTimeout(()=>{
+                txt.style.display = "none"
+            },2000)
         }else{ 
             //display image for 3 seconds, then turn it off
             
@@ -602,7 +575,12 @@ function l_mage_menu(){ //2
                     let d_crit = Math.floor(Math.random() * 9); //higher crit rate
                     if (d_crit == 8){
                         health.value -= 1200/phase_def;
-                        window.alert("Critical hit!") //note that this is NOT running 3 times. 
+                        let txt = document.getElementById("txt_")
+                        txt.style.display = "initial";
+                        txt.value = "Critical hit!"
+                        setTimeout(()=>{
+                            txt.style.display = "none"
+                        }, 3000) //note that this is NOT running 3 times. 
                     };    
                 black_mage_mp -= 10;
                 document.getElementById("d_mage_name_mp").value -=50;
@@ -629,7 +607,12 @@ function l_mage_menu(){ //2
     function PierceEvil(){
         document.getElementById("PierceEvil");
         if (white_mage_mp <10){
-            window.alert("Not enough mp!")
+            let txt = document.getElementById("txt_")
+            txt.style.display = "initial";
+            txt.value = "Not enough MP!"
+            setTimeout(()=>{
+                txt.style.display = "none"
+            }, 3000)
         }else{ 
             //display image for 3 seconds, then turn it off
             
@@ -643,7 +626,12 @@ function l_mage_menu(){ //2
                     let l_crit = Math.floor(Math.random() * 16);
                     if (l_crit == 15){
                         health.value -= 400 - phase_mdef;
-                        window.alert("Critical hit!")
+                        let txt = document.getElementById("txt_")
+                        txt.style.display = "initial";
+                        txt.value = "Critical hit!"
+                        setTimeout(()=>{
+                            txt.style.display = "none"
+                        }, 3000)
                     };    
                 white_mage_mp -= 10;
                 document.getElementById("l_mage_name_mp").value -=10;
