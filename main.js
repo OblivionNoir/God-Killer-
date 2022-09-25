@@ -284,7 +284,7 @@ function d_mage_menu(){ //1
           show_s_d.addEventListener("click", function d_custom(){ //use math to check for every second click.
            
               document.getElementById("btn_1").innerHTML = "Radiant Supernova"
-              document.getElementById("btn_2").innerHTML = "Mirage Blade"
+              document.getElementById("btn_2").innerHTML = "Mirage Blade (50MP)"
               document.getElementById("btn_3").innerHTML = "Entrapment"
 
               if (lastClick >= (Date.now() - delay)) //fixes bounce
@@ -548,14 +548,39 @@ function l_mage_menu(){ //2
 };
 
     function RadiantSupernova(){ //her ult
-        var RadiantSupernova = document.getElementById("RadiantSupernova");
+        document.getElementById("RadiantSupernova");
+        document.body.style.backgroundImage = "url('blackhole.png')"
+        document.body.style.backgroundSize = "contain";
+            //ultimas don't have a crit or mp value
+            //display image for 3 seconds, then turn it off
+            
+            document.getElementById("img_template").src = "RadiantSupernova.jpeg"
+            i_menu.style.display = "initial"
+            let DC = new Audio("DarkCreepy.mp3"); //change this
+            DC.volume = 0.5;
+            DC.play()
+            DC.loop = false;
+            setTimeout(()=>{
+                document.body.style.backgroundImage = "url('hellscape.png')"
+                document.body.style.backgroundSize = "contain";//this will change based on phase
+                DC.pause()
+                    health.value -= 1500 - phase_mdef;
+                document.getElementById("ultima_charge").value = -5;
+                turn_counter +=1;
+                console.log(turn_counter)
+                i_menu.style.display = "none"
+                counter()
+            }, 7000);
+            
+    };
+    
         counter()
 
-    };
     function MirageBlade(){
         console.log("in function");
         document.getElementById("MirageBlade");
-        if (black_mage_mp <50){
+        let d_mp = document.getElementById("d_mage_name_mp")
+        if (d_mp <50){ //these values need to be updated
             let txt = document.getElementById("txt_")
             txt.style.display = "initial";
             txt.value = "Not enough MP!"
@@ -606,7 +631,8 @@ function l_mage_menu(){ //2
     
     function PierceEvil(){
         document.getElementById("PierceEvil");
-        if (white_mage_mp <10){
+        let l_mp = document.getElementById("l_mage_name_mp")
+        if (l_mp <10){
             let txt = document.getElementById("txt_")
             txt.style.display = "initial";
             txt.value = "Not enough MP!"
