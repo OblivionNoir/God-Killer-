@@ -5,20 +5,20 @@ var phase_def = 1.2; //divide by this number
 var phase_mdef = 1.1;
 
 
-var warrior_hp = 2000;
+
 var warrior_mp = 70;
-var warrior_def = 10; //edit these
-var warrior_mdef = 6;
+var warrior_def = 1.6; //edit these
+var warrior_mdef = 1.4;
 
-var black_mage_hp = 1400; 
+
 var black_mage_mp = 220;
-var black_mage_def = 7;
-var black_mage_mdef = 16;
+var black_mage_def = 1.3;
+var black_mage_mdef = 1.7;
 
-var white_mage_hp = 1200;
+
 var white_mage_mp = 220;
-var white_mage_def = 6;
-var white_mage_mdef = 17; 
+var white_mage_def = 1.2;
+var white_mage_mdef = 1.8; 
 
 //hide elements that get used later
 var p1_img = document.getElementById("boss_img");
@@ -355,26 +355,58 @@ function l_mage_menu(){ //2
 
 
 
- //increment with each action taken
-    //add event listener for odd turn numbers to trigger boss attacks
-    /*document.addEventListener("click", function (){
-        if (turn_counter % 2 !==0){
-            setTimeout(()=>{
-                window.alert("MY TURN BITCH")
-            }, 2000)
-        }
-
-    })*/
-                        //~~~~Below here is all movesets~~~\\
-
     //going to need to keep track of turns in a list for some attacks to work 
-    var turn_counter = 0;
+    var turn_counter = [0];
+    var turn_counter_value = 0;
     function counter(){
         UC = document.getElementById("ultima_charge");
         UC.value +=5;
-        turn_counter +=1;
+        turn_counter_value +=1;
+        turn_counter.push(turn_counter_value)
         console.log(turn_counter)
     }
+
+    var LastAttack = undefined; //store last attack used by player, some boss skills rely on it
+    //get party member hp
+    let warrior_hp = document.getElementById("warrior_name_hp")
+    let black_mage_hp = document.getElementById("d_mage_name_hp")
+    let white_mage_hp = document.getElementById("l_mage_name_hp")    
+    document.addEventListener("click", function (){
+        if (turn_counter_value % 2 !==0 && turn_counter_value !== 0){
+                window.alert("MY TURN BITCH")
+                switch(true){
+                    case(phase2_tr):
+                        boss_phase2()
+                    break;
+                    case(phase3_tr):
+                        boss_phase3()
+                    break;
+                    default:
+                        boss_phase1()
+                    break;
+                };
+       
+        };
+
+    });
+
+    function boss_phase1(){
+        SpheresofInsanity()
+
+
+    }
+
+    function boss_phase2(){
+
+    }
+
+    function boss_phase3(){
+
+
+
+    }
+                        //~~~~Below here is all movesets~~~\\
+
 
     function randNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
@@ -382,26 +414,77 @@ function l_mage_menu(){ //2
 
     //boss attacks
     function SpheresofInsanity(){
-        const SpheresofInsanity = document.getElementById("SpheresofInsanity");
-        counter()
+        i_menu.src = "spheres.jpeg" //i_menu is the image template
+        i_menu.style.display = "initial"
+        PE.play()
+        PE.loop = false;
+        setTimeout(()=>{ //2 hits on random party members
+            let num_hits = 1;
+            while (num_hits !=3){ //two hits
+                let target = randNumber(0, 3);
+                console.log(target)
+                let dmg = randNumber(80, 101);
+                switch(true){
+                    case(target == 0):
+                        var final_dmg_w = dmg/warrior_def
+                        warrior_hp.value -= final_dmg_w; 
+                        num_hits +=1
+                        setTimeout(()=>{
+                            p1.style.display = "none"
+                        }, 2000)
+                    break
+                    case(target == 1):
+                        var final_dmg_d = dmg/black_mage_def
+                        black_mage_hp.value -= final_dmg_d;
+                        num_hits +=1
+                        setTimeout(()=>{
+                            p1.style.display = "none"
+                        }, 2000)
+                    break;
+                    case(target == 2):
+                        var final_dmg_l = dmg/white_mage_def
+                        white_mage_hp.value -= final_dmg_l;
+                        num_hits +=1
+                        setTimeout(()=>{
+                            p1.style.display = "none"
+                        }, 2000)
+                    }
+                p1.style.display = "initial";
+                //put targeted into a list
+            }
+            i_menu.style.display = "none"
+  
+        }, 3000);
+        
     };
     function Polarity(){
-        const Polarity = document.getElementById("Polarity");
+        document.getElementById("Polarity");
         counter()
     };
     function HellsGate(){
-        const HellsGate = document.getElementById("HellsGate");
+        document.getElementById("HellsGate");
         counter()
     };
     function SpacialRift(){
-        const SpacialRift = document.getElementById("SpacialRift")
+        document.getElementById("SpacialRift")
         counter()
     };
-    //only in phase 2\\
+
+    //addin phase 2\\
     function TendrilsoftheNight(){
-        const TendrilsoftheNight = document.getElementById("TendrilsoftheNight");
+        document.getElementById("TendrilsoftheNight");
         counter()
     };
+
+    function HallsofOblivion(){
+
+    }
+
+    //add in phase 3\\
+    function NightmareNascent(){//
+
+
+    }
     function BleedingSun1(){ //turn 1 charge
         const bSun1 = document.getElementById("bSun1");
         counter()
@@ -415,10 +498,7 @@ function l_mage_menu(){ //2
     };
 
     //warrior attacks
-    function basic_w(){ //basic attack, no mp used
-        counter()
-
-    };
+  
     function ThousandMen(){ //his ult
         const ThousandMen = document.getElementById("ThousandMen");
         counter()
@@ -461,7 +541,6 @@ function l_mage_menu(){ //2
 };
 
     function RadiantSupernova(){ //her ult
-        document.getElementById("RadiantSupernova");
         document.body.style.backgroundImage = "url('blackhole.png')"
         document.body.style.backgroundSize = "contain";
             //ultimas don't have a crit or mp value
@@ -485,13 +564,11 @@ function l_mage_menu(){ //2
             
     };
     
-        counter()
+
 
     function MirageBlade(){
-        console.log("in function");
-        document.getElementById("MirageBlade");
-        let d_mp = document.getElementById("d_mage_name_mp")
-        if (d_mp <50){ //these values need to be updated
+p
+        if (black_mage_mp <50){ //these values need to be updated
             
             p1.style.display = "initial";
             p1.value = "Not enough MP!"
@@ -516,8 +593,7 @@ function l_mage_menu(){ //2
                             p1.style.display = "none"
                         }, 3000) //note that this is NOT running 3 times. 
                     };    
-                black_mage_mp -= 10;
-                document.getElementById("d_mage_name_mp").value -=50;
+                black_mage_mp -= 50;
                 i_menu.style.display = "none"
                 counter()
             }, 3000);
@@ -540,9 +616,7 @@ function l_mage_menu(){ //2
     //
     
     function PierceEvil(){
-        document.getElementById("PierceEvil");
-        let l_mp = document.getElementById("l_mage_name_mp")
-        if (l_mp <10){
+        if (white_mage_mp <10){
             p1.style.display = "initial";
             p1.value = "Not enough MP!"
             setTimeout(()=>{
@@ -591,6 +665,7 @@ function l_mage_menu(){ //2
 
     //phase changes
     var phase2_tr;
+    var phase2_theme;
     document.addEventListener("click", function phase2(){ //PHASE 2!
         //console.log(hp)
         if (hp.value <10000 && hp.value > 5001){
@@ -636,18 +711,19 @@ function l_mage_menu(){ //2
  //change these to proper on/off
 var roar = new Audio("roar.wav");
 var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the else 
+var phase3_tr;
 document.addEventListener("click", function phase3(){ //PHASE 3!
         if (hp.value <5001){
             document.removeEventListener('click', phase3)
             p2.style.display = "initial"; //add timeout
             setTimeout(()=>{
-                phase2_theme.pause();
+                phase2_theme.pause();//fix this
                 p2.value = "...";
             },5000)
             setTimeout(() =>{
                 p2.value = "...\n...";
             },5000)
-            phase3_ = true; //trigger to reference phase 3 later on
+            phase3_tr = true; //trigger to reference phase 3 later on
             phase_def = 1.3; //update stats for phase 3
             phase_mdef = 1.5;
      
