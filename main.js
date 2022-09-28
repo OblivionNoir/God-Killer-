@@ -1,24 +1,24 @@
 
 //initial stats
  //global for now, tighten scope if it becomes problematic
-phase_def = 1.2; //divide by this number 
-phase_mdef = 1.1;
+var phase_def = 1.2; //divide by this number 
+var phase_mdef = 1.1;
 
 
-warrior_hp = 2000;
-warrior_mp = 70;
-warrior_def = 10; //edit these
-warrior_mdef = 6;
+var warrior_hp = 2000;
+var warrior_mp = 70;
+var warrior_def = 10; //edit these
+var warrior_mdef = 6;
 
-black_mage_hp = 1400; 
-black_mage_mp = 220;
-black_mage_def = 7;
-black_mage_mdef = 16;
+var black_mage_hp = 1400; 
+var black_mage_mp = 220;
+var black_mage_def = 7;
+var black_mage_mdef = 16;
 
-white_mage_hp = 1200;
-white_mage_mp = 220;
-white_mage_def = 6;
-white_mage_mdef = 17; 
+var white_mage_hp = 1200;
+var white_mage_mp = 220;
+var white_mage_def = 6;
+var white_mage_mdef = 17; 
 
 //hide elements that get used later
 var p1_img = document.getElementById("boss_img");
@@ -29,133 +29,55 @@ battle_menu.style.visibility = "hidden";
 
 var hp = document.getElementById("HP_bar");
 hp.style.visibility = "hidden";
-var hp = document.getElementById("HP_bar");
-hp.style.visibility = "hidden";
 var bn = document.getElementById("boss_name");
 bn.style.visibility = "hidden";
-var p2 = document.getElementById("txt_2");
+
+var p1 = document.getElementById("txt_"); //initial text box
+//p1.style.display = "none";
+var p2 = document.getElementById("txt_2"); //secondary text box
 p2.style.display = "none";
 
 var b_menu = document.getElementById("menu_template")
 b_menu.style.display = "none"
-var i_menu = document.getElementById("img_template")
+var i_menu = document.getElementById("img_template") //for spells
 i_menu.style.display = "none"
+
+var ostbox = document.getElementById("ost_box")
+
+
+//global sound effects 
+var PE = new Audio("pierceevil.wav");
+
+
 //test hp bar 
 /*document.addEventListener("click", function(){
-    health = document.getElementById("HP_bar")
-    health.value -= 700;
+    hp = document.getElementById("HP_bar")
+    hp.value -= 700;
 
 })*/
-var clickCheck = true; //todo: add fade out of phase 1 with for loop
-document.addEventListener("click", function phase2(){ //PHASE 2!
-        //console.log(health)
-        if (health.value <10000 && health.value > 5001 && clickCheck == true){
-            clickCheck = false;
-            p2.style.display = "initial"; //add timeout
-            p2.value = "Oh no...";
-            phase2 = true; //trigger to reference phase 2 later on
-            phase_def = 1.3; //update stats for phase 2
-            phase_mdef = 1.2;
-            setTimeout(() =>{
-                let dotheroar = new Audio('dotheroar.mp3')
-                dotheroar.play()
-                dotheroar.loop = false;
-            },2000);
-            
-            setTimeout(() =>{
-                document.getElementById("rainbg").src = "redrain.mp4"
-                p2.style.display = "none";
-                document.getElementById("boss_img").src = "AKUMU2.0.jpeg";
-                let hellnaw = new Audio("hellnaw.mp3");
-                hellnaw.play()
-                hellnaw.loop = false;
-                phase1_theme.pause();
-                phase2_theme = new Audio('phase2OST.mp3') //use hunter phase 2
-                phase2_theme.play();
-                phase2_theme.loop = true;
-                let roar = new Audio("roar.wav");
-                roar.play();
-                roar.loop = false;
-                document.getElementById("boss_name").innerHTML = "Akumu, Origin of the Nightmare";
-                let ostbox = document.getElementById("ost_box")
-                ostbox.value = "Now playing: \n Bloodborne OST: The Hunter - Phase 2";
-            }, 4000);
-            setTimeout(()=>{
-                let xtraThunder = new Audio("xtrathunder.mp3")
-                xtraThunder.play();
-                xtraThunder.loop = true;
-                p2.value = ""
-            }, 5000);
-    
-        }else if (health.value ==0){
-            phase2_theme.pause()
-           //display victory window
-        }
-})
-var clickCheck2 = true; 
-document.addEventListener("click", function phase3(){ //PHASE 3!
-        if (health.value <5001 && clickCheck2 == true){
-            clickCheck2 = false;
-            p2.style.display = "initial"; //add timeout
-            setTimeout(()=>{
-                phase2_theme.pause();
-                p2.value = "...";
-            },5000)
-            setTimeout(() =>{
-                p2.value = "...\n...";
-            },5000)
-            phase3_ = true; //trigger to reference phase 3 later on
-            phase_def = 1.3; //update stats for phase 3
-            phase_mdef = 1.5;
-     
-            document.getElementById("boss_name").innerHTML = "Purveyor of Nascency";
-            setTimeout(() =>{
-                document.getElementById("rainbg").src = "redrain3.mp4"
-                p2.style.display = "none";
-                document.getElementById("boss_img").src = "phase3.jpg";
-                phase3_theme = new Audio('phase3ost.mp3') //use hunter phase 2
-                phase3_theme.play();
-                phase3_theme.loop = true;
-                let roar = new Audio("roar.wav");
-                roar.play();
-                roar.loop = false;
-                document.body.style.backgroundImage = "url('firegate.jpg')"
-                document.body.style.backgroundSize = "contain";
-                let ostbox = document.getElementById("ost_box")
-                ostbox.value = "Now playing: \n Dark Souls 3 OST: Yhorm the Giant";
-            }, 4000);
-
-            let roar = new Audio("roar.wav");
-            roar.play();
-            roar.loop = false;
-         
-        }else if (health.value ==0){
-            phase3_theme.pause()
-           //display victory window
-        }
-})
+ //todo: add fade out of phase 1 with for loop
 
 
+ var btn = document.getElementsByClassName("btn"); //atk/spells/def
  //buttons become visible when character is picked
  function removeButtons(){
-    var btn = document.getElementsByClassName("btn"); //this produces a list, so need to loop to hide each item
+     //this produces a list, so need to loop to hide each item
         for(let i = 0; i <btn.length; i++){
             btn[i].style.visibility = "hidden";
             };       
  };
  removeButtons()
 
-function addButtons(){
-    var btn = document.getElementsByClassName("btn"); //this produces a list, so need to loop to hide each item
+function addButtons(){//this produces a list, so need to loop to hide each item
     for(let i = 0; i <btn.length; i++){
         btn[i].style.visibility = "visible";
         };       
 };
 //add listener to wait for initial enter to start game
-var check = true;
-document.addEventListener("keyup", function(event) {
-    if (event.code === 'Enter' && check == true) {
-        check = false; //so it can only happen once. Prevents event order from getting thrown out of wack
+var phase1_theme;
+document.addEventListener("keyup", function startGame(event) {
+    if (event.code === 'Enter') {
+        document.removeEventListener('keyup', startGame) //so it can only happen once. Prevents event order from getting thrown out of wack
         p1_img.style.visibility = "visible";
         const storm_bg = new Audio('stormnoises.mp3');
         storm_bg.play();
@@ -167,7 +89,6 @@ document.addEventListener("keyup", function(event) {
         phase1_theme = new Audio('phase1OST.mp3'); //user hunter phase 1
         phase1_theme.play();
         phase1_theme.loop =true;
-        let ostbox = document.getElementById("ost_box")
         ostbox.value = "Now playing: \n Bloodborne OST: The Hunter - Phase 1";
         del_box()
     }, 5000);
@@ -178,18 +99,16 @@ document.addEventListener("keyup", function(event) {
 //};
 
 function del_box(){ //SHOWTIME. Delete initial box and make menu appear
-    var init_box = document.getElementById("txt_");
-    init_box.style.display = "none"; 
+    p1.style.display = "none"; 
     battle_menu.style.visibility = "visible";
     hp.style.visibility = "visible";
     bn.style.visibility = "visible";
 
 };
 
-//Character selection. DO NOT TOUCH 
-document.addEventListener("keyup", function(event) { 
-    if (check == false && event.code === 'Enter'){ 
-     //this algorithm is disgusting but guess what it works
+//dynamically toggle this off and on as needed
+document.addEventListener("keyup", function CharacterSelect(event) { 
+    if (event.code === 'Enter'){ 
     var element = document.querySelectorAll('.clickable');//this acts like an array
         if (element){ //if it exists
             element.forEach(function getIndex(curVal, LIndex){ //current value and index in the list, add event listener to each
@@ -200,7 +119,7 @@ document.addEventListener("keyup", function(event) {
                     if(LIndex !== sL) { //if list index is NOT equal to the selected list element, aka one has already been picked
                         x.classList.remove('active');
                         };
-                        current_index = LIndex;
+                        const current_index = LIndex;
                         console.log(current_index) //stores current index
                         switch(current_index){ 
                             case(0): 
@@ -224,11 +143,11 @@ document.addEventListener("keyup", function(event) {
 var lastClick = 0; //fixes bounce glitch
 var delay = 20;
 function menu_sfx(){
-    let menusfx_ = new Audio("menuclick.wav");
+    const menusfx_ = new Audio("menuclick.wav");
     menusfx_.play()
     menusfx_.loop = false;
 }
-let click_counter = 0;
+
 
 
 
@@ -296,6 +215,7 @@ function d_mage_menu(){ //1
                   }
                 )
     }else{ 
+        console.log("removing buttons")
         removeButtons()
 
 };
@@ -329,14 +249,24 @@ function l_mage_menu(){ //2
  //TURN THIS LISTENER OFF AFTER IT IS USED, THEN BACK ON AS NECESSARY
     
     }else{
-        console.log("what")
+        console.log("removing buttons")
         removeButtons()
     };
     
     };
     //Some kind of general "click" listener is the culprit
 
-    //Everything is being called multiple
+    //Everything is being called multiple. This can probably be put in a function and 
+    //called as needed
+    function ultimaNotCharged(){
+        p1.style.display = "initial";
+        p1.value = "Ultima not charged!"
+        setTimeout(()=>{
+            p1.style.display = "none"
+        },2000)
+    }
+
+    var ultima = document.getElementById('ultima_charge');
     document.addEventListener("DOMContentLoaded", function(event) { 
         var buttons = document.querySelectorAll('.btn');//this acts like an array
             if (buttons){ //if it exists
@@ -350,7 +280,7 @@ function l_mage_menu(){ //2
                             };
                             current_index2 = LIndex2;
                             console.log(current_index2) //stores current index
-
+                            //moving onto the buttons themselves...
                             switch(current_index2){ 
                                 case(0): //basic attack. 
                                 basic()
@@ -360,39 +290,22 @@ function l_mage_menu(){ //2
                                 let btn1 = document.getElementById("btn_1")
                                 btn1.addEventListener("click", function(){
                                     if(btn1.innerHTML == "Supreme Altar"){
-                                        let ultima = document.getElementById('ultima_charge');
-                                        if (ultima.value != 100){
-                                            let txt = document.getElementById("txt_")
-                                            txt.style.display = "initial";
-                                            txt.value = "Ultima not charged!"
-                                            setTimeout(()=>{
-                                                txt.style.display = "none"
-                                            },2000)
+                                        if (ultima.value != 100){ 
+                                            ultimaNotCharged()
                                         }else{
                                             SupremeAltar()
+                                            
                                         }
                                     }
                                     else if (btn1.innerHTML == "Radiant Supernova"){
-                                        let ultima = document.getElementById('ultima_charge');
                                         if (ultima.value != 100){
-                                            let txt = document.getElementById("txt_")
-                                            txt.style.display = "initial";
-                                            txt.value = "Ultima not charged!"
-                                            setTimeout(()=>{
-                                                txt.style.display = "none"
-                                            },2000) 
+                                            ultimaNotCharged()
                                         }else{
                                             RadiantSupernova()
                                         }
-                                    }else if (btn1.innerHTML == "Thousand Men"){
-                                        let ultima = document.getElementById('ultima_charge');
+                                    }else if (btn1.innerHTML == "Thousand Men"){;
                                         if (ultima.value != 100){
-                                            let txt = document.getElementById("txt_")
-                                            txt.style.display = "initial";
-                                            txt.value = "Ultima not charged!"
-                                            setTimeout(()=>{
-                                                txt.style.display = "none"
-                                            },2000)
+                                           ultimaNotCharged()
                                         }else{
                                             ThousandMen()
                                         };
@@ -438,11 +351,11 @@ function l_mage_menu(){ //2
             
             });
         };
-    }); //use similar algo for battle menus, using stored index v
+    }); 
 
-    health = document.getElementById("HP_bar")
 
-    turn_counter = 0; //increment with each action taken
+
+ //increment with each action taken
     //add event listener for odd turn numbers to trigger boss attacks
     /*document.addEventListener("click", function (){
         if (turn_counter % 2 !==0){
@@ -453,11 +366,14 @@ function l_mage_menu(){ //2
 
     })*/
                         //~~~~Below here is all movesets~~~\\
+
     //going to need to keep track of turns in a list for some attacks to work 
+    var turn_counter = 0;
     function counter(){
         UC = document.getElementById("ultima_charge");
         UC.value +=5;
         turn_counter +=1;
+        console.log(turn_counter)
     }
 
     function randNumber(min, max) {
@@ -466,33 +382,33 @@ function l_mage_menu(){ //2
 
     //boss attacks
     function SpheresofInsanity(){
-        var SpheresofInsanity = document.getElementById("SpheresofInsanity");
+        const SpheresofInsanity = document.getElementById("SpheresofInsanity");
         counter()
     };
     function Polarity(){
-        var Polarity = document.getElementById("Polarity");
+        const Polarity = document.getElementById("Polarity");
         counter()
     };
     function HellsGate(){
-        var HellsGate = document.getElementById("HellsGate");
+        const HellsGate = document.getElementById("HellsGate");
         counter()
     };
     function SpacialRift(){
-        var SpacialRift = document.getElementById("SpacialRift")
+        const SpacialRift = document.getElementById("SpacialRift")
         counter()
     };
     //only in phase 2\\
     function TendrilsoftheNight(){
-        var TendrilsoftheNight = document.getElementById("TendrilsoftheNight");
+        const TendrilsoftheNight = document.getElementById("TendrilsoftheNight");
         counter()
     };
     function BleedingSun1(){ //turn 1 charge
-        var bSun1 = document.getElementById("bSun1");
+        const bSun1 = document.getElementById("bSun1");
         counter()
     };
     function BleedingSun2(){ //massive damage to all, defend is borderline required
-        var bSun2 = document.getElementById("bSun2");
-        let NANI = new Audio("omaewa.mp3");
+        const bSun2 = document.getElementById("bSun2");
+        const NANI = new Audio("omaewa.mp3");
         NANI.play()
         NANI.loop = false;
         counter()
@@ -504,44 +420,41 @@ function l_mage_menu(){ //2
 
     };
     function ThousandMen(){ //his ult
-        var ThousandMen = document.getElementById("ThousandMen");
+        const ThousandMen = document.getElementById("ThousandMen");
         counter()
     };
     function ShadowSelf(){
-        var ShadowSelf = document.getElementById("ShadowSelf");
+        const ShadowSelf = document.getElementById("ShadowSelf");
         counter()
     };
     function WhimsofFate(){
-        var WhimsofFate = document.getElementById("WhimsofFate");
+        const WhimsofFate = document.getElementById("WhimsofFate");
         counter()
 
     };
 
     //dark mage attacks
     function basic(){
-        let txt = document.getElementById("txt_")
-        txt.style.display = "initial";
+        p1.style.display = "initial";
         setTimeout(()=>{
            let rand_dmg = randNumber(50,70) ; //random value between 50 and 70
            let final_dmg = rand_dmg/phase_def;
-            health.value -= final_dmg;
+            hp.value -= final_dmg;
 
             let l_crit = Math.floor(Math.random() * 16);
             if (l_crit == 15){
-                let rand_dmg = randNumber(60,80) ; //adds second attack
-                let final_dmg = rand_dmg/phase_def;
-                health.value -= final_dmg;
-                txt.style.display = "initial";
-                txt.value = "Critical hit! Extra attack!"
+                rand_dmg = randNumber(60,80) ; //adds second attack
+                final_dmg = rand_dmg/phase_def;
+                hp.value -= final_dmg;
+                p1.style.display = "initial";
+                p1.value = "Critical hit! Extra attack!"
                 setTimeout(2000)
-                txt.value = `Your second attack did ${final_dmg.toFixed(1)} damage.`;
+                p1.value = `Your second attack did ${final_dmg.toFixed(1)} damage.`;
              
                 
             };    
-            txt.style.display = "none";
-        turn_counter +=1;
-        txt.value = `You attacked the monster. Did ${final_dmg.toFixed(1)} damage.`;
-        console.log(turn_counter)
+            p1.style.display = "none";
+        p1.value = `You attacked the monster. Did ${final_dmg.toFixed(1)} damage.`;
         counter()
     }, 2000);
 
@@ -556,7 +469,7 @@ function l_mage_menu(){ //2
             
             document.getElementById("img_template").src = "RadiantSupernova.jpeg"
             i_menu.style.display = "initial"
-            let DC = new Audio("DarkCreepy.mp3"); //change this
+            const DC = new Audio("DarkCreepy.mp3"); //change this
             DC.volume = 0.5;
             DC.play()
             DC.loop = false;
@@ -564,10 +477,8 @@ function l_mage_menu(){ //2
                 document.body.style.backgroundImage = "url('hellscape.png')"
                 document.body.style.backgroundSize = "contain";//this will change based on phase
                 DC.pause()
-                    health.value -= 1500 - phase_mdef;
+                    hp.value -= 1500 - phase_mdef;
                 document.getElementById("ultima_charge").value = -5;
-                turn_counter +=1;
-                console.log(turn_counter)
                 i_menu.style.display = "none"
                 counter()
             }, 7000);
@@ -581,36 +492,32 @@ function l_mage_menu(){ //2
         document.getElementById("MirageBlade");
         let d_mp = document.getElementById("d_mage_name_mp")
         if (d_mp <50){ //these values need to be updated
-            let txt = document.getElementById("txt_")
-            txt.style.display = "initial";
-            txt.value = "Not enough MP!"
+            
+            p1.style.display = "initial";
+            p1.value = "Not enough MP!"
             setTimeout(()=>{
-                txt.style.display = "none"
+                p1.style.display = "none"
             },2000)
         }else{ 
             //display image for 3 seconds, then turn it off
             
-            document.getElementById("img_template").src = "MirageBlade.jpg"
+            i_menu.src = "MirageBlade.jpg" //i_menu is the image template
             i_menu.style.display = "initial"
-            let PE = new Audio("pierceevil.wav");
             PE.play()
             PE.loop = false;
             setTimeout(()=>{
-                    health.value -= 600/phase_def;
+                    hp.value -= (600/phase_def); //hp = boss hp
                     let d_crit = Math.floor(Math.random() * 9); //higher crit rate
                     if (d_crit == 8){
-                        health.value -= 1200/phase_def;
-                        let txt = document.getElementById("txt_")
-                        txt.style.display = "initial";
-                        txt.value = "Critical hit!"
+                        hp.value -= (1200/phase_def);
+                        p1.style.display = "initial";
+                        p1.value = "Critical hit!"
                         setTimeout(()=>{
-                            txt.style.display = "none"
+                            p1.style.display = "none"
                         }, 3000) //note that this is NOT running 3 times. 
                     };    
                 black_mage_mp -= 10;
                 document.getElementById("d_mage_name_mp").value -=50;
-                turn_counter +=1;
-                console.log(turn_counter)
                 i_menu.style.display = "none"
                 counter()
             }, 3000);
@@ -619,50 +526,49 @@ function l_mage_menu(){ //2
         };
     
     };
+    
 
     
-    function Entrapment(){
+    function Entrapment(){ //this will wait till turn system is in place
         var Entrapment = document.getElementById("Entrapment");
-        counter()
+        counter() 
+        
 
     };
 
     //light mage attacks
+    //
     
     function PierceEvil(){
         document.getElementById("PierceEvil");
         let l_mp = document.getElementById("l_mage_name_mp")
         if (l_mp <10){
-            let txt = document.getElementById("txt_")
-            txt.style.display = "initial";
-            txt.value = "Not enough MP!"
+            p1.style.display = "initial";
+            p1.value = "Not enough MP!"
             setTimeout(()=>{
-                txt.style.display = "none"
+                p1.style.display = "none"
             }, 3000)
         }else{ 
             //display image for 3 seconds, then turn it off
             
-            document.getElementById("img_template").src = "PierceEvil.jpg"
+            i_menu.src = "PierceEvil.jpg"
             i_menu.style.display = "initial"
-            let PE = new Audio("pierceevil.wav");
+            const PE = new Audio("pierceevil.wav");
             PE.play()
             PE.loop = false;
             setTimeout(()=>{
-                    health.value -= 200 - phase_mdef;
+                    hp.value -= 200 - phase_mdef;
                     let l_crit = Math.floor(Math.random() * 16);
                     if (l_crit == 15){
-                        health.value -= 400 - phase_mdef;
-                        let txt = document.getElementById("txt_")
-                        txt.style.display = "initial";
-                        txt.value = "Critical hit!"
+                        hp.value -= 400 - phase_mdef;
+                        p1.style.display = "initial";
+                        p1.value = "Critical hit!"
                         setTimeout(()=>{
-                            txt.style.display = "none"
+                            p1.style.display = "none"
                         }, 3000)
                     };    
                 white_mage_mp -= 10;
                 document.getElementById("l_mage_name_mp").value -=10;
-                turn_counter +=1;
-                console.log(turn_counter)
                 i_menu.style.display = "none"
                 counter()
             }, 3000);
@@ -683,6 +589,89 @@ function l_mage_menu(){ //2
 
     };
 
+    //phase changes
+    var phase2_tr;
+    document.addEventListener("click", function phase2(){ //PHASE 2!
+        //console.log(hp)
+        if (hp.value <10000 && hp.value > 5001){
+            document.removeEventListener('click', phase2) //disable here
+            p2.style.display = "initial"; //add timeout
+            p2.value = "Oh no...";
+            phase2_tr = true; //trigger to reference phase 2 later on
+            phase_def = 1.3; //update stats for phase 2
+            phase_mdef = 1.2;
+            setTimeout(() =>{
+                const dotheroar = new Audio('dotheroar.mp3')
+                dotheroar.play()
+                dotheroar.loop = false;
+            },2000);
+            
+            setTimeout(() =>{
+                document.getElementById("rainbg").src = "redrain.mp4"
+                p2.style.display = "none";
+                document.getElementById("boss_img").src = "AKUMU2.0.jpeg";
+                const hellnaw = new Audio("hellnaw.mp3");
+                hellnaw.play()
+                hellnaw.loop = false;
+                phase1_theme.pause();
+                const phase2_theme = new Audio('phase2OST.mp3') //use hunter phase 2
+                phase2_theme.play();
+                phase2_theme.loop = true;
+                const roar = new Audio("roar.wav");
+                roar.play();
+                roar.loop = false;
+                document.getElementById("boss_name").innerHTML = "Akumu, Origin of the Nightmare";
+        
+                ostbox.value = "Now playing: \n Bloodborne OST: The Hunter - Phase 2";
+            }, 4000);
+            setTimeout(()=>{
+                const xtraThunder = new Audio("xtrathunder.mp3")
+                xtraThunder.play();
+                xtraThunder.loop = true;
+            }, 5000);
+
+    
+        }
+})
+ //change these to proper on/off
+var roar = new Audio("roar.wav");
+var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the else 
+document.addEventListener("click", function phase3(){ //PHASE 3!
+        if (hp.value <5001){
+            document.removeEventListener('click', phase3)
+            p2.style.display = "initial"; //add timeout
+            setTimeout(()=>{
+                phase2_theme.pause();
+                p2.value = "...";
+            },5000)
+            setTimeout(() =>{
+                p2.value = "...\n...";
+            },5000)
+            phase3_ = true; //trigger to reference phase 3 later on
+            phase_def = 1.3; //update stats for phase 3
+            phase_mdef = 1.5;
+     
+            document.getElementById("boss_name").innerHTML = "Purveyor of Nascency";
+            setTimeout(() =>{
+                document.getElementById("rainbg").src = "redrain3.mp4"
+                p2.style.display = "none";
+                document.getElementById("boss_img").src = "phase3.jpg";
+                phase3_theme.play();
+                phase3_theme.loop = true;
+                roar.play();
+                roar.loop = false;
+                document.body.style.backgroundImage = "url('firegate.jpg')"
+                document.body.style.backgroundSize = "contain";
+                ostbox.value = "Now playing: \n Dark Souls 3 OST: Yhorm the Giant";
+            }, 4000);
+            roar.play();
+            roar.loop = false;
+         
+        }else if (hp.value ==0){
+            phase3_theme.pause()
+           //display victory window
+        }
+})
  //these will work by retrieving the character's list index and matching it 
  //listener to check if any of them are clicked 
 
