@@ -4,8 +4,6 @@
 var phase_def = 1.2; //divide by this number 
 var phase_mdef = 1.1;
 
-
-
 var warrior_mp = 70;
 var warrior_def = 1.6; //edit these
 var warrior_mdef = 1.4;
@@ -19,6 +17,10 @@ var black_mage_mdef = 1.7;
 var white_mage_mp = 220;
 var white_mage_def = 1.2;
 var white_mage_mdef = 1.8; 
+
+var warrior_dead = false;
+var black_mage_dead = false;
+var white_mage_dead = false;
 
 //hide elements that get used later
 var p1_img = document.getElementById("boss_img");
@@ -366,7 +368,7 @@ function l_mage_menu(){ //2
         console.log(turn_counter)
     }
 
-    var LastAttack = undefined; //store last attack used by player, some boss skills rely on it
+    var LastAttacks = [] //store last attacks used by player, some skills rely on it
     //get party member hp
     let warrior_hp = document.getElementById("warrior_name_hp")
     let black_mage_hp = document.getElementById("d_mage_name_hp")
@@ -389,9 +391,16 @@ function l_mage_menu(){ //2
         };
 
     });
-
+    var LastBossAttacks = []
     function boss_phase1(){
-        SpheresofInsanity()
+        let boss_choice = randNumber(1,11)
+
+        if (boss_choice == 1 | boss_choice ==2 | boss_choice ==3) //30% chance
+            SpheresofInsanity()
+        else if(boss_choice ==10 | boss_choice ==9 && LastBossAttacks[-1] != "BorderofLife" 
+        && LastBossAttacks[-2] != "BorderofLife" && hp.value <12500){
+            BorderofLife()
+        }
 
 
     }
@@ -432,7 +441,7 @@ function l_mage_menu(){ //2
                         setTimeout(()=>{
                             p1.style.display = "none"
                         }, 2000)
-                    break
+                    break;
                     case(target == 1):
                         var final_dmg_d = dmg/black_mage_def
                         black_mage_hp.value -= final_dmg_d;
@@ -450,7 +459,6 @@ function l_mage_menu(){ //2
                         }, 2000)
                     }
                 p1.style.display = "initial";
-                //put targeted into a list
             }
             i_menu.style.display = "none"
   
@@ -461,8 +469,9 @@ function l_mage_menu(){ //2
         document.getElementById("Polarity");
         counter()
     };
-    function HellsGate(){
-        document.getElementById("HellsGate");
+    function BorderofLife(){ //swaps a party member's hp with 0.01%(1/100th) of boss's current hp. 
+        //does not work on dead party members. Heals boss by what you lost, or 2x in p2 and 3x in p3
+        document.getElementById("BorderofLife");
         counter()
     };
     function SpacialRift(){
