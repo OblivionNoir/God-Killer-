@@ -108,9 +108,9 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
 
 };
 
-//dynamically toggle this off and on as needed
-document.addEventListener("keyup", function CharacterSelect(event) { 
-    if (event.code === 'Enter'){ 
+//can likely be simplified
+
+
     var element = document.querySelectorAll('.clickable');//this acts like an array
         if (element){ //if it exists
             element.forEach(function getIndex(curVal, LIndex){ //current value and index in the list, add event listener to each
@@ -141,7 +141,7 @@ document.addEventListener("keyup", function CharacterSelect(event) {
         
         });
     };
-}}); //use similar algo for battle menus, using stored index values. 
+ //use similar algo for battle menus, using stored index values. 
 var lastClick = 0; //fixes bounce glitch
 var delay = 20;
 function menu_sfx(){
@@ -164,7 +164,7 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
     if (ki.classList.contains('active')){
         console.log('made it -knight')
         menu_sfx()
-        addButtons() //consider refactoring the below
+        addButtons() 
             document.getElementById("btn_1").innerHTML = "Thousand Men"
             document.getElementById("btn_2").innerHTML = "Shadow Self"
             document.getElementById("btn_3").innerHTML = "Whims of Fate"
@@ -237,9 +237,9 @@ function l_mage_menu(){ //2
     var ultima = document.getElementById('ultima_charge');
     //This can probably be put in a function and 
     //called as needed
-    document.addEventListener("DOMContentLoaded", function(event) { 
+ 
         var buttons = document.querySelectorAll('.btn');//this acts like an array
-            if (buttons){ //if it exists
+        //if it exists
                 buttons.forEach(function getIndex(curVal2, LIndex2){ //current value and index in the list, add event listener to each
                     curVal2.addEventListener('click', function() {
                     //console.log(lIndex);
@@ -258,56 +258,53 @@ function l_mage_menu(){ //2
                                 case(1): //this one is spells
                                 //use listener to execute the matching spell
                                 let btn1 = document.getElementById("btn_1")
-                                btn1.addEventListener("click", function(){
-                                    if(btn1.innerHTML == "Supreme Altar"){
+                                    if(btn1.innerHTML == "Supreme Altar"){ //swap for html click?
                                         if (ultima.value != 100){ 
-                                            ultimaNotCharged()
+                                            btn1.onclick = ultimaNotCharged()
                                         }else{
-                                            SupremeAltar()
+                                            btn1.onclick = SupremeAltar()
                                             
                                         }
                                     }
                                     else if (btn1.innerHTML == "Radiant Supernova"){
                                         if (ultima.value != 100){
-                                            ultimaNotCharged()
+                                            btn1.onclick = ultimaNotCharged()
                                         }else{
-                                            RadiantSupernova()
+                                            btn1.onclick = RadiantSupernova()
                                         }
                                     }else if (btn1.innerHTML == "Thousand Men"){;
                                         if (ultima.value != 100){
-                                           ultimaNotCharged()
+                                           btn1.onclick = ultimaNotCharged()
                                         }else{
-                                            ThousandMen()
+                                            btn1.onclick = ThousandMen()
                                         };
 
                                     };
-                                }) 
+                                
                                 let btn2 = document.getElementById("btn_2")
-                                btn2.addEventListener("click", function(){
                                     if(btn2.innerHTML == "Mirage Blade"){
-                                        MirageBlade();
+                                        btn2.onclick = MirageBlade();
                                     }
                                     else if (btn2.innerHTML == "Pierce Evil"){
-                                        PierceEvil();
+                                        btn2.onclick = PierceEvil();
                                     }
                                     else if (btn2.innerHTML == "Shadow Self"){
-                                        ShadowSelf();
+                                        btn2.onclick = ShadowSelf();
                                     };
-                                });
+                    
                                 let btn3 = document.getElementById("btn_3")
-                                btn3.addEventListener("click", function(){
                                     if(btn3.innerHTML == "Angel's Grace"){
-                                        AngelsGrace();
+                                        btn3.onclick = AngelsGrace();
                                     }
                                     else if(btn3.innerHTML == "Entrapment"){
-                                        Entrapment();
+                                        btn3.onclick= Entrapment();
                                     }
                                     else if (btn3.innerHTML == "Whims of Fate"){
-                                        WhimsofFate();
+                                        btn3.onclick = WhimsofFate();
 
                                     }
 
-                                })
+            
                                 break;
 
                                 case(2): //defend
@@ -320,8 +317,8 @@ function l_mage_menu(){ //2
                  //console.log(LIndex)
             
             });
-        };
-    }); 
+        
+    
 
 
 
@@ -335,7 +332,6 @@ function l_mage_menu(){ //2
         black_mage_mp += 5;
         white_mage_mp += 5;
         warrior_mp += 5;
-        turn_counter.push(turn_counter_value)
         console.log(turn_counter_value)
     }
 
@@ -510,13 +506,13 @@ function l_mage_menu(){ //2
                 p1.value = "Critical hit! Extra attack!"
                 setTimeout(2000)
                 p1.value = `Your second attack did ${final_dmg.toFixed(1)} damage.`;
-             
                 
             };    
-            p1.style.display = "none";
         p1.value = `You attacked the monster. Did ${final_dmg.toFixed(1)} damage.`;
+        turn_counter.push(turn_counter_value, [-1])
         counter()
     }, 2000);
+    p1.style.display = "none";
 
 };
 
