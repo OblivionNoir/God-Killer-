@@ -5,3 +5,5 @@
 -Gradual transitions as opposed to images just popping in
 -Stylize battle menu
 -Difficulty options? 
+
+-lots of bugs to fix
