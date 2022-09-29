@@ -44,6 +44,12 @@ b_menu.style.display = "none"
 var i_menu = document.getElementById("img_template") //for spells
 i_menu.style.display = "none"
 
+//get hp values 
+var warrior_hp = document.getElementById("warrior_name_hp")
+var black_mage_hp = document.getElementById("d_mage_name_hp")
+var white_mage_hp = document.getElementById("l_mage_name_hp")    
+
+
 var ostbox = document.getElementById("ost_box")
 
 
@@ -235,9 +241,64 @@ function l_mage_menu(){ //2
     }
 
     var ultima = document.getElementById('ultima_charge');
-    //This can probably be put in a function and 
+
+
+    //check for dead status
+    var warrior_dead = false;
+    var dmage_dead = false;
+    var lmage_dead = false;
+    var players_array = [];
+    var players = document.getElementsByClassName('clickable');
+    players_array.push(players[0], players[1], players[2]);
+    console.log(players_array)
+
+//convert to array items 0,1,2
+
+    //only want this to check whenever the boss attacks, not every click. No yandev code!
+    players_array.forEach(function addDeadStatus(){
+            addEventListener('click', function(){ //adding to 0,1,2, which are the players
+            switch(true){
+                case(warrior_hp.value <=0):  //first revert to 0 if negative
+                    warrior_hp.value ==0;
+                    warrior_dead = true; //add message 
+                    p1.style.display = "initial";
+                    p1.value = "Warrior has fallen!"
+                    setTimeout(()=>{ //refactor this into a function
+                        p1.style.display = "none"
+                    }, 2000);
+                    break;
+                case(black_mage_hp.value <=0):
+                    black_mage_hp.value ==0;
+                    dmage_dead = true;
+                    p1.style.display = "initial";
+                    p1.value = "Dark mage has fallen!"
+                    setTimeout(()=>{
+                        p1.style.display = "none"
+                    }, 2000);
+                    break;
+                case(white_mage_hp.value <=0):
+                    white_mage_hp.value ==0;
+                    lmage_dead = true;
+                    p1.style.display = "initial";
+                    p1.value = "Light mage has fallen!"
+                    setTimeout(()=>{
+                        p1.style.display = "none"
+                    }, 2000);
+                    break;
+                default:
+                    console.log("nobody is dead")
+    
+            };
+    
+        });
+        
+    });
+   
+
+
+
+     //This can probably be put in a function and 
     //called as needed
- 
         var buttons = document.querySelectorAll('.btn');//this acts like an array
         //if it exists
                 buttons.forEach(function getIndex(curVal2, LIndex2){ //current value and index in the list, add event listener to each
@@ -323,7 +384,7 @@ function l_mage_menu(){ //2
 
 
     //going to need to keep track of turns in a list for some attacks to work 
-    var turn_counter = [0];
+    var turn_counter = [];
     var turn_counter_value = 0;
     function counter(){
         UC = document.getElementById("ultima_charge");
@@ -332,18 +393,17 @@ function l_mage_menu(){ //2
         black_mage_mp += 5;
         white_mage_mp += 5;
         warrior_mp += 5;
+        turn_counter.push(turn_counter_value)
         console.log(turn_counter_value)
     }
 
     var LastAttacks = [] //store last attacks used by player, some skills rely on it
-    //get party member hp
-    let warrior_hp = document.getElementById("warrior_name_hp")
-    let black_mage_hp = document.getElementById("d_mage_name_hp")
-    let white_mage_hp = document.getElementById("l_mage_name_hp")    
-    /*document.addEventListener("click", function (){
+
+    document.addEventListener("click", function (){
         if (turn_counter_value % 2 !==0 && turn_counter_value !== 0){
                 window.alert("MY TURN BITCH")
-                switch(true){
+                Borderof_Life()
+                /*switch(true){
                     case(phase2_tr):
                         boss_phase2()
                     break;
@@ -353,11 +413,11 @@ function l_mage_menu(){ //2
                     default:
                         boss_phase1()
                     break;
-                };
+                };*/
        
         };
 
-    });*/
+    });
     var LastBossAttacks = []
     function boss_phase1(){
         let boss_choice = randNumber(1,11)
@@ -385,7 +445,7 @@ function l_mage_menu(){ //2
 
 
     function randNumber(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) ) + min;
+        return Math.floor(Math.random() * (max - min) ) + min;
       }
 
     //boss attacks
@@ -428,7 +488,7 @@ function l_mage_menu(){ //2
                 p1.style.display = "initial";
             }
             i_menu.style.display = "none"
-  
+            counter()
         }, 3000);
         
     };
@@ -436,11 +496,84 @@ function l_mage_menu(){ //2
         document.getElementById("Polarity");
         counter()
     };
-    function BorderofLife(){ //swaps a party member's hp with 0.01%(1/100th) of boss's current hp. 
-        //does not work on dead party members. Heals boss by what you lost, or 2x in p2 and 3x in p3
+
+    function SwapHP(){ 
+        switch(true){ 
+            case(phase2_tr):
+                hp.value += (newHp*2)
+            break;
+            case(phase3_tr):
+                hp.value += (newHp*3)
+            break;
+            default:
+                hp.value += newHp;
+            break;
+            };
+    }
+    function atkFailed(){
+        p1.value = "The beast's attack failed!"
+        p1.style.display = "initial";
+        setTimeout(()=>{
+            p1.style.display = "none"
+        }, 2000)
+    }
+    var newHp = null; 
+    function Borderof_Life(){ //swaps a party member's hp with 1/120th of boss's current hp. 
+        //does not work on dead party members. 
+        //Heals boss by what you lost, or 2x in p2 and 3x in p3
         document.getElementById("BorderofLife");
-        counter()
-    };
+        i_menu.src = "s_lycoris-removebg.png"
+        i_menu.style.display = "initial"
+        PE.play()//find new sfx
+        PE.loop = false;
+        setTimeout(()=>{
+            let fate = randNumber(0,3); //choose 1 target 
+            console.log(fate)
+            switch(true){
+                case(fate == 0):
+                    if (warrior_dead == false){
+                        var newHp = (hp.value.toFixed(0)/120)//perform the swap
+                        warrior_hp.value = newHp.toFixed(0);
+          
+                        SwapHP()
+                    }else{
+                        atkFailed()
+                    };
+             
+                break;            
+                case(fate ==1):
+                    if (dmage_dead == false){
+                        var newHp = (hp.value.toFixed(0)/120)
+                        black_mage_hp.value = newHp.toFixed(0);
+        
+                        SwapHP()
+                    }else{
+                        atkFailed()
+                    };
+    
+                break;
+                case(fate ==2):
+                    if (lmage_dead == false){
+                        var newHp = (hp.value.toFixed(0)/100)
+                        white_mage_hp.value = newHp.toFixed(0);
+
+            
+                        SwapHP()
+                    }else{
+                        atkFailed()
+                    };
+
+                break;
+                default: 
+                console.log("what the fuck")    
+    
+                };//switch ends here
+
+            counter()
+        }, 2000);
+        i_menu.style.display = "none"
+    };//function ends here
+
     function SpacialRift(){
         document.getElementById("SpacialRift")
         counter()
@@ -462,11 +595,11 @@ function l_mage_menu(){ //2
 
     }
     function BleedingSun1(){ //turn 1 charge
-        const bSun1 = document.getElementById("bSun1");
+        document.getElementById("bSun1");
         counter()
     };
     function BleedingSun2(){ //massive damage to all, defend is borderline required
-        const bSun2 = document.getElementById("bSun2");
+        document.getElementById("bSun2");
         const NANI = new Audio("omaewa.mp3");
         NANI.play()
         NANI.loop = false;
@@ -476,15 +609,15 @@ function l_mage_menu(){ //2
     //warrior attacks
   
     function ThousandMen(){ //his ult
-        const ThousandMen = document.getElementById("ThousandMen");
+        document.getElementById("ThousandMen");
         counter()
     };
     function ShadowSelf(){
-        const ShadowSelf = document.getElementById("ShadowSelf");
+        document.getElementById("ShadowSelf");
         counter()
     };
     function WhimsofFate(){
-        const WhimsofFate = document.getElementById("WhimsofFate");
+        document.getElementById("WhimsofFate");
         counter()
 
     };
@@ -509,7 +642,6 @@ function l_mage_menu(){ //2
                 
             };    
         p1.value = `You attacked the monster. Did ${final_dmg.toFixed(1)} damage.`;
-        turn_counter.push(turn_counter_value, [-1])
         counter()
     }, 2000);
     p1.style.display = "none";
@@ -579,7 +711,6 @@ function l_mage_menu(){ //2
     
     };
     
-
     
     function Entrapment(){ //this will wait till turn system is in place
         var Entrapment = document.getElementById("Entrapment");
