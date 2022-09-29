@@ -165,24 +165,12 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
         console.log('made it -knight')
         menu_sfx()
         addButtons() //consider refactoring the below
-
-        //add listener for click on spells 
-
-        let show_s_k = document.getElementById("spells_b"); //needs on and off state
-        show_s_k.addEventListener("click", function k_custom(){ //use math to check for every second click.
-            //every second click (2,4,6 etc)will turn it off
             document.getElementById("btn_1").innerHTML = "Thousand Men"
             document.getElementById("btn_2").innerHTML = "Shadow Self"
             document.getElementById("btn_3").innerHTML = "Whims of Fate"
-
-            if (lastClick >= (Date.now() - delay)) //fixes bounce
-            return; 
-            lastClick = Date.now(); 
-                var b_menu = document.getElementById("menu_template")
-                b_menu.style.display = "initial"
+            b_menu.style.display = "initial"
       
-        }
-    )  
+
     }else{
         removeButtons()
     };    
@@ -199,23 +187,12 @@ function d_mage_menu(){ //1
     if (di.classList.contains('active')){
         menu_sfx()
         addButtons()
-          //add listener for click on spells 
-          let show_s_d = document.getElementById("spells_b"); //needs on and off state
-          
-          show_s_d.addEventListener("click", function d_custom(){ //use math to check for every second click.
-           
               document.getElementById("btn_1").innerHTML = "Radiant Supernova"
               document.getElementById("btn_2").innerHTML = "Mirage Blade (50MP)"
               document.getElementById("btn_3").innerHTML = "Entrapment"
-
-              if (lastClick >= (Date.now() - delay)) //fixes bounce
-              return; 
-              lastClick = Date.now(); 
-                  var b_menu = document.getElementById("menu_template") 
                   b_menu.style.display = "initial";
 
-                  }
-                )
+              
     }else{ 
         console.log("removing buttons")
         removeButtons()
@@ -234,21 +211,11 @@ function l_mage_menu(){ //2
     if (li.classList.contains('active')){
         menu_sfx()
         addButtons()
-          //add listener for click on spells 
-          let show_s_l = document.getElementById("spells_b"); //needs on and off state
-          show_s_l.addEventListener("click", function l_custom(){ //use math to check for every second click.
-              //every second click (2,4,6 etc)will turn it off
               document.getElementById("btn_1").innerHTML = "Supreme Altar"
               document.getElementById("btn_2").innerHTML = "Pierce Evil"
               document.getElementById("btn_3").innerHTML = "Angel's Grace"
-                if (lastClick >= (Date.now() - delay)) //fixes bounce
-                    return; 
-                lastClick = Date.now(); 
-                var b_menu = document.getElementById("menu_template")
-                b_menu.style.display = "initial";
-          }
-        )
- //TURN THIS LISTENER OFF AFTER IT IS USED, THEN BACK ON AS NECESSARY
+              b_menu.style.display = "initial";
+      
     
     }else{
         console.log("removing buttons")
@@ -258,8 +225,7 @@ function l_mage_menu(){ //2
     };
     //Some kind of general "click" listener is the culprit
 
-    //Everything is being called multiple. This can probably be put in a function and 
-    //called as needed
+    //Everything is being called multiple.
     function ultimaNotCharged(){
         p1.style.display = "initial";
         p1.value = "Ultima not charged!"
@@ -269,6 +235,8 @@ function l_mage_menu(){ //2
     }
 
     var ultima = document.getElementById('ultima_charge');
+    //This can probably be put in a function and 
+    //called as needed
     document.addEventListener("DOMContentLoaded", function(event) { 
         var buttons = document.querySelectorAll('.btn');//this acts like an array
             if (buttons){ //if it exists
@@ -364,8 +332,11 @@ function l_mage_menu(){ //2
         UC = document.getElementById("ultima_charge");
         UC.value +=5;
         turn_counter_value +=1;
+        black_mage_mp += 5;
+        white_mage_mp += 5;
+        warrior_mp += 5;
         turn_counter.push(turn_counter_value)
-        console.log(turn_counter)
+        console.log(turn_counter_value)
     }
 
     var LastAttacks = [] //store last attacks used by player, some skills rely on it
@@ -373,7 +344,7 @@ function l_mage_menu(){ //2
     let warrior_hp = document.getElementById("warrior_name_hp")
     let black_mage_hp = document.getElementById("d_mage_name_hp")
     let white_mage_hp = document.getElementById("l_mage_name_hp")    
-    document.addEventListener("click", function (){
+    /*document.addEventListener("click", function (){
         if (turn_counter_value % 2 !==0 && turn_counter_value !== 0){
                 window.alert("MY TURN BITCH")
                 switch(true){
@@ -390,7 +361,7 @@ function l_mage_menu(){ //2
        
         };
 
-    });
+    });*/
     var LastBossAttacks = []
     function boss_phase1(){
         let boss_choice = randNumber(1,11)
@@ -439,7 +410,7 @@ function l_mage_menu(){ //2
                         warrior_hp.value -= final_dmg_w; 
                         num_hits +=1
                         setTimeout(()=>{
-                            p1.style.display = "none"
+                            i_menu.style.display = "none"
                         }, 2000)
                     break;
                     case(target == 1):
@@ -447,7 +418,7 @@ function l_mage_menu(){ //2
                         black_mage_hp.value -= final_dmg_d;
                         num_hits +=1
                         setTimeout(()=>{
-                            p1.style.display = "none"
+                            i_menu.style.display = "none"
                         }, 2000)
                     break;
                     case(target == 2):
@@ -455,7 +426,7 @@ function l_mage_menu(){ //2
                         white_mage_hp.value -= final_dmg_l;
                         num_hits +=1
                         setTimeout(()=>{
-                            p1.style.display = "none"
+                            i_menu.style.display = "none"
                         }, 2000)
                     }
                 p1.style.display = "initial";
@@ -565,7 +536,7 @@ function l_mage_menu(){ //2
                 document.body.style.backgroundImage = "url('hellscape.png')"
                 document.body.style.backgroundSize = "contain";//this will change based on phase
                 DC.pause()
-                    hp.value -= 1500 - phase_mdef;
+                    hp.value -= 1500/phase_mdef;
                 document.getElementById("ultima_charge").value = -5;
                 i_menu.style.display = "none"
                 counter()
