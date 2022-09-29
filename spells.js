@@ -5,11 +5,18 @@ var SpheresofInsanity = document.getElementById("SpheresofInsanity");
 SpheresofInsanity.style.visibility = "hidden";
 var Polarity = document.getElementById("Polarity");
 Polarity.style.visibility = "hidden";
-var HellsGate = document.getElementById("HellsGate");
-HellsGate.style.visibility = "hidden";
+var BorderofLife = document.getElementById("BorderofLife");
+BorderofLife.style.visibility = "hidden";
 var SpacialRift = document.getElementById("SpacialRift"); //getelementbyid...getelementbyid everywhere
 SpacialRift.style.visibility = "hidden";
-var bSun1 = document.getElementById("bSun1"); //need to retrieve these assets
+
+var HallsofOblivion = document.getElementById("HallsofOblivion");
+HallsofOblivion.style.visibility = "hidden";
+
+var NightmareNascent = document.getElementById("NightmareNascent");
+NightmareNascent.style.visibility = "hidden";
+
+var bSun1 = document.getElementById("bSun1"); 
 bSun1.style.visibility = "hidden";
 var bSun2 = document.getElementById("bSun2");
 bSun2.style.visibility = "hidden";

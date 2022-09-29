@@ -543,7 +543,7 @@ function l_mage_menu(){ //2
 
 
     function MirageBlade(){
-p
+
         if (black_mage_mp <50){ //these values need to be updated
             
             p1.style.display = "initial";
@@ -684,7 +684,7 @@ p
     
         }
 })
- //change these to proper on/off
+
 var roar = new Audio("roar.wav");
 var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the else 
 var phase3_tr;
