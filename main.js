@@ -150,11 +150,11 @@ for (let i = 0; i < players_array.length; i++){
                     break;
                     case 1:
                         console.log("Dark Mage selected")
-                        //d_mage_menu()
+                        d_mage_menu()
                     break;
                     case 2:
                         console.log("Light Mage selected")
-                        //l_mage_menu()
+                        l_mage_menu()
                     break;
                     default:
                         console.log("switch - what the fuck")
@@ -206,7 +206,7 @@ function d_mage_menu(){ //1
         menu_sfx()
         addButtons()
               document.getElementById("btn_1").innerHTML = "Radiant Supernova"
-              document.getElementById("btn_2").innerHTML = "Mirage Blade (50MP)"
+              document.getElementById("btn_2").innerHTML = "Mirage Blade"
               document.getElementById("btn_3").innerHTML = "Entrapment"    
     }else{ 
         console.log("removing buttons")
@@ -233,9 +233,57 @@ function l_mage_menu(){ //2
     };
     
     };
-    //Some kind of general "click" listener is the culprit
 
-    //Everything is being called multiple.
+      //This can probably be put in a function and 
+    //called as needed
+   //this acts like an array
+    //here we need to loop through the battle options, much like the character selection
+    var buttons_array = [];
+    var button = document.getElementsByClassName('btn');
+    buttons_array.push(button[0], button[1], button[2]);
+    var active2_added = false;
+    
+    for (let i = 0; i < buttons_array.length; i++){
+        buttons_array[i].addEventListener('click', function buttonMenu(){
+            console.log("listeners added to combat buttons")
+            if (this.classList.contains('active2')){ 
+                for (let i = 0; i < buttons_array.length; i++){
+                    b_menu.style.display = "none";
+                    buttons_array[i].classList.remove('active2')
+                    active2_added = false;
+                }//second for loop ends here    
+          
+            }else if (active2_added == false){
+                this.classList.add('active2')
+                active2_added = true;
+                let list_index_buttons = buttons_array.indexOf(this);
+                switch(list_index_buttons){
+                    case 0:
+                        console.log("Attack selected")
+                    break;
+                    case 1:
+                        console.log("Spells selected")
+                        b_menu.style.display = "initial";
+                        spellsMenu()
+                   
+                    break;
+                    case 2:
+                        console.log("Defend selected")
+
+                   
+                    break;
+                    default:
+                        console.log("switch - what the fuck")
+                };
+            }else{
+                console.log("what the fuck")
+            };
+        }//listener ends here
+    )};//first for loop ends here
+    
+
+    //this one doens't need on off state, it's just one click
+    //can't use class or I'd get 0-8 instead of 0-2
     function ultimaNotCharged(){
         p1.style.display = "initial";
         p1.value = "Ultima not charged!"
@@ -245,6 +293,40 @@ function l_mage_menu(){ //2
     }
 
     var ultima = document.getElementById('ultima_charge');
+
+    var spells1 = document.getElementById("btn_1") //0
+    var spells2 = document.getElementById("btn_2") //1
+    var spells3 = document.getElementById("btn_3")  //2
+    var spells_array = []
+    spells_array.push(spells1, spells2, spells3)
+
+    function spellsMenu(){ //triggering on spells button?
+        
+        for (let i = 0; i < spells_array.length; i++){
+            spells_array[i].addEventListener('click', function spellsMenu(){
+                console.log("listeners added to spells buttons")
+                    let list_index_spells = spells_array.indexOf(this);
+                    switch(list_index_spells){
+                        case 0: //this is working! 
+                            console.log("spell button 0 selected")
+                        break;
+                        case 1:
+                            console.log("spell button 1 selected")
+                       
+                        break;
+                        case 2:
+                            console.log("spell button 2 selected")
+    
+                        break;
+                        default:
+                            console.log("switch2 - what the fuck")
+                    };
+             
+            }//listener ends here
+        )};
+
+ 
+}
 
 
     //check for dead status
@@ -300,89 +382,7 @@ function l_mage_menu(){ //2
 
 
 
-     //This can probably be put in a function and 
-    //called as needed
-        var buttons = document.querySelectorAll('.btn');//this acts like an array
-        //if it exists
-                buttons.forEach(function getIndex(curVal2, LIndex2){ //current value and index in the list, add event listener to each
-                    curVal2.addEventListener('click', function() {
-                    //console.log(lIndex);
-                    curVal2.classList.toggle("active2");
-                    buttons.forEach(function(x, sL2){ 
-                        if(LIndex2 !== sL2) { //if list index is NOT equal to the selected list element, aka one has already been picked
-                            x.classList.remove('active2');
-                            };
-                            current_index2 = LIndex2;
-                            console.log(current_index2) //stores current index
-                            //moving onto the buttons themselves...
-                            switch(current_index2){ 
-                                case(0): //basic attack. 
-                                basic()
-                                break;
-                                case(1): //this one is spells
-                                //use listener to execute the matching spell
-                                let btn1 = document.getElementById("btn_1")
-                                    if(btn1.innerHTML == "Supreme Altar"){ //swap for html click?
-                                        if (ultima.value != 100){ 
-                                            btn1.onclick = ultimaNotCharged()
-                                        }else{
-                                            btn1.onclick = SupremeAltar()
-                                            
-                                        }
-                                    }
-                                    else if (btn1.innerHTML == "Radiant Supernova"){
-                                        if (ultima.value != 100){
-                                            btn1.onclick = ultimaNotCharged()
-                                        }else{
-                                            btn1.onclick = RadiantSupernova()
-                                        }
-                                    }else if (btn1.innerHTML == "Thousand Men"){;
-                                        if (ultima.value != 100){
-                                           btn1.onclick = ultimaNotCharged()
-                                        }else{
-                                            btn1.onclick = ThousandMen()
-                                        };
-
-                                    };
-                                
-                                let btn2 = document.getElementById("btn_2")
-                                    if(btn2.innerHTML == "Mirage Blade"){
-                                        btn2.onclick = MirageBlade();
-                                    }
-                                    else if (btn2.innerHTML == "Pierce Evil"){
-                                        btn2.onclick = PierceEvil();
-                                    }
-                                    else if (btn2.innerHTML == "Shadow Self"){
-                                        btn2.onclick = ShadowSelf();
-                                    };
-                    
-                                let btn3 = document.getElementById("btn_3")
-                                    if(btn3.innerHTML == "Angel's Grace"){
-                                        btn3.onclick = AngelsGrace();
-                                    }
-                                    else if(btn3.innerHTML == "Entrapment"){
-                                        btn3.onclick= Entrapment();
-                                    }
-                                    else if (btn3.innerHTML == "Whims of Fate"){
-                                        btn3.onclick = WhimsofFate();
-
-                                    }
-
-            
-                                break;
-
-                                case(2): //defend
-                                console.log('you defended')
-                                break;
-                            };
-                     });
-    
-                 });//move to picking menu based on character
-                 //console.log(LIndex)
-            
-            });
-        
-    
+   
 
 
 
