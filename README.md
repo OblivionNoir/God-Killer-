@@ -1,3 +1,2 @@
-Game engine nearly done. After that, time to hire the exterminator
-
+Major bugs all taken care of, almost done
 
