@@ -282,8 +282,6 @@ function l_mage_menu(){ //2
     )};//first for loop ends here
     
 
-    //this one doens't need on off state, it's just one click
-    //can't use class or I'd get 0-8 instead of 0-2
     function ultimaNotCharged(){
         p1.style.display = "initial";
         p1.value = "Ultima not charged!"
@@ -300,18 +298,33 @@ function l_mage_menu(){ //2
     var spells_array = []
     spells_array.push(spells1, spells2, spells3)
 
-    function spellsMenu(){ //triggering on spells button?
-        
+    //this one doens't need on off state, it's just one click
+    //can't use class or I'd get 0-8 instead of 0-2
+    function spellsMenu(){ 
+        console.log("spells menu called")
         for (let i = 0; i < spells_array.length; i++){
-            spells_array[i].addEventListener('click', function spellsMenu(){
+            spells_array[i].addEventListener('click', function(){
                 console.log("listeners added to spells buttons")
                     let list_index_spells = spells_array.indexOf(this);
                     switch(list_index_spells){
                         case 0: //this is working! 
                             console.log("spell button 0 selected")
+                            if (ultima.value !== 100){
+                                ultimaNotCharged()
+                                
+                            }else if (spells1.innerHTML == "Thousand Men"){
+                                ThousandMen()
+                            }
                         break;
                         case 1:
                             console.log("spell button 1 selected")
+                            if (spells2.innerHTML == "Shadow Self"){
+                                ShadowSelf()
+                            }else if (spells2.innerHTML == "Mirage Blade"){
+                                Mirage_Blade()
+                            }else if (spells2.innerHTML == "Pierce Evil"){
+                                Pierce_Evil()
+                            }
                        
                         break;
                         case 2:
@@ -324,7 +337,6 @@ function l_mage_menu(){ //2
              
             }//listener ends here
         )};
-
  
 }
 
@@ -405,7 +417,7 @@ function l_mage_menu(){ //2
     document.addEventListener("click", function (){
         if (turn_counter_value % 2 !==0 && turn_counter_value !== 0){
                 window.alert("MY TURN BITCH")
-                Borderof_Life()
+                BorderofLife()
                 /*switch(true){
                     case(phase2_tr):
                         boss_phase2()
@@ -521,7 +533,7 @@ function l_mage_menu(){ //2
         }, 2000)
     }
     var newHp = null; 
-    function Borderof_Life(){ //swaps a party member's hp with 1/120th of boss's current hp. 
+    function BorderofLife(){ //swaps a party member's hp with 1/120th of boss's current hp. 
         //does not work on dead party members. 
         //Heals boss by what you lost, or 2x in p2 and 3x in p3
         document.getElementById("BorderofLife");
@@ -677,7 +689,7 @@ function l_mage_menu(){ //2
     
 
 
-    function MirageBlade(){
+    function Mirage_Blade(){
 
         if (black_mage_mp <50){ //these values need to be updated
             
@@ -725,7 +737,7 @@ function l_mage_menu(){ //2
     //light mage attacks
     //
     
-    function PierceEvil(){
+    function Pierce_Evil(){
         if (white_mage_mp <10){
             p1.style.display = "initial";
             p1.value = "Not enough MP!"
