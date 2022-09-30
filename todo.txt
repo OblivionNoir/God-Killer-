@@ -6,4 +6,4 @@
 -Stylize battle menu
 -Keep all the numbers as int. No decimals 
 
--lots of bugs to fix
+
