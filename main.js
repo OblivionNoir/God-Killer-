@@ -49,7 +49,7 @@ var warrior_hp = document.getElementById("warrior_name_hp")
 var black_mage_hp = document.getElementById("d_mage_name_hp")
 var white_mage_hp = document.getElementById("l_mage_name_hp")    
 
-
+var combat_buttons = document.getElementsByClassName('btn')
 var ostbox = document.getElementById("ost_box")
 
 
@@ -116,67 +116,56 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
 
 };
 
-//can likely be simplified
+
 
 var players_array = [];
 var players = document.getElementsByClassName('clickable');
 players_array.push(players[0], players[1], players[2]);
 var active_added = false;
+//Character selection, working beautifully<3
 for (let i = 0; i < players_array.length; i++){
     players_array[i].addEventListener('click', function selected(){
         console.log("listeners added to players")
-        if (this.classList.contains('active')){
+        if (this.classList.contains('active')){ 
             for (let i = 0; i < players_array.length; i++){
                 players_array[i].classList.remove('active') //remove all, not just one
                 active_added = false;
+                document.getElementById('atk_b').style.visibility = "hidden";
+                document.getElementById('spells_b').style.visibility = "hidden";
+                document.getElementById('def_b').style.visibility = "hidden";
 
-            }    //need to compare what's currently active and what's not
+            }//second for loop ends here    
       
         }else if (active_added == false){
             this.classList.add('active')
             active_added = true;
+            document.getElementById('atk_b').style.visibility = "visible";
+            document.getElementById('spells_b').style.visibility = "visible";
+            document.getElementById('def_b').style.visibility = "visible";
+            let list_index_players = players_array.indexOf(this);
+                switch(list_index_players){
+                    case 0:
+                        console.log("Warrior selected")
+                        warrior_menu()
+                    break;
+                    case 1:
+                        console.log("Dark Mage selected")
+                        //d_mage_menu()
+                    break;
+                    case 2:
+                        console.log("Light Mage selected")
+                        //l_mage_menu()
+                    break;
+                    default:
+                        console.log("switch - what the fuck")
+                };
+            //access current index here, then pull up appropriate menu
+        }else{
+            console.log("what the fuck")
         };
+    }//listener ends here
+)};//first for loop ends here
 
-        
-                
-                
-        
-          
-            //console.log("added")
-        }
-    
-    )}
-
-    /*var element = document.querySelectorAll('.clickable');//this acts like an array
-        if (element){ //if it exists
-            element.forEach(function getIndex(curVal, LIndex){ //current value and index in the list, add event listener to each
-                curVal.addEventListener('click', function() {
-                //console.log(lIndex);
-                curVal.classList.toggle("active");
-                element.forEach(function(x, sL){ 
-                    if(LIndex !== sL) { //if list index is NOT equal to the selected list element, aka one has already been picked
-                        x.classList.remove('active');
-                        };
-                        const current_index = LIndex;
-                        console.log(current_index) //stores current index
-                        switch(current_index){ 
-                            case(0): 
-                            warrior_menu()
-                            break;
-                            case(1):
-                            d_mage_menu()
-                            break;
-                            case(2):
-                            l_mage_menu();
-                            break;
-                        };
-                 });
-
-             });//move to picking menu based on character
-             //console.log(LIndex)
-        
-        });
-    };*/
  //use similar algo for battle menus, using stored index values. 
 var lastClick = 0; //fixes bounce glitch
 var delay = 20;
@@ -191,21 +180,17 @@ function menu_sfx(){
 
 
 function warrior_menu(){ //0 //when this is reached, we know the warrior has been clicked
-    if (lastClick >= (Date.now() - delay)) //need to check if clicked
-    return; //returns undefined, false because it's a boolean
-    lastClick = Date.now(); 
-    ki = document.getElementById("knight_img"); //need to check if it has border or not
+    var ki = document.getElementById("knight_img"); //need to check if it has border or not
     //if red, show menu. If null, hide menu
     //active class = red
+    console.log('made it -knight') 
     if (ki.classList.contains('active')){
-        console.log('made it -knight')
         menu_sfx()
         addButtons() 
             document.getElementById("btn_1").innerHTML = "Thousand Men"
             document.getElementById("btn_2").innerHTML = "Shadow Self"
             document.getElementById("btn_3").innerHTML = "Whims of Fate"
-            b_menu.style.display = "initial"
-      
+            //from here move to the function that executes it
 
     }else{
         removeButtons()
@@ -214,9 +199,6 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
 
 //remove custom menus AFTER they are called, then add back as needed
 function d_mage_menu(){ //1
-    if (lastClick >= (Date.now() - delay))
-    return;
-    lastClick = Date.now()
     di = document.getElementById("d_mage_img"); //need to check if it has border or not
     //if red, show menu. If null, hide menu
     //active class = red
@@ -225,10 +207,7 @@ function d_mage_menu(){ //1
         addButtons()
               document.getElementById("btn_1").innerHTML = "Radiant Supernova"
               document.getElementById("btn_2").innerHTML = "Mirage Blade (50MP)"
-              document.getElementById("btn_3").innerHTML = "Entrapment"
-                  b_menu.style.display = "initial";
-
-              
+              document.getElementById("btn_3").innerHTML = "Entrapment"    
     }else{ 
         console.log("removing buttons")
         removeButtons()
@@ -238,9 +217,6 @@ function d_mage_menu(){ //1
 };
 
 function l_mage_menu(){ //2
-    if (lastClick >= (Date.now() - delay))
-    return;
-    lastClick = Date.now()
     li = document.getElementById("l_mage_img"); //need to check if it has border or not
         //if red, show menu. If null, hide menu
         //active class = red
@@ -250,9 +226,7 @@ function l_mage_menu(){ //2
               document.getElementById("btn_1").innerHTML = "Supreme Altar"
               document.getElementById("btn_2").innerHTML = "Pierce Evil"
               document.getElementById("btn_3").innerHTML = "Angel's Grace"
-              b_menu.style.display = "initial";
-      
-    
+
     }else{
         console.log("removing buttons")
         removeButtons()
