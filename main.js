@@ -83,9 +83,10 @@ function addButtons(){//this produces a list, so need to loop to hide each item
 };
 //add listener to wait for initial enter to start game
 var phase1_theme;
-document.addEventListener("keyup", function startGame(event) {
+document.addEventListener('keyup', function startGame(event) {
     if (event.code === 'Enter') {
-        document.removeEventListener('keyup', startGame) //so it can only happen once. Prevents event order from getting thrown out of wack
+        document.removeEventListener('keyup', startGame)
+        console.log("Starting listener removed")
         p1_img.style.visibility = "visible";
         const storm_bg = new Audio('stormnoises.mp3');
         storm_bg.play();
@@ -107,6 +108,7 @@ document.addEventListener("keyup", function startGame(event) {
 //};
 
 function del_box(){ //SHOWTIME. Delete initial box and make menu appear
+    console.log("Intro box removed")
     p1.style.display = "none"; 
     battle_menu.style.visibility = "visible";
     hp.style.visibility = "visible";
@@ -116,8 +118,36 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
 
 //can likely be simplified
 
+var players_array = [];
+var players = document.getElementsByClassName('clickable');
+players_array.push(players[0], players[1], players[2]);
+var active_added = false;
+for (let i = 0; i < players_array.length; i++){
+    players_array[i].addEventListener('click', function selected(){
+        console.log("listeners added to players")
+        if (this.classList.contains('active')){
+            for (let i = 0; i < players_array.length; i++){
+                players_array[i].classList.remove('active') //remove all, not just one
+                active_added = false;
 
-    var element = document.querySelectorAll('.clickable');//this acts like an array
+            }    //need to compare what's currently active and what's not
+      
+        }else if (active_added == false){
+            this.classList.add('active')
+            active_added = true;
+        };
+
+        
+                
+                
+        
+          
+            //console.log("added")
+        }
+    
+    )}
+
+    /*var element = document.querySelectorAll('.clickable');//this acts like an array
         if (element){ //if it exists
             element.forEach(function getIndex(curVal, LIndex){ //current value and index in the list, add event listener to each
                 curVal.addEventListener('click', function() {
@@ -146,7 +176,7 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
              //console.log(LIndex)
         
         });
-    };
+    };*/
  //use similar algo for battle menus, using stored index values. 
 var lastClick = 0; //fixes bounce glitch
 var delay = 20;
@@ -248,7 +278,6 @@ function l_mage_menu(){ //2
     var dmage_dead = false;
     var lmage_dead = false;
     var players_array = [];
-    var players = document.getElementsByClassName('clickable');
     players_array.push(players[0], players[1], players[2]);
     console.log(players_array)
 
@@ -554,7 +583,7 @@ function l_mage_menu(){ //2
                 break;
                 case(fate ==2):
                     if (lmage_dead == false){
-                        var newHp = (hp.value.toFixed(0)/100)
+                        var newHp = (hp.value.toFixed(0)/120)
                         white_mage_hp.value = newHp.toFixed(0);
 
             
