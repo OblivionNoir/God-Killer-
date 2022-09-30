@@ -4,23 +4,22 @@
 var phase_def = 1.2; //divide by this number 
 var phase_mdef = 1.1;
 
-var warrior_mp = 70;
+
 var warrior_def = 1.6; //edit these
 var warrior_mdef = 1.4;
 
 
-var black_mage_mp = 220;
+
 var black_mage_def = 1.3;
 var black_mage_mdef = 1.7;
 
 
-var white_mage_mp = 220;
 var white_mage_def = 1.2;
 var white_mage_mdef = 1.8; 
 
 var warrior_dead = false;
 var black_mage_dead = false;
-var white_mage_dead = false;
+var l_mage_dead = false;
 
 //hide elements that get used later
 var p1_img = document.getElementById("boss_img");
@@ -48,7 +47,10 @@ i_menu.style.display = "none"
 var warrior_hp = document.getElementById("warrior_name_hp")
 var black_mage_hp = document.getElementById("d_mage_name_hp")
 var white_mage_hp = document.getElementById("l_mage_name_hp")    
-
+//get mp values 
+var warrior_mp = document.getElementById("warrior_name_mp")
+var black_mage_mp = document.getElementById("d_mage_name_mp")
+var white_mage_mp = document.getElementById("l_mage_name_mp")
 var combat_buttons = document.getElementsByClassName('btn')
 var ostbox = document.getElementById("ost_box")
 
@@ -234,9 +236,7 @@ function l_mage_menu(){ //2
     
     };
 
-      //This can probably be put in a function and 
-    //called as needed
-   //this acts like an array
+
     //here we need to loop through the battle options, much like the character selection
     var buttons_array = [];
     var button = document.getElementsByClassName('btn');
@@ -338,19 +338,16 @@ function l_mage_menu(){ //2
             }//listener ends here
         )};
  
-}
+};
 
 
-    //check for dead status
-    var warrior_dead = false;
-    var dmage_dead = false;
-    var lmage_dead = false;
+
+    //convert to array items 0,1,2
     var players_array = [];
     players_array.push(players[0], players[1], players[2]);
     console.log(players_array)
 
-//convert to array items 0,1,2
-
+    //check for dead status
     //only want this to check whenever the boss attacks, not every click. No yandev code!
     players_array.forEach(function addDeadStatus(){
             addEventListener('click', function(){ //adding to 0,1,2, which are the players
@@ -366,7 +363,7 @@ function l_mage_menu(){ //2
                     break;
                 case(black_mage_hp.value <=0):
                     black_mage_hp.value ==0;
-                    dmage_dead = true;
+                    black_mage_dead = true;
                     p1.style.display = "initial";
                     p1.value = "Dark mage has fallen!"
                     setTimeout(()=>{
@@ -375,7 +372,7 @@ function l_mage_menu(){ //2
                     break;
                 case(white_mage_hp.value <=0):
                     white_mage_hp.value ==0;
-                    lmage_dead = true;
+                    l_mage_dead = true;
                     p1.style.display = "initial";
                     p1.value = "Light mage has fallen!"
                     setTimeout(()=>{
@@ -414,10 +411,11 @@ function l_mage_menu(){ //2
 
     var LastAttacks = [] //store last attacks used by player, some skills rely on it
 
+    //this needs a different condition, not triggering correctly
     document.addEventListener("click", function (){
         if (turn_counter_value % 2 !==0 && turn_counter_value !== 0){
-                window.alert("MY TURN BITCH")
-                BorderofLife()
+                //window.alert("MY TURN BITCH")
+                Borderof_Life()
                 /*switch(true){
                     case(phase2_tr):
                         boss_phase2()
@@ -436,7 +434,7 @@ function l_mage_menu(){ //2
     var LastBossAttacks = []
     function boss_phase1(){
         let boss_choice = randNumber(1,11)
-
+//might be a better way of setting percent chance.
         if (boss_choice == 1 | boss_choice ==2 | boss_choice ==3) //30% chance
             SpheresofInsanity()
         else if(boss_choice ==10 | boss_choice ==9 && LastBossAttacks[-1] != "BorderofLife" 
@@ -526,27 +524,28 @@ function l_mage_menu(){ //2
             };
     }
     function atkFailed(){
-        p1.value = "The beast's attack failed!"
         p1.style.display = "initial";
+        p1.value = "The beast's attack failed!"
         setTimeout(()=>{
             p1.style.display = "none"
         }, 2000)
     }
     var newHp = null; 
-    function BorderofLife(){ //swaps a party member's hp with 1/120th of boss's current hp. 
+    function Borderof_Life(){ //swaps a party member's hp with 1/120th of boss's current hp. 
         //does not work on dead party members. 
         //Heals boss by what you lost, or 2x in p2 and 3x in p3
-        document.getElementById("BorderofLife");
-        i_menu.src = "s_lycoris-removebg.png"
+        //seems to be not targeting those it would kill?
+        i_menu.src = "s_lycoris-removebg.png" 
         i_menu.style.display = "initial"
         PE.play()//find new sfx
         PE.loop = false;
+    
         setTimeout(()=>{
             let fate = randNumber(0,3); //choose 1 target 
             console.log(fate)
             switch(true){
                 case(fate == 0):
-                    if (warrior_dead == false){
+                    if (warrior_dead == false){ 
                         var newHp = (hp.value.toFixed(0)/120)//perform the swap
                         warrior_hp.value = newHp.toFixed(0);
           
@@ -557,7 +556,7 @@ function l_mage_menu(){ //2
              
                 break;            
                 case(fate ==1):
-                    if (dmage_dead == false){
+                    if (black_mage_dead == false){
                         var newHp = (hp.value.toFixed(0)/120)
                         black_mage_hp.value = newHp.toFixed(0);
         
@@ -568,7 +567,7 @@ function l_mage_menu(){ //2
     
                 break;
                 case(fate ==2):
-                    if (lmage_dead == false){
+                    if (l_mage_dead == false){
                         var newHp = (hp.value.toFixed(0)/120)
                         white_mage_hp.value = newHp.toFixed(0);
 
@@ -585,8 +584,8 @@ function l_mage_menu(){ //2
                 };//switch ends here
 
             counter()
-        }, 2000);
-        i_menu.style.display = "none"
+            i_menu.style.display = "none"
+        }, 7000);
     };//function ends here
 
     function SpacialRift(){
@@ -764,7 +763,6 @@ function l_mage_menu(){ //2
                         }, 3000)
                     };    
                 white_mage_mp -= 10;
-                document.getElementById("l_mage_name_mp").value -=10;
                 i_menu.style.display = "none"
                 counter()
             }, 3000);
