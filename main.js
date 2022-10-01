@@ -53,6 +53,9 @@ var black_mage_mp = document.getElementById("d_mage_name_mp")
 var white_mage_mp = document.getElementById("l_mage_name_mp")
 var combat_buttons = document.getElementsByClassName('btn')
 var ostbox = document.getElementById("ost_box")
+var rain = document.getElementById("rainbg")
+rain.loop = true;
+
 
 
 //global sound effects 
@@ -416,7 +419,7 @@ function l_mage_menu(){ //2
     function BossAttack(){
         if (turn_counter_value % 2 !==0 && turn_counter_value !== 0){
                 //window.alert("MY TURN BITCH")
-                Borderof_Life()
+                //Borderof_Life()
                 /*switch(true){
                     case(phase2_tr):
                         boss_phase2()
@@ -669,8 +672,7 @@ function l_mage_menu(){ //2
                     p1.style.display = "none";
                     counter() 
                     BossAttack()
-            
-    
+                    TestPhase()
                 }, 2000)
 
 
@@ -699,6 +701,7 @@ function l_mage_menu(){ //2
                 i_menu.style.display = "none"
                 counter()
                 BossAttack()
+                TestPhase()
             }, 7000);
         
             
@@ -706,7 +709,7 @@ function l_mage_menu(){ //2
     
 
 
-    function Mirage_Blade(){
+    function Mirage_Blade(){ //mp sometimes doesn't subtract
 
         if (black_mage_mp <50){ 
             
@@ -723,7 +726,7 @@ function l_mage_menu(){ //2
             PE.play()
             PE.loop = false;
             setTimeout(()=>{
-                    hp.value -= (600/phase_def); //hp = boss hp
+                    hp.value -= (3000/phase_def); //hp = boss hp
                     let d_crit = Math.floor(Math.random() * 9); //higher crit rate
                     if (d_crit == 8){
                         hp.value -= (1200/phase_def);
@@ -737,6 +740,7 @@ function l_mage_menu(){ //2
                 i_menu.style.display = "none"
                 counter()
                 BossAttack()
+                TestPhase()
             }, 3000);
             
             
@@ -786,6 +790,7 @@ function l_mage_menu(){ //2
                 i_menu.style.display = "none"
                 counter()
                 BossAttack()
+                TestPhase()
             }, 3000);
             
 
@@ -808,28 +813,35 @@ function l_mage_menu(){ //2
     var phase2_tr;
     var phase2_theme;
     var roar = new Audio("roar.wav");
-    document.addEventListener("click", function phase2(){ //PHASE 2!
-        //console.log(hp)
-        if (hp.value <10000 && hp.value > 5001){
-            document.removeEventListener('click', phase2) //disable here
-            p2.style.display = "initial"; //add timeout
+    //test conditions for phases
+    function TestPhase(){
+        if (hp.value <=0){
+            Victory()
+        }else if (hp.value <10000 && hp.value > 5001){
+            phase2()
+        }else if (hp.value <5001){
+            phase3()
+        }else{
+            console.log("still in phase 1")
+        }
+    }
+
+    function Victory(){
+        //stuff when you win
+    }
+
+   function phase2(){ 
+            rain.src = "BloodRain2.0.mp4" //gets stuck in firefox?
+            rain.play()
+            rain.loop = true;
+            p2.style.display = "initial"; 
             p2.value = "Oh no...";
             phase2_tr = true; //trigger to reference phase 2 later on
             phase_def = 1.3; //update stats for phase 2
-            phase_mdef = 1.2;
+            phase_mdef = 1.2;  
             setTimeout(() =>{
-                const dotheroar = new Audio('dotheroar.mp3')
-                dotheroar.play()
-                dotheroar.loop = false;
-            },2000);
-            
-            setTimeout(() =>{
-                document.getElementById("rainbg").src = "redrain.mp4"
                 p2.style.display = "none";
                 document.getElementById("boss_img").src = "AKUMU2.0.jpeg";
-                const hellnaw = new Audio("hellnaw.mp3");
-                hellnaw.play()
-                hellnaw.loop = false;
                 phase1_theme.pause();
                 const phase2_theme = new Audio('phase2OST.mp3') //use hunter phase 2
                 phase2_theme.play();
@@ -848,12 +860,14 @@ function l_mage_menu(){ //2
 
     
         }
-})
+     
+
 
 
 var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the else 
 var phase3_tr;
-document.addEventListener("click", function phase3(){ //PHASE 3!
+
+function phase3(){ //PHASE 3!
         if (hp.value <5001){
             document.removeEventListener('click', phase3)
             p2.style.display = "initial"; //add timeout
@@ -888,7 +902,7 @@ document.addEventListener("click", function phase3(){ //PHASE 3!
             phase3_theme.pause()
            //display victory window
         }
-})
+}
  //these will work by retrieving the character's list index and matching it 
  //listener to check if any of them are clicked 
 
