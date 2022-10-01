@@ -869,7 +869,6 @@ var phase3_tr;
 
 function phase3(){ //PHASE 3!
         if (hp.value <5001){
-            document.removeEventListener('click', phase3)
             p2.style.display = "initial"; //add timeout
             setTimeout(()=>{
                 phase2_theme.pause();//fix this
