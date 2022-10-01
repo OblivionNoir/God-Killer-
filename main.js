@@ -260,6 +260,7 @@ function l_mage_menu(){ //2
                 switch(list_index_buttons){
                     case 0:
                         console.log("Attack selected")
+                        basic()
                     break;
                     case 1:
                         console.log("Spells selected")
@@ -411,8 +412,8 @@ function l_mage_menu(){ //2
 
     var LastAttacks = [] //store last attacks used by player, some skills rely on it
 
-    //this needs a different condition, not on click
-    document.addEventListener("click", function (){
+
+    function BossAttack(){
         if (turn_counter_value % 2 !==0 && turn_counter_value !== 0){
                 //window.alert("MY TURN BITCH")
                 Borderof_Life()
@@ -429,8 +430,8 @@ function l_mage_menu(){ //2
                 };*/
        
         };
+    };
 
-    });
     var LastBossAttacks = []//remember to add to this
     function boss_phase1(){
         let boss_choice = randNumber(1,11)
@@ -640,27 +641,40 @@ function l_mage_menu(){ //2
 
     //dark mage attacks
     function basic(){
-        p1.style.display = "initial";
-        setTimeout(()=>{
-           let rand_dmg = randNumber(50,70) ; //random value between 50 and 70
-           let final_dmg = rand_dmg/phase_def;
-            hp.value -= final_dmg;
+
 
             let l_crit = Math.floor(Math.random() * 16);
-            if (l_crit == 15){
-                rand_dmg = randNumber(60,80) ; //adds second attack
+            console.log("value" + l_crit)
+            //crit
+            if (l_crit == 1){
+                rand_dmg = randNumber(100,140) ; 
                 final_dmg = rand_dmg/phase_def;
                 hp.value -= final_dmg;
                 p1.style.display = "initial";
-                p1.value = "Critical hit! Extra attack!"
-                setTimeout(2000)
-                p1.value = `Your second attack did ${final_dmg.toFixed(1)} damage.`;
-                
+                p1.value = "Critical hit!"
+                setTimeout(()=>{
+                    p1.style.display = "none";
+                    counter() 
+                    BossAttack()
+    
+                }, 2000)
+  
+
+            //no crit        
+            }else{
+                let rand_dmg = randNumber(50,70) ; //random value between 50 and 70
+                let final_dmg = rand_dmg/phase_def;
+                hp.value -= final_dmg;
+                setTimeout(()=>{
+                    p1.style.display = "none";
+                    counter() 
+                    BossAttack()
+            
+    
+                }, 2000)
+
+
             };    
-        p1.value = `You attacked the monster. Did ${final_dmg.toFixed(1)} damage.`;
-        counter()
-    }, 2000);
-    p1.style.display = "none";
 
 };
 
@@ -684,7 +698,9 @@ function l_mage_menu(){ //2
                 document.getElementById("ultima_charge").value = -5;
                 i_menu.style.display = "none"
                 counter()
+                BossAttack()
             }, 7000);
+        
             
     };
     
@@ -720,7 +736,9 @@ function l_mage_menu(){ //2
                 black_mage_mp.value -= 50;
                 i_menu.style.display = "none"
                 counter()
+                BossAttack()
             }, 3000);
+            
             
 
         };
@@ -767,6 +785,7 @@ function l_mage_menu(){ //2
                 white_mage_mp -= 10; //I have no fucking idea why this one doesn't need .value, but it works
                 i_menu.style.display = "none"
                 counter()
+                BossAttack()
             }, 3000);
             
 
