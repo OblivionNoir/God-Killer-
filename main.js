@@ -411,7 +411,7 @@ function l_mage_menu(){ //2
 
     var LastAttacks = [] //store last attacks used by player, some skills rely on it
 
-    //this needs a different condition, not triggering correctly
+    //this needs a different condition, not on click
     document.addEventListener("click", function (){
         if (turn_counter_value % 2 !==0 && turn_counter_value !== 0){
                 //window.alert("MY TURN BITCH")
@@ -431,7 +431,7 @@ function l_mage_menu(){ //2
         };
 
     });
-    var LastBossAttacks = []
+    var LastBossAttacks = []//remember to add to this
     function boss_phase1(){
         let boss_choice = randNumber(1,11)
 //might be a better way of setting percent chance.
@@ -439,7 +439,7 @@ function l_mage_menu(){ //2
             SpheresofInsanity()
         else if(boss_choice ==10 | boss_choice ==9 && LastBossAttacks[-1] != "BorderofLife" 
         && LastBossAttacks[-2] != "BorderofLife" && hp.value <12500){
-            BorderofLife()
+            Borderof_Life()
         }
 
 
@@ -510,27 +510,8 @@ function l_mage_menu(){ //2
         counter()
     };
 
-    function SwapHP(){ 
-        switch(true){ 
-            case(phase2_tr):
-                hp.value += (newHp*2)
-            break;
-            case(phase3_tr):
-                hp.value += (newHp*3)
-            break;
-            default:
-                hp.value += newHp;
-            break;
-            };
-    }
-    function atkFailed(){
-        p1.style.display = "initial";
-        p1.value = "The beast's attack failed!"
-        setTimeout(()=>{
-            p1.style.display = "none"
-        }, 2000)
-    }
-    var newHp = null; 
+
+    var newHp; 
     function Borderof_Life(){ //swaps a party member's hp with 1/120th of boss's current hp. 
         //does not work on dead party members. 
         //Heals boss by what you lost, or 2x in p2 and 3x in p3
@@ -543,10 +524,10 @@ function l_mage_menu(){ //2
         setTimeout(()=>{
             let fate = randNumber(0,3); //choose 1 target 
             console.log(fate)
-            switch(true){
-                case(fate == 0):
+            switch(fate){
+                case(0):
                     if (warrior_dead == false){ 
-                        var newHp = (hp.value.toFixed(0)/120)//perform the swap
+                        newHp = (hp.value/120)//perform the swap
                         warrior_hp.value = newHp.toFixed(0);
           
                         SwapHP()
@@ -555,9 +536,9 @@ function l_mage_menu(){ //2
                     };
              
                 break;            
-                case(fate ==1):
+                case(1):
                     if (black_mage_dead == false){
-                        var newHp = (hp.value.toFixed(0)/120)
+                        newHp = (hp.value/120)
                         black_mage_hp.value = newHp.toFixed(0);
         
                         SwapHP()
@@ -566,9 +547,9 @@ function l_mage_menu(){ //2
                     };
     
                 break;
-                case(fate ==2):
+                case(2):
                     if (l_mage_dead == false){
-                        var newHp = (hp.value.toFixed(0)/120)
+                        newHp = (hp.value/120)
                         white_mage_hp.value = newHp.toFixed(0);
 
             
@@ -587,6 +568,27 @@ function l_mage_menu(){ //2
             i_menu.style.display = "none"
         }, 7000);
     };//function ends here
+    function SwapHP(){ 
+        switch(true){ 
+            case(phase2_tr):
+                hp.value += newHp.toFixed(0)*2
+            break;
+            case(phase3_tr):
+                hp.value += newHp.toFixed(0)*3
+            break;
+            default:
+                console.log(newHp)
+                hp.value += newHp.toFixed(0);
+            break;
+            };
+    }
+    function atkFailed(){
+        p1.style.display = "initial";
+        p1.value = "The beast's attack failed!"
+        setTimeout(()=>{
+            p1.style.display = "none"
+        }, 2000)
+    }
 
     function SpacialRift(){
         document.getElementById("SpacialRift")
@@ -690,7 +692,7 @@ function l_mage_menu(){ //2
 
     function Mirage_Blade(){
 
-        if (black_mage_mp <50){ //these values need to be updated
+        if (black_mage_mp <50){ 
             
             p1.style.display = "initial";
             p1.value = "Not enough MP!"
@@ -715,7 +717,7 @@ function l_mage_menu(){ //2
                             p1.style.display = "none"
                         }, 3000) //note that this is NOT running 3 times. 
                     };    
-                black_mage_mp -= 50;
+                black_mage_mp.value -= 50;
                 i_menu.style.display = "none"
                 counter()
             }, 3000);
@@ -762,7 +764,7 @@ function l_mage_menu(){ //2
                             p1.style.display = "none"
                         }, 3000)
                     };    
-                white_mage_mp -= 10;
+                white_mage_mp -= 10; //I have no fucking idea why this one doesn't need .value, but it works
                 i_menu.style.display = "none"
                 counter()
             }, 3000);
@@ -786,6 +788,7 @@ function l_mage_menu(){ //2
     //phase changes
     var phase2_tr;
     var phase2_theme;
+    var roar = new Audio("roar.wav");
     document.addEventListener("click", function phase2(){ //PHASE 2!
         //console.log(hp)
         if (hp.value <10000 && hp.value > 5001){
@@ -812,7 +815,6 @@ function l_mage_menu(){ //2
                 const phase2_theme = new Audio('phase2OST.mp3') //use hunter phase 2
                 phase2_theme.play();
                 phase2_theme.loop = true;
-                const roar = new Audio("roar.wav");
                 roar.play();
                 roar.loop = false;
                 document.getElementById("boss_name").innerHTML = "Akumu, Origin of the Nightmare";
@@ -829,7 +831,7 @@ function l_mage_menu(){ //2
         }
 })
 
-var roar = new Audio("roar.wav");
+
 var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the else 
 var phase3_tr;
 document.addEventListener("click", function phase3(){ //PHASE 3!
