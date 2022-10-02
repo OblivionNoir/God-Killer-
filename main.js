@@ -182,8 +182,6 @@ function menu_sfx(){
 
 
 
-
-
 function warrior_menu(){ //0 //when this is reached, we know the warrior has been clicked
     var ki = document.getElementById("knight_img"); //need to check if it has border or not
     //if red, show menu. If null, hide menu
@@ -307,8 +305,10 @@ function l_mage_menu(){ //2
     function spellsMenu(){ 
         console.log("spells menu called")
         for (let i = 0; i < spells_array.length; i++){
+
             spells_array[i].addEventListener('click', function(){
                 console.log("listeners added to spells buttons")
+
                     let list_index_spells = spells_array.indexOf(this);
                     switch(list_index_spells){
                         case 0: //this is working! 
@@ -352,45 +352,43 @@ function l_mage_menu(){ //2
     console.log(players_array)
 
     //check for dead status
-    //only want this to check whenever the boss attacks, not every click. No yandev code!
-    players_array.forEach(function addDeadStatus(){
-            addEventListener('click', function(){ //adding to 0,1,2, which are the players
+    //only want this to check whenever the boss attacks
+function timeout(){
+    setTimeout(()=>{ 
+        p1.style.display = "none"
+    }, 2000);
+}
+
+ function CheckDeadStatus(){
+            //adding to 0,1,2, which are the players
             switch(true){
                 case(warrior_hp.value <=0):  //first revert to 0 if negative
                     warrior_hp.value ==0;
                     warrior_dead = true; //add message 
                     p1.style.display = "initial";
                     p1.value = "Warrior has fallen!"
-                    setTimeout(()=>{ //refactor this into a function
-                        p1.style.display = "none"
-                    }, 2000);
+                    timeout()
                     break;
                 case(black_mage_hp.value <=0):
                     black_mage_hp.value ==0;
                     black_mage_dead = true;
                     p1.style.display = "initial";
                     p1.value = "Dark mage has fallen!"
-                    setTimeout(()=>{
-                        p1.style.display = "none"
-                    }, 2000);
+                    timeout()
                     break;
                 case(white_mage_hp.value <=0):
                     white_mage_hp.value ==0;
                     l_mage_dead = true;
                     p1.style.display = "initial";
                     p1.value = "Light mage has fallen!"
-                    setTimeout(()=>{
-                        p1.style.display = "none"
-                    }, 2000);
+                    timeout()
                     break;
                 default:
                     console.log("nobody is dead")
     
             };
     
-        });
-        
-    });
+    };
    
 
 
@@ -417,7 +415,7 @@ function l_mage_menu(){ //2
 
 
     function BossAttack(){
-        if (turn_counter_value % 2 !==0 && turn_counter_value !== 0){
+        
                 //window.alert("MY TURN BITCH")
                 //Borderof_Life()
                 /*switch(true){
@@ -433,7 +431,7 @@ function l_mage_menu(){ //2
                 };*/
        
         };
-    };
+ 
 
     var LastBossAttacks = []//remember to add to this
     function boss_phase1(){
@@ -464,7 +462,11 @@ function l_mage_menu(){ //2
     function randNumber(min, max) {
         return Math.floor(Math.random() * (max - min) ) + min;
       }
-
+    function timeout_i_menu(){
+        setTimeout(()=>{
+            i_menu.style.display = "none"
+        }, 2000)
+    }
     //boss attacks
     function SpheresofInsanity(){
         i_menu.src = "spheres.jpeg" //i_menu is the image template
@@ -482,25 +484,19 @@ function l_mage_menu(){ //2
                         var final_dmg_w = dmg/warrior_def
                         warrior_hp.value -= final_dmg_w; 
                         num_hits +=1
-                        setTimeout(()=>{
-                            i_menu.style.display = "none"
-                        }, 2000)
+                        timeout_i_menu()
                     break;
                     case(target == 1):
                         var final_dmg_d = dmg/black_mage_def
                         black_mage_hp.value -= final_dmg_d;
                         num_hits +=1
-                        setTimeout(()=>{
-                            i_menu.style.display = "none"
-                        }, 2000)
+                        timeout_i_menu()
                     break;
                     case(target == 2):
                         var final_dmg_l = dmg/white_mage_def
                         white_mage_hp.value -= final_dmg_l;
                         num_hits +=1
-                        setTimeout(()=>{
-                            i_menu.style.display = "none"
-                        }, 2000)
+                        timeout_i_menu()
                     }
                 p1.style.display = "initial";
             }
@@ -572,7 +568,7 @@ function l_mage_menu(){ //2
             i_menu.style.display = "none"
         }, 7000);
     };//function ends here
-    function SwapHP(){ 
+    function SwapHP(){ //for border of life
         switch(true){ 
             case(phase2_tr):
                 hp.value += newHp.toFixed(0)*2
@@ -641,7 +637,11 @@ function l_mage_menu(){ //2
         counter()
 
     };
-
+    function ending3(){
+        counter() 
+        TestPhase()
+        BossAttack()
+    }
     //dark mage attacks
     function basic(){
 
@@ -657,9 +657,8 @@ function l_mage_menu(){ //2
                 p1.value = "Critical hit!"
                 setTimeout(()=>{
                     p1.style.display = "none";
-                    counter() 
-                    BossAttack()
-    
+                    ending3()
+              
                 }, 2000)
   
 
@@ -670,9 +669,7 @@ function l_mage_menu(){ //2
                 hp.value -= final_dmg;
                 setTimeout(()=>{
                     p1.style.display = "none";
-                    counter() 
-                    BossAttack()
-                    TestPhase()
+                    ending3()
                 }, 2000)
 
 
@@ -699,9 +696,7 @@ function l_mage_menu(){ //2
                     hp.value -= 1500/phase_mdef;
                 document.getElementById("ultima_charge").value = -5;
                 i_menu.style.display = "none"
-                counter()
-                BossAttack()
-                TestPhase()
+                ending3()
             }, 7000);
         
             
@@ -709,9 +704,9 @@ function l_mage_menu(){ //2
     
 
 
-    function Mirage_Blade(){ //mp sometimes doesn't subtract
+    function Mirage_Blade(){ //mp doesn't subtract after the first use???
 
-        if (black_mage_mp <50){ 
+        if (black_mage_mp.value <50){ 
             
             p1.style.display = "initial";
             p1.value = "Not enough MP!"
@@ -720,7 +715,7 @@ function l_mage_menu(){ //2
             },2000)
         }else{ 
             //display image for 3 seconds, then turn it off
-            
+            black_mage_mp.value -= 50;
             i_menu.src = "MirageBlade.jpg" //i_menu is the image template
             i_menu.style.display = "initial"
             PE.play()
@@ -734,13 +729,11 @@ function l_mage_menu(){ //2
                         p1.value = "Critical hit!"
                         setTimeout(()=>{
                             p1.style.display = "none"
-                        }, 3000) //note that this is NOT running 3 times. 
+                        }, 3000) 
                     };    
-                black_mage_mp.value -= 50;
+        
                 i_menu.style.display = "none"
-                counter()
-                BossAttack()
-                TestPhase()
+                ending3()
             }, 3000);
             
             
@@ -761,7 +754,7 @@ function l_mage_menu(){ //2
     //
     
     function Pierce_Evil(){
-        if (white_mage_mp <10){
+        if (white_mage_mp.value <10){
             p1.style.display = "initial";
             p1.value = "Not enough MP!"
             setTimeout(()=>{
@@ -786,11 +779,9 @@ function l_mage_menu(){ //2
                             p1.style.display = "none"
                         }, 3000)
                     };    
-                white_mage_mp -= 10; //I have no fucking idea why this one doesn't need .value, but it works
+                white_mage_mp.value -= 10; //try reinitializing? IDFK
                 i_menu.style.display = "none"
-                counter()
-                BossAttack()
-                TestPhase()
+                ending3()
             }, 3000);
             
 
@@ -831,7 +822,7 @@ function l_mage_menu(){ //2
     }
 
    function phase2(){ 
-            rain.src = "BloodRain2.0.mp4" //gets stuck in firefox?
+            rain.src = "BloodRain2.0.mp4" //getting stuck on something
             rain.play()
             rain.loop = true;
             p2.style.display = "initial"; 
@@ -898,8 +889,9 @@ function phase3(){ //PHASE 3!
             roar.play();
             roar.loop = false;
          
-        }else if (hp.value ==0){
+        }else if (hp.value <=0){
             phase3_theme.pause()
+            Victory()
            //display victory window
         }
 }
