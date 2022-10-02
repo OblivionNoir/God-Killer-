@@ -359,7 +359,7 @@ function timeout(){
     }, 2000);
 }
 
- function CheckDeadStatus(){
+ function CheckDeadStatus(){ //call after every boss attack
             //adding to 0,1,2, which are the players
             switch(true){
                 case(warrior_hp.value <=0):  //first revert to 0 if negative
@@ -637,7 +637,7 @@ function timeout(){
         counter()
 
     };
-    function ending3(){
+    function ending3(){ //call after every player attack
         counter() 
         TestPhase()
         BossAttack()
@@ -704,17 +704,17 @@ function timeout(){
     
 
 
-    function Mirage_Blade(){ //mp doesn't subtract after the first use???
-
+    function Mirage_Blade(){ 
+        var black_mage_mp = document.getElementById("d_mage_name_mp");
+        //I have no fucking idea why this needs to be redefined
+        //If I don't it only works once
         if (black_mage_mp.value <50){ 
-            
             p1.style.display = "initial";
             p1.value = "Not enough MP!"
             setTimeout(()=>{
                 p1.style.display = "none"
             },2000)
         }else{ 
-            //display image for 3 seconds, then turn it off
             black_mage_mp.value -= 50;
             i_menu.src = "MirageBlade.jpg" //i_menu is the image template
             i_menu.style.display = "initial"
@@ -736,8 +736,6 @@ function timeout(){
                 ending3()
             }, 3000);
             
-            
-
         };
     
     };
@@ -751,9 +749,10 @@ function timeout(){
     };
 
     //light mage attacks
-    //
     
     function Pierce_Evil(){
+        var white_mage_mp = document.getElementById("l_mage_name_mp");
+        //see above comment...
         if (white_mage_mp.value <10){
             p1.style.display = "initial";
             p1.value = "Not enough MP!"
@@ -761,8 +760,8 @@ function timeout(){
                 p1.style.display = "none"
             }, 3000)
         }else{ 
+            white_mage_mp.value -= 10;
             //display image for 3 seconds, then turn it off
-            
             i_menu.src = "PierceEvil.jpg"
             i_menu.style.display = "initial"
             const PE = new Audio("pierceevil.wav");
@@ -779,7 +778,7 @@ function timeout(){
                             p1.style.display = "none"
                         }, 3000)
                     };    
-                white_mage_mp.value -= 10; //try reinitializing? IDFK
+                //try reinitializing? IDFK
                 i_menu.style.display = "none"
                 ending3()
             }, 3000);
