@@ -7,19 +7,23 @@ var phase_mdef = 1.1;
 
 var warrior_def = 1.6; //edit these
 var warrior_mdef = 1.4;
+//evasion
+var warrior_ev = 0.05;//5%
 
 
 
 var black_mage_def = 1.3;
 var black_mage_mdef = 1.7;
+var black_mage_ev = 0.1;//10%
 
 
 var white_mage_def = 1.2;
 var white_mage_mdef = 1.8; 
+var white_mage_ev = 0.15;//15%
 
 var warrior_dead = false;
 var black_mage_dead = false;
-var l_mage_dead = false;
+var white_mage_dead = false;
 
 //hide elements that get used later
 var p1_img = document.getElementById("boss_img");
@@ -294,11 +298,11 @@ function l_mage_menu(){ //2
 
     var ultima = document.getElementById('ultima_charge');
 
-    var spells1 = document.getElementById("btn_1") //0
-    var spells2 = document.getElementById("btn_2") //1
-    var spells3 = document.getElementById("btn_3")  //2
+    var spells0 = document.getElementById("btn_1") //0
+    var spells1 = document.getElementById("btn_2") //1
+    var spells2 = document.getElementById("btn_3")  //2
     var spells_array = []
-    spells_array.push(spells1, spells2, spells3)
+    spells_array.push(spells0, spells1, spells2)
 
     //this one doens't need on off state, it's just one click
     //can't use class or I'd get 0-8 instead of 0-2
@@ -316,17 +320,22 @@ function l_mage_menu(){ //2
                             if (ultima.value !== 100){
                                 ultimaNotCharged()
                                 
-                            }else if (spells1.innerHTML == "Thousand Men"){
-                                ThousandMen()
+                            }else if (spells0.innerHTML == "Thousand Men"){
+                                Thousand_Men()
+                            }else if (spells0.innerHTML == "Radiant Supernova"){
+                                Radiant_Supernova()
+                            }else if (spells0.innerHTML == "Supreme Altar"){
+                                Supreme_Altar()
                             }
+                                
                         break;
                         case 1:
                             console.log("spell button 1 selected")
-                            if (spells2.innerHTML == "Shadow Self"){
+                            if (spells1.innerHTML == "Shadow Self"){
                                 ShadowSelf()
-                            }else if (spells2.innerHTML == "Mirage Blade"){
+                            }else if (spells1.innerHTML == "Mirage Blade"){
                                 Mirage_Blade()
-                            }else if (spells2.innerHTML == "Pierce Evil"){
+                            }else if (spells1.innerHTML == "Pierce Evil"){
                                 Pierce_Evil()
                             }
                        
@@ -378,7 +387,7 @@ function timeout(){
                     break;
                 case(white_mage_hp.value <=0):
                     white_mage_hp.value ==0;
-                    l_mage_dead = true;
+                    white_mage_dead = true;
                     p1.style.display = "initial";
                     p1.value = "Light mage has fallen!"
                     timeout()
@@ -417,7 +426,7 @@ function timeout(){
     function BossAttack(){
         
                 //window.alert("MY TURN BITCH")
-                //Borderof_Life()
+                Borderof_Life()
                 /*switch(true){
                     case(phase2_tr):
                         boss_phase2()
@@ -548,7 +557,7 @@ function timeout(){
     
                 break;
                 case(2):
-                    if (l_mage_dead == false){
+                    if (white_mage_dead == false){
                         newHp = (hp.value/120)
                         white_mage_hp.value = newHp.toFixed(0);
 
@@ -624,7 +633,7 @@ function timeout(){
 
     //warrior attacks
   
-    function ThousandMen(){ //his ult
+    function Thousand_Men(){ //his ult
         document.getElementById("ThousandMen");
         counter()
     };
@@ -677,7 +686,7 @@ function timeout(){
 
 };
 
-    function RadiantSupernova(){ //her ult
+    function Radiant_Supernova(){ //her ult
         document.body.style.backgroundImage = "url('blackhole.png')"
         document.body.style.backgroundSize = "contain";
             //ultimas don't have a crit or mp value
@@ -694,7 +703,6 @@ function timeout(){
                 document.body.style.backgroundSize = "contain";//this will change based on phase
                 DC.pause()
                     hp.value -= 1500/phase_mdef;
-                document.getElementById("ultima_charge").value = -5;
                 i_menu.style.display = "none"
                 ending3()
             }, 7000);
@@ -790,12 +798,51 @@ function timeout(){
 
     function AngelsGrace(){
         document.getElementById("AngelsGrace");
-        turn_counter +=1;
+        
 
     };
-    function SupremeAltar(){ //her ult
-        document.getElementById("SupremeAltar");
-        turn_counter +=1;
+    function Supreme_Altar(){ //her ult, fully restores party to default state
+        //if anyone is dead, change their dead status to false
+        document.body.style.backgroundImage = "url('altarbg.png')"
+        document.body.style.backgroundSize = "contain"; //find sfx for this
+        if (warrior_dead == true){ //first revive any dead members
+            warrior_dead = false;
+        }
+        if (black_mage_dead == true){
+            black_mage_dead = false;
+        }
+        if (white_mage_dead == true){
+            white_mage_dead = false;
+        };
+        //then restore mp and hp
+        document.getElementById("warrior_name_hp").value = 550;
+        document.getElementById("d_mage_name_hp").value = 470;
+        document.getElementById("l_mage_name_hp").value = 400;
+        document.getElementById("warrior_name_mp").value = 120;
+        document.getElementById("d_mage_name_mp").value = 260;
+        document.getElementById("l_mage_name_mp").value = 280;
+
+        //fix any debuffs 
+        warrior_def = 1.6;
+        warrior_mdef = 1.4;
+        black_mage_def = 1.3;
+        black_mage_mdef = 1.7;
+        white_mage_def = 1.2;
+        white_mage_mdef = 1.8;
+        warrior_ev = 0.05;
+        black_mage_ev = 0.1;
+        white_mage_ev = 0.15;
+
+        document.getElementById("img_template").src = "SupremeAltar.jpg"
+            i_menu.style.display = "initial"
+          
+            setTimeout(()=>{
+                document.body.style.backgroundImage = "url('hellscape.png')"
+                document.body.style.backgroundSize = "contain";//this will change based on phase
+                i_menu.style.display = "none"
+                ending3()
+            }, 7000);
+        
 
     };
 
