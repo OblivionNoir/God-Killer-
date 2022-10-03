@@ -377,7 +377,7 @@ function timeout(){
                     p1.style.display = "initial";
                     p1.value = "Warrior has fallen!"
                     timeout()
-                    break;
+                    break; //do stuff so they can't be attacked or selected while dead
                 case(black_mage_hp.value <=0):
                     black_mage_hp.value ==0;
                     black_mage_dead = true;
@@ -447,9 +447,9 @@ function timeout(){
         let boss_choice = randNumber(1,11)
 //might be a better way of setting percent chance.
         if (boss_choice == 1 | boss_choice ==2 | boss_choice ==3) //30% chance
-            SpheresofInsanity()
+            SpheresofInsanity()  //change this so it checks if ANY party members are <=1/dead
         else if(boss_choice ==10 | boss_choice ==9 && LastBossAttacks[-1] != "BorderofLife" 
-        && LastBossAttacks[-2] != "BorderofLife" && hp.value <12500){
+        && LastBossAttacks[-2] != "BorderofLife" && hp.value <12500 && (!(warrior_hp.value<=1))){
             Borderof_Life()
         }
 
@@ -525,88 +525,80 @@ function timeout(){
         //does not work on dead party members. 
         //Heals boss by what you lost, or 2x in p2 and 3x in p3
         //seems to be not targeting those it would kill?
-        i_menu.src = "s_lycoris-removebg.png" 
+        i_menu.src = "BOL.png" 
         i_menu.style.display = "initial"
+        document.body.style.backgroundImage = "url('BOLbg.png')"
+
         PE.play()//find new sfx
         PE.loop = false;
     
         setTimeout(()=>{
             let fate = randNumber(0,3); //choose 1 target 
             console.log(fate)
+            const DeadNotDead = randNumber(0, 2)
             switch(fate){
-                case(0):
-                    if (warrior_dead == false){ 
-                        newHp = (hp.value/120)//perform the swap
-                        warrior_hp.value = newHp.toFixed(0);
-          
-                        SwapHP()
-                    }else{
-                        atkFailed()
+                case(0)://warrior 
+                //if phase 3, add chance of instakill
+                    if (phase3_tr == true){ //he already won't target dead people 
+                        //or if they're at 1hp
+                        hp.value += warrior_hp.value -1 //add to boss's HP
+                        warrior_hp.value = 1; //then knock player down to 1
+                        if (DeadNotDead == 0){
+                            warrior_hp.value = 0;//then check for deaths after the turn
+                        };                                     //will not attack if at 1 or dead
+                    }else{ //if not phase 3
+                        hp.value += warrior_hp.value -1 
+                        warrior_hp.value = 1; 
                     };
-             
-                break;            
-                case(1):
-                    if (black_mage_dead == false){
-                        newHp = (hp.value/120)
-                        black_mage_hp.value = newHp.toFixed(0);
-        
-                        SwapHP()
+                         
+                case(1): //black mage
+                    if (phase3_tr == true){
+                        hp.value += black_mage_hp.value -1
+                        black_mage_hp.value = 1;
+                        if (DeadNotDead == 0){
+                            black_mage_hp.value = 0;
+                        };
                     }else{
-                        atkFailed()
+                        hp.value += black_mage_hp.value -1;
+                        black_mage_hp.value = 1;
                     };
     
                 break;
-                case(2):
-                    if (white_mage_dead == false){
-                        newHp = (hp.value/120)
-                        white_mage_hp.value = newHp.toFixed(0);
-
-            
-                        SwapHP()
+                case(2): //white mage
+                    if (phase3_tr == true){
+                        white_mage_hp.value = 1;
+                        if (DeadNotDead == 0){
+                            white_mage_hp.value = 0;
+                        };
                     }else{
-                        atkFailed()
+                        hp.value += white_mage_hp.value -1
+                        white_mage_hp.value = 1;
                     };
 
                 break;
                 default: 
-                console.log("what the fuck")    
+                console.log("shits fucked")    
     
                 };//switch ends here
 
             counter()
+            CheckDeadStatus()
             i_menu.style.display = "none"
+            //change this based on phase later
+            document.body.style.backgroundImage = "url('hellscape.png')"
+            LastBossAttacks.push("BorderofLife")
         }, 7000);
     };//function ends here
-    function SwapHP(){ //for border of life
-        switch(true){ 
-            case(phase2_tr):
-                hp.value += newHp.toFixed(0)*2
-            break;
-            case(phase3_tr):
-                hp.value += newHp.toFixed(0)*3
-            break;
-            default:
-                console.log(newHp)
-                hp.value += newHp.toFixed(0);
-            break;
-            };
-    }
-    function atkFailed(){
-        p1.style.display = "initial";
-        p1.value = "The beast's attack failed!"
-        setTimeout(()=>{
-            p1.style.display = "none"
-        }, 2000)
-    }
+
 
     function SpacialRift(){
-        document.getElementById("SpacialRift")
+  
         counter()
     };
 
     //addin phase 2\\
     function TendrilsoftheNight(){
-        document.getElementById("TendrilsoftheNight");
+
         counter()
     };
 
@@ -620,11 +612,11 @@ function timeout(){
 
     }
     function BleedingSun1(){ //turn 1 charge
-        document.getElementById("bSun1");
+
         counter()
     };
     function BleedingSun2(){ //massive damage to all, defend is borderline required
-        document.getElementById("bSun2");
+
         const NANI = new Audio("omaewa.mp3");
         NANI.play()
         NANI.loop = false;
@@ -634,15 +626,15 @@ function timeout(){
     //warrior attacks
   
     function Thousand_Men(){ //his ult
-        document.getElementById("ThousandMen");
+
         counter()
     };
     function ShadowSelf(){
-        document.getElementById("ShadowSelf");
+
         counter()
     };
     function WhimsofFate(){
-        document.getElementById("WhimsofFate");
+
         counter()
 
     };
@@ -688,7 +680,6 @@ function timeout(){
 
     function Radiant_Supernova(){ //her ult
         document.body.style.backgroundImage = "url('blackhole.png')"
-        document.body.style.backgroundSize = "contain";
             //ultimas don't have a crit or mp value
             //display image for 3 seconds, then turn it off
             
@@ -700,7 +691,7 @@ function timeout(){
             DC.loop = false;
             setTimeout(()=>{
                 document.body.style.backgroundImage = "url('hellscape.png')"
-                document.body.style.backgroundSize = "contain";//this will change based on phase
+                                                //this will change based on phase
                 DC.pause()
                     hp.value -= 1500/phase_mdef;
                 i_menu.style.display = "none"
