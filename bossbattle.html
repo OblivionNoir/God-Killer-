@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boss Battle</title>
-    <script src = "spells.js" async></script>
-    <script src = "main.js" async></script>
+    <script src = "main.js" defer ></script>
+    <script src = "labeled_bars.js" defer></script>
+    <script src = "attacks.js" defer></script>
     <link rel = "stylesheet" href = "reset.css">
     <link rel = "stylesheet" href = "styles.css">
 </head>
@@ -37,18 +38,36 @@
             <div><button id = "def_b" class = "btn" >Defend</button></div> <!--triples defense for next turn-->
             
             <div><img src = "knight.jpg" id = "knight_img" class = "clickable"></div>
+            <div id = "k_hp" class = "hp_label">1</div>
             <div><progress id = "warrior_name_hp" max="550" value="550" class = "party_hp"></progress></div>
+            <div id = "k_mp" class = "mp_label"></div>
             <div><progress id = "warrior_name_mp" max="120" value="120" class = "party_mp"></progress></div>
 
             <div><img src = "dmage1.jpg" id = "d_mage_img" class = "clickable"></div> 
+            <div id = "b_hp" class = "hp_label">1</div>
             <div><progress id = "d_mage_name_hp" max="470" value="470" class = "party_hp"></progress></div>
+            <div id = "b_mp" class = "mp_label">1</div>
             <div><progress id = "d_mage_name_mp" max="260" value="260" class = "party_mp"></progress></div>
 
             <div><img src = "lmage.jpg" id = "l_mage_img" class = "clickable"></div>
+            <div id = "w_hp" class = "hp_label">1</div>
             <div><progress id = "l_mage_name_hp" max = "400" value = "400" class = "party_hp"></progress></div>
+            <div id = "w_mp" class = "mp_label">1</div>
             <div><progress id = "l_mage_name_mp" max = "280" value = "280" class = "party_mp"></progress></div>
+            <div id = "u_label"></div>
             <div><progress id = "ultima_charge" value = "100" max = "100"></progress></div>
         </div>  
+        <style>
+            .hp_label{
+                color: red;
+            }
+            .mp_label{
+                color: green
+            }
+            #u_label{
+                color: blue;
+            }
+        </style>
     
         <div id = "menu_template">
                 <div><button id = "btn_1">1</button></div> <!--link these to atk function-->
@@ -63,6 +82,7 @@
     <textarea id = ost_box disabled rows = "5">Now playing:</textarea> <!--updates in real time!-->
  
     <div id = "boss_name">Beast of Oblivion</div> <!--link this to JS-->
+    <div id = "boss_hp_label"></div>
         <progress id = "HP_bar" value = "15000" max="15000">
     </progress>
  <!--make color inside linked to hp percentage-->
@@ -73,6 +93,10 @@
             font-size: 2em;
             z-index: 2;
         }
+    #boss_hp_label{
+        color: red;
+        z-index: 3;
+    }
     </style>
     <style>
         #img_template{

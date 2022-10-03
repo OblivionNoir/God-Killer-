@@ -8,9 +8,8 @@
 }
 html{
     background-image: url("hellscape.png"); 
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
-
     overflow-y: hidden;
     
 }
@@ -60,12 +59,12 @@ html{
 }
 #battle_menu{
     
-    background-image: url('obsidian2.jpg');
+    background-color: rgba(0, 0, 0, 0.4);
     max-width: fit-content;
-    padding-bottom: 1vh;
-    max-height: 90vh;
-    border-radius: 2%;
-    margin-top: 2vh;
+    padding-bottom: -5vh;
+    max-height: 100vh;
+    border-radius: 10%;
+
     font-size: large;
 
 }
@@ -74,7 +73,14 @@ html{
     padding-top: 1vh;
     display: flex;
     flex-direction: row;
-    width: 10vw;
+    width: 8vw;
+    border-radius: 8%;
+}
+#battle_menu >div >img{
+    height: 15vh;
+
+ 
+   
     border-radius: 8%;
 }
 
@@ -144,11 +150,23 @@ html{
     z-index: 0;
     opacity: 0.8;
 }
+#boss_hp_label{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: -3vh;
+    position: relative;
+    opacity: 0.8;
+    font-size: 2em;
+    font-family: 'optimus princeps';
+
+}
 #boss_name{
     color: white;
     display: flex;
     justify-content: center;
     margin: auto;
+    margin-top: -5vh;
     width: 70vw;
     height: 0.1vh;
     position: relative;
