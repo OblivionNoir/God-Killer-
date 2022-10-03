@@ -406,16 +406,20 @@ function timeout(){
 
     //phase changes
     var phase2_tr;
-    var phase2_theme;
+    var phase2_theme = new Audio('phase2OST.mp3');
     var roar = new Audio("roar.wav");
     //test conditions for phases
+    phase2called = false;
+    phase3called = false;
     function TestPhase(){
         if (hp.value <=0){
             Victory()
-        }else if (hp.value <10000 && hp.value > 5001){
+        }else if (hp.value <10000 && hp.value > 5001 && phase2called == false){
             phase2()
-        }else if (hp.value <5001){
+            phase2called = true;
+        }else if (hp.value <5001 && phase3called == false){
             phase3()
+            phase3called = true;
         }else{
             console.log("still in phase 1")
         }
@@ -437,8 +441,7 @@ function timeout(){
             setTimeout(() =>{
                 p2.style.display = "none";
                 document.getElementById("boss_img").src = "AKUMU2.0.jpeg";
-                phase1_theme.pause();
-                const phase2_theme = new Audio('phase2OST.mp3') //use hunter phase 2
+                phase1_theme.pause(); //use hunter phase 2
                 phase2_theme.play();
                 phase2_theme.loop = true;
                 roar.play();
