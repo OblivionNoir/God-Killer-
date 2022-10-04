@@ -14,7 +14,48 @@
 
   var LastAttacks = [] //store last attacks used by player, some skills rely on it
 
+//try event listener that adds +1 to value every time counter() is called
+//make new thread for this
+  async function defend(turn_counter_value){//raises everyone's defense for 2 turns
+    spellActive = true;
+    document.addEventListener("click", function UpdateValue(){
+        //make this go up every time a spell or attack/defend is clicked
+        //or see if theres a way to check every time counter() is called
+        //interval probably not necessary
 
+
+    })
+
+    //on the right track here, but the value isn't updating
+            let fuckery = new Promise((resolve, reject) => {
+                if (spellActive == true){
+                    setInterval(() => {
+                if (turn_counter_value == turn_counter_value +2){
+                    resolve('kill spell')
+            
+                }else{
+                    reject('not yet')
+                }
+            
+                fuckery.then(()=>{
+                    spell_active = false;
+                    console.log("spell killed")
+                    //kill spell
+                }).catch(()=>{
+                    console.log("turn_counter_value: " + turn_counter_value)
+                    console.log("not ready yet")
+                })        
+        },1000); //checks every second
+    }else{
+        console.log("spell not active")
+    }
+    
+    return turn_counter_value;
+    
+  }
+)}
+
+//Boss will not attack dead party members, remember to code that in!!!
   function BossAttack(){
       
               //window.alert("MY TURN BITCH")
@@ -74,13 +115,14 @@
       PE.play()
       PE.loop = false;
       setTimeout(()=>{ //2 hits on random party members
-          let num_hits = 1;
+          let num_hits = 1; //this will need to be linked to how many 
+          //surviving party members there are, then pick randomly between them
           while (num_hits !=3){ //two hits
               let target = randNumber(0, 3);
               console.log(target)
               let dmg = randNumber(80, 101);
               switch(true){
-                  case(target == 0):
+                  case(target == 0): //reformat to use list of non-dead
                       var final_dmg_w = dmg/warrior_def
                       warrior_hp.value -= final_dmg_w; 
                       num_hits +=1
@@ -112,10 +154,9 @@
 
 
  
-  function Borderof_Life(){ //swaps a party member's hp with 1/120th of boss's current hp. 
+  function Borderof_Life(){ //Knocks targeted to 1 HP. 50% instakill chance in phase 3 
       //does not work on dead party members. 
-      //Heals boss by what you lost, or 2x in p2 and 3x in p3
-      //seems to be not targeting those it would kill?
+      //Heals boss by what you lost
       i_menu.src = "BOL.png" 
       i_menu.style.display = "initial"
       document.body.style.backgroundImage = "url('BOLbg.png')"
