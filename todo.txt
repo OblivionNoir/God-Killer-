@@ -6,6 +6,7 @@
 -Keep all the numbers as int. No decimals 
 -credits: vecteezy.com for the rain
 -Hover over attacks for descriptions
+-resize all backgrounds to 16:9 so they fit properly
 -testing
 
 
