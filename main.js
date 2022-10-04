@@ -32,6 +32,9 @@ p1_img.style.visibility = "hidden";
 var battle_menu = document.getElementById("battle_menu");
 battle_menu.style.visibility = "hidden";
 
+var progress_menu = document.getElementById("p_menu");
+progress_menu.style.visibility = "hidden";
+
 var hp = document.getElementById("HP_bar");
 hp.style.visibility = "hidden";
 var hp_label = document.getElementById("boss_hp_label");
@@ -124,6 +127,7 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     p1.style.display = "none"; 
     hp_label.style.visibility = "visible";
     battle_menu.style.visibility = "visible";
+    progress_menu.style.visibility = "visible";
     hp.style.visibility = "visible";
     bn.style.visibility = "visible";
 
@@ -279,6 +283,7 @@ function l_mage_menu(){ //2
                     break;
                     case 2:
                         console.log("Defend selected")
+                        defend(turn_counter_value)
 
                    
                     break;
@@ -286,7 +291,7 @@ function l_mage_menu(){ //2
                         console.log("switch - what the fuck")
                 };
             }else{
-                console.log("what the fuck")
+                console.log("shits fucked")
             };
         }//listener ends here
     )};//first for loop ends here
@@ -429,7 +434,7 @@ function timeout(){
         //stuff when you win
     }
 
-   function phase2(){ 
+  function phase2(){ 
             rain.src = "BloodRain2.0.mp4" //getting stuck on something
             rain.play()
             rain.loop = true;
@@ -465,7 +470,7 @@ function timeout(){
 var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the else 
 var phase3_tr;
 
-function phase3(){ //PHASE 3!
+ function phase3(){ //PHASE 3!
         if (hp.value <5001){
             p2.style.display = "initial"; //add timeout
             setTimeout(()=>{
@@ -506,3 +511,6 @@ function phase3(){ //PHASE 3!
 
 
 //warrior is 0, dmage is 1, lmage is 2 
+
+
+

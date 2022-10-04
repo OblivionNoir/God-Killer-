@@ -7,6 +7,9 @@ var b_mp = document.getElementById("b_mp").innerHTML = "MP: " + d_mage_name_mp.v
 var w_hp = document.getElementById("w_hp").innerHTML = "HP: " + l_mage_name_hp.value + "/400";
 var w_mp = document.getElementById("w_mp").innerHTML = "MP: " + l_mage_name_mp.value + "/280";
 
+var r_hp = document.getElementById("r_hp").innerHTML = "HP: " + r_mage_name_hp.value + "/380";
+var r_mp = document.getElementById("r_mp").innerHTML = "MP: " + r_mage_name_mp.value + "/360";
+
 var u_label = document.getElementById("u_label").innerHTML = ultima_charge.value + "/100";
 
 var boss_label = document.getElementById("boss_hp_label").innerHTML = hp.value + "/15000";

@@ -37,35 +37,66 @@
             <div><button id = "spells_b" class = "btn" >Spells</button></div>
             <div><button id = "def_b" class = "btn" >Defend</button></div> <!--triples defense for next turn-->
             
-            <div><img src = "knight.jpg" id = "knight_img" class = "clickable"></div>
-            <div id = "k_hp" class = "hp_label">1</div>
-            <div><progress id = "warrior_name_hp" max="550" value="550" class = "party_hp"></progress></div>
-            <div id = "k_mp" class = "mp_label"></div>
-            <div><progress id = "warrior_name_mp" max="120" value="120" class = "party_mp"></progress></div>
+            <div><img src = "knight2.png" id = "knight_img" class = "clickable"></div>
+           
+            <div><img src = "mage2.png" id = "d_mage_img" class = "clickable"></div> 
+       
+            <div><img src = "whitemage2.png" id = "l_mage_img" class = "clickable"></div>
 
-            <div><img src = "dmage1.jpg" id = "d_mage_img" class = "clickable"></div> 
-            <div id = "b_hp" class = "hp_label">1</div>
-            <div><progress id = "d_mage_name_hp" max="470" value="470" class = "party_hp"></progress></div>
-            <div id = "b_mp" class = "mp_label">1</div>
-            <div><progress id = "d_mage_name_mp" max="260" value="260" class = "party_mp"></progress></div>
 
-            <div><img src = "lmage.jpg" id = "l_mage_img" class = "clickable"></div>
-            <div id = "w_hp" class = "hp_label">1</div>
-            <div><progress id = "l_mage_name_hp" max = "400" value = "400" class = "party_hp"></progress></div>
-            <div id = "w_mp" class = "mp_label">1</div>
-            <div><progress id = "l_mage_name_mp" max = "280" value = "280" class = "party_mp"></progress></div>
+            <div><img src = "redmage2.png" id = "r_mage_img" class = "clickable"></div>
+    
             <div id = "u_label"></div>
             <div><progress id = "ultima_charge" value = "100" max = "100"></progress></div>
+
+
         </div>  
+
+        <div id = "p_menu">
+            <div id = "k_hp" class = "hp_label"></div>
+            <div><progress id = "warrior_name_hp" max="550" value="550" class = "party_hp" ></progress></div>
+            <div id = "k_mp" class = "mp_label"></div>
+            <div><progress id = "warrior_name_mp" max="120" value="120" class = "party_mp"></progress></div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div id = "b_hp" class = "hp_label"></div>
+            <div><progress id = "d_mage_name_hp" max="470" value="470" class = "party_hp"></progress></div>
+            <div id = "b_mp" class = "mp_label"></div>
+            <div><progress id = "d_mage_name_mp" max="260" value="260" class = "party_mp"></progress></div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div id = "w_hp" class = "hp_label"></div>
+            <div><progress id = "l_mage_name_hp" max = "400" value = "400" class = "party_hp"></progress></div>
+            <div id = "w_mp" class = "mp_label"></div>
+            <div><progress id = "l_mage_name_mp" max = "280" value = "280" class = "party_mp"></progress></div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div id = "r_hp" class = "hp_label"></div>
+            <div><progress id = "r_mage_name_hp" max = "380" value = "380" class = "party_hp"></progress></div>
+            <div id = "r_mp" class = "mp_label"></div>
+            <div><progress id = "r_mage_name_mp" max = "360" value = "360" class = "party_mp"></progress></div>
+        </div>
         <style>
             .hp_label{
-                color: red;
+                color: white;
             }
             .mp_label{
-                color: green
+                color: white;
             }
             #u_label{
-                color: blue;
+                color: white;
             }
         </style>
     
@@ -77,7 +108,6 @@
     
         <img src = "bleedingsunpart2.jpg" id = "img_template">
 
-    <div id = "credit">All images created with <a href = https://www.midjourney.com/home target = "_blank">Midjourney AI</a></div>
    
     <textarea id = ost_box disabled rows = "5">Now playing:</textarea> <!--updates in real time!-->
  
