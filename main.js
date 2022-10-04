@@ -4,7 +4,7 @@
 var phase_def = 1.2; //divide by this number 
 var phase_mdef = 1.1;
 
-
+//should turn all these into objects
 var warrior_def = 1.7; //edit these
 var warrior_mdef = 1.4;
 //evasion
@@ -262,7 +262,7 @@ function r_mage_menu(){ //3
     menu_sfx()
     addButtons()
           document.getElementById("btn_1").innerHTML = "Scarlet Subversion"
-          document.getElementById("btn_2").innerHTML = "Rebellion"
+          document.getElementById("btn_2").innerHTML = "Dance of Death"
           document.getElementById("btn_3").innerHTML = "Bloody Vengeance"
 
 }else{

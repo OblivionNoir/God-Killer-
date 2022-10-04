@@ -428,11 +428,17 @@
   
   };
 
-  function AngelsGrace(){
+  function AngelsGrace(){ //moderate healing spell
       document.getElementById("AngelsGrace");
       
 
   };
+
+  function Rebirth(){ //revive a fallen ally with 50% hp
+      
+
+  }
+
   function Supreme_Altar(){ //her ult, fully restores party to default state
       //if anyone is dead, change their dead status to false
       document.body.style.backgroundImage = "url('altarbg.png')"
@@ -485,11 +491,17 @@
     //lower hp = more damage. 
     //Base damage at 1hp is 4000 and it subtracts 10 for each hp after that 
   }
-
-  function Rebellion(){
-    //Adds a 2x multiplier to crit chance and evasion for 3 turns
+  function Dance_of_Death(){
+    //Lower self defenses and ev to 0 for 3 turns, but gain very high crit chance and a 1.5x damage multiplier
+    //Smaller multiplier on ult, something like 1.2x
   }
 
   function Bloody_Vengeance(){
-    //ignores def for a set amount of damage. Physical
+    //ignores def, works like a much stronger basic attack with a slightly higher
+    //crit rate. Physical
   }
+
+
+
+
+
