@@ -58,19 +58,21 @@
 //Boss will not attack dead party members, remember to code that in!!!
   function BossAttack(){
       
-              //window.alert("MY TURN BITCH")
-              Borderof_Life()
-              /*switch(true){
-                  case(phase2_tr):
-                      boss_phase2()
-                  break;
-                  case(phase3_tr):
-                      boss_phase3()
-                  break;
-                  default:
-                      boss_phase1()
-                  break;
-              };*/
+              setTimeout(()=>{
+                Borderof_Life()
+                /*switch(true){
+                    case(phase2_tr):
+                        boss_phase2()
+                    break;
+                    case(phase3_tr):
+                        boss_phase3()
+                    break;
+                    default:
+                        boss_phase1()
+                    break;
+                };*/
+              }, 1000);
+
      
       };
 
@@ -379,7 +381,7 @@
   };
   
   
-  function Entrapment(){ //this will wait till turn system is in place
+  function Entrapment(){ //Makes boss immobile for 2 turns
       var Entrapment = document.getElementById("Entrapment");
       counter() 
       
@@ -475,3 +477,19 @@
       
 
   };
+
+  //red mage attacks
+
+  function Scarlet_Subversion(){
+    //ult
+    //lower hp = more damage. 
+    //Base damage at 1hp is 4000 and it subtracts 10 for each hp after that 
+  }
+
+  function Rebellion(){
+    //Adds a 2x multiplier to crit chance and evasion for 3 turns
+  }
+
+  function Bloody_Vengeance(){
+    //ignores def for a set amount of damage. Physical
+  }
