@@ -147,7 +147,7 @@ var players_array = [];
 var players = document.getElementsByClassName('clickable');
 players_array.push(players[0], players[1], players[2], players[3]);
 var active_added = false;
-for (let i = 0; i <= players_array.length; i++){ //using <= makes it undefined, no fucking clue why
+for (let i = 0; i != players_array.length; i++){ //using <= makes it undefined
     players_array[i].addEventListener('click', function selected(){
         console.log(players_array)
         console.log("listeners added to players")
