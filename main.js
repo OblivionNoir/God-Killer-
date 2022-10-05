@@ -50,12 +50,12 @@ bn.style.visibility = "hidden";
 var p1 = document.getElementById("txt_"); //initial text box
 //p1.style.display = "none";
 var p2 = document.getElementById("txt_2"); //secondary text box
-p2.style.display = "none";
+p2.style.visibility = "hidden";
 
 var b_menu = document.getElementById("menu_template")
-b_menu.style.display = "none"
+b_menu.style.visibility = "hidden"
 var i_menu = document.getElementById("img_template") //for spells
-i_menu.style.display = "none"
+i_menu.style.visibility = "hidden"
 
 //get hp values 
 var warrior_hp = document.getElementById("warrior_name_hp")
@@ -72,7 +72,7 @@ var combat_buttons = document.getElementsByClassName('btn')
 
 var rain = document.getElementById("rainbg")
 rain.loop = true;
-
+document.getElementById("i_overlay").style.opacity = "0.22"
 
 
 //global sound effects 
@@ -121,6 +121,7 @@ document.addEventListener('keyup', function startGame(event) {
         phase1_theme = new Audio('phase3ost.mp3'); 
         phase1_theme.play();
         phase1_theme.loop =true;
+        phase1_theme.volume = 0.8;//because the phase 3 theme is naturally a little quieter
         del_box()
     }, 5000);
 
@@ -131,7 +132,7 @@ document.addEventListener('keyup', function startGame(event) {
 
 function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     console.log("Intro box removed")
-    p1.style.display = "none"; 
+    p1.style.visibility= "hidden"; 
     hp_label.style.visibility = "visible";
     battle_menu.style.visibility = "visible";
     progress_menu.style.visibility = "visible";
@@ -284,7 +285,7 @@ function r_mage_menu(){ //3
             console.log("listeners added to combat buttons")
             if (this.classList.contains('active2')){ 
                 for (let i = 0; i < buttons_array.length; i++){
-                    b_menu.style.display = "none";
+                    b_menu.style.visibility = "visible";
                     buttons_array[i].classList.remove('active2')
                     active2_added = false;
                 }//second for loop ends here    
@@ -300,7 +301,7 @@ function r_mage_menu(){ //3
                     break;
                     case 1:
                         console.log("Spells selected")
-                        b_menu.style.display = "initial";
+                        b_menu.style.visibility = "visible";
                         spellsMenu()
                    
                     break;
@@ -311,20 +312,20 @@ function r_mage_menu(){ //3
                    
                     break;
                     default:
-                        console.log("switch - what the fuck")
+                        console.log("buttons switch - shits fucked")
                 };
             }else{
-                console.log("shits fucked")
+                console.log("wtf")
             };
         }//listener ends here
     )};//first for loop ends here
     
 
     function ultimaNotCharged(){
-        p1.style.display = "initial";
+        p1.style.visibility = "visible";
         p1.value = "Ultima not charged!"
         setTimeout(()=>{
-            p1.style.display = "none"
+            p1.style.visibility = "visible"
         },2000)
     }
 
@@ -394,7 +395,7 @@ function r_mage_menu(){ //3
     //only want this to check whenever the boss attacks
 function timeout(){
     setTimeout(()=>{ 
-        p1.style.display = "none"
+        p1.style.visibility = "hidden"
     }, 2000);
 }
 
@@ -404,21 +405,21 @@ function timeout(){
                 case(warrior_hp.value <=0):  //first revert to 0 if negative
                     warrior_hp.value ==0;
                     warrior_dead = true; //add message 
-                    p1.style.display = "initial";
+                    p1.style.visibility= "visible";
                     p1.value = "Warrior has fallen!"
                     timeout()
                     break; //do stuff so they can't be attacked or selected while dead
                 case(black_mage_hp.value <=0):
                     black_mage_hp.value ==0;
                     black_mage_dead = true;
-                    p1.style.display = "initial";
+                    p1.style.visibility = "visible";
                     p1.value = "Dark mage has fallen!"
                     timeout()
                     break;
                 case(white_mage_hp.value <=0):
                     white_mage_hp.value ==0;
                     white_mage_dead = true;
-                    p1.style.display = "initial";
+                    p1.style.visibility = "visible";
                     p1.value = "Light mage has fallen!"
                     timeout()
                     break;
@@ -473,15 +474,25 @@ function TestPhase(){
 var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the else 
 var phase3_tr;
 
- function phase3(){ //PHASE 3!
+ function phase3(){ //PHASE 3
+            //pause music
+            //remember to disable the buttons during this time
+            //make a short little cutscene with the text boxes, wait a sec then start phase
+            //refill hp bar with 10k hp(new max will be 10k)
             phase_def = 1.3; //update stats for phase 3
             phase_mdef = 1.5;
             roar.play();
+            let phase3theme = new Audio('epicaf_Em.mp3')
+            phase1_theme.pause()
+            phase3theme.play()
+            phase3theme.loop = true;
             p1_img.style.boxShadow= "1.5vh 1.5vh 1.5h 1.5vh  rgb(130, 3, 3)"
             //roar.loop = false;
             const growl = new Audio('growl.mp3')
-            document.body.style.backgroundImage = "url('hellsfury.jpg')"    
-            
+            document.body.style.backgroundImage = "url('trueformbg.png')"   
+            p1_img.src = "trueform.png"
+            bn.innerHTML = "True Form of the Abomination" 
+            document.getElementById("i_overlay").style.opacity = "0.3"//make it bloodier
             //sound effect intervals
             setInterval(()=>{
                 roar.play();
@@ -489,6 +500,7 @@ var phase3_tr;
             setInterval(()=>{
                 growl.play();
             },40000) 
+
 
 }
 

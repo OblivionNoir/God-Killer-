@@ -18,18 +18,18 @@
 <source src = "video(1).mp4" type="video/mp4" > 
     </video>
 
-    <div id = "parent">
+    <!--<div id = "parent">-->
         
-        <img src ="purveyor.png" id = "boss_img" class = "child">
+        <img src ="purveyor.png" id = "boss_img" class = "child" class = "hide">
           
 
 
-    <div id = "box" class = "child">
+    <div id = "box" class = "child" class = "hide">
         <textarea id = "txt_" disabled rows="4" cols="32" >Face the great beast of wrath! Press enter to begin...</textarea> <!--remember that this becomes invisible!-->
     </div>
 
 
-    <div id = "box2" class = "child2">
+    <div id = "box2" class = "child2" class = "hide">
         <textarea id = "txt_2" disabled rows="4" cols="32" >
 
         </textarea> 
@@ -38,12 +38,12 @@
 
 
     <!--treat this similarly to the og textarea, css-wise-->
-        <div id = "battle_menu">
+        <div id = "battle_menu" class = "hide">
             <div><button id = "atk_b" class = "btn" >Attack</button></div>
             <div><button id = "spells_b" class = "btn" >Spells</button></div>
             <div><button id = "def_b" class = "btn" >Defend</button></div> <!--triples defense for next turn-->
             
-            <div><img src = "knight2.png" id = "knight_img" class = "clickable"></div>
+            <div><img src = "newknight.jpeg" id = "knight_img" class = "clickable"></div>
            
             <div><img src = "mage3.jpeg" id = "d_mage_img" class = "clickable"></div> 
        
@@ -58,7 +58,7 @@
 
         </div>  
 <!--try and fix this pile of shit-->
-        <div id = "p_menu">
+        <div id = "p_menu" class = "hide">
             <div id = "k_hp" class = "hp_label"></div>
             <div><progress id = "warrior_name_hp" max="550" value="550" class = "party_hp" ></progress></div>
             <div id = "k_mp" class = "mp_label"></div>
@@ -106,7 +106,7 @@
             }
         </style>
     
-        <div id = "menu_template">
+        <div id = "menu_template" class = "hide">
                 <div><button id = "btn_1">1</button></div> <!--link these to atk function-->
                 <div><button id = "btn_2">2</button></div>
                 <div><button id = "btn_3">3</button></div>
@@ -115,8 +115,9 @@
         <img src = "bleedingsunpart2.jpg" id = "img_template">
 
 
-    <div id = "boss_name">Purveyor of Nascency</div> 
-    <div id = "boss_hp_label"></div>
+    <div id = "boss_name" class = "hide">Novas Mors, The Purveyor of Nascency</div> 
+    <!--name comes from latin for "new death"-->
+    <div id = "boss_hp_label" class = "hide"></div>
         <progress id = "HP_bar" value = "15000" max="15000">
     </progress>
  <!--make color inside linked to hp percentage-->
