@@ -58,8 +58,8 @@
 //Boss will not attack dead party members, remember to code that in!!!
   function BossAttack(){
       
-              setTimeout(()=>{
-                Borderof_Life()
+              //setTimeout(()=>{
+                //Borderof_Life()
                 /*switch(true){
                     case(phase2_tr):
                         boss_phase2()
@@ -71,7 +71,7 @@
                         boss_phase1()
                     break;
                 };*/
-              }, 1000);
+              //}, 1000);
 
      
       };
@@ -331,7 +331,7 @@
           DC.play()
           DC.loop = false;
           setTimeout(()=>{
-              document.body.style.backgroundImage = "url('hellscape.png')"
+              document.body.style.backgroundImage = "url('purveryorbg.png')"
                                               //this will change based on phase
               DC.pause()
                   hp.value -= 1500/phase_mdef;
@@ -475,7 +475,7 @@
           i_menu.style.display = "initial"
         
           setTimeout(()=>{
-              document.body.style.backgroundImage = "url('hellscape.png')"
+              document.body.style.backgroundImage = "url('purveryorbg.png')"
               document.body.style.backgroundSize = "contain";//this will change based on phase
               i_menu.style.display = "none"
               ending3()

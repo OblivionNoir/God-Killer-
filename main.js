@@ -1,11 +1,10 @@
 
 //initial stats
- //global for now, tighten scope if it becomes problematic
 var phase_def = 1.2; //divide by this number 
 var phase_mdef = 1.1;
 
 //should turn all these into objects
-var warrior_def = 1.7; //edit these
+var warrior_def = 1.7; 
 var warrior_mdef = 1.4;
 //evasion
 var warrior_ev = 0.05;//5%
@@ -69,7 +68,7 @@ var white_mage_mp = document.getElementById("l_mage_name_mp")
 var red_mage_mp = document.getElementById("r_mage_name_mp")
 
 var combat_buttons = document.getElementsByClassName('btn')
-var ostbox = document.getElementById("ost_box")
+
 var rain = document.getElementById("rainbg")
 rain.loop = true;
 
@@ -118,10 +117,9 @@ document.addEventListener('keyup', function startGame(event) {
     }
     setTimeout(() =>{
         //window.alert("SHOWTIME!");
-        phase1_theme = new Audio('phase1OST.mp3'); //user hunter phase 1
+        phase1_theme = new Audio('phase3ost.mp3'); 
         phase1_theme.play();
         phase1_theme.loop =true;
-        ostbox.value = "Now playing: \n Bloodborne OST: The Hunter - Phase 1";
         del_box()
     }, 5000);
 
@@ -432,8 +430,6 @@ function timeout(){
 
 
     //phase changes
-    var phase2_tr;
-    var phase2_theme = new Audio('phase2OST.mp3');
     var roar = new Audio("roar.wav");
     //test conditions for phases
     phase2called = false;
@@ -457,33 +453,16 @@ function timeout(){
     }
 
   function phase2(){ 
-            rain.src = "BloodRain2.0.mp4" //getting stuck on something
-            rain.play()
-            rain.loop = true;
-            p2.style.display = "initial"; 
-            p2.value = "Oh no...";
-            phase2_tr = true; //trigger to reference phase 2 later on
+            console.log("phase 2 triggered")
             phase_def = 1.3; //update stats for phase 2
             phase_mdef = 1.2;  
-            setTimeout(() =>{
-                p2.style.display = "none";
-                document.getElementById("boss_img").src = "AKUMU2.0.jpeg";
-                phase1_theme.pause(); //use hunter phase 2
-                phase2_theme.play();
-                phase2_theme.loop = true;
-                roar.play();
-                roar.loop = false;
-                document.getElementById("boss_name").innerHTML = "Akumu, Origin of the Nightmare";
-        
-                ostbox.value = "Now playing: \n Bloodborne OST: The Hunter - Phase 2";
-            }, 4000);
+            roar.play();
+            roar.loop = false;
             setTimeout(()=>{
                 const xtraThunder = new Audio("xtrathunder.mp3")
                 xtraThunder.play();
                 xtraThunder.loop = true;
-            }, 5000);
-
-    
+            }, 2000);
         }
      
 
@@ -493,43 +472,14 @@ var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the els
 var phase3_tr;
 
  function phase3(){ //PHASE 3!
-        if (hp.value <5001){
-            p2.style.display = "initial"; //add timeout
-            setTimeout(()=>{
-                phase2_theme.pause();//fix this
-                p2.value = "...";
-            },5000)
-            setTimeout(() =>{
-                p2.value = "...\n...";
-            },5000)
-            phase3_tr = true; //trigger to reference phase 3 later on
             phase_def = 1.3; //update stats for phase 3
             phase_mdef = 1.5;
-     
-            document.getElementById("boss_name").innerHTML = "Purveyor of Nascency";
-            setTimeout(() =>{
-                document.getElementById("rainbg").src = "redrain3.mp4"
-                p2.style.display = "none";
-                document.getElementById("boss_img").src = "phase3.jpg";
-                phase3_theme.play();
-                phase3_theme.loop = true;
-                roar.play();
-                roar.loop = false;
-                document.body.style.backgroundImage = "url('firegate.jpg')"
-                document.body.style.backgroundSize = "contain";
-                ostbox.value = "Now playing: \n Dark Souls 3 OST: Yhorm the Giant";
-            }, 4000);
+            //make roar trigger every 20 seconds
             roar.play();
             roar.loop = false;
-         
-        }else if (hp.value <=0){
-            phase3_theme.pause()
-            Victory()
-           //display victory window
-        }
+            document.body.style.backgroundImage = "url('hellsfury.jpg')"      
 }
- //these will work by retrieving the character's list index and matching it 
- //listener to check if any of them are clicked 
+
 
 
 //warrior is 0, dmage is 1, lmage is 2 
