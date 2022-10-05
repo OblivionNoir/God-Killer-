@@ -32,6 +32,7 @@ var red_mage_dead = false;
 //hide elements that get used later
 var p1_img = document.getElementById("boss_img");
 p1_img.style.visibility = "hidden";
+p1_img.style.border.color = "rgb(130, 3, 3)"
 
 var battle_menu = document.getElementById("battle_menu");
 battle_menu.style.visibility = "hidden";
@@ -434,15 +435,16 @@ function timeout(){
     //test conditions for phases
     phase2called = false;
     phase3called = false;
-    function TestPhase(){
+function TestPhase(){
         if (hp.value <=0){
             Victory()
         }else if (hp.value <10000 && hp.value > 5001 && phase2called == false){
-            phase2()
             phase2called = true;
+            phase2()
+            
         }else if (hp.value <5001 && phase3called == false){
-            phase3()
             phase3called = true;
+            phase3()
         }else{
             console.log("still in phase 1")
         }
@@ -474,10 +476,20 @@ var phase3_tr;
  function phase3(){ //PHASE 3!
             phase_def = 1.3; //update stats for phase 3
             phase_mdef = 1.5;
-            //make roar trigger every 20 seconds
             roar.play();
-            roar.loop = false;
-            document.body.style.backgroundImage = "url('hellsfury.jpg')"      
+            p1_img.style.boxShadow= "1.5vh 1.5vh 1.5h 1.5vh  rgb(130, 3, 3)"
+            //roar.loop = false;
+            const growl = new Audio('growl.mp3')
+            document.body.style.backgroundImage = "url('hellsfury.jpg')"    
+            
+            //sound effect intervals
+            setInterval(()=>{
+                roar.play();
+            },30000)  
+            setInterval(()=>{
+                growl.play();
+            },40000) 
+
 }
 
 

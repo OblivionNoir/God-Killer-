@@ -2,7 +2,7 @@
   var turn_counter = [];
   var turn_counter_value = 0;
   function counter(){
-      UC = document.getElementById("ultima_charge");
+      let UC = document.getElementById("ultima_charge");
       UC.value +=5;
       turn_counter_value +=1;
       black_mage_mp += 5;
