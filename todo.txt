@@ -2,11 +2,12 @@
 -Frame rate counter
 -Glow on ultima bar when full
 -Gradual transitions as opposed to images just popping in
--Stylize battle menu
 -Keep all the numbers as int. No decimals 
 -credits: vecteezy.com for the rain
 -Hover over attacks for descriptions
 -resize all backgrounds to 16:9 so they fit properly
+-New OST for phase 3, add short cutscene and refill hp bar (phase 3 will have 10k hp, the first two combined have 15k) 
+Use a slow set interval to create the refill animation
 -testing
 
 
