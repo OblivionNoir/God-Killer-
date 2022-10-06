@@ -8,6 +8,7 @@
 -resize all backgrounds to 16:9 so they fit properly
 -New OST for phase 3, add short cutscene and refill hp bar (phase 3 will have 10k hp, the first two combined have 15k) 
 Use a slow set interval to create the refill animation
+-replace all "visibility" with "display"
 -testing
 
 
