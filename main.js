@@ -72,7 +72,7 @@ var combat_buttons = document.getElementsByClassName('btn')
 
 var rain = document.getElementById("rainbg")
 rain.loop = true;
-document.getElementById("i_overlay").style.opacity = "0.22"
+document.getElementById("i_overlay").style.opacity = "0.20"
 
 
 //global sound effects 
@@ -118,10 +118,10 @@ document.addEventListener('keyup', function startGame(event) {
     }
     setTimeout(() =>{
         //window.alert("SHOWTIME!");
-        phase1_theme = new Audio('phase3ost.mp3'); 
+        phase1_theme = new Audio('epicaf_Em.mp3'); 
         phase1_theme.play();
         phase1_theme.loop =true;
-        phase1_theme.volume = 0.8;//because the phase 3 theme is naturally a little quieter
+        phase1_theme.volume = 0.7;//because the phase 3 theme is naturally a little quieter
         del_box()
     }, 5000);
 
@@ -188,9 +188,7 @@ for (let i = 0; i != players_array.length; i++){ //using <= makes it undefined
     }//listener ends here
 )};//first for loop ends here
 
- //use similar algo for battle menus, using stored index values. 
-var lastClick = 0; //fixes bounce glitch
-var delay = 20;
+
 function menu_sfx(){
     const menusfx_ = new Audio("menuclick.wav");
     menusfx_.play()
@@ -273,6 +271,7 @@ function r_mage_menu(){ //3
 
 };
 
+var add2called = false
 
     //here we need to loop through the battle options, much like the character selection
     var buttons_array = [];
@@ -307,7 +306,16 @@ function r_mage_menu(){ //3
                     break;
                     case 2:
                         console.log("Defend selected")
-                        defend(turn_counter_value)
+            
+                        if (add2called == false){
+                            AddTwo() //only call one time
+                            add2called = true;
+                            defend()
+                        }else{
+                            add2called = false;
+                            defend()
+                        }
+                   
 
                    
                     break;
@@ -481,8 +489,10 @@ var phase3_tr;
             //refill hp bar with 10k hp(new max will be 10k)
             phase_def = 1.3; //update stats for phase 3
             phase_mdef = 1.5;
+            let hellnaw = new Audio("hellnaw.mp3")
+            hellnaw.play();
             roar.play();
-            let phase3theme = new Audio('epicaf_Em.mp3')
+            let phase3theme = new Audio('yhormdrop.wav')
             phase1_theme.pause()
             phase3theme.play()
             phase3theme.loop = true;
@@ -492,7 +502,7 @@ var phase3_tr;
             document.body.style.backgroundImage = "url('trueformbg.png')"   
             p1_img.src = "trueform.png"
             bn.innerHTML = "True Form of the Abomination" 
-            document.getElementById("i_overlay").style.opacity = "0.3"//make it bloodier
+            document.getElementById("i_overlay").style.opacity = "0.25"//make it bloodier
             //sound effect intervals
             setInterval(()=>{
                 roar.play();
