@@ -1,5 +1,5 @@
 -Switch to active time turn based system
--Scrolling text like in games
+-Scrolling text like in games. This will require a pause button.
 -Frame rate counter
 -basic attack can be spammed in your window to attack, but will never do as much dmg as a spell. 
 -Glow on ultima bar when full
