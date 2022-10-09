@@ -1,6 +1,7 @@
 -Switch to active time turn based system
 -Scrolling text like in games
 -Frame rate counter
+-basic attack can be spammed in your window to attack, but will never do as much dmg as a spell. 
 -Glow on ultima bar when full
 -Gradual transitions as opposed to images just popping in
 -Keep all the numbers as int. No decimals 
