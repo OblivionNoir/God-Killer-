@@ -24,7 +24,7 @@
 
 
 
-  function defend(){//check for equality
+  function defend(){//Can not be used if already in effect
     counter()
     console.log(turn_counter)
 
@@ -270,7 +270,7 @@
   }
 
   function Deathblow(){
-    //A much stronger basic attack with a 30% chance to lower defense by 10% for 3 turns
+    //Like a normal attack but a guaranteed crit. 
 
   }
   function ending3(){ //call after every player attack
@@ -291,6 +291,7 @@
               hp.value -= final_dmg;
               p1.style.visibility = "visible";
               p1.value = "Critical hit!"
+              console.log(final_dmg)
               setTimeout(()=>{
                   p1.style.visibility = "hidden";
                   ending3()
@@ -303,6 +304,7 @@
               let rand_dmg = randNumber(50,70) ; //random value between 50 and 70
               let final_dmg = rand_dmg/phase_def;
               hp.value -= final_dmg;
+              console.log(final_dmg)
               setTimeout(()=>{
                   p1.style.visibility = "hidden";
                   ending3()

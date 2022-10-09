@@ -293,7 +293,7 @@ var add2called = false
                             defend()
                         }else{
                             add2called = false;
-                            defend()
+                            defend() //cannot be used if already in effect!!! Lasts 2 turns
                         }
                    
 
@@ -445,8 +445,8 @@ function TestPhase(){
 
   function phase2(){ 
             console.log("phase 2 triggered")
-            phase_def = 1.3; //update stats for phase 2
-            phase_mdef = 1.2;  
+            phase_def = 1.4; //update stats for phase 2
+            phase_mdef = 1.3;  
             roar.play();
             roar.loop = false;
             setTimeout(()=>{
@@ -463,12 +463,8 @@ var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the els
 var phase3_tr;
 
  function phase3(){ //PHASE 3
-            //pause music
-            //remember to disable the buttons during this time
-            //make a short little cutscene with the text boxes, wait a sec then start phase
-            //refill hp bar with 10k hp(new max will be 10k)
-            phase_def = 1.3; //update stats for phase 3
-            phase_mdef = 1.5;
+            phase_def = 1.5; //update stats for phase 3
+            phase_mdef = 1.6;
             let hellnaw = new Audio("hellnaw.mp3")
             hellnaw.play();
             roar.play();
@@ -489,6 +485,7 @@ var phase3_tr;
             },30000)  
             setInterval(()=>{
                 growl.play();
+                growl.volume = 0.8;
             },40000) 
 
 
