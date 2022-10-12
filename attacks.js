@@ -1,9 +1,9 @@
-  //going to need to keep track of turns in a list for some attacks to work 
+//good idea to keep track of these for now
  turn_counter_value = 0;
  turn_counter = []
   function counter(){
       let UC = document.getElementById("ultima_charge");
-      UC.value +=5;
+      UC.value +=1;
       turn_counter_value +=1;
       black_mage_mp += 5;
       white_mage_mp += 5;

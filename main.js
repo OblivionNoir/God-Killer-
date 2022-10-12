@@ -126,9 +126,12 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
 
 var players_array = [];
 var players = document.getElementsByClassName('clickable');
-players_array.push(players[0], players[1], players[2], players[3]);
+for (let i = 0; i < players.length; i++) {
+    players_array.push(players[i]);
+}
+
 var active_added = false;
-for (let i = 0; i != players_array.length; i++){ //using <= makes it undefined
+for (let i = 0; i < players_array.length; i++){ //using <= makes it undefined
     players_array[i].addEventListener('click', function selected(){
         console.log(players_array)
         console.log("listeners added to players")
@@ -262,9 +265,13 @@ function r_mage_menu(){ //3
 
 var defend_active =false;
     //here we need to loop through the battle options, much like the character selection
-    var buttons_array = [];
-    var button = document.getElementsByClassName('btn');
-    buttons_array.push(button[0], button[1], button[2]);
+var buttons_array = [];
+var button = document.getElementsByClassName('btn');
+    //change this to a for loop
+    for(let i = 0; i < button.length; i++){
+        buttons_array.push(button[i])
+        console.log(buttons_array)
+    }
     var active2_added = false;
     
     for (let i = 0; i < buttons_array.length; i++){
@@ -326,14 +333,15 @@ var defend_active =false;
     }
 
     var ultima = document.getElementById('ultima_charge');
-    //this can probably be optimized with a for loop
-    var spells0 = document.getElementById("btn_1") //0
-    var spells1 = document.getElementById("btn_2") //1
-    var spells2 = document.getElementById("btn_3")  //2
-    var spells3 = document.getElementById("btn_4") //3
-    var spells4 = document.getElementById("btn_5") //4
+
     var spells_array = []
-    spells_array.push(spells0, spells1, spells2, spells3, spells4)
+    var makespells = document.getElementsByClassName('spellbutton')
+    //make array to check through
+    for (let i = 0; i < makespells.length; i++){
+        spells_array.push(makespells[i])
+        console.log(spells_array)
+    }
+    //spells_array.push(spells0, spells1, spells2, spells3, spells4)
 
     //this one doens't need on off state, it's just one click
     //can't use class or I'd get 0-8 instead of 0-2
@@ -351,23 +359,23 @@ var defend_active =false;
                             if (ultima.value !== 100){
                                 ultimaNotCharged()
                                 
-                            }else if (spells0.innerHTML == "Thousand Men"){
+                            }else if (spells_array[0].innerHTML == "Thousand Men"){
                                 //goes 0, 1, 2, 3, 4, top down
                                 Thousand_Men()
-                            }else if (spells0.innerHTML == "Radiant Supernova"){
+                            }else if (spells_array[0].innerHTML == "Radiant Supernova"){
                                 Radiant_Supernova()
-                            }else if (spells0.innerHTML == "Supreme Altar"){
+                            }else if (spells_array[0].innerHTML == "Supreme Altar"){
                                 Supreme_Altar()
                             }//There will be 4 else if for each case. Remember red mage
                                 
                         break;
                         case 1: //so this is the second spell button...
                             console.log("spell button 1 selected")
-                            if (spells1.innerHTML == "Shadow Self"){
+                            if (spells_array[1].innerHTML == "Shadow Self"){
                                 ShadowSelf()
-                            }else if (spells1.innerHTML == "Mirage Blade"){
+                            }else if (spells_array[1].innerHTML == "Mirage Blade"){
                                 Mirage_Blade()
-                            }else if (spells1.innerHTML == "Pierce Evil"){
+                            }else if (spells_array[1].innerHTML == "Pierce Evil"){
                                 Pierce_Evil()
                             }
                        
