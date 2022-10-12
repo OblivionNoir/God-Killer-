@@ -135,27 +135,111 @@ body{
     opacity: 0.7;
 }
 
-#menu_template>div{
-    padding: 1vh;
+#menu_template>button{
+    padding: 0 1rem 3rem 1rem;
     border-radius: 8%;
     z-index: 4;
     max-height: 1vh;
 
     
 }
-#menu_template>div>button{
-    width: 4vw;
-    height: 4vh;
+/*add rainbow effect to the ultima*/
+#menu_template>button{
+  
     background-color: rgba(195, 79, 224, 0.8);
     font-weight: 900;
     border: 1px solid black;
     
-
 }
 
-#menu_template>div>button:hover{
- 
+
+#menu_template>button:hover:not(:first-child){
     box-shadow: #ff2400 0px 0px 0.5vh;
+}
+#menu_template>button:first-child{
+    background-color: grey;
+}
+
+#rainbowglow{ /* add this to first button child when ultima is ready*/
+    animation: rainbow-bg 2.5s linear;
+    animation-iteration-count: infinite;
+}
+@keyframes rainbow-bg{
+    100%,0%{
+        background-color: rgb(255,0,0);
+    }
+    8%{
+        background-color: rgb(255,127,0);
+    }
+    16%{
+        background-color: rgb(255,255,0);
+    }
+    25%{
+        background-color: rgb(127,255,0);
+    }
+    33%{
+        background-color: rgb(0,255,0);
+    }
+    41%{
+        background-color: rgb(0,255,127);
+    }
+    50%{
+        background-color: rgb(0,255,255);
+    }
+    58%{
+        background-color: rgb(0,127,255);
+    }
+    66%{
+        background-color: rgb(0,0,255);
+    }
+    75%{
+        background-color: rgb(127,0,255);
+    }
+    83%{
+        background-color: rgb(255,0,255);
+    }
+    91%{
+        background-color: rgb(255,0,127);
+    }
+}
+
+@keyframes rainbow{
+    100%,0%{
+        color: rgb(255,0,0);
+    }
+    8%{
+        color: rgb(255,127,0);
+    }
+    16%{
+        color: rgb(255,255,0);
+    }
+    25%{
+        color: rgb(127,255,0);
+    }
+    33%{
+        color: rgb(0,255,0);
+    }
+    41%{
+        color: rgb(0,255,127);
+    }
+    50%{
+        color: rgb(0,255,255);
+    }
+    58%{
+        color: rgb(0,127,255);
+    }
+    66%{
+        color: rgb(0,0,255);
+    }
+    75%{
+        color: rgb(127,0,255);
+    }
+    83%{
+        color: rgb(255,0,255);
+    }
+    91%{
+        color: rgb(255,0,127);
+    }
 }
 
 #warrior_name, #d_mage_name, #l_mage_name{
@@ -313,8 +397,3 @@ body{
     border-color: red;
 }
 
-/*glow*/
-.glow{
-border: linear-gradient(2px, solid, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
-
-}

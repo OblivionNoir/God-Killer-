@@ -113,6 +113,7 @@ document.addEventListener('click', function startGame(event) {
 
 function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     console.log("Intro box removed")
+    //make these a class and for loop through them all 
     hp_label.style.visibility = "visible";
     battle_menu.style.visibility = "visible";
     progress_menu.style.visibility = "visible";
@@ -131,7 +132,7 @@ for (let i = 0; i < players.length; i++) {
 }
 
 var active_added = false;
-for (let i = 0; i < players_array.length; i++){ //using <= makes it undefined
+for (let i = 0; i < players_array.length; i++){ 
     players_array[i].addEventListener('click', function selected(){
         console.log(players_array)
         console.log("listeners added to players")
