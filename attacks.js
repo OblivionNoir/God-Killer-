@@ -12,9 +12,12 @@
       return turn_counter
   }
 
-  //1 turn = 25 seconds (average of boss attack time)
+  //1 turn = 20 seconds (average of boss attack time)
   function defend(){
+
+    //can only be called once every two turns,
     counter()
+    //double everyone's defense(m and p) for 2 turns
     defend_timer()
 
 
@@ -201,7 +204,9 @@ function Boss_Attacks(){
 
       counter()
   };
-  function BleedingSun2(){ //massive damage to all, defend is borderline required
+  function BleedingSun2(){ //Defend is required to survive.
+    //900 base m damage, r mage will just barely survive with defend. 
+    //no defend = everyone dies
 
       const NANI = new Audio("omaewa.mp3");
       NANI.play()
@@ -236,7 +241,6 @@ function Boss_Attacks(){
   function ending3(){ //call after every player attack
       counter() 
       TestPhase()
-      BossAttack()
   }
   //dark mage attacks
   function basic(){

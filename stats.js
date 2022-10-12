@@ -26,3 +26,6 @@ var warrior_dead = false;
 var black_mage_dead = false;
 var white_mage_dead = false;
 var red_mage_dead = false;
+
+var defenses = [warrior_def, warrior_mdef, black_mage_def, black_mage_mdef, 
+    white_mage_def, white_mage_mdef, red_mage_def, red_mage_mdef];

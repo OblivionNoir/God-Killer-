@@ -15,7 +15,7 @@ function boss_phase1(){
 
 var p_2_interval;
 function boss_phase2(){
-    clearInterval(p1_interval)//disable the first intrval
+    clearInterval(p1_interval)//disable the first interval
     p_2_interval = setInterval(()=>{
 
 
@@ -32,9 +32,42 @@ function boss_phase3(){
 
     }, 15000)
   };
+//not sure why this is returning a huge list 
+function revert_defense(){
+    for (let i = 0; i < defenses.length; i++){{
+        defenses[i] /=2; 
+        console.log(defenses[i])
+ };
 
+};
+};
+  //2 turn timer
 function defend_timer(){
-    setTimeout(()=>{
-        //expires when the timeout finished
-    }, 50000) //2 turns, 50 seconds
-  }
+       defend_active = true; //then back to false when the timer expires
+       //double everyone's defenses
+       console.log("defend timer started")
+       for (let i = 0; i < defenses.length; i++){
+              defenses[i] *=2; 
+              console.log(defenses[i])
+       };
+
+        switch(true){
+            case (phase2):
+            
+            break;
+            case (phase3):
+            
+            break;
+            default: //phase 1 time
+            
+                setTimeout(()=>{
+                    defend_active = false;
+                    revert_defense();
+                    //expires when the timeout finished
+                }, 50000) //2 turns +10 sec, which varies by phase so account for that
+                //extra 10 sec so it doesn't expire right before the attack hits 
+              
+            break; 
+        };
+    
+};

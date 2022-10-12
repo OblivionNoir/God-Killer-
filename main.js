@@ -262,8 +262,7 @@ function r_mage_menu(){ //3
 
 };
 
-var add2called = false
-
+var defend_active =false;
     //here we need to loop through the battle options, much like the character selection
     var buttons_array = [];
     var button = document.getElementsByClassName('btn');
@@ -297,15 +296,15 @@ var add2called = false
                     break;
                     case 2:
                         console.log("Defend selected")
-            
-                        if (add2called == false){
-                            AddTwo() //only call one time
-                            add2called = true;
+                        if (defend_active == false){
                             defend()
                         }else{
-                            add2called = false;
-                            defend() //cannot be used if already in effect!!! Lasts 2 turns
+                            console.log("already defending")
+                            console.log(defend_active)
+                            //make an actual window for this later
                         }
+             //cannot be used if already in effect!!! Lasts 2 turns
+                        
                    
 
                    
