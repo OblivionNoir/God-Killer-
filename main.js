@@ -321,12 +321,12 @@ var defend_active =false;
         p1.style.visibility = "visible";
         p1.value = "Ultima not charged!"
         setTimeout(()=>{
-            p1.style.visibility = "visible"
+            p1.style.visibility = "hidden"
         },2000)
     }
 
     var ultima = document.getElementById('ultima_charge');
-    //this can probably be optimized
+    //this can probably be optimized with a for loop
     var spells0 = document.getElementById("btn_1") //0
     var spells1 = document.getElementById("btn_2") //1
     var spells2 = document.getElementById("btn_3")  //2
