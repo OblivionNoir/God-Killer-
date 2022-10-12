@@ -10,6 +10,8 @@
 
 
 //hide elements that get used later
+var worker = new Worker('timers_thread.js'); //worker thread for timers
+
 var p1_img = document.getElementById("boss_img");
 p1_img.style.visibility = "hidden";
 p1_img.style.border.color = "rgb(130, 3, 3)"
@@ -101,7 +103,7 @@ document.addEventListener('keyup', function startGame(event) {
         phase1_theme = new Audio('epicaf_Em.mp3'); 
         phase1_theme.play();
         phase1_theme.loop =true;
-        phase1_theme.volume = 0.7;//because the phase 3 theme is naturally a little quieter
+        phase1_theme.volume = 0.7;//because the phase 3 theme is naturally a little louder
         del_box()
     }, 5000);
 
@@ -118,6 +120,7 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     progress_menu.style.visibility = "visible";
     hp.style.visibility = "visible";
     bn.style.visibility = "visible";
+    Boss_Attacks()//start attack loop
 
 };
 
@@ -188,6 +191,8 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
             document.getElementById("btn_1").innerHTML = "Thousand Men"
             document.getElementById("btn_2").innerHTML = "Shadow Self"
             document.getElementById("btn_3").innerHTML = "Whims of Fate"
+            document.getElementById("btn_4").innerHTML = "Rebellion"
+            document.getElementById("btn_5").innerHTML = "Deathblow"  
             //from here move to the function that executes it
 
     }else{
@@ -205,7 +210,9 @@ function d_mage_menu(){ //1
         addButtons()
               document.getElementById("btn_1").innerHTML = "Radiant Supernova"
               document.getElementById("btn_2").innerHTML = "Mirage Blade"
-              document.getElementById("btn_3").innerHTML = "Entrapment"    
+              document.getElementById("btn_3").innerHTML = "Entrapment" 
+              document.getElementById("btn_4").innerHTML = "Black Fire"
+              document.getElementById("btn_5").innerHTML = "Shattered Mirror"   
     }else{ 
         console.log("removing buttons")
         removeButtons()
@@ -224,6 +231,8 @@ function l_mage_menu(){ //2
               document.getElementById("btn_1").innerHTML = "Supreme Altar"
               document.getElementById("btn_2").innerHTML = "Pierce Evil"
               document.getElementById("btn_3").innerHTML = "Angel's Grace"
+              document.getElementById("btn_4").innerHTML = "Rebirth"
+              document.getElementById("btn_5").innerHTML = "Chain Heal"  
 
     }else{
         console.log("removing buttons")
@@ -242,6 +251,8 @@ function r_mage_menu(){ //3
           document.getElementById("btn_1").innerHTML = "Scarlet Subversion"
           document.getElementById("btn_2").innerHTML = "Dance of Death"
           document.getElementById("btn_3").innerHTML = "Bloody Vengeance"
+          document.getElementById("btn_4").innerHTML = "Chain Lightning"
+          document.getElementById("btn_5").innerHTML = "My Turn"  
 
 }else{
     console.log("removing buttons")
@@ -318,12 +329,14 @@ var add2called = false
     }
 
     var ultima = document.getElementById('ultima_charge');
-
+    //this can probably be optimized
     var spells0 = document.getElementById("btn_1") //0
     var spells1 = document.getElementById("btn_2") //1
     var spells2 = document.getElementById("btn_3")  //2
+    var spells3 = document.getElementById("btn_4") //3
+    var spells4 = document.getElementById("btn_5") //4
     var spells_array = []
-    spells_array.push(spells0, spells1, spells2)
+    spells_array.push(spells0, spells1, spells2, spells3, spells4)
 
     //this one doens't need on off state, it's just one click
     //can't use class or I'd get 0-8 instead of 0-2
@@ -342,15 +355,16 @@ var add2called = false
                                 ultimaNotCharged()
                                 
                             }else if (spells0.innerHTML == "Thousand Men"){
+                                //goes 0, 1, 2, 3, 4, top down
                                 Thousand_Men()
                             }else if (spells0.innerHTML == "Radiant Supernova"){
                                 Radiant_Supernova()
                             }else if (spells0.innerHTML == "Supreme Altar"){
                                 Supreme_Altar()
-                            }
+                            }//There will be 4 else if for each case. Remember red mage
                                 
                         break;
-                        case 1:
+                        case 1: //so this is the second spell button...
                             console.log("spell button 1 selected")
                             if (spells1.innerHTML == "Shadow Self"){
                                 ShadowSelf()
@@ -361,12 +375,22 @@ var add2called = false
                             }
                        
                         break;
-                        case 2:
+                        case 2: //this is the 3rd and so forth
                             console.log("spell button 2 selected")
     
                         break;
+                        case 3:
+                            console.log("spell button 3 selected")
+
+
+                        break;
+                        case 4:
+                            console.log("spell button 4 selected")
+
+
+                        break;
                         default:
-                            console.log("switch2 - what the fuck")
+                            console.log("switch2 - shits fucked")
                     };
              
             }//listener ends here
@@ -460,7 +484,6 @@ function TestPhase(){
 
 
 var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the else 
-var phase3_tr;
 
  function phase3(){ //PHASE 3
             phase_def = 1.5; //update stats for phase 3

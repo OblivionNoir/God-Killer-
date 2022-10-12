@@ -12,23 +12,10 @@
       return turn_counter
   }
 
-  //make a seperate list that's 2 numbers ahead, then compare them for the skills that wear off
-//gonna need to call this whenever a timed skill is used
-  function AddTwo(){ //only call ONCE when needed for the attack, then compare the two arrays until they match
-
-            counterPlusTwo = turn_counter.map(v => v+2) //add 2 to each value in the list
-            //loop and add +1 to each counterplus2 value to account for the initial counter
-            return counterPlusTwo
-
-  }
-
-
-
-  function defend(){//Can not be used if already in effect
+  //1 turn = 25 seconds (average of boss attack time)
+  function defend(){
     counter()
-    console.log(turn_counter)
-
-    console.log(counterPlusTwo)
+    defend_timer()
 
 
   }
@@ -41,50 +28,23 @@
 
 
 //Boss will not attack dead party members, remember to code that in!!!
-  function BossAttack(){
-      
-              //setTimeout(()=>{
-                //Borderof_Life()
-                /*switch(true){
-                    case(phase2_tr):
-                        boss_phase2()
-                    break;
-                    case(phase3_tr):
-                        boss_phase3()
-                    break;
-                    default:
-                        boss_phase1()
-                    break;
-                };*/
-              //}, 1000);
+var LastBossAttacks = []//remember to add to this
 
-     
-      };
+function Boss_Attacks(){
+    switch(true){
+      case(phase2called):
+        boss_phase2()
+      break;
+      case(phase3called):
+        boss_phase3()
+      break;
+      default: //still in phase 1
+        boss_phase1()
+      break;
+    };
 
+};
 
-  var LastBossAttacks = []//remember to add to this
-  function boss_phase1(){
-      let boss_choice = randNumber(1,11)
-//might be a better way of setting percent chance.
-      if (boss_choice == 1 | boss_choice ==2 | boss_choice ==3) //30% chance
-          SpheresofInsanity()  //change this so it checks if ANY party members are <=1/dead
-      else if(boss_choice ==10 | boss_choice ==9 && LastBossAttacks[-1] != "BorderofLife" 
-      && LastBossAttacks[-2] != "BorderofLife" && hp.value <12500 && (!(warrior_hp.value<=1))){
-          Borderof_Life()
-      }
-
-
-  }
-
-  function boss_phase2(){
-
-  }
-
-  function boss_phase3(){
-
-
-
-  }
       
 
   function randNumber(min, max) {
@@ -378,14 +338,15 @@
   
   
   function Entrapment(){ //Makes boss immobile for 2 turns
-      var Entrapment = document.getElementById("Entrapment");
       counter() 
   };
 
   function Black_Fire(){
+    counter()
 
   }
   function Shattered_Mirror(){
+    counter()
     //Severely lower's bosses defenses for one turn
   }
   //light mage attacks
@@ -515,6 +476,10 @@
     //hits 4 times, each with a slight damage randomizer, 
     //then the 5th is all the previous combined
     //so something like 60, 65, 63, 70, 258 for 516 total 
+  }
+
+  function My_Turn(){
+    //lowers boss rate of attack for 2 turns
   }
 
 
