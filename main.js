@@ -30,6 +30,7 @@ var bn = document.getElementById("boss_name");
 bn.style.visibility = "hidden";
 
 var p1 = document.getElementById("txt_"); //initial text box
+p1.style.visibility= "hidden"; 
 //p1.style.display = "none";
 var p2 = document.getElementById("txt_2"); //secondary text box
 p2.style.visibility = "hidden";
@@ -87,9 +88,8 @@ function addButtons(){//this produces a list, so need to loop to hide each item
 };
 //add listener to wait for initial enter to start game
 var phase1_theme;
-document.addEventListener('keyup', function startGame(event) {
-    if (event.code === 'Enter') {
-        document.removeEventListener('keyup', startGame)
+document.addEventListener('click', function startGame(event) {
+        document.removeEventListener('click', startGame)
         console.log("Starting listener removed")
         p1_img.style.visibility = "visible";
      
@@ -97,7 +97,6 @@ document.addEventListener('keyup', function startGame(event) {
         storm_bg.play();
         storm_bg.loop =true;
         storm_bg.volume = 0.3; 
-    }
     setTimeout(() =>{
         //window.alert("SHOWTIME!");
         phase1_theme = new Audio('epicaf_Em.mp3'); 
@@ -114,7 +113,6 @@ document.addEventListener('keyup', function startGame(event) {
 
 function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     console.log("Intro box removed")
-    p1.style.visibility= "hidden"; 
     hp_label.style.visibility = "visible";
     battle_menu.style.visibility = "visible";
     progress_menu.style.visibility = "visible";

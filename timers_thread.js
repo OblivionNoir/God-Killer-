@@ -10,7 +10,7 @@ function boss_phase1(){
             && LastBossAttacks[-2] != "BorderofLife" && hp.value <12500 && (!(warrior_hp.value<=1))){
                 Borderof_Life()
             }
-    }, 25000)//gets 5 seconds faster each phase
+    }, 25000)//gets 5 seconds faster each phase, add a slight randomization 
 };
 
 var p_2_interval;
@@ -32,7 +32,6 @@ function boss_phase3(){
 
     }, 15000)
   };
-//not sure why this is returning a huge list 
 function revert_defense(){
     for (let i = 0; i < defenses.length; i++){{
         defenses[i] /=2; 
