@@ -117,6 +117,10 @@ body{
 
 
 #menu_template{
+    display: grid;
+    grid-template-columns: 5vw auto 5vw;
+    grid-row-gap: 1.5vw;
+    grid-template-rows: 1vw auto 1vw;
     background-color:black;
     position: absolute;
     max-width: 25vw;
@@ -132,12 +136,26 @@ body{
 }
 
 #menu_template>div{
-    padding-top: 1vh;
-    display: flex;
-    flex-direction: row;
-    width: 10vw;
+    padding: 1vh;
     border-radius: 8%;
     z-index: 4;
+    max-height: 1vh;
+
+    
+}
+#menu_template>div>button{
+    width: 4vw;
+    height: 4vh;
+    background-color: rgba(195, 79, 224, 0.8);
+    font-weight: 900;
+    border: 1px solid black;
+    
+
+}
+
+#menu_template>div>button:hover{
+ 
+    box-shadow: #ff2400 0px 0px 0.5vh;
 }
 
 #warrior_name, #d_mage_name, #l_mage_name{

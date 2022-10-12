@@ -90,7 +90,6 @@ function Boss_Attacks(){
                       num_hits +=1
                       timeout_i_menu()
                   }
-              p1.style.visibility = "visible";
           }
           i_menu.style.visibility = "hidden"
           counter()
