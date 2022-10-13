@@ -100,7 +100,14 @@ function Boss_Attacks(){
       document.getElementById("Polarity");
       counter()
   };
-
+  function changeBackground(){
+    if (phase3called == true){
+        document.body.style.backgroundImage = "url('trueformbg.png')"
+      }else{
+        document.body.style.backgroundImage = "url('purveyorbg.png')"
+      }
+ 
+}
 
  
   function Borderof_Life(){ //Knocks targeted to 1 HP. 50% instakill chance in phase 3 
@@ -109,6 +116,7 @@ function Boss_Attacks(){
       i_menu.src = "BOL.png" 
       i_menu.style.visibility = "visible"
       document.body.style.backgroundImage = "url('BOLbg.png')"
+  
 
       PE.play()//find new sfx
       PE.loop = false;
@@ -116,15 +124,15 @@ function Boss_Attacks(){
       setTimeout(()=>{ //this can probably be optimized
           let fate = randNumber(0,3); //choose 1 target 
           console.log(fate)
-          const DeadNotDead = randNumber(0, 2)
+          const DeadNotDead = Math.random()<0.5//random boolean 
           switch(fate){
               case(0)://warrior 
               //if phase 3, add chance of instakill
-                  if (phase3_tr == true){ //he already won't target dead people 
+                  if (phase3called == true){ //he already won't target dead people 
                       //or if they're at 1hp
                       hp.value += warrior_hp.value -1 //add to boss's HP
                       warrior_hp.value = 1; //then knock player down to 1
-                      if (DeadNotDead == 0){
+                      if (DeadNotDead == true){
                           warrior_hp.value = 0;//then check for deaths after the turn
                           //will not attack if at 1 or dead
 
@@ -136,10 +144,10 @@ function Boss_Attacks(){
                   };
                        
               case(1): //black mage
-                  if (phase3_tr == true){
+                  if (phase3called == true){
                       hp.value += black_mage_hp.value -1
                       black_mage_hp.value = 1;
-                      if (DeadNotDead == 0){
+                      if (DeadNotDead == true){
                           black_mage_hp.value = 0;
                       };
                   }else{
@@ -151,9 +159,9 @@ function Boss_Attacks(){
   
               break;
               case(2): //white mage
-                  if (phase3_tr == true){
+                  if (phase3called == true){
                       white_mage_hp.value = 1;
-                      if (DeadNotDead == 0){
+                      if (DeadNotDead == true){
                           white_mage_hp.value = 0;
                       };
                   }else{
@@ -173,7 +181,7 @@ function Boss_Attacks(){
           CheckDeadStatus()
           i_menu.style.visibility = "hidden"
           //change this based on phase later
-          document.body.style.backgroundImage = "url('hellscape.png')"
+          changeBackground()
           LastBossAttacks.push("BorderofLife")
       }, 7000);
   };//function ends here

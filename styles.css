@@ -12,7 +12,7 @@ html{
 }
 
 body{
-    background-image: url("purveryorbg.png"); 
+    background-image: url("purveyorbg.png"); 
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -143,7 +143,7 @@ body{
 
     
 }
-/*add rainbow effect to the ultima*/
+
 #menu_template>button{
   
     background-color: rgba(195, 79, 224, 0.8);
@@ -203,44 +203,6 @@ body{
     }
 }
 
-@keyframes rainbow{
-    100%,0%{
-        color: rgb(255,0,0);
-    }
-    8%{
-        color: rgb(255,127,0);
-    }
-    16%{
-        color: rgb(255,255,0);
-    }
-    25%{
-        color: rgb(127,255,0);
-    }
-    33%{
-        color: rgb(0,255,0);
-    }
-    41%{
-        color: rgb(0,255,127);
-    }
-    50%{
-        color: rgb(0,255,255);
-    }
-    58%{
-        color: rgb(0,127,255);
-    }
-    66%{
-        color: rgb(0,0,255);
-    }
-    75%{
-        color: rgb(127,0,255);
-    }
-    83%{
-        color: rgb(255,0,255);
-    }
-    91%{
-        color: rgb(255,0,127);
-    }
-}
 
 #warrior_name, #d_mage_name, #l_mage_name{
     font-size: 1em;

@@ -2,6 +2,7 @@ var p1_interval;
 function boss_phase1(){
     p1_interval = setInterval(()=>{
         console.log("made it to interval")
+        Borderof_Life()
         let boss_choice = randNumber(1,11)
         //might be a better way of setting percent chance.
             if (boss_choice == 1 | boss_choice ==2 | boss_choice ==3) //30% chance
