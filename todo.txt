@@ -1,17 +1,12 @@
 -css file is messy. Less IDs, more classes. Sve the IDs for JS
 -Scrolling text like in games. This will require a pause button.
--Frame rate counter
--basic attack can be spammed in your window to attack, but will never do as much dmg as a spell. 
 -ultima bar turns gold when full
 -Gradual transitions as opposed to images just popping in
 -Keep all the numbers as int. No decimals 
 -credits: vecteezy.com for the rain and credit the OSTs
 -Hover over attacks for descriptions
 -resize all backgrounds to 16:9 so they fit properly
--for phase 3, add short cutscene and refill hp bar (phase 3 will have 10k hp, the first two combined have 15k) 
-Use a slow set interval to create the refill animation
 -replace all "visibility" with "display"
--Make settings menu for adjusting volume of music/sfx
 -testing
 
 
