@@ -227,11 +227,11 @@ function Boss_Attacks(){
 
       counter()
   };
-  function ShadowSelf(){
+  function Shadow_Self(){
 
       counter()
   };
-  function WhimsofFate(){
+  function Whims_of_Fate(){
 
       counter()
 
@@ -347,9 +347,51 @@ function Boss_Attacks(){
   
   };
   
-  
+  var trapped = false; 
   function Entrapment(){ //Makes boss immobile for 2 turns
+    if (black_mage_mp.value < 50){
+        p1.style.visibility = "visible";
+        p1.value = "Not enough MP!"
+        setTimeout(()=>{
+            p1.style.visibility = "hidden"
+        },2000)
+    }else{
+        black_mage_mp.value -= 50;
+        i_menu.src = "Entrapment.jpg"
+        i_menu.style.visibility = "visible"
+        //find sfx
+        setTimeout(()=>{
+            i_menu.style.visibility = "hidden"
+
+        }, 3000);
+
+    
+
+    if (trapped == false){
+        //do the thing
+        switch(true){
+            case(phase2called == true):
+            trapped = true;//disable when timer runs out
+            //do stuff
+        break;
+            case(phase3called == true):
+            trapped = true;
+            //do stuff
+        break;
+            default://phase 1 
+            trapped = true;
+            console.log("boss is trapped")
+            countdown_p1()
+
+        break;
+        }
+    }else{
+        //won't work
+    }
+
+
       counter() 
+}//closes off the first else statement
   };
 
   function Black_Fire(){

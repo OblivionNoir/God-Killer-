@@ -373,7 +373,7 @@ var button = document.getElementsByClassName('btn');
                         case 1: //so this is the second spell button...
                             console.log("spell button 1 selected")
                             if (spells_array[1].innerHTML == "Shadow Self"){
-                                ShadowSelf()
+                                Shadow_Self()
                             }else if (spells_array[1].innerHTML == "Mirage Blade"){
                                 Mirage_Blade()
                             }else if (spells_array[1].innerHTML == "Pierce Evil"){
@@ -383,6 +383,11 @@ var button = document.getElementsByClassName('btn');
                         break;
                         case 2: //this is the 3rd and so forth
                             console.log("spell button 2 selected")
+                            if (spells_array[2].innerHTML == "Whims of Fate"){
+                                Whims_of_Fate()
+                            }else if (spells_array[2].innerHTML == "Entrapment"){
+                                Entrapment()
+                            }//you are here
     
                         break;
                         case 3:

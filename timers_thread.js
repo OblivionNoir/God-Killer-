@@ -1,5 +1,11 @@
+
+
 var p1_interval;
 function boss_phase1(){
+    if(trapped == true){
+        //do nothing
+        console.log("trapped")
+    }else{
     p1_interval = setInterval(()=>{
         console.log("made it to interval")
         Borderof_Life()
@@ -12,6 +18,7 @@ function boss_phase1(){
                 Borderof_Life()
             }
     }, 25000)//gets 5 seconds faster each phase, add a slight randomization 
+}//else ends here
 };
 
 var p_2_interval;
@@ -71,3 +78,22 @@ function defend_timer(){
         };
     
 };
+    //phase 1 = 50sec
+    //phase 2 = 40sec
+    //phase 3 = 30sec
+function countdown_p1(){
+    setTimeout(()=>{
+        trapped = false;
+        console.log("no longer trapped")
+    }, 50000)
+    
+
+ 
+}
+
+function countdown_p2(){
+
+}
+function countdown_p3(){
+
+}
