@@ -27,8 +27,10 @@ var LastBossAttacks = []//remember to add to this
 
 
 
-
-
+//op test attack to instakill someone
+function bosstest(){
+    black_mage_hp.value = 0;
+}
 
       
 
@@ -161,7 +163,6 @@ var LastBossAttacks = []//remember to add to this
               };//switch ends here
 
           counter()
-          CheckDeadStatus()
           i_menu.style.visibility = "hidden"
           //change this based on phase later
           changeBackground()

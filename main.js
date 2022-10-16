@@ -51,6 +51,11 @@ var black_mage_mp = document.getElementById("d_mage_name_mp")
 var white_mage_mp = document.getElementById("l_mage_name_mp")
 var red_mage_mp = document.getElementById("r_mage_name_mp")
 
+var wa = document.getElementById("knight_img");
+var dmi = document.getElementById("d_mage_img")
+var lmi = document.getElementById("l_mage_img");
+var rmi = document.getElementById("r_mage_img");
+
 var combat_buttons = document.getElementsByClassName('btn')
 
 var rain = document.getElementById("rainbg")
@@ -111,9 +116,8 @@ document.addEventListener('click', function startGame(event) {
 
 });
 
-function startBoss(){
+function startBoss(){//this cannot be a constant interval. Causes boss to attack too fast
             //start boss attack rotation 
-               BossInterval = setInterval(()=>{
                 switch(true){
                     case(phase2called):
                     boss_phase2()
@@ -125,7 +129,7 @@ function startBoss(){
                     boss_phase1()
                 break;
           };
-    }, 1000)
+    
 }
 
 //};
@@ -200,12 +204,11 @@ function menu_sfx(){
 
 
 
-function warrior_menu(){ //0 //when this is reached, we know the warrior has been clicked
-    let ki = document.getElementById("knight_img"); //need to check if it has border or not
+function warrior_menu(){ //0 //when this is reached, we know the warrior has been clicked //need to check if it has border or not
     //if red, show menu. If null, hide menu
     //active class = red
     console.log('made it -knight') 
-    if (ki.classList.contains('active')){
+    if (wa.classList.contains('active')){
         menu_sfx()
         addButtons() 
             document.getElementById("btn_1").innerHTML = "Thousand Men"
@@ -221,11 +224,10 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
 };
 
 //remove custom menus AFTER they are called, then add back as needed
-function d_mage_menu(){ //1
-    let di = document.getElementById("d_mage_img"); //need to check if it has border or not
+function d_mage_menu(){ //1//need to check if it has border or not
     //if red, show menu. If null, hide menu
     //active class = red
-    if (di.classList.contains('active')){
+    if (dmi.classList.contains('active')){
         menu_sfx()
         addButtons()
               document.getElementById("btn_1").innerHTML = "Radiant Supernova"
@@ -241,11 +243,10 @@ function d_mage_menu(){ //1
 
 };
 
-function l_mage_menu(){ //2
-    let li = document.getElementById("l_mage_img"); //need to check if it has border or not
+function l_mage_menu(){ //2//need to check if it has border or not
         //if red, show menu. If null, hide menu
         //active class = red
-    if (li.classList.contains('active')){
+    if (lmi.classList.contains('active')){
         menu_sfx()
         addButtons()
               document.getElementById("btn_1").innerHTML = "Supreme Altar"
@@ -261,11 +262,10 @@ function l_mage_menu(){ //2
     
     };
 //todo: add hovers
-function r_mage_menu(){ //3
-    let ri = document.getElementById("r_mage_img"); //need to check if it has border or not
+function r_mage_menu(){ //3 //need to check if it has border or not
     //if red, show menu. If null, hide menu
     //active class = red
-    if (ri.classList.contains('active')){
+    if (rmi.classList.contains('active')){
     menu_sfx()
     addButtons()
           document.getElementById("btn_1").innerHTML = "Scarlet Subversion"
@@ -466,6 +466,13 @@ function timeout(){
     }, 2000);
 }
 
+var warrior_dead = false;
+var black_mage_dead = false;
+var white_mage_dead = false;
+var red_mage_dead = false;
+//spell menu should dissapear and reset while boss is attacking, so it shouldn't be a concern here
+//need to loop through the alive members if someone dies so the buttons work again. Functions?
+//Easiest way is probably a constant refresh in the background, but that's a lot of processing power
  function CheckDeadStatus(){ //call after every boss attack
             //adding to 0,1,2, which are the players
             switch(true){
@@ -474,6 +481,7 @@ function timeout(){
                     warrior_dead = true; //add message 
                     p1.style.visibility= "visible";
                     p1.value = "Warrior has fallen!"
+                    isDead(wa)
                     timeout()
                     break; //do stuff so they can't be attacked or selected while dead
                 case(black_mage_hp.value <=0):
@@ -481,6 +489,7 @@ function timeout(){
                     black_mage_dead = true;
                     p1.style.visibility = "visible";
                     p1.value = "Dark mage has fallen!"
+                    isDead(dmi)
                     timeout()
                     break;
                 case(white_mage_hp.value <=0):
@@ -488,6 +497,15 @@ function timeout(){
                     white_mage_dead = true;
                     p1.style.visibility = "visible";
                     p1.value = "Light mage has fallen!"
+                    isDead(lmi)
+                    timeout()
+                    break;
+                case(red_mage_hp.value <=0):
+                    red_mage_hp.value ==0;
+                    red_mage_dead = true;
+                    p1.style.visibility = "visible";
+                    p1.value = "Red mage has fallen!"
+                    isDead(rmi)
                     timeout()
                     break;
                 default:
@@ -496,7 +514,15 @@ function timeout(){
             };
     
     };
-
+    //apply the limitations of the dead status
+function isDead(partyMember){
+    partyMember.style.zIndex = "0"
+    partyMember.style.opacity = "0.5"
+}
+function isAlive(partyMember){
+    //revert to whatever the default is 
+}
+ 
 
     //phase changes
     var roar = new Audio("roar.wav");
@@ -515,6 +541,7 @@ function TestPhase(){
             phase3()
         }else{
             console.log("still in phase 1")
+            
         }
     }
 

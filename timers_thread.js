@@ -1,6 +1,7 @@
 
-var p1_interval;
+var p1_interval; 
 function boss_phase1(){
+    trapped = false;//temp for testing
     if(trapped == true){
         //do nothing
         console.log("trapped")
@@ -9,6 +10,8 @@ function boss_phase1(){
         console.log("made it to interval")
         //Borderof_Life()
         console.log("boss test")
+        bosstest()
+        CheckDeadStatus()
         let boss_choice = randNumber(1,11)
         //might be a better way of setting percent chance.
         //the way this is setup allows multiple attacks. Fix! 
