@@ -103,11 +103,30 @@ document.addEventListener('click', function startGame(event) {
         phase1_theme.play();
         phase1_theme.loop =true;
         phase1_theme.volume = 0.7;//because the phase 3 theme is naturally a little louder
+ //check every second for phase change
+
         del_box()
+        startBoss()
     }, 5000);
 
 });
 
+function startBoss(){
+            //start boss attack rotation 
+               BossInterval = setInterval(()=>{
+                switch(true){
+                    case(phase2called):
+                    boss_phase2()
+                break;
+                    case(phase3called):
+                    boss_phase3()
+                break;
+                default: //still in phase 1
+                    boss_phase1()
+                break;
+          };
+    }, 1000)
+}
 
 //};
 
@@ -119,7 +138,6 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     progress_menu.style.visibility = "visible";
     hp.style.visibility = "visible";
     bn.style.visibility = "visible";
-    Boss_Attacks()//start attack loop
 
 };
 
@@ -303,7 +321,7 @@ var button = document.getElementsByClassName('btn');
                     case 2:
                         console.log("Defend selected")
                         if (defend_active == false){
-                            defend()
+                            defend_timer()
                         }else{
                             console.log("already defending")
                             console.log(defend_active)
@@ -360,14 +378,16 @@ var button = document.getElementsByClassName('btn');
                             if (ultima.value !== 100){
                                 ultimaNotCharged()
                                 
-                            }else if (spells_array[0].innerHTML == "Thousand Men"){
+                            }else if (spells_array[0].innerHTML == "Thousand Men"){ //knight
                                 //goes 0, 1, 2, 3, 4, top down
                                 Thousand_Men()
-                            }else if (spells_array[0].innerHTML == "Radiant Supernova"){
+                            }else if (spells_array[0].innerHTML == "Radiant Supernova"){//d mage
                                 Radiant_Supernova()
-                            }else if (spells_array[0].innerHTML == "Supreme Altar"){
+                            }else if (spells_array[0].innerHTML == "Supreme Altar"){ //l mage
                                 Supreme_Altar()
-                            }//There will be 4 else if for each case. Remember red mage
+                            }else if (spells_array[0].innerHTML == "Scarlet Subversion"){ //r mage
+                                Scarlet_Subversion()
+                            };
                                 
                         break;
                         case 1: //so this is the second spell button...
@@ -378,7 +398,9 @@ var button = document.getElementsByClassName('btn');
                                 Mirage_Blade()
                             }else if (spells_array[1].innerHTML == "Pierce Evil"){
                                 Pierce_Evil()
-                            }
+                            }else if (spells_array[1].innerHTML == "Dance of Death"){
+                                Dance_of_Death()
+                            };
                        
                         break;
                         case 2: //this is the 3rd and so forth
@@ -387,16 +409,38 @@ var button = document.getElementsByClassName('btn');
                                 Whims_of_Fate()
                             }else if (spells_array[2].innerHTML == "Entrapment"){
                                 Entrapment()
-                            }//you are here
+                            }else if (spells_array[2].innerHTML == "Angel's Grace"){
+                                Angels_Grace()
+                            }else if (spells_array[2].innerHTML == "Bloody Vengeance"){
+                                Bloody_Vengeance()
+                            };
     
                         break;
                         case 3:
                             console.log("spell button 3 selected")
+                            if (spells_array[3].innerHTML == "Rebellion"){
+                                Rebellion()
+                            }else if (spells_array[3].innerHTML == "Black Fire"){
+                                Black_Fire()
+                            }else if (spells_array[3].innerHTML == "Rebirth"){
+                                Rebirth()
+                            }else if (spells_array[3].innerHTML == "Chain Lightning"){
+                                Chain_Lightning()
+                            };
 
 
                         break;
                         case 4:
                             console.log("spell button 4 selected")
+                            if (spells_array[4].innerHTML == "Deathblow"){
+                                Deathblow()
+                            }else if (spells_array[4].innerHTML == "Shattered Mirror"){
+                                Shattered_Mirror()
+                            }else if (spells_array[4].innerHTML == "Chain Heal"){
+                                Chain_Heal()
+                            }else if (spells_array[4].innerHTML == "My Turn"){
+                                My_Turn()
+                            };
 
 
                         break;

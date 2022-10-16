@@ -13,15 +13,7 @@
   }
 
   //1 turn = 20 seconds (average of boss attack time)
-  function defend(){
 
-    //can only be called once every two turns,
-    counter()
-    //double everyone's defense(m and p) for 2 turns
-    defend_timer()
-
-
-  }
 
   var LastAttacks = [] //store last attacks used by player, some skills rely on it
 
@@ -33,20 +25,10 @@
 //Boss will not attack dead party members, remember to code that in!!!
 var LastBossAttacks = []//remember to add to this
 
-function Boss_Attacks(){
-    switch(true){
-      case(phase2called):
-        boss_phase2()
-      break;
-      case(phase3called):
-        boss_phase3()
-      break;
-      default: //still in phase 1
-        boss_phase1()
-      break;
-    };
 
-};
+
+
+
 
       
 
@@ -100,6 +82,7 @@ function Boss_Attacks(){
       document.getElementById("Polarity");
       counter()
   };
+  //switches background back, according to current phase
   function changeBackground(){
     if (phase3called == true){
         document.body.style.backgroundImage = "url('trueformbg.png')"
@@ -187,31 +170,31 @@ function Boss_Attacks(){
   };//function ends here
 
 
-  function SpacialRift(){
+  function Spacial_Rift(){
 
       counter()
   };
 
   //addin phase 2\\
-  function TendrilsoftheNight(){
+  function Tendrils_of_the_Night(){
 
       counter()
   };
 
-  function HallsofOblivion(){
+  function Halls_of_Oblivion(){
 
   }
 
   //add in phase 3\\
-  function NightmareNascent(){//
+  function Nightmare_Nascent(){//
 
 
   }
-  function BleedingSun1(){ //turn 1 charge
+  function Bleeding_Sun1(){ //turn 1 charge
 
       counter()
   };
-  function BleedingSun2(){ //Defend is required to survive.
+  function Bleeding_Sun2(){ //Defend is required to survive.
     //900 base m damage, r mage will just barely survive with defend. 
     //no defend = everyone dies
 
@@ -312,9 +295,8 @@ function Boss_Attacks(){
 
 
   function Mirage_Blade(){ 
-      var black_mage_mp = document.getElementById("d_mage_name_mp");
-      //I have no fucking idea why this needs to be redefined
-      //If I don't it only works once
+      let black_mage_mp = document.getElementById("d_mage_name_mp");
+      //needs to be redefined every use or it references the OLD mp value and only works once
       if (black_mage_mp.value <50){ 
           p1.style.visibility = "visible";
           p1.value = "Not enough MP!"
@@ -347,15 +329,22 @@ function Boss_Attacks(){
   
   };
   
-  var trapped = false; 
+  var trapped; //this can just be undefined for now, gets assigned boolean later
+  //Works, but for some reason boss is spamming attacks when it ends...
   function Entrapment(){ //Makes boss immobile for 2 turns
+    let black_mage_mp = document.getElementById("d_mage_name_mp");
     if (black_mage_mp.value < 50){
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
         setTimeout(()=>{
             p1.style.visibility = "hidden"
         },2000)
-    }else{
+        //ensure it isn't already in effect
+    }if (trapped == true){
+        //make this an actual window later
+        console.log("already trapped")
+
+    }else{ //execute spell
         black_mage_mp.value -= 50;
         i_menu.src = "Entrapment.jpg"
         i_menu.style.visibility = "visible"
@@ -364,47 +353,127 @@ function Boss_Attacks(){
             i_menu.style.visibility = "hidden"
 
         }, 3000);
+        //change timer according to phase
+        trapped = true;
+        CounterSwitch()
 
-    
-
-    if (trapped == false){
-        //do the thing
-        switch(true){
-            case(phase2called == true):
-            trapped = true;//disable when timer runs out
-            //do stuff
-        break;
-            case(phase3called == true):
-            trapped = true;
-            //do stuff
-        break;
-            default://phase 1 
-            trapped = true;
-            console.log("boss is trapped")
-            countdown_p1()
-
-        break;
-        }
-    }else{
-        //won't work
-    }
-
-
-      counter() 
+    } 
 }//closes off the first else statement
-  };
 
-  function Black_Fire(){
+  function Black_Fire(){ //moderate spell damage
+    let black_mage_mp = document.getElementById("d_mage_name_mp");
+    if (black_mage_mp.value <25){
+        p1.style.visibility = "visible";
+        p1.value = "Not enough MP!"
+        setTimeout(()=>{
+            p1.style.visibility = "hidden"
+        }, 3000)
+    }else{ 
+        black_mage_mp.value -= 25;
+        //visibility image for 3 seconds, then turn it off
+        i_menu.src = "blackfire.png"
+        i_menu.style.visibility = "visible"
+        const PE = new Audio("pierceevil.wav"); //find new sfx
+        PE.play()
+        PE.loop = false;
+        setTimeout(()=>{
+                hp.value -= 400 - phase_mdef;
+                let d_crit = Math.floor(Math.random() * 16);
+                if (d_crit == 15){
+                    hp.value -= 800 - phase_mdef;
+                    p1.style.visibility = "visible";
+                    p1.value = "Critical hit!"
+                    setTimeout(()=>{
+                        p1.style.visibility = "hidden"
+                    }, 3000)
+                };    
+            i_menu.style.visibility = "hidden"
+            ending3()
+        }, 3000);
+        
+    };
     counter()
-
   }
+var mirror;
   function Shattered_Mirror(){
+        //Severely lower's bosses defenses for one turn
+    let black_mage_mp = document.getElementById("d_mage_name_mp");
+    if (black_mage_mp.value < 50){
+        p1.style.visibility = "visible";
+        p1.value = "Not enough MP!"
+        setTimeout(()=>{
+            p1.style.visibility = "hidden"
+        },2000)
+        //ensure it isn't already in effect
+    }if (mirror == true){
+        //make this an actual window later
+        console.log("mirror already in effect")
+
+    }else{ //execute spell
+        black_mage_mp.value -= 35;
+        i_menu.src = "shatteredmirror.png"
+        i_menu.style.visibility = "visible"
+        //find sfx
+        setTimeout(()=>{
+            i_menu.style.visibility = "hidden"
+
+        }, 3000);
+        //change timer according to phase
+        mirror = true;
+        CounterSwitch()
+        MirrorLower()
+    } 
     counter()
-    //Severely lower's bosses defenses for one turn
   }
   //light mage attacks
 //change the loop to go through 5
-  
+function MirrorLower(){
+    //lower boss stats
+    phase_def /= 2;
+    phase_mdef /= 2;
+    console.log(phase_def, phase_mdef)
+
+}
+function MirrorRevert(){
+    //revert them back
+    phase_def *= 2;
+    phase_mdef *= 2;
+    console.log(phase_def, phase_mdef)
+}
+function CounterSwitch(){
+        switch(true){
+            case(phase2called == true):
+            if (mirror == true){//use the shorter version for Broken Mirror, one turn not 2 
+                counter()
+                countdown_1turn(20000)
+            }else{
+                counter()
+                trapped_countdown(40000)
+            }
+        break;
+            case(phase3called == true):
+            if (mirror == true){
+                counter()
+                countdown_1turn(15000)
+            }else{
+                counter()
+                trapped_countdown(30000)
+            }      
+        break;
+            default://phase 1 
+            if (mirror == true){
+                counter()
+                countdown_1turn(25000)
+            }else{
+                counter()
+                trapped_countdown(50000)
+            }
+        break;
+        }
+
+    }; 
+    //assign counter time according to phase
+
   function Pierce_Evil(){
       var white_mage_mp = document.getElementById("l_mage_name_mp");
       //see above comment...
@@ -433,7 +502,6 @@ function Boss_Attacks(){
                           p1.style.visibility = "hidden"
                       }, 3000)
                   };    
-              //try revisibleizing? IDFK
               i_menu.style.visibility = "hidden"
               ending3()
           }, 3000);
@@ -443,7 +511,7 @@ function Boss_Attacks(){
   
   };
 
-  function AngelsGrace(){ //moderate healing spell
+  function Angels_Grace(){ //moderate healing spell
       document.getElementById("AngelsGrace");
       
 
@@ -525,7 +593,7 @@ function Boss_Attacks(){
     //crit rate. Physical
   }
 
-  function ChainLightning(){
+  function Chain_Lightning(){
     //hits 4 times, each with a slight damage randomizer, 
     //then the 5th is all the previous combined
     //so something like 60, 65, 63, 70, 258 for 516 total 

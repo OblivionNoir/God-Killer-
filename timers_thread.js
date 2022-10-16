@@ -1,31 +1,33 @@
 
-
 var p1_interval;
 function boss_phase1(){
     if(trapped == true){
         //do nothing
         console.log("trapped")
-    }else{
+    }else if (trapped == false){
     p1_interval = setInterval(()=>{
         console.log("made it to interval")
-        Borderof_Life()
+        //Borderof_Life()
+        console.log("boss test")
         let boss_choice = randNumber(1,11)
         //might be a better way of setting percent chance.
-            if (boss_choice == 1 | boss_choice ==2 | boss_choice ==3) //30% chance
+        //the way this is setup allows multiple attacks. Fix! 
+            /*if (boss_choice == 1 | boss_choice ==2 | boss_choice ==3) //30% chance
                 SpheresofInsanity()  //change this so it checks if ANY party members are <=1/dead
             else if(boss_choice ==10 | boss_choice ==9 && LastBossAttacks[-1] != "BorderofLife" 
             && LastBossAttacks[-2] != "BorderofLife" && hp.value <12500 && (!(warrior_hp.value<=1))){
                 Borderof_Life()
-            }
+            }*/
     }, 25000)//gets 5 seconds faster each phase, add a slight randomization 
-}//else ends here
+}else{
+    console.log("error"+ trapped)
+}
 };
 
-var p_2_interval;
+var p_2_interval; 
 function boss_phase2(){
     clearInterval(p1_interval)//disable the first interval
     p_2_interval = setInterval(()=>{
-
 
 
 
@@ -41,6 +43,7 @@ function boss_phase3(){
     }, 15000)
   };
 function revert_defense(){
+    //change back to normal
     for (let i = 0; i < defenses.length; i++){{
         defenses[i] /=2; 
         console.log(defenses[i])
@@ -50,6 +53,7 @@ function revert_defense(){
 };
   //2 turn timer
 function defend_timer(){
+       counter()
        defend_active = true; //then back to false when the timer expires
        //double everyone's defenses
        console.log("defend timer started")
@@ -81,19 +85,26 @@ function defend_timer(){
     //phase 1 = 50sec
     //phase 2 = 40sec
     //phase 3 = 30sec
-function countdown_p1(){
+function trapped_countdown(time){ //2 turn countdown
+    //attacks are already disabled by setting trapped to true
     setTimeout(()=>{
         trapped = false;
         console.log("no longer trapped")
-    }, 50000)
-    
-
- 
+    }, time)
 }
 
 function countdown_p2(){
 
 }
 function countdown_p3(){
+
+}
+
+function countdown_1turn(time_1turn){
+    setTimeout(()=>{
+        mirror = false;
+        MirrorRevert()
+        console.log("mirror no longer active")
+    }, time_1turn)
 
 }
