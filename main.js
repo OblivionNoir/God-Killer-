@@ -163,8 +163,7 @@ for (let i = 0; i < players_array.length; i++){
                 players_array[i].classList.remove('active') //remove all, not just one
                 active_added = false;
             }//second for loop ends here    
-      
-        }else if (active_added == false){
+        }else if (active_added == false ){
             this.classList.add('active')
             active_added = true;
             let list_index_players = players_array.indexOf(this);
@@ -516,8 +515,11 @@ var red_mage_dead = false;
     };
     //apply the limitations of the dead status
 function isDead(partyMember){
-    partyMember.style.zIndex = "0"
-    partyMember.style.opacity = "0.5"
+    //partyMember.style.zIndex = "-1"
+    //remove any active status on the dead party member
+    partyMember.classList.remove("active")
+    active_added = false;
+    partyMember.style.zIndex = "-1"
 }
 function isAlive(partyMember){
     //revert to whatever the default is 
