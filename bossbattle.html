@@ -11,6 +11,7 @@
     <script src = "stats.js" defer></script>
     <script src = "timers_thread.js" defer></script>
     <script src = "FPS.js" defer></script>
+    <script src = "boss_attacks.js" defer></script>
     <link rel = "stylesheet" href = "reset.css">
     <link rel = "stylesheet" href = "styles.css">
 </head>
@@ -42,14 +43,14 @@
             <div><button id = "spells_b" class = "btn" >Spells</button></div>
             <div><button id = "def_b" class = "btn" >Defend</button></div> <!--triples defense for next turn-->
             
-            <div><img src = "newknight.jpeg" id = "knight_img" class = "clickable"></div>
+            <div><img src = "newknight.jpeg" id = "knight_img" class = "clickable ally_img"></div>
            
-            <div><img src = "mage3.jpeg" id = "d_mage_img" class = "clickable"></div> 
+            <div><img src = "mage3.jpeg" id = "d_mage_img" class = "clickable ally_img"></div> 
        
-            <div><img src = "whitemage3.jpeg" id = "l_mage_img" class = "clickable"></div>
+            <div><img src = "whitemage3.jpeg" id = "l_mage_img" class = "clickable ally_img"></div>
 
 
-            <div><img src = "redmage3.jpeg" id = "r_mage_img" class = "clickable"></div>
+            <div><img src = "redmage3.jpeg" id = "r_mage_img" class = "clickable ally_img"></div>
     
             <div id = "u_label"></div>
             <div><progress id = "ultima_charge" value = "95" max = "100"></progress></div>
@@ -59,7 +60,7 @@
 <!--try and fix this pile of shit-->
         <div id = "p_menu" class = "hide">
             <div id = "k_hp" class = "hp_label"></div>
-            <div><progress id = "warrior_name_hp" max="550" value="550" class = "party_hp" ></progress></div>
+            <div><progress id = "warrior_name_hp" max="550" value="300" class = "party_hp" ></progress></div>
             <div id = "k_mp" class = "mp_label"></div>
             <div><progress id = "warrior_name_mp" max="120" value="120" class = "party_mp"></progress></div>
             <br>
@@ -69,7 +70,7 @@
             <br>
             <br>
             <div id = "b_hp" class = "hp_label"></div>
-            <div><progress id = "d_mage_name_hp" max="470" value="470" class = "party_hp"></progress></div>
+            <div><progress id = "d_mage_name_hp" max="470" value="100" class = "party_hp"></progress></div>
             <div id = "b_mp" class = "mp_label"></div>
             <div><progress id = "d_mage_name_mp" max="260" value="260" class = "party_mp"></progress></div>
             <br>
@@ -79,7 +80,7 @@
             <br>
             <br>
             <div id = "w_hp" class = "hp_label"></div>
-            <div><progress id = "l_mage_name_hp" max = "400" value = "400" class = "party_hp"></progress></div>
+            <div><progress id = "l_mage_name_hp" max = "400" value = "200" class = "party_hp"></progress></div>
             <div id = "w_mp" class = "mp_label"></div>
             <div><progress id = "l_mage_name_mp" max = "280" value = "280" class = "party_mp"></progress></div>
             <br>
@@ -89,7 +90,7 @@
             <br>
             <br>
             <div id = "r_hp" class = "hp_label"></div>
-            <div><progress id = "r_mage_name_hp" max = "380" value = "380" class = "party_hp"></progress></div>
+            <div><progress id = "r_mage_name_hp" max = "380" value = "300" class = "party_hp"></progress></div>
             <div id = "r_mp" class = "mp_label"></div>
             <div><progress id = "r_mage_name_mp" max = "360" value = "360" class = "party_mp"></progress></div>
         </div>

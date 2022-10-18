@@ -519,7 +519,7 @@ function isDead(partyMember){
     //remove any active status on the dead party member
     partyMember.classList.remove("active")
     active_added = false;
-    partyMember.style.zIndex = "-1"
+    partyMember.style.visibility = "hidden"
 }
 function isAlive(partyMember){
     //revert to whatever the default is 

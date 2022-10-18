@@ -111,14 +111,14 @@
           //ultimas don't have a crit or mp value
           //visibility image for 3 seconds, then turn it off
           
-          document.getElementById("img_template").src = "RadiantSupernova.jpeg"
+          i_menu.src = "RadiantSupernova.jpeg"
           i_menu.style.visibility = "visible"
           const DC = new Audio("DarkCreepy.mp3"); //change this
           DC.volume = 0.5;
           DC.play()
           DC.loop = false;
           setTimeout(()=>{
-              document.body.style.backgroundImage = "url('purveryorbg.png')"
+              changeBackground()
                                               //this will change based on phase
               DC.pause()
                   hp.value -= 1500/phase_mdef;
@@ -167,7 +167,6 @@
   };
   
   var trapped; //this can just be undefined for now, gets assigned boolean later
-  //Works, but for some reason boss is spamming attacks when it ends...
   function Entrapment(){ //Makes boss immobile for 2 turns
     let black_mage_mp = document.getElementById("d_mage_name_mp");
     if (black_mage_mp.value < 50){
@@ -312,7 +311,7 @@ function CounterSwitch(){
     //assign counter time according to phase
 
   function Pierce_Evil(){
-      var white_mage_mp = document.getElementById("l_mage_name_mp");
+      let white_mage_mp = document.getElementById("l_mage_name_mp");
       //see above comment...
       if (white_mage_mp.value <10){
           p1.style.visibility = "visible";
@@ -347,11 +346,107 @@ function CounterSwitch(){
       };
   
   };
+  var ally_targets = []
+  function makeAllyTargets(){
+    let maketargets = document.getElementsByClassName('ally_img')
+      for (let i = 0; i < maketargets.length; i++){
+          ally_targets.push(maketargets[i])
+          console.log(ally_targets)
+      };
+  }
 
-  function Angels_Grace(){ //moderate healing spell
-      document.getElementById("AngelsGrace");
-      
 
+var amt_healed;
+  function Angels_Grace(){ //moderate healing spell on one ally
+    //make the list of targets
+    makeAllyTargets();
+    for (let i = 0; i < ally_targets.length; i++){
+        //add the listener to each target
+        ally_targets[i].addEventListener('click', function addAllyTargets(){
+              //amt healed is 55% of the target's max. 
+            console.log(ally_targets)
+            const selected_ally = ally_targets.indexOf(this);
+            switch(selected_ally){
+                case 0: //knight
+                    console.log("healed knight")
+                    amt_healed = 303;
+                    //ensure it doesn't go over max
+                    if (warrior_hp.value + amt_healed > 550){
+                        Angels_Grace_Part2()
+                        warrior_hp.value = 550;
+                        //create a seperate function for the imagery/mp subtraction
+                    }else{
+                        Angels_Grace_Part2()
+                        warrior_hp.value += amt_healed;
+                    };
+                    //remove the listener
+                    ally_targets[i].removeEventListener('click', addAllyTargets)
+                break;
+                case 1: //dark mage
+                    console.log("healed dark mage")
+                    amt_healed = 259;
+                    if (black_mage_hp + amt_healed > 470){
+                        black_mage_hp.value = 470;
+                        Angels_Grace_Part2()
+                    }else{
+                        black_mage_hp.value += amt_healed;
+                        Angels_Grace_Part2()
+                    };
+                    ally_targets[i].removeEventListener('click', addAllyTargets)
+                break;
+                case 2: //light mage
+                    console.log("healed light mage")
+                    amt_healed = 220;
+                    if (white_mage_hp + amt_healed > 400){
+                        Angels_Grace_Part2()
+                        white_mage_hp.value = 400;
+                    }else{
+                        Angels_Grace_Part2()
+                        white_mage_hp.value += amt_healed;
+                    };
+                    ally_targets[i].removeEventListener('click', addAllyTargets)
+                break;
+                case 3: //rmage
+                    console.log("healed red mage")
+                    amt_healed = 209;
+                    if (red_mage_hp + amt_healed > 380){
+                        Angels_Grace_Part2()
+                        red_mage_hp.value = 380;
+                    }else{
+                        Angels_Grace_Part2()
+                        red_mage_hp.value += amt_healed;
+                    };
+                    ally_targets[i].removeEventListener('click', addAllyTargets)
+                default:
+                    console.log("heal switch - shits fucked")
+                break;
+
+            };
+    })
+
+    };
+  };
+  //all the usual visual stuff
+  function Angels_Grace_Part2(){
+    let white_mage_mp = document.getElementById("l_mage_name_mp");
+    if (white_mage_mp.value < 40){
+        p1.style.visibility = "visible";
+        p1.value = "Not enough MP!"
+        setTimeout(()=>{
+            p1.style.visibility = "hidden"
+        }, 3000)
+    }else{
+        white_mage_mp.value -= 40;
+        i_menu.src = "AngelsGrace.jpg"
+        i_menu.style.visibility = "visible"
+        const h2 = new Audio("heal2.mp3"); 
+        h2.play()
+        h2.loop = false;
+        setTimeout(()=>{                      //this will change based on phase
+            i_menu.style.visibility = "hidden"
+            ending3()
+        }, 1000);
+    };
   };
 
   function Rebirth(){ //revive a fallen ally with 50% hp
