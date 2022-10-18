@@ -1,9 +1,8 @@
 -css file is messy. Less IDs, more classes. Sve the IDs for JS
--Scrolling text like in games. This will require a pause button.
 -ultima bar turns gold when full
 -Gradual transitions as opposed to images just popping in
 -Keep all the numbers as int. No decimals 
--credits: vecteezy.com for the rain and credit the OSTs
+-credits: vecteezy.com for the rain and credit the OSTs, pixabay for sfx
 -Hover over attacks for descriptions
 -resize all backgrounds to 16:9 so they fit properly
 -replace all "visibility" with "display"
