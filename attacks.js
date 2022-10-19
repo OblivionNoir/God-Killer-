@@ -429,14 +429,14 @@ var amt_healed;
   //all the usual visual stuff
   function Angels_Grace_Part2(){
     let white_mage_mp = document.getElementById("l_mage_name_mp");
-    if (white_mage_mp.value < 40){
+    if (white_mage_mp.value < 20){
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
         setTimeout(()=>{
             p1.style.visibility = "hidden"
         }, 3000)
     }else{
-        white_mage_mp.value -= 40;
+        white_mage_mp.value -= 20;
         i_menu.src = "AngelsGrace.jpg"
         i_menu.style.visibility = "visible"
         const h2 = new Audio("heal2.mp3"); 
@@ -448,11 +448,72 @@ var amt_healed;
         }, 1000);
     };
   };
+function stillAlive(){
+    p1.style.visibility = "visible";
+    p1.value = "That ally is still alive!"
+    setTimeout(()=>{
+        p1.style.visibility = "hidden"
+    }, 2000)
+}
 
   function Rebirth(){ //revive a fallen ally with 50% hp
-      
-
+    makeAllyTargets()
+    for (let i = 0; i < ally_targets.length; i++){
+        ally_targets[i].addEventListener('click', function addReviveTargets(){
+            console.log(ally_targets)
+            const selected_ally = ally_targets.indexOf(this);
+            switch(selected_ally){
+                case 0:
+                    if (warrior_dead == true){
+                        warrior_dead == false;
+                        console.log("revived knight")
+                        isAlive(wa)
+                    }else{
+                        stillAlive()
+                    };
+                    document.removeEventListener('click', addReviveTargets)
+                break;
+                case 1:
+                    if (black_mage_dead == true){
+                        black_mage_dead == false;
+                        console.log("revived dark mage")
+                        isAlive(dmi)
+                    }else{
+                        stillAlive()
+                    }
+                    document.removeEventListener('click', addReviveTargets)
+                break;
+                case 2:
+                    if (white_mage_dead == true){
+                        white_mage_dead == false;
+                        console.log("revived light mage")
+                        isAlive(lmi)
+                    }else{
+                        stillAlive()
+                    }
+                    document.removeEventListener('click', addReviveTargets)
+                break;
+                case 3: 
+                if (red_mage_dead == true){
+                    red_mage_dead == false;
+                    console.log("revived red mage")
+                    isAlive(rmi)
+                }else{
+                    stillAlive()
+                }
+                document.removeEventListener('click', addReviveTargets)
+                break;
+                default:
+                    console.log("revive switch - shits fucked")
+                break;
+            }
+        })
+    }
   }
+
+function RebirthPart2(){
+    //graphical stuff
+}
 
   function ChainHeal(){ //heals all allies a small amount
       
@@ -462,6 +523,8 @@ var amt_healed;
   function Supreme_Altar(){ //her ult, fully restores party to default state
       //if anyone is dead, change their dead status to false
       document.body.style.backgroundImage = "url('altarbg.png')" //find sfx for this
+//change this to call the alive function for each character
+
       if (warrior_dead == true){ //first revive any dead members
           warrior_dead = false;
       }
@@ -471,6 +534,9 @@ var amt_healed;
       if (white_mage_dead == true){
           white_mage_dead = false;
       };
+      if (red_mage_dead == true){
+          red_mage_dead = false;
+      }
       //then restore mp and hp
       document.getElementById("warrior_name_hp").value = 550;
       document.getElementById("d_mage_name_hp").value = 470;
@@ -496,11 +562,11 @@ var amt_healed;
       red_mage_mdef = 1.2;
       red_mage_ev = 0.2;
 
-      document.getElementById("img_template").src = "SupremeAltar.jpg"
-          i_menu.style.visibility = "visible"
+      i_menu.src = "SupremeAltar.jpg"
+      i_menu.style.visibility = "visible"
         
           setTimeout(()=>{
-              document.body.style.backgroundImage = "url('purveryorbg.png')"//this will change based on phase
+              changeBackground()
               i_menu.style.visibility = "hidden"
               ending3()
           }, 7000);

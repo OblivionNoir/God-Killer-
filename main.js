@@ -56,6 +56,11 @@ var dmi = document.getElementById("d_mage_img")
 var lmi = document.getElementById("l_mage_img");
 var rmi = document.getElementById("r_mage_img");
 
+var warrior_dead = false;
+var black_mage_dead = false;
+var white_mage_dead = false;
+var red_mage_dead = false;
+
 var combat_buttons = document.getElementsByClassName('btn')
 
 var rain = document.getElementById("rainbg")
@@ -145,7 +150,14 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
 
 };
 
+function DeadMessage(){
+    p1.style.visibility = "visible";
+    p1.innerHTML = "This person is dead! Pick another character."
+    setTimeout(()=>{
+        p1.style.visibility = "hidden";
+    }, 2000)
 
+}
 
 var players_array = [];
 var players = document.getElementsByClassName('clickable');
@@ -154,45 +166,68 @@ for (let i = 0; i < players.length; i++) {
 }
 
 var active_added = false;
-for (let i = 0; i < players_array.length; i++){ 
-    players_array[i].addEventListener('click', function selected(){
-        console.log(players_array)
-        console.log("listeners added to players")
-        if (this.classList.contains('active')){ 
-            for (let i = 0; i != players_array.length; i++){
-                players_array[i].classList.remove('active') //remove all, not just one
-                active_added = false;
-            }//second for loop ends here    
-        }else if (active_added == false ){
-            this.classList.add('active')
-            active_added = true;
-            let list_index_players = players_array.indexOf(this);
-                switch(list_index_players){
-                    case 0:
-                        console.log("Warrior selected")
-                        warrior_menu()
-                    break;
-                    case 1:
-                        console.log("Dark Mage selected")
-                        d_mage_menu()
-                    break;
-                    case 2:
-                        console.log("Light Mage selected")
-                        l_mage_menu()
-                    break;
-                    case 3:
-                        console.log("Red Mage selected")
-                        r_mage_menu()
-                    break;
-                    default:
-                        console.log("switch 1 - shits fucked")
-                };
-            //access current index, then pull up appropriate menu
-        }else{
-            console.log("wtf")
-        };
-    }//listener ends here
-)};//first for loop ends here
+
+    for (let i = 0; i < players_array.length; i++){ 
+        players_array[i].addEventListener('click', window.selected = function(){
+            console.log(players_array)
+            console.log("listeners added to players")
+            if (this.classList.contains('active')){ 
+                for (let i = 0; i != players_array.length; i++){
+                    players_array[i].classList.remove('active') //remove all, not just one
+                    active_added = false;
+                }//second for loop ends here    
+            }else if (active_added == false ){
+                this.classList.add('active')
+                active_added = true;
+                let list_index_players = players_array.indexOf(this);
+                console.log(list_index_players)
+                    switch(list_index_players){
+                        case 0:
+                            if (warrior_dead == true){
+                                DeadMessage()
+                            }else{
+                                console.log("Warrior selected")
+                                warrior_menu()
+                            }
+                        break;
+                        case 1://mage is being recognized as 1, so why the fuck is it not working?
+                            if (black_mage_dead == true){
+                                DeadMessage()
+                            }else{
+                                //this is not being reached when she is revived
+                                console.log("Dark Mage selected")
+                                d_mage_menu()
+                            }
+                        break;
+                        case 2:
+                            if (white_mage_dead == true){
+                                DeadMessage()
+                            }else{
+                                console.log("Light Mage selected")
+                                l_mage_menu()
+                            }
+                        break;
+                        case 3:
+                            if (red_mage_dead == true){
+                                DeadMessage()
+                            }else{
+                                console.log("Red Mage selected")
+                                r_mage_menu()
+                            }
+                        break;
+                        default:
+                            console.log("switch 1 - shits fucked")
+                    };
+                //access current index, then pull up appropriate menu
+            }else{
+                console.log("wtf")
+            };
+        }//listener ends here
+    )};//first for loop ends here
+
+
+
+
 
 
 function menu_sfx(){
@@ -465,10 +500,7 @@ function timeout(){
     }, 2000);
 }
 
-var warrior_dead = false;
-var black_mage_dead = false;
-var white_mage_dead = false;
-var red_mage_dead = false;
+
 //spell menu should dissapear and reset while boss is attacking, so it shouldn't be a concern here
 //need to loop through the alive members if someone dies so the buttons work again. Functions?
 //Easiest way is probably a constant refresh in the background, but that's a lot of processing power
@@ -511,18 +543,41 @@ var red_mage_dead = false;
                     console.log("nobody is dead")
     
             };
-    
     };
     //apply the limitations of the dead status
 function isDead(partyMember){
     //partyMember.style.zIndex = "-1"
     //remove any active status on the dead party member
-    partyMember.classList.remove("active")
+   //partyMember.classList.remove("active")
     active_added = false;
-    partyMember.style.visibility = "hidden"
+    partyMember.style.opacity = "0.1"//There will be checks in the character selection to make sure they can't be selected
+    b_menu.style.visibility = "hidden"
+    //hide the buttons too
 }
 function isAlive(partyMember){
-    //revert to whatever the default is 
+    d_mage_menu() //for some fucking reason that only God knows, this is the only way to get the menu to show up again
+    //Make it into a switch
+    partyMember.style.opacity = "1"
+    //revert hp according to who is being revived
+    switch(partyMember){
+        case wa:
+            warrior_hp.value = 275;
+        break;
+        case dmi:
+            black_mage_hp.value = 235;
+        break;
+        case lmi:
+            white_mage_hp.value = 200;
+        break;
+        case rmi:
+            red_mage_hp.value = 190;
+        break;
+        default:
+            console.log("isAlive - shits fucked")
+        break;
+
+
+    }
 }
  
 
