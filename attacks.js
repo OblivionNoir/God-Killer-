@@ -130,27 +130,27 @@
   };
   
 
-
+//This one is slighly more expensive because of the double crit rate
   function Mirage_Blade(){ 
       let black_mage_mp = document.getElementById("d_mage_name_mp");
       //needs to be redefined every use or it references the OLD mp value and only works once
-      if (black_mage_mp.value <50){ 
+      if (black_mage_mp.value <22){ 
           p1.style.visibility = "visible";
           p1.value = "Not enough MP!"
           setTimeout(()=>{
               p1.style.visibility = "hidden"
           },2000)
       }else{ 
-          black_mage_mp.value -= 50;
+          black_mage_mp.value -= 22;
           i_menu.src = "MirageBlade.jpg" //i_menu is the image template
           i_menu.style.visibility = "visible"
           PE.play()
           PE.loop = false;
           setTimeout(()=>{
-                  hp.value -= (3000/phase_def); //hp = boss hp
+                  hp.value -= (1200/phase_def); //hp = boss hp
                   let d_crit = Math.floor(Math.random() * 9); //higher crit rate
                   if (d_crit == 8){
-                      hp.value -= (1200/phase_def);
+                      hp.value -= (1400/phase_def);
                       p1.style.visibility = "visible";
                       p1.value = "Critical hit!"
                       setTimeout(()=>{
@@ -167,9 +167,10 @@
   };
   
   var trapped; //this can just be undefined for now, gets assigned boolean later
+  //this is actually incredibly powerful. Give it a very high MP cost 
   function Entrapment(){ //Makes boss immobile for 2 turns
     let black_mage_mp = document.getElementById("d_mage_name_mp");
-    if (black_mage_mp.value < 50){
+    if (black_mage_mp.value < 65){
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
         setTimeout(()=>{
@@ -181,7 +182,7 @@
         console.log("already trapped")
 
     }else{ //execute spell
-        black_mage_mp.value -= 50;
+        black_mage_mp.value -= 65;
         i_menu.src = "Entrapment.jpg"
         i_menu.style.visibility = "visible"
         //find sfx
@@ -196,16 +197,29 @@
     } 
 }//closes off the first else statement
 
+//some math: 
+//First phase of the boss consists of 15k hp, or 18k phys and 16.5k mag with stats taken into account
+//phase 2: 15k hp, 21k phys, 19.5k mag
+//phase 3: 15k hp, 22.5k phys, 24k mag
+//That equals a total of 45k hp, 61.5k phys, 60k mag
+//There are more magic attacks, so lets say a 70% magic and 30% physical ratio
+//That means ~60450 total damage to win, or 60 moderate spells. 
+//Across 4 characters, that's 15 spells each.
+//With a mp/power ratio of 1:50, that's 750 mp total to kill the boss.
+//But one character is focused on healing, so let's subtract that from the total mp pool of 1020
+//This leaves me with 740 mp to work with across all 3 characters...not enough. 
+//With a 1:75 mp/power ratio, that gives me a 1125 mp pool to work with, not counting the healer. 
+//Taking the expensive spells like Entrapment into account, I think this is a good start. 
   function Black_Fire(){ //moderate spell damage
     let black_mage_mp = document.getElementById("d_mage_name_mp");
-    if (black_mage_mp.value <25){
+    if (black_mage_mp.value <14){
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
         setTimeout(()=>{
             p1.style.visibility = "hidden"
         }, 3000)
     }else{ 
-        black_mage_mp.value -= 25;
+        black_mage_mp.value -= 14;
         //visibility image for 3 seconds, then turn it off
         i_menu.src = "blackfire.png"
         i_menu.style.visibility = "visible"
@@ -213,10 +227,10 @@
         PE.play()
         PE.loop = false;
         setTimeout(()=>{
-                hp.value -= 400 - phase_mdef;
+                hp.value -= 1000 - phase_mdef;
                 let d_crit = Math.floor(Math.random() * 16);
                 if (d_crit == 15){
-                    hp.value -= 800 - phase_mdef;
+                    hp.value -= 1200 - phase_mdef;
                     p1.style.visibility = "visible";
                     p1.value = "Critical hit!"
                     setTimeout(()=>{
@@ -232,9 +246,10 @@
   }
 var mirror;
   function Shattered_Mirror(){
-        //Severely lower's bosses defenses for one turn
+        //Severely lower's bosses defenses for one turn, attacks do 2x
+        //ultimas don't count
     let black_mage_mp = document.getElementById("d_mage_name_mp");
-    if (black_mage_mp.value < 50){
+    if (black_mage_mp.value < 30){
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
         setTimeout(()=>{
@@ -246,7 +261,7 @@ var mirror;
         console.log("mirror already in effect")
 
     }else{ //execute spell
-        black_mage_mp.value -= 35;
+        black_mage_mp.value -= 30;
         i_menu.src = "shatteredmirror.png"
         i_menu.style.visibility = "visible"
         //find sfx
@@ -279,7 +294,7 @@ function MirrorRevert(){
 function CounterSwitch(){
         switch(true){
             case(phase2called == true):
-            if (mirror == true){//use the shorter version for Broken Mirror, one turn not 2 
+            if (mirror == true){//use the shorter version for Shattered Mirror, one turn not 2 
                 counter()
                 countdown_1turn(20000)
             }else{
@@ -313,14 +328,14 @@ function CounterSwitch(){
   function Pierce_Evil(){
       let white_mage_mp = document.getElementById("l_mage_name_mp");
       //see above comment...
-      if (white_mage_mp.value <10){
+      if (white_mage_mp.value <6){
           p1.style.visibility = "visible";
           p1.value = "Not enough MP!"
           setTimeout(()=>{
               p1.style.visibility = "hidden"
           }, 3000)
       }else{ 
-          white_mage_mp.value -= 10;
+          white_mage_mp.value -= 6;
           //visibility image for 3 seconds, then turn it off
           i_menu.src = "PierceEvil.jpg"
           i_menu.style.visibility = "visible"
@@ -328,10 +343,10 @@ function CounterSwitch(){
           PE.play()
           PE.loop = false;
           setTimeout(()=>{
-                  hp.value -= 200 - phase_mdef;
+                  hp.value -= 500 - phase_mdef;
                   let l_crit = Math.floor(Math.random() * 16);
                   if (l_crit == 15){
-                      hp.value -= 400 - phase_mdef;
+                      hp.value -= 700 - phase_mdef;
                       p1.style.visibility = "visible";
                       p1.value = "Critical hit!"
                       setTimeout(()=>{
@@ -356,77 +371,20 @@ function CounterSwitch(){
   }
 
 
-var amt_healed;
+
   function Angels_Grace(){ //moderate healing spell on one ally
     //make the list of targets
+    console.log("function called")
     makeAllyTargets();
-    for (let i = 0; i < ally_targets.length; i++){
-        //add the listener to each target
-        ally_targets[i].addEventListener('click', function addAllyTargets(){
-              //amt healed is 55% of the target's max. 
-            console.log(ally_targets)
-            const selected_ally = ally_targets.indexOf(this);
-            switch(selected_ally){
-                case 0: //knight
-                    console.log("healed knight")
-                    amt_healed = 303;
-                    //ensure it doesn't go over max
-                    if (warrior_hp.value + amt_healed > 550){
-                        Angels_Grace_Part2()
-                        warrior_hp.value = 550;
-                        //create a seperate function for the imagery/mp subtraction
-                    }else{
-                        Angels_Grace_Part2()
-                        warrior_hp.value += amt_healed;
-                    };
-                    //remove the listener
-                    ally_targets[i].removeEventListener('click', addAllyTargets)
-                break;
-                case 1: //dark mage
-                    console.log("healed dark mage")
-                    amt_healed = 259;
-                    if (black_mage_hp + amt_healed > 470){
-                        black_mage_hp.value = 470;
-                        Angels_Grace_Part2()
-                    }else{
-                        black_mage_hp.value += amt_healed;
-                        Angels_Grace_Part2()
-                    };
-                    ally_targets[i].removeEventListener('click', addAllyTargets)
-                break;
-                case 2: //light mage
-                    console.log("healed light mage")
-                    amt_healed = 220;
-                    if (white_mage_hp + amt_healed > 400){
-                        Angels_Grace_Part2()
-                        white_mage_hp.value = 400;
-                    }else{
-                        Angels_Grace_Part2()
-                        white_mage_hp.value += amt_healed;
-                    };
-                    ally_targets[i].removeEventListener('click', addAllyTargets)
-                break;
-                case 3: //rmage
-                    console.log("healed red mage")
-                    amt_healed = 209;
-                    if (red_mage_hp + amt_healed > 380){
-                        Angels_Grace_Part2()
-                        red_mage_hp.value = 380;
-                    }else{
-                        Angels_Grace_Part2()
-                        red_mage_hp.value += amt_healed;
-                    };
-                    ally_targets[i].removeEventListener('click', addAllyTargets)
-                default:
-                    console.log("heal switch - shits fucked")
-                break;
-
-            };
-    })
-
-    };
-  };
+   
+        };
   //all the usual visual stuff
+
+
+
+
+
+//not sure how to balance healing yet
   function Angels_Grace_Part2(){
     let white_mage_mp = document.getElementById("l_mage_name_mp");
     if (white_mage_mp.value < 20){
@@ -442,7 +400,7 @@ var amt_healed;
         const h2 = new Audio("heal2.mp3"); 
         h2.play()
         h2.loop = false;
-        setTimeout(()=>{                      //this will change based on phase
+        setTimeout(()=>{                     
             i_menu.style.visibility = "hidden"
             ending3()
         }, 1000);
@@ -512,7 +470,7 @@ function stillAlive(){
   }
 
 function RebirthPart2(){
-    //graphical stuff
+    //graphical stuff, mp cost, etc
 }
 
   function ChainHeal(){ //heals all allies a small amount
@@ -524,19 +482,11 @@ function RebirthPart2(){
       //if anyone is dead, change their dead status to false
       document.body.style.backgroundImage = "url('altarbg.png')" //find sfx for this
 //change this to call the alive function for each character
-
-      if (warrior_dead == true){ //first revive any dead members
           warrior_dead = false;
-      }
-      if (black_mage_dead == true){
           black_mage_dead = false;
-      }
-      if (white_mage_dead == true){
           white_mage_dead = false;
-      };
-      if (red_mage_dead == true){
           red_mage_dead = false;
-      }
+
       //then restore mp and hp
       document.getElementById("warrior_name_hp").value = 550;
       document.getElementById("d_mage_name_hp").value = 470;
@@ -598,7 +548,9 @@ function RebirthPart2(){
   }
 
   function My_Turn(){
-    //lowers boss rate of attack for 2 turns
+    //Reversal move that waits in the background and waits for her to be targeted. 
+    //Only one active at a time 
+    //Reflects attack back on the boss for 2x base damage. Doesn't trigger for Bleeding Sun. 
   }
 
 

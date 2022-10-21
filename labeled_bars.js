@@ -12,4 +12,4 @@ var r_mp = document.getElementById("r_mp").innerHTML = "MP: " + r_mage_name_mp.v
 
 var u_label = document.getElementById("u_label").innerHTML = ultima_charge.value + "/100";
 
-var boss_label = document.getElementById("boss_hp_label").innerHTML = hp.value + "/15000";
+var boss_label = document.getElementById("boss_hp_label").innerHTML = hp.value + "/45000";

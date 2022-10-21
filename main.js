@@ -168,7 +168,7 @@ for (let i = 0; i < players.length; i++) {
 var active_added = false;
 
     for (let i = 0; i < players_array.length; i++){ 
-        players_array[i].addEventListener('click', window.selected = function(){
+        players_array[i].addEventListener('click', function selected(){
             console.log(players_array)
             console.log("listeners added to players")
             if (this.classList.contains('active')){ 
@@ -555,22 +555,24 @@ function isDead(partyMember){
     //hide the buttons too
 }
 function isAlive(partyMember){
-    d_mage_menu() //for some fucking reason that only God knows, this is the only way to get the menu to show up again
-    //Make it into a switch
     partyMember.style.opacity = "1"
     //revert hp according to who is being revived
     switch(partyMember){
         case wa:
             warrior_hp.value = 275;
+            warrior_menu() //for some fucking reason that only God knows, this is the only way to get the menu to show up again
         break;
         case dmi:
             black_mage_hp.value = 235;
+            d_mage_menu()
         break;
         case lmi:
             white_mage_hp.value = 200;
+            l_mage_menu()
         break;
         case rmi:
             red_mage_hp.value = 190;
+            r_mage_menu()
         break;
         default:
             console.log("isAlive - shits fucked")
@@ -589,11 +591,11 @@ function isAlive(partyMember){
 function TestPhase(){
         if (hp.value <=0){
             Victory()
-        }else if (hp.value <10000 && hp.value > 5001 && phase2called == false){
+        }else if (hp.value <30000 && hp.value > 15001 && phase2called == false){
             phase2called = true;
             phase2()
             
-        }else if (hp.value <5001 && phase3called == false){
+        }else if (hp.value <15001 && phase3called == false){
             phase3called = true;
             phase3()
         }else{
