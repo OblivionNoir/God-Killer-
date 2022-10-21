@@ -5,27 +5,27 @@ function SpheresofInsanity(){
     PE.play()
     PE.loop = false;
     setTimeout(()=>{ //2 hits on random party members
-        let num_hits = 1; //this will need to be linked to how many 
+        let num_hits = 0; //this will need to be linked to how many 
         //surviving party members there are, then pick randomly between them
         while (num_hits !=3){ //two hits
             let target = randNumber(0, 3);
             console.log(target)
-            let dmg = randNumber(80, 101);
+            Randomizer(105)
             switch(true){
                 case(target == 0): //reformat to use list of non-dead
-                    var final_dmg_w = dmg/warrior_def
+                    var final_dmg_w = final_dmg/warrior_def
                     warrior_hp.value -= final_dmg_w; 
                     num_hits +=1
                     timeout_i_menu()
                 break;
                 case(target == 1):
-                    var final_dmg_d = dmg/black_mage_def
+                    var final_dmg_d = final_dmg/black_mage_def
                     black_mage_hp.value -= final_dmg_d;
                     num_hits +=1
                     timeout_i_menu()
                 break;
                 case(target == 2):
-                    var final_dmg_l = dmg/white_mage_def
+                    var final_dmg_l = final_dmg/white_mage_def
                     white_mage_hp.value -= final_dmg_l;
                     num_hits +=1
                     timeout_i_menu()

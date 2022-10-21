@@ -500,7 +500,16 @@ function timeout(){
     }, 2000);
 }
 
+var final_dmg;
+function Randomizer(base_power){
+    //use a random decimal between 0.95 and 1.05
+    let add_on = (Math.random() * (1.05 - 0.95) + 0.95).toFixed(3);
+    console.log(add_on*base_power)
+    final_dmg = add_on*base_power
+    //adds a 1-5% pos/neg randomizer to each attack that's used
+}
 
+Randomizer(1000)
 //spell menu should dissapear and reset while boss is attacking, so it shouldn't be a concern here
 //need to loop through the alive members if someone dies so the buttons work again. Functions?
 //Easiest way is probably a constant refresh in the background, but that's a lot of processing power

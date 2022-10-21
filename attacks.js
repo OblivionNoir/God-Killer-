@@ -77,8 +77,7 @@
           console.log("value" + l_crit)
           //crit
           if (l_crit == 1){
-              rand_dmg = randNumber(100,140) ; 
-              final_dmg = rand_dmg/phase_def;
+              Randomizer(120)
               hp.value -= final_dmg;
               p1.style.visibility = "visible";
               p1.value = "Critical hit!"
@@ -121,7 +120,8 @@
               changeBackground()
                                               //this will change based on phase
               DC.pause()
-                  hp.value -= 1500/phase_mdef;
+              Randomizer(2500)
+                  hp.value -= final_dmg/phase_mdef;
               i_menu.style.visibility = "hidden"
               ending3()
           }, 7000);
@@ -147,10 +147,12 @@
           PE.play()
           PE.loop = false;
           setTimeout(()=>{
-                  hp.value -= (1200/phase_def); //hp = boss hp
+                  Randomizer(1200)
+                  hp.value -= (final_dmg/phase_def); //hp = boss hp
                   let d_crit = Math.floor(Math.random() * 9); //higher crit rate
                   if (d_crit == 8){
-                      hp.value -= (1400/phase_def);
+                        Randomizer(1400)
+                      hp.value -= (final_dmg/phase_def);
                       p1.style.visibility = "visible";
                       p1.value = "Critical hit!"
                       setTimeout(()=>{
@@ -227,7 +229,8 @@
         PE.play()
         PE.loop = false;
         setTimeout(()=>{
-                hp.value -= 1000 - phase_mdef;
+                Randomizer(1000)
+                hp.value -= final_dmg - phase_mdef;
                 let d_crit = Math.floor(Math.random() * 16);
                 if (d_crit == 15){
                     hp.value -= 1200 - phase_mdef;
@@ -343,7 +346,8 @@ function CounterSwitch(){
           PE.play()
           PE.loop = false;
           setTimeout(()=>{
-                  hp.value -= 500 - phase_mdef;
+                Randomizer(500)
+                  hp.value -= final_dmg - phase_mdef;
                   let l_crit = Math.floor(Math.random() * 16);
                   if (l_crit == 15){
                       hp.value -= 700 - phase_mdef;
