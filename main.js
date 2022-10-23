@@ -242,7 +242,7 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
     //if red, show menu. If null, hide menu
     //active class = red
     console.log('made it -knight') 
-    if (wa.classList.contains('active')){
+    if (wa.classList.contains('active') && warrior_dead == false){
         menu_sfx()
         addButtons() 
             document.getElementById("btn_1").innerHTML = "Thousand Men"
@@ -261,7 +261,7 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
 function d_mage_menu(){ //1//need to check if it has border or not
     //if red, show menu. If null, hide menu
     //active class = red
-    if (dmi.classList.contains('active')){
+    if (dmi.classList.contains('active') && black_mage_dead == false){
         menu_sfx()
         addButtons()
               document.getElementById("btn_1").innerHTML = "Radiant Supernova"
@@ -280,7 +280,7 @@ function d_mage_menu(){ //1//need to check if it has border or not
 function l_mage_menu(){ //2//need to check if it has border or not
         //if red, show menu. If null, hide menu
         //active class = red
-    if (lmi.classList.contains('active')){
+    if (lmi.classList.contains('active') && white_mage_dead == false){
         menu_sfx()
         addButtons()
               document.getElementById("btn_1").innerHTML = "Supreme Altar"
@@ -299,7 +299,7 @@ function l_mage_menu(){ //2//need to check if it has border or not
 function r_mage_menu(){ //3 //need to check if it has border or not
     //if red, show menu. If null, hide menu
     //active class = red
-    if (rmi.classList.contains('active')){
+    if (rmi.classList.contains('active') && red_mage_dead == false){
     menu_sfx()
     addButtons()
           document.getElementById("btn_1").innerHTML = "Scarlet Subversion"
@@ -499,17 +499,18 @@ function timeout(){
         p1.style.visibility = "hidden"
     }, 2000);
 }
-
+var final_dmg_pre;
 var final_dmg;
 function Randomizer(base_power){
-    //use a random decimal between 0.95 and 1.05
-    let add_on = (Math.random() * (1.05 - 0.95) + 0.95).toFixed(3);
-    console.log(add_on*base_power)
-    final_dmg = add_on*base_power
+    let add_on = (Math.random() * (106 - 95) + 95)
+    //console.log(add_on*base_power)
+    final_dmg_pre = add_on*base_power/100
+    final_dmg = final_dmg_pre.toFixed(0)
+    console.log(final_dmg_pre)
+    console.log(final_dmg)
     //adds a 1-5% pos/neg randomizer to each attack that's used
 }
 
-Randomizer(1000)
 //spell menu should dissapear and reset while boss is attacking, so it shouldn't be a concern here
 //need to loop through the alive members if someone dies so the buttons work again. Functions?
 //Easiest way is probably a constant refresh in the background, but that's a lot of processing power
