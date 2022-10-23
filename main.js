@@ -8,7 +8,7 @@
 //initial stats
 //remember to add hover descriptions over the spells!!!
 
-
+var ag_active = false;
 //hide elements that get used later
 var worker = new Worker('timers_thread.js'); //worker thread for timers
 
@@ -317,6 +317,7 @@ function r_mage_menu(){ //3 //need to check if it has border or not
 };
 
 var defend_active =false;
+
     //here we need to loop through the battle options, much like the character selection
 var buttons_array = [];
 var button = document.getElementsByClassName('btn');
@@ -398,6 +399,7 @@ var button = document.getElementsByClassName('btn');
 
     //this one doens't need on off state, it's just one click
     //can't use class or I'd get 0-8 instead of 0-2
+
     function spellsMenu(){ 
         console.log("spells menu called")
         for (let i = 0; i < spells_array.length; i++){
@@ -443,7 +445,7 @@ var button = document.getElementsByClassName('btn');
                                 Whims_of_Fate()
                             }else if (spells_array[2].innerHTML == "Entrapment"){
                                 Entrapment()
-                            }else if (spells_array[2].innerHTML == "Angel's Grace"){
+                            }else if (spells_array[2].innerHTML == "Angel's Grace" && ag_active == false){
                                 Angels_Grace()
                             }else if (spells_array[2].innerHTML == "Bloody Vengeance"){
                                 Bloody_Vengeance()
