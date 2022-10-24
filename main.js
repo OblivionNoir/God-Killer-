@@ -8,7 +8,7 @@
 //initial stats
 //remember to add hover descriptions over the spells!!!
 
-var ag_active = false;
+
 //hide elements that get used later
 var worker = new Worker('timers_thread.js'); //worker thread for timers
 
@@ -364,9 +364,6 @@ var button = document.getElementsByClassName('btn');
                         }
              //cannot be used if already in effect!!! Lasts 2 turns
                         
-                   
-
-                   
                     break;
                     default:
                         console.log("buttons switch - shits fucked")
@@ -445,7 +442,7 @@ var button = document.getElementsByClassName('btn');
                                 Whims_of_Fate()
                             }else if (spells_array[2].innerHTML == "Entrapment"){
                                 Entrapment()
-                            }else if (spells_array[2].innerHTML == "Angel's Grace" && ag_active == false){
+                            }else if (spells_array[2].innerHTML == "Angel's Grace"){
                                 Angels_Grace()
                             }else if (spells_array[2].innerHTML == "Bloody Vengeance"){
                                 Bloody_Vengeance()
@@ -670,8 +667,18 @@ var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the els
 
 
 }
+//check for ultima status and change appearance accordingly
+//attacks, which raise the bar, are done with clicks so this should check every time by default
+var u_button = document.getElementById("btn_1")
+document.addEventListener('click', function(){
+    console.log("ultima check triggered")
+    if (ultima.value == 99 || ultima.value ==100){//to offset the extra click needed to actuallyexecute the listener when the bar is full
+        ultima.value = 100
+        u_button.classList.add("rainbowglow")//add rainbow glow to the button
+        console.log ("added")
+    }
 
-
+})
 
 //warrior is 0, dmage is 1, lmage is 2 
 

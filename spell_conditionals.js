@@ -65,3 +65,15 @@ function makeAllyTargets(){
         console.log(ally_targets)
     };
 }
+
+function ending3(){ //call after every player attack
+    counter() 
+    TestPhase()
+}
+
+function RevertUltima(){
+    u_button.classList.remove("rainbowglow");
+    ultima.value = 0;
+    console.log("removed glow");
+
+  }

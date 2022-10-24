@@ -160,7 +160,7 @@ body{
     background-color: grey;
 }
 
-#rainbowglow{ /* add this to first button child when ultima is ready*/
+.rainbowglow{ /* add this to first button child when ultima is ready*/
     animation: rainbow-bg 2.5s linear;
     animation-iteration-count: infinite;
 }

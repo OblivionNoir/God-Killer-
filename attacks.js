@@ -1,45 +1,4 @@
-//good idea to keep track of these for now
- turn_counter_value = 0;
- turn_counter = []
-  function counter(){
-      let UC = document.getElementById("ultima_charge");
-      UC.value +=1;
-      turn_counter_value +=1;
-      black_mage_mp += 5;
-      white_mage_mp += 5;
-      warrior_mp += 5;
-      turn_counter.push(turn_counter_value)
-      return turn_counter
-  }
 
-  //1 turn = 20 seconds (average of boss attack time)
-
-
-  var LastAttacks = [] //store last attacks used by player, some skills rely on it
-
-//try event listener that adds +1 to value every time counter() is called
-//make new thread for this
-
-
-
-//Boss will not attack dead party members, remember to code that in!!!
-
-
-
-
-
-      
-
-  function randNumber(min, max) {
-      return Math.floor(Math.random() * (max - min) ) + min;
-    }
-  function timeout_i_menu(){
-      setTimeout(()=>{
-          i_menu.style.visibility = "hidden"
-      }, 2000)
-  }
-  //boss attacks
- 
 
   //warrior attacks
 
@@ -65,10 +24,7 @@
     //Like a normal attack but a guaranteed crit. 
 
   }
-  function ending3(){ //call after every player attack
-      counter() 
-      TestPhase()
-  }
+
   //dark mage attacks
   function basic(){
 
@@ -106,10 +62,11 @@
 };
 
   function Radiant_Supernova(){ //her ult
+      document.body.style.backgroundImage = "";
       document.body.style.backgroundImage = "url('blackhole.png')"
           //ultimas don't have a crit or mp value
           //visibility image for 3 seconds, then turn it off
-          
+          i_menu.src = "" //Reset to blank prevent previous image from showing
           i_menu.src = "RadiantSupernova.jpeg"
           i_menu.style.visibility = "visible"
           const DC = new Audio("DarkCreepy.mp3"); //change this
@@ -124,6 +81,7 @@
                   hp.value -= final_dmg/phase_mdef;
               i_menu.style.visibility = "hidden"
               ending3()
+              RevertUltima()
           }, 7000);
       
           
@@ -142,6 +100,7 @@
           },2000)
       }else{ 
           black_mage_mp.value -= 22;
+          i_menu.src = "" //Reset to blank prevent previous image from showing
           i_menu.src = "MirageBlade.jpg" //i_menu is the image template
           i_menu.style.visibility = "visible"
           PE.play()
@@ -185,6 +144,7 @@
 
     }else{ //execute spell
         black_mage_mp.value -= 65;
+        i_menu.src = "" //Reset to blank prevent previous image from showing
         i_menu.src = "Entrapment.jpg"
         i_menu.style.visibility = "visible"
         //find sfx
@@ -223,6 +183,7 @@
     }else{ 
         black_mage_mp.value -= 14;
         //visibility image for 3 seconds, then turn it off
+        i_menu.src = "" //Reset to blank prevent previous image from showing
         i_menu.src = "blackfire.png"
         i_menu.style.visibility = "visible"
         const PE = new Audio("pierceevil.wav"); //find new sfx
@@ -245,7 +206,6 @@
         }, 3000);
         
     };
-    counter()
   }
 var mirror;
   function Shattered_Mirror(){
@@ -265,11 +225,13 @@ var mirror;
 
     }else{ //execute spell
         black_mage_mp.value -= 30;
+        i_menu.src = "" //Reset to blank prevent previous image from showing
         i_menu.src = "shatteredmirror.png"
         i_menu.style.visibility = "visible"
         //find sfx
         setTimeout(()=>{
             i_menu.style.visibility = "hidden"
+            ending3()
 
         }, 3000);
         //change timer according to phase
@@ -277,7 +239,7 @@ var mirror;
         CounterSwitch()
         MirrorLower()
     } 
-    counter()
+
   }
   //light mage attacks
 //change the loop to go through 5
@@ -294,38 +256,7 @@ function MirrorRevert(){
     phase_mdef *= 2;
     console.log(phase_def, phase_mdef)
 }
-function CounterSwitch(){
-        switch(true){
-            case(phase2called == true):
-            if (mirror == true){//use the shorter version for Shattered Mirror, one turn not 2 
-                counter()
-                countdown_1turn(20000)
-            }else{
-                counter()
-                trapped_countdown(40000)
-            }
-        break;
-            case(phase3called == true):
-            if (mirror == true){
-                counter()
-                countdown_1turn(15000)
-            }else{
-                counter()
-                trapped_countdown(30000)
-            }      
-        break;
-            default://phase 1 
-            if (mirror == true){
-                counter()
-                countdown_1turn(25000)
-            }else{
-                counter()
-                trapped_countdown(50000)
-            }
-        break;
-        }
 
-    }; 
     //assign counter time according to phase
 
   function Pierce_Evil(){
@@ -340,6 +271,7 @@ function CounterSwitch(){
       }else{ 
           white_mage_mp.value -= 6;
           //visibility image for 3 seconds, then turn it off
+          i_menu.src = "" //Reset to blank prevent previous image from showing
           i_menu.src = "PierceEvil.jpg"
           i_menu.style.visibility = "visible"
           const PE = new Audio("pierceevil.wav");
@@ -365,14 +297,7 @@ function CounterSwitch(){
       };
   
   };
-  var ally_targets = []
-  function makeAllyTargets(){
-    let maketargets = document.getElementsByClassName('ally_img')
-      for (let i = 0; i < maketargets.length; i++){
-          ally_targets.push(maketargets[i])
-          console.log(ally_targets)
-      };
-  }
+
 
 function removeAllyTargets(){ 
     for(let i = 0; i < ally_targets.length; i++){
@@ -468,6 +393,7 @@ function addAllyTargets(){
         }, 3000)
     }else{
         white_mage_mp.value -= 20;
+        i_menu.src = "" //Reset to blank prevent previous image from showing
         i_menu.src = "AngelsGrace.jpg"
         i_menu.style.visibility = "visible"
         const h2 = new Audio("heal2.mp3"); 
@@ -510,6 +436,7 @@ function removeReviveTargets(){
             case 0:
                 if (warrior_dead == true){
                     warrior_dead == false;
+                    RebirthPart2()
                     console.log("revived knight")
                     isAlive(wa)
                 }else{
@@ -519,6 +446,7 @@ function removeReviveTargets(){
             case 1:
                 if (black_mage_dead == true){
                     black_mage_dead == false;
+                    RebirthPart2()
                     console.log("revived dark mage")
                     isAlive(dmi)
                 }else{
@@ -528,6 +456,7 @@ function removeReviveTargets(){
             case 2:
                 if (white_mage_dead == true){
                     white_mage_dead == false;
+                    RebirthPart2()
                     console.log("revived light mage")
                     isAlive(lmi)
                 }else{
@@ -537,6 +466,7 @@ function removeReviveTargets(){
             case 3: 
             if (red_mage_dead == true){
                 red_mage_dead == false;
+                RebirthPart2()
                 console.log("revived red mage")
                 isAlive(rmi)
             }else{
@@ -547,17 +477,36 @@ function removeReviveTargets(){
                 console.log("revive switch - shits fucked")
             break;
         };
+     
         ally_targets.forEach(removeReviveTargets)
 
     };
 
 
-
-
-
+//graphical stuff, mp cost, etc
 function RebirthPart2(){
-    //graphical stuff, mp cost, etc
-}
+    let white_mage_mp = document.getElementById("l_mage_name_mp");
+    if (white_mage_mp.value < 50){
+        p1.style.visibility = "visible";
+        p1.value = "Not enough MP!"
+        setTimeout(()=>{
+            p1.style.visibility = "hidden"
+        }, 3000)
+    }else{
+        white_mage_mp.value -= 50;
+        i_menu.src = "revival.png"
+        i_menu.style.visibility = "visible"
+        const h2 = new Audio("heal2.mp3"); //find new sfx
+        h2.play()
+        h2.loop = false;
+        //this can probably be a function
+        setTimeout(()=>{                     
+            i_menu.style.visibility = "hidden"
+            ending3()
+        }, 3000);
+    };
+  };
+
 
   function ChainHeal(){ //heals all allies a small amount
       
@@ -567,13 +516,11 @@ function RebirthPart2(){
   function Supreme_Altar(){ //her ult, fully restores party to default state
       //if anyone is dead, change their dead status to false
       document.body.style.backgroundImage = "url('altarbg.png')" //find sfx for this
-//change this to call the alive function for each character
-          warrior_dead = false;
-          black_mage_dead = false;
-          white_mage_dead = false;
-          red_mage_dead = false;
-
-      //then restore mp and hp
+        isAlive(wa)
+        isAlive(dmi)
+        isAlive(lmi)
+        isAlive(rmi)
+      //then fully restore mp and hp
       document.getElementById("warrior_name_hp").value = 550;
       document.getElementById("d_mage_name_hp").value = 470;
       document.getElementById("l_mage_name_hp").value = 400;
@@ -600,15 +547,15 @@ function RebirthPart2(){
 
       i_menu.src = "SupremeAltar.jpg"
       i_menu.style.visibility = "visible"
-        
+      RevertUltima()
           setTimeout(()=>{
               changeBackground()
               i_menu.style.visibility = "hidden"
               ending3()
           }, 7000);
-      
 
   };
+
 
   //red mage attacks
 
