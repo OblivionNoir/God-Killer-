@@ -664,21 +664,11 @@ var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the els
                 growl.play();
                 growl.volume = 0.8;
             },40000) 
-
-
-}
+};
 //check for ultima status and change appearance accordingly
 //attacks, which raise the bar, are done with clicks so this should check every time by default
-var u_button = document.getElementById("btn_1")
-document.addEventListener('click', function(){
-    console.log("ultima check triggered")
-    if (ultima.value == 99 || ultima.value ==100){//to offset the extra click needed to actuallyexecute the listener when the bar is full
-        ultima.value = 100
-        u_button.classList.add("rainbowglow")//add rainbow glow to the button
-        console.log ("added")
-    }
+//use promises for this instead?
 
-})
 
 //warrior is 0, dmage is 1, lmage is 2 
 

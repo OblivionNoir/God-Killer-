@@ -69,8 +69,18 @@ function makeAllyTargets(){
 function ending3(){ //call after every player attack
     counter() 
     TestPhase()
+    if (ultima.value ==100){
+        AddUltima()
+    }
+    
 }
 
+function AddUltima(){
+    u_button.classList.add("rainbowglow")//add rainbow glow to the button
+    console.log ("added")
+};
+
+var u_button = document.getElementById("btn_1")
 function RevertUltima(){
     u_button.classList.remove("rainbowglow");
     ultima.value = 0;

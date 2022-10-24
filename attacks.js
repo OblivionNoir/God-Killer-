@@ -317,6 +317,7 @@ function Angels_Grace(){ //moderate healing spell on one ally
 
 };
 
+//Need to add conditional to prevent targeting dead characters!
 function addAllyTargets(){
     console.log(ally_targets)
     const selected_ally = ally_targets.indexOf(this);
@@ -326,7 +327,10 @@ function addAllyTargets(){
             console.log("healed knight")
             amt_healed = 303;
             //ensure it doesn't go over max
-            if (warrior_hp.value + amt_healed > 550){
+            if (warrior_dead == true){
+                DeadMessage()
+            }
+            else if (warrior_hp.value + amt_healed > 550){
                 Angels_Grace_Part2()
                 warrior_hp.value = 550;
                 //create a seperate function for the imagery/mp subtraction
@@ -335,13 +339,13 @@ function addAllyTargets(){
                 warrior_hp.value += amt_healed;
             };
             //remove the listener
-           
         break;
         case 1: //dark mage
-
-            console.log("healed dark mage")
             amt_healed = 259;
-            if (black_mage_hp + amt_healed > 470){
+            if (black_mage_dead == true){
+                DeadMessage()
+            }
+            else if (black_mage_hp + amt_healed > 470){
                 black_mage_hp.value = 470;
                 Angels_Grace_Part2()
             }else{
@@ -350,9 +354,11 @@ function addAllyTargets(){
             };
         break;
         case 2: //light mage
-            console.log("healed light mage")
             amt_healed = 220;
-            if (white_mage_hp + amt_healed > 400){
+            if (white_mage_dead == true){
+                DeadMessage()
+            }
+            else if (white_mage_hp + amt_healed > 400){
                 Angels_Grace_Part2()
                 white_mage_hp.value = 400;
             }else{
@@ -361,9 +367,11 @@ function addAllyTargets(){
             };
         break;
         case 3: //rmage
-            console.log("healed red mage")
             amt_healed = 209;
-            if (red_mage_hp + amt_healed > 380){
+            if (red_mage_dead == true){
+                DeadMessage()
+            }
+            else if (red_mage_hp + amt_healed > 380){
                 Angels_Grace_Part2()
                 red_mage_hp.value = 380;
             }else{
