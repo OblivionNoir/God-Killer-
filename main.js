@@ -571,18 +571,22 @@ function isAlive(partyMember){
     //revert hp according to who is being revived
     switch(partyMember){
         case wa:
+            warrior_dead = false;
             warrior_hp.value = 275;
             warrior_menu() //for some fucking reason that only God knows, this is the only way to get the menu to show up again
         break;
         case dmi:
+            black_mage_dead = false;
             black_mage_hp.value = 235;
             d_mage_menu()
         break;
         case lmi:
+            white_mage_dead = false;
             white_mage_hp.value = 200;
             l_mage_menu()
         break;
         case rmi:
+            red_mage_dead = false;
             red_mage_hp.value = 190;
             r_mage_menu()
         break;

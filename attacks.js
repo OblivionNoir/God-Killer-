@@ -374,11 +374,12 @@ function CounterSwitch(){
       };
   }
 
-function removeAllyTargets(){ //no idea why this sin't being recognized. Fucky way for now. 
+function removeAllyTargets(){ 
     for(let i = 0; i < ally_targets.length; i++){
-    ally_targets[i].removeEventListener("click", addAllyTargets)//calling a function that doesn't exist...
+    ally_targets[i].removeEventListener("click", addAllyTargets)
 }
 }
+
 //not sure if this list even needs to be created, but leave it until everything
 function Angels_Grace(){ //moderate healing spell on one ally
     //make the list of targets
@@ -456,10 +457,6 @@ function addAllyTargets(){
 
   //all the usual visual stuff
 
-
-
-
-
 //not sure how to balance healing yet
   function Angels_Grace_Part2(){
     let white_mage_mp = document.getElementById("l_mage_name_mp");
@@ -490,60 +487,73 @@ function stillAlive(){
     }, 2000)
 }
 
+//below here is rebirth stuff. Do not touch angel's grace
+
+function removeReviveTargets(){
+    for(let i = 0; i < ally_targets.length; i++){
+    ally_targets[i].removeEventListener("click", addReviveTargets)
+}
+    
+}
+
   function Rebirth(){ //revive a fallen ally with 50% hp
     makeAllyTargets()
     for (let i = 0; i < ally_targets.length; i++){
-        ally_targets[i].addEventListener('click', function addReviveTargets(){
-            console.log(ally_targets)
-            const selected_ally = ally_targets.indexOf(this);
-            switch(selected_ally){
-                case 0:
-                    if (warrior_dead == true){
-                        warrior_dead == false;
-                        console.log("revived knight")
-                        isAlive(wa)
-                    }else{
-                        stillAlive()
-                    };
-                    document.removeEventListener('click', addReviveTargets)
-                break;
-                case 1:
-                    if (black_mage_dead == true){
-                        black_mage_dead == false;
-                        console.log("revived dark mage")
-                        isAlive(dmi)
-                    }else{
-                        stillAlive()
-                    }
-                    document.removeEventListener('click', addReviveTargets)
-                break;
-                case 2:
-                    if (white_mage_dead == true){
-                        white_mage_dead == false;
-                        console.log("revived light mage")
-                        isAlive(lmi)
-                    }else{
-                        stillAlive()
-                    }
-                    document.removeEventListener('click', addReviveTargets)
-                break;
-                case 3: 
-                if (red_mage_dead == true){
-                    red_mage_dead == false;
-                    console.log("revived red mage")
-                    isAlive(rmi)
+        ally_targets[i].addEventListener('click', addReviveTargets);
+    };
+
+};
+    function addReviveTargets(){
+        console.log(ally_targets)
+        const revived_ally = ally_targets.indexOf(this);
+        switch(revived_ally){
+            case 0:
+                if (warrior_dead == true){
+                    warrior_dead == false;
+                    console.log("revived knight")
+                    isAlive(wa)
+                }else{
+                    stillAlive()
+                };
+            break;
+            case 1:
+                if (black_mage_dead == true){
+                    black_mage_dead == false;
+                    console.log("revived dark mage")
+                    isAlive(dmi)
                 }else{
                     stillAlive()
                 }
-                document.removeEventListener('click', addReviveTargets)
-                break;
-                default:
-                    console.log("revive switch - shits fucked")
-                break;
+            break;
+            case 2:
+                if (white_mage_dead == true){
+                    white_mage_dead == false;
+                    console.log("revived light mage")
+                    isAlive(lmi)
+                }else{
+                    stillAlive()
+                }
+            break;
+            case 3: 
+            if (red_mage_dead == true){
+                red_mage_dead == false;
+                console.log("revived red mage")
+                isAlive(rmi)
+            }else{
+                stillAlive()
             }
-        })
-    }
-  }
+            break;
+            default:
+                console.log("revive switch - shits fucked")
+            break;
+        };
+        ally_targets.forEach(removeReviveTargets)
+
+    };
+
+
+
+
 
 function RebirthPart2(){
     //graphical stuff, mp cost, etc
