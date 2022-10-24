@@ -376,7 +376,7 @@ function CounterSwitch(){
 
 function removeAllyTargets(){ //no idea why this sin't being recognized. Fucky way for now. 
     for(let i = 0; i < ally_targets.length; i++){
-    ally_targets[i].removeEventListener("click", addAllyTargets)
+    ally_targets[i].removeEventListener("click", addAllyTargets)//calling a function that doesn't exist...
 }
 }
 //not sure if this list even needs to be created, but leave it until everything
@@ -385,73 +385,75 @@ function Angels_Grace(){ //moderate healing spell on one ally
     makeAllyTargets();
     for (let i = 0; i < ally_targets.length; i++){
         //add the listener to each target
-        ally_targets[i].addEventListener('click', function addAllyTargets(){
+        ally_targets[i].addEventListener('click', addAllyTargets);
               //amt healed is 55% of the target's max. 
-            console.log(ally_targets)
-            const selected_ally = ally_targets.indexOf(this);
-            switch(selected_ally){
-                case 0: //knight
-                //THANK FUCKING GOD IT FINALLY WORKS
-                    console.log("healed knight")
-                    amt_healed = 303;
-                    //ensure it doesn't go over max
-                    if (warrior_hp.value + amt_healed > 550){
-                        Angels_Grace_Part2()
-                        warrior_hp.value = 550;
-                        //create a seperate function for the imagery/mp subtraction
-                    }else{
-                        Angels_Grace_Part2()
-                        warrior_hp.value += amt_healed;
-                    };
-                    //remove the listener
-                   
-                break;
-                case 1: //dark mage
-        
-                    console.log("healed dark mage")
-                    amt_healed = 259;
-                    if (black_mage_hp + amt_healed > 470){
-                        black_mage_hp.value = 470;
-                        Angels_Grace_Part2()
-                    }else{
-                        black_mage_hp.value += amt_healed;
-                        Angels_Grace_Part2()
-                    };
-                break;
-                case 2: //light mage
-                    console.log("healed light mage")
-                    amt_healed = 220;
-                    if (white_mage_hp + amt_healed > 400){
-                        Angels_Grace_Part2()
-                        white_mage_hp.value = 400;
-                    }else{
-                        Angels_Grace_Part2()
-                        white_mage_hp.value += amt_healed;
-                    };
-                break;
-                case 3: //rmage
-                    console.log("healed red mage")
-                    amt_healed = 209;
-                    if (red_mage_hp + amt_healed > 380){
-                        Angels_Grace_Part2()
-                        red_mage_hp.value = 380;
-                    }else{
-                        Angels_Grace_Part2()
-                        red_mage_hp.value += amt_healed;
-                    };
-                default:
-                    console.log("heal switch - shits fucked")
-                break;
+    }; 
 
+};
+
+function addAllyTargets(){
+    console.log(ally_targets)
+    const selected_ally = ally_targets.indexOf(this);
+    switch(selected_ally){
+        case 0: //knight
+        //THANK FUCKING GOD IT FINALLY WORKS
+            console.log("healed knight")
+            amt_healed = 303;
+            //ensure it doesn't go over max
+            if (warrior_hp.value + amt_healed > 550){
+                Angels_Grace_Part2()
+                warrior_hp.value = 550;
+                //create a seperate function for the imagery/mp subtraction
+            }else{
+                Angels_Grace_Part2()
+                warrior_hp.value += amt_healed;
             };
-            for(let i = 0; i < ally_targets.length; i++){//works, but only removes from the selected ally. Try foreach?
-                ally_targets[i].removeEventListener("click", addAllyTargets)
-            }
+            //remove the listener
+           
+        break;
+        case 1: //dark mage
 
-    })
+            console.log("healed dark mage")
+            amt_healed = 259;
+            if (black_mage_hp + amt_healed > 470){
+                black_mage_hp.value = 470;
+                Angels_Grace_Part2()
+            }else{
+                black_mage_hp.value += amt_healed;
+                Angels_Grace_Part2()
+            };
+        break;
+        case 2: //light mage
+            console.log("healed light mage")
+            amt_healed = 220;
+            if (white_mage_hp + amt_healed > 400){
+                Angels_Grace_Part2()
+                white_mage_hp.value = 400;
+            }else{
+                Angels_Grace_Part2()
+                white_mage_hp.value += amt_healed;
+            };
+        break;
+        case 3: //rmage
+            console.log("healed red mage")
+            amt_healed = 209;
+            if (red_mage_hp + amt_healed > 380){
+                Angels_Grace_Part2()
+                red_mage_hp.value = 380;
+            }else{
+                Angels_Grace_Part2()
+                red_mage_hp.value += amt_healed;
+            };
+        default:
+            console.log("heal switch - shits fucked")
+        break;
 
     };
-  };
+    ally_targets.forEach(removeAllyTargets)
+
+};
+
+
   //all the usual visual stuff
 
 
