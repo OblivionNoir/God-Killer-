@@ -1,3 +1,5 @@
+-Add a small pause between attack calls to prevent spamming to charge the ultima super fast
+-add items so characters can still be revived if l mage dies
 -css file is messy. Less IDs, more classes. Sve the IDs for JS
 -ultima bar turns gold when full
 -Gradual transitions as opposed to images just popping in
