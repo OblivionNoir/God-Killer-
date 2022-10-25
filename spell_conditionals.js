@@ -55,7 +55,22 @@ function timeout_i_menu(){
         i_menu.style.visibility = "hidden"
     }, 2000)
 }
-
+function p1_3sec(){
+    setTimeout(()=>{ 
+        p1.style.visibility = "hidden"
+    }, 3000)
+}
+function p1_2sec(){ //should actually have these take in a value instead of creating a new function for each
+    setTimeout(()=>{ 
+        p1.style.visibility = "hidden"
+    },2000)
+}
+function timeout_ending(){
+    setTimeout(()=>{
+        p1.style.visibility = "hidden";
+        ending3()
+    }, 2000)
+}
 //Used for turning the character images into targets for spells
 var ally_targets = []
 function makeAllyTargets(){
@@ -87,3 +102,14 @@ function RevertUltima(){
     console.log("removed glow");
 
   }
+var final_dmg_pre;
+var final_dmg;
+function Randomizer(base_power){
+    let add_on = (Math.random() * (106 - 95) + 95)
+    //console.log(add_on*base_power)
+    final_dmg_pre = add_on*base_power/100
+    final_dmg = final_dmg_pre.toFixed(0)
+    //console.log(final_dmg_pre)
+    console.log(final_dmg)
+    //adds a 1-5% pos/neg randomizer to each attack that's used
+}

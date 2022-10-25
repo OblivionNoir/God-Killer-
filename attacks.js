@@ -1,5 +1,5 @@
 
-
+//crit = 1.5x damage, adjust that for the existing spells
   //warrior attacks
 
   function Thousand_Men(){ //his ult
@@ -28,35 +28,22 @@
   //dark mage attacks
   function basic(){
 
-
           let l_crit = Math.floor(Math.random() * 16);
           console.log("value" + l_crit)
           //crit
           if (l_crit == 1){
-              Randomizer(120)
-              hp.value -= final_dmg;
+              Randomizer(150)
+              hp.value -= final_dmg/phase_def;
               p1.style.visibility = "visible";
               p1.value = "Critical hit!"
-              console.log(final_dmg)
-              setTimeout(()=>{
-                  p1.style.visibility = "hidden";
-                  ending3()
-            
-              }, 2000)
-
-
+              console.log(final_dmg/phase_def)
+              timeout_ending()
           //no crit        
           }else{
-              let rand_dmg = randNumber(50,70) ; //random value between 50 and 70
-              let final_dmg = rand_dmg/phase_def;
-              hp.value -= final_dmg;
-              console.log(final_dmg)
-              setTimeout(()=>{
-                  p1.style.visibility = "hidden";
-                  ending3()
-              }, 2000)
-
-
+              Randomizer(100) ; 
+              hp.value -= final_dmg/phase_def;
+              console.log(final_dmg/phase_def)
+              timeout_ending()
           };    
 
 };
@@ -95,9 +82,7 @@
       if (black_mage_mp.value <22){ 
           p1.style.visibility = "visible";
           p1.value = "Not enough MP!"
-          setTimeout(()=>{
-              p1.style.visibility = "hidden"
-          },2000)
+          p1_2sec()
       }else{ 
           black_mage_mp.value -= 22;
           i_menu.src = "" //Reset to blank prevent previous image from showing
@@ -107,20 +92,17 @@
           PE.loop = false;
           setTimeout(()=>{
                   Randomizer(1200)
-                  hp.value -= (final_dmg/phase_def); //hp = boss hp
                   let d_crit = Math.floor(Math.random() * 9); //higher crit rate
-                  if (d_crit == 8){
-                        Randomizer(1400)
-                      hp.value -= (final_dmg/phase_def);
+                  if (d_crit == 1){
+                      hp.value -= (final_dmg*1.5)/phase_def;
                       p1.style.visibility = "visible";
                       p1.value = "Critical hit!"
-                      setTimeout(()=>{
-                          p1.style.visibility = "hidden"
-                      }, 3000) 
-                  };    
+                      timeout_ending()
+                  }else{
+                    hp.value -= final_dmg/phase_def
+                  }   
       
               i_menu.style.visibility = "hidden"
-              ending3()
           }, 3000);
           
       };
@@ -134,9 +116,7 @@
     if (black_mage_mp.value < 65){
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
-        setTimeout(()=>{
-            p1.style.visibility = "hidden"
-        },2000)
+        p1_2sec()
         //ensure it isn't already in effect
     }if (trapped == true){
         //make this an actual window later
@@ -150,7 +130,7 @@
         //find sfx
         setTimeout(()=>{
             i_menu.style.visibility = "hidden"
-
+            ending3()
         }, 3000);
         //change timer according to phase
         trapped = true;
@@ -177,9 +157,7 @@
     if (black_mage_mp.value <14){
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
-        setTimeout(()=>{
-            p1.style.visibility = "hidden"
-        }, 3000)
+        p1_3sec()
     }else{ 
         black_mage_mp.value -= 14;
         //visibility image for 3 seconds, then turn it off
@@ -191,16 +169,17 @@
         PE.loop = false;
         setTimeout(()=>{
                 Randomizer(1000)
-                hp.value -= final_dmg - phase_mdef;
                 let d_crit = Math.floor(Math.random() * 16);
-                if (d_crit == 15){
-                    hp.value -= 1200 - phase_mdef;
+                if (d_crit == 1){
+                    hp.value -= (final_dmg*1.5)/phase_mdef;
                     p1.style.visibility = "visible";
                     p1.value = "Critical hit!"
                     setTimeout(()=>{
                         p1.style.visibility = "hidden"
                     }, 3000)
-                };    
+                }else{
+                    hp.value -= final_dmg/phase_mdef;
+                }  
             i_menu.style.visibility = "hidden"
             ending3()
         }, 3000);
@@ -215,9 +194,7 @@ var mirror;
     if (black_mage_mp.value < 30){
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
-        setTimeout(()=>{
-            p1.style.visibility = "hidden"
-        },2000)
+        p1_2sec()
         //ensure it isn't already in effect
     }if (mirror == true){
         //make this an actual window later
@@ -265,9 +242,7 @@ function MirrorRevert(){
       if (white_mage_mp.value <6){
           p1.style.visibility = "visible";
           p1.value = "Not enough MP!"
-          setTimeout(()=>{
-              p1.style.visibility = "hidden"
-          }, 3000)
+          p1_3sec()
       }else{ 
           white_mage_mp.value -= 6;
           //visibility image for 3 seconds, then turn it off
@@ -279,16 +254,15 @@ function MirrorRevert(){
           PE.loop = false;
           setTimeout(()=>{
                 Randomizer(500)
-                  hp.value -= final_dmg - phase_mdef;
                   let l_crit = Math.floor(Math.random() * 16);
-                  if (l_crit == 15){
-                      hp.value -= 700 - phase_mdef;
+                  if (l_crit == 1){
+                      hp.value -= (final_dmg*1.5)/phase_mdef;
                       p1.style.visibility = "visible";
                       p1.value = "Critical hit!"
-                      setTimeout(()=>{
-                          p1.style.visibility = "hidden"
-                      }, 3000)
-                  };    
+                      p1_3sec()
+                  }else{
+                    hp.value -= final_dmg/phase_mdef;
+                  }  
               i_menu.style.visibility = "hidden"
               ending3()
           }, 3000);
@@ -324,7 +298,6 @@ function addAllyTargets(){
     switch(selected_ally){
         case 0: //knight
         //THANK FUCKING GOD IT FINALLY WORKS
-            console.log("healed knight")
             amt_healed = 303;
             //ensure it doesn't go over max
             if (warrior_dead == true){
@@ -338,8 +311,8 @@ function addAllyTargets(){
                 Angels_Grace_Part2()
                 warrior_hp.value += amt_healed;
             };
-            //remove the listener
         break;
+
         case 1: //dark mage
             amt_healed = 259;
             if (black_mage_dead == true){
@@ -353,6 +326,7 @@ function addAllyTargets(){
                 Angels_Grace_Part2()
             };
         break;
+
         case 2: //light mage
             amt_healed = 220;
             if (white_mage_dead == true){
@@ -366,6 +340,7 @@ function addAllyTargets(){
                 white_mage_hp.value += amt_healed;
             };
         break;
+        
         case 3: //rmage
             amt_healed = 209;
             if (red_mage_dead == true){
@@ -396,9 +371,7 @@ function addAllyTargets(){
     if (white_mage_mp.value < 20){
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
-        setTimeout(()=>{
-            p1.style.visibility = "hidden"
-        }, 3000)
+        p1_3sec()
     }else{
         white_mage_mp.value -= 20;
         i_menu.src = "" //Reset to blank prevent previous image from showing
@@ -416,9 +389,7 @@ function addAllyTargets(){
 function stillAlive(){
     p1.style.visibility = "visible";
     p1.value = "That ally is still alive!"
-    setTimeout(()=>{
-        p1.style.visibility = "hidden"
-    }, 2000)
+    p1_2sec()
 }
 
 //below here is rebirth stuff. Do not touch angel's grace
@@ -497,9 +468,7 @@ function RebirthPart2(){
     if (white_mage_mp.value < 50){
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
-        setTimeout(()=>{
-            p1.style.visibility = "hidden"
-        }, 3000)
+        p1_3sec()
     }else{
         white_mage_mp.value -= 50;
         i_menu.src = "revival.png"
@@ -511,7 +480,7 @@ function RebirthPart2(){
         setTimeout(()=>{                     
             i_menu.style.visibility = "hidden"
             ending3()
-        }, 3000);
+        }, 4000);
     };
   };
 
@@ -580,13 +549,54 @@ function RebirthPart2(){
   function Bloody_Vengeance(){
     //ignores def, works like a much stronger basic attack with a slightly higher
     //crit rate. Physical
+    let red_mage_mp = document.getElementById("r_mage_name_mp");
+    if (red_mage_mp.value <26){ 
+        p1.style.visibility = "visible";
+        p1.value = "Not enough MP!"
+        p1_2sec()
+    }else{ 
+        red_mage_mp.value -= 26;
+        i_menu.src = "" //Reset to blank prevent previous image from showing
+        i_menu.src = "bloodyvengeance1.png" 
+        i_menu.style.visibility = "visible"
+        PE.play()
+        PE.loop = false;
+        setTimeout(()=>{
+             Randomizer(1300)
+                let r_crit = Math.floor(Math.random() * 13); 
+                if (r_crit == 1){ 
+                    hp.value -= final_dmg*1.5;
+                    p1.style.visibility = "visible";
+                    p1.value = "Critical hit!"
+                    p1_3sec()
+                }else{
+                    hp.value -= final_dmg; //hp = boss hp
+                }
+            i_menu.style.visibility = "hidden"
+            ending3()
+        }, 3000);
+    };
+  };
+  /*function SuperRandomizer(base_power){
+    const add_on = (Math.random() * (111 - 90) + 90)
+    final_dmg_pre = add_on*base_power/100
+    final_dmg = final_dmg_pre.toFixed(0)
+    console.log(final_dmg)
+    return final_dmg
+  }*/
+  function Chain_Lightning(){ //This will be a very luck based attack with wide damage variance
+    //hits 4 times, each slightly stronger than the last and a gradually increasing crit rate
+    //then the 5th is all the previous combined
+    //crit chance will start at the usual 1/15, then 1/12, 1/9, 1/5, 1/2
+    
+    let d1 = (Math.random() * (151 - 75) + 75)
+    let d2 = (Math.random() * (181 - 125) + 125)
+    let d3 = (Math.random() * (231 - 175) + 175)
+    let d4 = (Math.random() * (281 - 225) + 225)
+    console.log(d1, d2, d3, d4)
+    console.log(d1+d2+d3+d4)
   }
 
-  function Chain_Lightning(){
-    //hits 4 times, each with a slight damage randomizer, 
-    //then the 5th is all the previous combined
-    //so something like 60, 65, 63, 70, 258 for 516 total 
-  }
 
   function My_Turn(){
     //Reversal move that waits in the background and waits for her to be targeted. 

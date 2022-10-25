@@ -498,17 +498,7 @@ function timeout(){
         p1.style.visibility = "hidden"
     }, 2000);
 }
-var final_dmg_pre;
-var final_dmg;
-function Randomizer(base_power){
-    let add_on = (Math.random() * (106 - 95) + 95)
-    //console.log(add_on*base_power)
-    final_dmg_pre = add_on*base_power/100
-    final_dmg = final_dmg_pre.toFixed(0)
-    console.log(final_dmg_pre)
-    console.log(final_dmg)
-    //adds a 1-5% pos/neg randomizer to each attack that's used
-}
+
 
 //spell menu should dissapear and reset while boss is attacking, so it shouldn't be a concern here
 //need to loop through the alive members if someone dies so the buttons work again. Functions?
