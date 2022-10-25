@@ -1,0 +1,11 @@
+html{
+    background-image: url('glossary/book.jpg');
+    background-size: cover;
+    font-family: 'Caveat', cursive;
+}
+
+#spells_title{
+    text-align: center;
+    font-size: 4.5rem;
+    color: rgb(202, 202, 202);
+}
