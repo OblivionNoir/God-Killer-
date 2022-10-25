@@ -17,9 +17,9 @@ turn_counter = []
 function CounterSwitch(){
     switch(true){
         case(phase2called == true):
-        if (mirror == true){//use the shorter version for Shattered Mirror, one turn not 2 
+        if (mirror == true){//use the shorter version for Shattered Mirror
             counter()
-            countdown_1turn(20000)
+            countdown_mirror(30000)
         }else{
             counter()
             trapped_countdown(40000)
@@ -28,7 +28,7 @@ function CounterSwitch(){
         case(phase3called == true):
         if (mirror == true){
             counter()
-            countdown_1turn(15000)
+            countdown_mirror(22500)
         }else{
             counter()
             trapped_countdown(30000)
@@ -37,7 +37,7 @@ function CounterSwitch(){
         default://phase 1 
         if (mirror == true){
             counter()
-            countdown_1turn(25000)
+            countdown_1turn(37500)
         }else{
             counter()
             trapped_countdown(50000)

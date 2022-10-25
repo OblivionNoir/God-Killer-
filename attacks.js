@@ -64,7 +64,7 @@
               changeBackground()
                                               //this will change based on phase
               DC.pause()
-              Randomizer(2500)
+              Randomizer(4500)
                   hp.value -= final_dmg/phase_mdef;
               i_menu.style.visibility = "hidden"
               ending3()
@@ -540,6 +540,7 @@ function RebirthPart2(){
     //ult
     //lower hp = more damage. 
     //Base damage at 1hp is 4000 and it subtracts 10 for each hp after that 
+    //make this number higher, actually
   }
   function Dance_of_Death(){
     //Lower self defenses and ev to 0 for 3 turns, but gain very high crit chance and a 1.5x damage multiplier
