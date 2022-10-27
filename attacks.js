@@ -1,4 +1,6 @@
-
+function cooldown(atk_time){
+    //adjusts cooldown depending on the attack being used to prevent spamming, by disabling mouse click
+}
 //crit = 1.5x damage, adjust that for the existing spells
   //warrior attacks
 
@@ -22,6 +24,7 @@
 
   function Deathblow(){
     //Like a normal attack but a guaranteed crit. 
+    //very quick cooldown, low mp cost
 
   }
 
@@ -56,7 +59,7 @@
           i_menu.src = "" //Reset to blank prevent previous image from showing
           i_menu.src = "RadiantSupernova.jpeg"
           i_menu.style.visibility = "visible"
-          const DC = new Audio("DarkCreepy.mp3"); //change this
+          const DC = new Audio("DarkCreepy.mp3"); 
           DC.volume = 0.5;
           DC.play()
           DC.loop = false;
@@ -532,15 +535,35 @@ function RebirthPart2(){
           }, 7000);
 
   };
+/*
+max hp = 380
+Lets start with 1000 base dmg at max hp, then add a 1.01% multipler per 1 hp lost, so it scales at an increasing speed
+So for example 
 
+
+
+
+
+*/
+
+//Aha! I have found a way to make the damage scale with hp lost! Praise my genius!
+var loop_margin = 1;
+exp = []
+function experiment(){
+    for(let i = 0; i < 380; i++){
+        loop_margin *= 2;
+        console.log(loop_margin)
+        console.log(100 + loop_margin)
+    }
+}
+experiment()
 
   //red mage attacks
 
   function Scarlet_Subversion(){
     //ult
     //lower hp = more damage. 
-    //Base damage at 1hp is 4000 and it subtracts 10 for each hp after that 
-    //make this number higher, actually
+    //Base damage at 1hp is 6000(?) and it subtracts 10 for each hp after that 
   }
   function Dance_of_Death(){
     //Lower self defenses and ev to 0 for 3 turns, but gain very high crit chance and a 1.5x damage multiplier
