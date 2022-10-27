@@ -104,12 +104,11 @@ function RevertUltima(){
   }
 var final_dmg_pre;
 var final_dmg;
-function Randomizer(base_power){
-    let add_on = (Math.random() * (106 - 95) + 95)
-    //console.log(add_on*base_power)
+//96/106 is the default but lower it for super strong attacks
+function Randomizer(base_power, min, max){
+    let add_on = (Math.random() * (max - min) + min)
     final_dmg_pre = add_on*base_power/100
-    final_dmg = final_dmg_pre.toFixed(0)
-    //console.log(final_dmg_pre)
+    final_dmg = final_dmg_pre;//Breaks without the toFixed! Infinite decimals go brrrr
     console.log(final_dmg)
     //adds a 1-5% pos/neg randomizer to each attack that's used
 }

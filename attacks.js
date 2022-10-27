@@ -35,7 +35,7 @@ function cooldown(atk_time){
           console.log("value" + l_crit)
           //crit
           if (l_crit == 1){
-              Randomizer(150)
+              Randomizer(150, 95, 106)
               hp.value -= final_dmg/phase_def;
               p1.style.visibility = "visible";
               p1.value = "Critical hit!"
@@ -43,7 +43,7 @@ function cooldown(atk_time){
               timeout_ending()
           //no crit        
           }else{
-              Randomizer(100) ; 
+              Randomizer(100, 95, 106) ; 
               hp.value -= final_dmg/phase_def;
               console.log(final_dmg/phase_def)
               timeout_ending()
@@ -67,7 +67,7 @@ function cooldown(atk_time){
               changeBackground()
                                               //this will change based on phase
               DC.pause()
-              Randomizer(4500)
+              Randomizer(4500, 98, 103)//Ultimas have a smaller randomizer so the percentage doesn't knock too much off
                   hp.value -= final_dmg/phase_mdef;
               i_menu.style.visibility = "hidden"
               ending3()
@@ -94,7 +94,7 @@ function cooldown(atk_time){
           PE.play()
           PE.loop = false;
           setTimeout(()=>{
-                  Randomizer(1200)
+                  Randomizer(1200, 95, 106)
                   let d_crit = Math.floor(Math.random() * 9); //higher crit rate
                   if (d_crit == 1){
                       hp.value -= (final_dmg*1.5)/phase_def;
@@ -171,7 +171,7 @@ function cooldown(atk_time){
         PE.play()
         PE.loop = false;
         setTimeout(()=>{
-                Randomizer(1000)
+                Randomizer(1000, 95, 106)
                 let d_crit = Math.floor(Math.random() * 16);
                 if (d_crit == 1){
                     hp.value -= (final_dmg*1.5)/phase_mdef;
@@ -256,7 +256,7 @@ function MirrorRevert(){
           PE.play()
           PE.loop = false;
           setTimeout(()=>{
-                Randomizer(500)
+                Randomizer(500, 95, 106)
                   let l_crit = Math.floor(Math.random() * 16);
                   if (l_crit == 1){
                       hp.value -= (final_dmg*1.5)/phase_mdef;
@@ -547,24 +547,28 @@ So for example
 */
 
 //Aha! I have found a way to make the damage scale with hp lost! Praise my genius!
-var loop_margin = 1;
-exp = []
-function experiment(){
-    for(let i = 0; i < 380; i++){
-        loop_margin *= 2;
-        console.log(loop_margin)
-        console.log(100 + loop_margin)
-    }
-}
-experiment()
+//remembber to cut out the decimals
 
   //red mage attacks
-
-  function Scarlet_Subversion(){
+var SSList = [];
+  function SScalculation(){
     //ult
     //lower hp = more damage. 
-    //Base damage at 1hp is 6000(?) and it subtracts 10 for each hp after that 
-  }
+    var loop_margin = 1; //reset loop margin to prevent numbers getting all negative and fucked up
+    for(let i = 0; i < red_mage_hp.value; i++){
+        loop_margin *= 1.0055;  //links back to the base dmg of 1000 to increase the multiplier per hp lost
+        //Base dmg at 1hp = 8038 
+        z = (8038 - (1000 * loop_margin))//Final damage based on hp
+        SSList.push(z)
+    }
+    return SSList[SSList.length - 1];
+    //store in an external list, then return the last value in the list
+};
+function Scarlet_Subversion(){
+    hp.value -= (SScalculation())
+    //console.log("SS dmg " + final_dmg)
+    //hp.value -= Y;
+};
   function Dance_of_Death(){
     //Lower self defenses and ev to 0 for 3 turns, but gain very high crit chance and a 1.5x damage multiplier
     //Smaller multiplier on ult, something like 1.2x
@@ -586,7 +590,7 @@ experiment()
         PE.play()
         PE.loop = false;
         setTimeout(()=>{
-             Randomizer(1300)
+             Randomizer(1300, 95, 106)
                 let r_crit = Math.floor(Math.random() * 13); 
                 if (r_crit == 1){ 
                     hp.value -= final_dmg*1.5;
@@ -612,11 +616,10 @@ experiment()
     //hits 4 times, each slightly stronger than the last and a gradually increasing crit rate
     //then the 5th is all the previous combined
     //crit chance will start at the usual 1/15, then 1/12, 1/9, 1/5, 1/2
-    
-    let d1 = (Math.random() * (151 - 75) + 75)
-    let d2 = (Math.random() * (181 - 125) + 125)
-    let d3 = (Math.random() * (231 - 175) + 175)
-    let d4 = (Math.random() * (281 - 225) + 225)
+    let d1 = Randomizer(151, 75, 126)
+    let d2 = Randomizer(181, 75, 126)
+    let d3 = Randomizer(231, 75, 126)
+    let d4 = Randomizer(281, 75, 126)
     console.log(d1, d2, d3, d4)
     console.log(d1+d2+d3+d4)
   }
