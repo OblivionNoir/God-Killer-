@@ -106,6 +106,7 @@ function cooldown(atk_time){
                   }   
       
               i_menu.style.visibility = "hidden"
+              ending3()
           }, 3000);
           
       };
@@ -550,6 +551,7 @@ So for example
 //remembber to cut out the decimals
 
   //red mage attacks
+  //Kinda just ended up changing random numbers but it looks good to me
 var SSList = [];
   function SScalculation(){
     //ult
@@ -557,21 +559,47 @@ var SSList = [];
     var loop_margin = 1; //reset loop margin to prevent numbers getting all negative and fucked up
     for(let i = 0; i < red_mage_hp.value; i++){
         loop_margin *= 1.0055;  //links back to the base dmg of 1000 to increase the multiplier per hp lost
-        //Base dmg at 1hp = 8038 
-        z = (8038 - (1000 * loop_margin))//Final damage based on hp
+        let z = (8750 - (1000 * loop_margin))//Final damage based on hp
         SSList.push(z)
     }
     return SSList[SSList.length - 1];
     //store in an external list, then return the last value in the list
 };
-function Scarlet_Subversion(){
-    hp.value -= (SScalculation())
-    //console.log("SS dmg " + final_dmg)
-    //hp.value -= Y;
+function Scarlet_Subversion(){  
+    SS_Part2()
+    console.log(SScalculation())
+    //hp.value -= (SScalculation())
+    //SS_Final = SScalculation()
+    //console.log(SS_Final)
 };
+
+function SS_Part2(){
+    document.body.style.backgroundImage = "";
+    document.body.style.backgroundImage = "url('SSBG.png')"
+        //ultimas don't have a crit or mp value
+        //visibility image for 3 seconds, then turn it off
+        i_menu.src = "" //Reset to blank prevent previous image from showing
+        i_menu.src = "SS.png"
+        i_menu.style.visibility = "visible"
+        const B = new Audio("boom.mp3"); 
+        B.play()
+        setTimeout(()=>{
+            changeBackground()
+            i_menu.style.visibility = "hidden"
+            ending3()
+            RevertUltima()
+            hp.value -= SScalculation()+1000 //not sure why this is only affecting it if she's at max hp, but hey, it works!
+        }, 7000);
+    
+
+
+}
   function Dance_of_Death(){
     //Lower self defenses and ev to 0 for 3 turns, but gain very high crit chance and a 1.5x damage multiplier
-    //Smaller multiplier on ult, something like 1.2x
+    //To do this, keep all the damage she does in a list (added before execution) 
+    //then call this as a listener attached to her spell buttons to multiply the damage before it executes
+    //For the defense and ev, do it like broken mirror but a 3 turn timer
+    //Doesn't apply to ult
   }
 
   function Bloody_Vengeance(){

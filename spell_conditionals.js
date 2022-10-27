@@ -3,13 +3,13 @@ turn_counter_value = 0;
 turn_counter = []
  function counter(){
      let UC = document.getElementById("ultima_charge");
-     UC.value +=1;
+     UC.value +=2;
      turn_counter_value +=1;
      black_mage_mp += 5;
      white_mage_mp += 5;
      warrior_mp += 5;
      turn_counter.push(turn_counter_value)
-     return turn_counter
+     //return turn_counter
  }
  var LastAttacks = [] //store last attacks used by player, some skills rely on it
 
