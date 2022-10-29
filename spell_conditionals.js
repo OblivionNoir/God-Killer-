@@ -111,4 +111,5 @@ function Randomizer(base_power, min, max){
     final_dmg = final_dmg_pre;//Breaks without the toFixed! Infinite decimals go brrrr
     console.log(final_dmg)
     //adds a 1-5% pos/neg randomizer to each attack that's used
+    //return final_dmg
 }
