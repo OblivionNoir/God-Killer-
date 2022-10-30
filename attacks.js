@@ -65,7 +65,7 @@ function cooldown(atk_time){
           DC.loop = false;
           setTimeout(()=>{
               changeBackground()
-                                              //this will change based on phase
+                                             
               DC.pause()
               Randomizer(4500, 98, 103)//Ultimas have a smaller randomizer so the percentage doesn't knock too much off
                   hp.value -= final_dmg/phase_mdef;
@@ -634,116 +634,101 @@ function SS_Part2(){
     };
   };
 
+//median damage: 1898
 
-  //avg damage is around 1000 with 4200, so scale mp cost accordingly 
-  function Chain_Lightning(){ //This will be a very luck based attack with wide damage variance
-    //hits 4 times, each slightly stronger than the last and a gradually increasing crit rate
-    //then the 5th is all the previous combined
-    //1784 is the median total damage, so scale mp cost accordingly
-    //Max (if you get extremely lucky) = 2382
-    /*for (let i = 0; i<10000; i++){*/
-    //Randomizer wants to be a bitch, so we're gonna do it the janky way
-
-    //to fix this store the values in an array then add up the array for the 5th
-        let d1_crit = Math.floor(Math.random() * 14);
-        if (d1_crit == 1){
-            //do a critical
-             a = (Math.random() * (269 - 161) + 161)
-            p1.style.visibility = "visible";
-            p1.value = "Critical hit! " + a + " damage!"
-            p1_2sec()
-            hp.value -= a
-        }else{
-            //or the default
-             a = (Math.random() * (179 - 107) + 107)
-            p1.style.visibility = "visible";
-            p1.value =  a + " damage!"
-            p1_2sec()
-            hp.value -= a;
-        }
-        setTimeout(()=>{
-            let d2_crit = Math.floor(Math.random() * 11);
-            if (d2_crit ==1){
-                g = (Math.random() * (312 - 188) + 188)
-                p1.style.visibility = "visible";
-                p1.value = "Critical hit! " + g + " damage!"
-                p1_2sec()
-                hp.value -= g;
-            }else{
-                g = (Math.random() * (208 - 125) + 125)
-                p1.style.visibility = "visible";
-                p1.value =  g + " damage!"
-                p1_2sec()
-                hp.value -= g;
-            }
-       
-        }, 4000)
-       
-        setTimeout(()=>{
-            let d3_crit = Math.floor(Math.random()* 8);
-            if (d3_crit == 1){
-                c = (Math.random() * (381 - 228) + 228)
-               p1.style.visibility = "visible";
-               p1.value = "Critical hit! " + c + " damage!"
-               p1_2sec()
-               hp.value -= c;
-            }else{
-                 c = (Math.random() * (254 - 152) + 152)
-                p1.style.visibility = "visible";
-                p1.value =  c + " damage!"
-                p1_2sec()
-                hp.value -= c;
-            }
-        },4000)
-        setTimeout(()=>{
-            let d4_crit = Math.floor(Math.random()*4);
-            if (d4_crit == 1){
-                d = (Math.random() * (450 - 270) + 270)
-                p1.style.visibility = "visible";
-                p1.value = "Critical hit! " + d + " damage!"
-                p1_2sec()
-                hp.value -= d;
-            }else{
-                 d = (Math.random() * (300 - 180) + 180)
-                p1.style.visibility = "visible";
-                p1.value =  d + " damage!"
-                p1_2sec()
-                hp.value -= d;
-            }
-        }, 4000)
-        setTimeout(()=>{
-                 
-        let d5_crit = Math.floor(Math.random()*3);
-        if (d5_crit == 1){
-             e =((a + g + c + d)*1.5) //if this keeps being bitchy try storing the values in an array and adding them up
-            p1.style.visibility = "visible";
-            p1.value = "Critical hit! " + e + " damage!"
-            p1_2sec()
-            hp.value -= e;
-        }else{
-            e =(a + g + c + d)
-            p1.style.visibility = "visible";
-            p1.value =  e + " damage!"
-            p1_2sec()
-            hp.value -= e;
-        }
-        }, 2000)
-        /*p1.style.visibility = "visible";
-        p1.value = "Final damage: " + e*2
-        p1_3sec()*/
-        //p1.style.visibility = "visible";
-        //p1.value = "Total damage: " + (a + b + c + d + e)
+function CLCalc(crit, hit_name){
+    if (crit == 1){
+        p1.style.visibility = "visible";
+        p1.value = "Critical hit! " + hit_name.toFixed(0)*1.5 + " damage!"
+        hp.value -= hit_name*1.5.toFixed(0);
+    }else{
+        p1.style.visibility = "visible";
+        p1.value =  hit_name.toFixed(0) + " damage!"
         //p1_2sec()
-        //CL_testList.push(e)//then double to get the final damage
-            
-    };//5th hit will be the sum of the previous 4, with a 1/2 crit chance
-    /*console.log(CL_testList)
-    const median  = CL_testList =>{
-        const mid = Math.floor(CL_testList.length / 2),
-        nums = [...CL_testList].sort((a, b) => a - b);
-        return CL_testList.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
+        hp.value -= hit_name.toFixed(0);
     }
-    console.log(median(CL_testList))
+};
+var l_sfx = new Audio("LS.mp3")
+  function Chain_Lightning(){ //this needs to be very powerful due to the long execution time, increase the numbers. Aim for ~3k average
+    l_sfx.play()
+    l_sfx.loop = true;
+          //hit 1
+          let a = (Math.random() * (150 - 113) + 113)//goes up 1.4x each hit. Exponential
+          //Min is 75% of the max
+          let d1_crit = Math.floor(Math.random() * 14);
+      //hit 2
+          let b = (Math.random() * (210 - 158) + 158)
+          let d2_crit = Math.floor(Math.random() * 11);
+      //hit 3
+          let c = (Math.random() * (294 - 221) + 221)
+          let d3_crit = Math.floor(Math.random()* 8);
+      //hit 4
+          let d = (Math.random() * (412 - 309) + 309)
+          let d4_crit = Math.floor(Math.random()*5);
+      //hit 5
+          let e = (a + b + c + d) 
+          let d5_crit = Math.floor(Math.random()*3);
+  
+          CLCalc(d1_crit, a)
+          ShowLightning(1)
+          timeout_lightning(200)
+  
+          setTimeout(()=>{
+              CLCalc(d2_crit, b)
+              ShowLightning(1)
+              timeout_lightning(200)
+          }, 2000)
+          
+          setTimeout(()=>{
+              CLCalc(d3_crit, c)
+              ShowLightning(1)
+              timeout_lightning(200)
+          },4000)
+  
+          setTimeout(()=>{
+              CLCalc(d4_crit, d)
+              ShowLightning(1)
+              timeout_lightning(200)
+          }, 6000)
+  
+          setTimeout(()=>{ //5th attack is the sum of all previous, not counting any additional critical damage. 
+            //The 5th hit itself already has a high crit rate so that would be OP and too unpredictable even for this
+              CLCalc(d5_crit, e)
+              ShowLightning(2)
+              timeout_lightning(200)
+              l_sfx.loop = false;
+          }, 8000)
+  
+          setTimeout(()=>{
+              p1.value = "Total damage: " + e.toFixed(0)*2 //this is innacurate because e does not count crits. Get the values from CLCalc for this
+              timeout_i_menu()
+              ending3()
+              
+          }, 12000)
+
+    }
+
+    function timeout_lightning(time){
+        setTimeout(()=>{
+            i_menu.style.visibility = "hidden" 
+        }, time)
+           
+    }
+    //use a more epic picture for 5th strike
+    function ShowLightning(atk_num){
+        if (atk_num == 1){//represents 1-4
+            i_menu.style.visibility = "visible"
+            i_menu.src = ""
+            i_menu.src = "lightning.png"
+
+        }else{//the 5th one
+            i_menu.style.visibility = "visible"
+            i_menu.src = ""
+            i_menu.src = "chainlightning.png"
+        }
+
+    }
+
     //console.log(d1, d2, d3, d4)
    //console.log(d1+d2+d3+d4)*/
   //}
