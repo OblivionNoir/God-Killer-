@@ -1,8 +1,7 @@
--Add a small pause between attack calls to prevent spamming to charge the ultima super fast
--Adjust crit for existing spells. Should not be a second attack, but instead a single attack with a 1.5x multipler.
+-Cannot use multiple attacks at once. Set an attack active state to prevent this. Exceptions are My Turn, Broken Mirror and defend or anything else that waits in the background.
+-Could probably clean some things up with ternaries 
 -add items so characters can still be revived if l mage dies
 -css file is messy. Less IDs, more classes. Sve the IDs for JS
--ultima bar turns gold when full
 -Gradual transitions as opposed to images just popping in
 -Keep all the numbers as int. No decimals 
 -credits: vecteezy.com for the rain and credit the OSTs, pixabay for sfx
