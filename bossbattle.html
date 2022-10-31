@@ -40,9 +40,8 @@
 
     <!--treat this similarly to the og textarea, css-wise-->
         <div id = "battle_menu" class = "hide">
-            <div><button id = "atk_b" class = "btn" >Attack</button></div>
-            <div><button id = "spells_b" class = "btn" >Spells</button></div>
-            <div><button id = "def_b" class = "btn" >Defend</button></div> <!--triples defense for next turn-->
+            <div><button id = "item_b" class = "btn" >Items</button></div>
+            <div><button id = "spells_b" class = "btn" >Actions</button></div>
             
             <div><img src = "newknight.jpeg" id = "knight_img" class = "clickable ally_img"></div>
            
@@ -112,7 +111,8 @@
                 <button id = "btn_2" class = "spellbutton">2</button>
                 <button id = "btn_3" class = "spellbutton">3</button>
                 <button id = "btn_4" class = "spellbutton">4</button>
-                <button id = "btn_5" class = "spellbutton">5</button>        
+                <button id = "btn_5" class = "spellbutton">5</button>   
+                <button id = "btn_6" class = "spellbutton">6</button> <!--defend button--> 
         </div>    
     
         <img src = "bleedingsunpart2.jpg" id = "img_template">
@@ -121,7 +121,7 @@
     <div id = "boss_name" class = "hide">Novas Mors, The Purveyor of Nascency</div> 
     <!--name comes from latin for "new death"-->
     <div id = "boss_hp_label" class = "hide"></div>
-        <progress id = "HP_bar" value = "16000" max="45000">
+        <progress id = "HP_bar" value = "45000" max="45000">
     </progress>
  <!--make color inside linked to hp percentage-->
     <style>

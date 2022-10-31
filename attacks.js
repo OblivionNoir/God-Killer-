@@ -1,3 +1,4 @@
+  //order of calculation is base damage, then multiply by character stats, divide by boss def, then check for crit
 function cooldown(atk_time){
     //adjusts cooldown depending on the attack being used to prevent spamming, by disabling mouse click
 }
@@ -28,33 +29,20 @@ function cooldown(atk_time){
 
   }
 
+
+  function defend(character){
+    console.log(character + " made it") 
+    //This is a toggle. 
+    //If defending, that character can't do anything else but their defense is raised 3x. 
+    //Essential to survive Bleeding Sun at th end
+  }
+
   //dark mage attacks
-  function basic(){
-
-          let l_crit = Math.floor(Math.random() * 16);
-          console.log("value" + l_crit)
-          //crit
-          if (l_crit == 1){
-              Randomizer(150, 95, 106)
-              hp.value -= final_dmg/phase_def;
-              p1.style.visibility = "visible";
-              p1.value = "Critical hit!"
-              console.log(final_dmg/phase_def)
-              timeout_ending()
-          //no crit        
-          }else{
-              Randomizer(100, 95, 106) ; 
-              hp.value -= final_dmg/phase_def;
-              console.log(final_dmg/phase_def)
-              timeout_ending()
-          };    
-
-};
 
   function Radiant_Supernova(){ //her ult
       document.body.style.backgroundImage = "";
       document.body.style.backgroundImage = "url('blackhole.png')"
-          //ultimas don't have a crit or mp value
+          //ultimas don't have a crit or mp value, and aren't affected by atk stats
           //visibility image for 3 seconds, then turn it off
           i_menu.src = "" //Reset to blank prevent previous image from showing
           i_menu.src = "RadiantSupernova.jpeg"
@@ -67,7 +55,7 @@ function cooldown(atk_time){
               changeBackground()
                                              
               DC.pause()
-              Randomizer(4500, 98, 103)//Ultimas have a smaller randomizer so the percentage doesn't knock too much off
+              Randomizer(5500, 98, 103)//Ultimas have a smaller randomizer so the percentage doesn't knock too much off
                   hp.value -= final_dmg/phase_mdef;
               i_menu.style.visibility = "hidden"
               ending3()
@@ -97,12 +85,13 @@ function cooldown(atk_time){
                   Randomizer(1200, 95, 106)
                   let d_crit = Math.floor(Math.random() * 9); //higher crit rate
                   if (d_crit == 1){
-                      hp.value -= (final_dmg*1.5)/phase_def;
+                      hp.value -= ((final_dmg*black_mage_atk)*1.5)/phase_def;
                       p1.style.visibility = "visible";
                       p1.value = "Critical hit!"
                       timeout_ending()
                   }else{
-                    hp.value -= final_dmg/phase_def
+                    console.log(final_dmg*black_mage_atk)/phase_def
+                    hp.value -= (final_dmg*black_mage_atk)/phase_def
                   }   
       
               i_menu.style.visibility = "hidden"
@@ -175,14 +164,15 @@ function cooldown(atk_time){
                 Randomizer(1000, 95, 106)
                 let d_crit = Math.floor(Math.random() * 16);
                 if (d_crit == 1){
-                    hp.value -= (final_dmg*1.5)/phase_mdef;
+                    hp.value -= ((final_dmg*black_mage_matk)*1.5)/phase_mdef;
                     p1.style.visibility = "visible";
                     p1.value = "Critical hit!"
                     setTimeout(()=>{
                         p1.style.visibility = "hidden"
                     }, 3000)
                 }else{
-                    hp.value -= final_dmg/phase_mdef;
+                    console.log(final_dmg*black_mage_matk)/phase_mdef
+                    hp.value -= (final_dmg*black_mage_matk)/phase_mdef;
                 }  
             i_menu.style.visibility = "hidden"
             ending3()
@@ -260,12 +250,13 @@ function MirrorRevert(){
                 Randomizer(500, 95, 106)
                   let l_crit = Math.floor(Math.random() * 16);
                   if (l_crit == 1){
-                      hp.value -= (final_dmg*1.5)/phase_mdef;
+                      hp.value -= ((final_dmg*white_mage_matk)*1.5)/phase_mdef;
                       p1.style.visibility = "visible";
                       p1.value = "Critical hit!"
                       p1_3sec()
                   }else{
-                    hp.value -= final_dmg/phase_mdef;
+                    console.log(final_dmg*white_mage_matk)/phase_mdef
+                    hp.value -= (final_dmg*white_mage_matk)/phase_mdef;
                   }  
               i_menu.style.visibility = "hidden"
               ending3()
@@ -559,7 +550,7 @@ var SSList = [];
     var loop_margin = 1; //reset loop margin to prevent numbers getting all negative and fucked up
     for(let i = 0; i < red_mage_hp.value; i++){
         loop_margin *= 1.0055;  //links back to the base dmg of 1000 to increase the multiplier per hp lost
-        let z = (8750 - (1000 * loop_margin))//Final damage based on hp
+        let z = (9750 - (1000 * loop_margin))//Final damage based on hp
         SSList.push(z)
     }
     return SSList[SSList.length - 1];
@@ -591,14 +582,17 @@ function SS_Part2(){
 
 
 }
-  function Dance_of_Death(){
-    //Lower self defenses and ev to 0 for 3 turns, but gain very high crit chance and a 1.5x damage multiplier
-    //To do this, keep all the damage she does in a list (added before execution) 
-    //then call this as a listener attached to her spell buttons to multiply the damage before it executes
-    //For the defense and ev, do it like broken mirror but a 3 turn timer
-    //Doesn't apply to ult
-  }
+function Borderof_Life(){ //adjust for use by red mage
+    //Cut defenses in exchange for much higher attack for 20 seconds
+    //will require creation of attack stats
+    i_menu.src = ""
+    i_menu.src = "BOL.png" 
+    i_menu.style.visibility = "visible"
+    PE.play()//find new sfx
+    PE.loop = false;
 
+    
+};//function ends here
   function Bloody_Vengeance(){
     //ignores def, works like a much stronger basic attack with a slightly higher
     //crit rate. Physical
@@ -618,12 +612,13 @@ function SS_Part2(){
              Randomizer(1300, 95, 106)
                 let r_crit = Math.floor(Math.random() * 13); 
                 if (r_crit == 1){ 
-                    hp.value -= final_dmg*1.5;
+                    hp.value -= (final_dmg*red_mage_atk)*1.5;
                     p1.style.visibility = "visible";
                     p1.value = "Critical hit!"
                     p1_3sec()
                 }else{
-                    hp.value -= final_dmg; //hp = boss hp
+                    console.log(final_dmg*red_mage_atk)
+                    hp.value -= (final_dmg*red_mage_atk); //hp = boss hp
                 }
             i_menu.style.visibility = "hidden"
             ending3()
@@ -636,7 +631,8 @@ var FinalCL = []//stores the final calculated damage of all 5 strikes for an acc
 function CLCalc(crit, hit_name){
     if (crit == 1){
         p1.style.visibility = "visible";
-        hit_name*=1.5
+        hit_name *= 1.5
+        console.log(hit_name)
         p1.value = "Critical hit! " + hit_name.toFixed(0) + " damage!"
         //Create seperate variable with the multiplied value THEN do the toFixed? 
         hp.value -= hit_name.toFixed(0);
@@ -649,7 +645,7 @@ function CLCalc(crit, hit_name){
         FinalCL.push(hit_name)
     }
 };
-//Scale mp cost to 3750 dmg
+//Scale mp cost to 3750 dmg (this doesn't account for character stats)
 var l_sfx = new Audio("LS.mp3")
   function Chain_Lightning(){ //This attack takes 14 seconds to execute. So it must be very powerful!
     let red_mage_mp = document.getElementById("r_mage_name_mp");
@@ -662,17 +658,17 @@ var l_sfx = new Audio("LS.mp3")
         l_sfx.play()
         l_sfx.loop = true;
           //hit 1
-              let a = (Math.random() * (163 - 113) + 113)/phase_mdef//goes up 1.35x each hit. Exponential
+              let a = (Math.random() * ((163 - 113) + 113)*red_mage_atk)/phase_mdef//goes up 1.35x each hit. Exponential
               //Min is max -50
               let d1_crit = Math.floor(Math.random() * 14);
           //hit 2
-              let b = (Math.random() * (213 - 163) + 163)/phase_mdef
+              let b = ((Math.random() * (213 - 163) + 163)*red_mage_atk)/phase_mdef
               let d2_crit = Math.floor(Math.random() * 11);
           //hit 3
-              let c = (Math.random() * (279 - 229) + 229)/phase_mdef
+              let c = ((Math.random() * (279 - 229) + 229)*red_mage_atk)/phase_mdef
               let d3_crit = Math.floor(Math.random()* 8);
           //hit 4
-              let d = (Math.random() * (371 - 321) + 321)/phase_mdef
+              let d = ((Math.random() * (371 - 321) + 321)*red_mage_atk)/phase_mdef
               let d4_crit = Math.floor(Math.random()*5);
           //hit 5
               let e = (a + b + c + d) 
@@ -747,9 +743,6 @@ var l_sfx = new Audio("LS.mp3")
 
     }
 
-    //console.log(d1, d2, d3, d4)
-   //console.log(d1+d2+d3+d4)*/
-  //}
 
 
   function My_Turn(){

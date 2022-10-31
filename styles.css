@@ -80,6 +80,7 @@ body{
     max-height: 100vh;
     font-size: large;
     border-bottom-right-radius: 10%;
+  
 }
 
 #battle_menu > div{
@@ -117,6 +118,7 @@ body{
 
 
 #menu_template{
+    position: absolute;
     display: grid;
     grid-template-columns: 5vw auto 5vw;
     grid-row-gap: 1.5vw;
@@ -128,17 +130,19 @@ body{
     max-height: 10vh;
     border-top-right-radius: 10%;
     border-bottom-right-radius: 10%;
-    margin-top: -70vh;
+    margin-top: -65vh;
     margin-left: 8vw;
     font-size: large;
     z-index: 4;
     opacity: 0.7;
+  
+
 }
 
 #menu_template>button{
     padding: 0 1rem 3rem 1rem;
     border-radius: 8%;
-    z-index: 4;
+    z-index: 5;
     max-height: 1vh;
 
     

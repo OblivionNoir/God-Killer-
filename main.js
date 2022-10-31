@@ -250,6 +250,7 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
             document.getElementById("btn_3").innerHTML = "Whims of Fate"
             document.getElementById("btn_4").innerHTML = "Rebellion"
             document.getElementById("btn_5").innerHTML = "Deathblow"  
+            document.getElementById("btn_6").innerHTML = "Defend - knight"//change this to character name
             //from here move to the function that executes it
 
     }else{
@@ -269,6 +270,7 @@ function d_mage_menu(){ //1//need to check if it has border or not
               document.getElementById("btn_3").innerHTML = "Entrapment" 
               document.getElementById("btn_4").innerHTML = "Black Fire"
               document.getElementById("btn_5").innerHTML = "Shattered Mirror"   
+              document.getElementById("btn_6").innerHTML = "Defend - dark mage"
     }else{ 
         console.log("removing buttons")
         removeButtons()
@@ -288,6 +290,7 @@ function l_mage_menu(){ //2//need to check if it has border or not
               document.getElementById("btn_3").innerHTML = "Angel's Grace"
               document.getElementById("btn_4").innerHTML = "Rebirth"
               document.getElementById("btn_5").innerHTML = "Chain Heal"  
+              document.getElementById("btn_6").innerHTML = "Defend - light mage"
 
     }else{
         console.log("removing buttons")
@@ -303,10 +306,11 @@ function r_mage_menu(){ //3 //need to check if it has border or not
     menu_sfx()
     addButtons()
           document.getElementById("btn_1").innerHTML = "Scarlet Subversion"
-          document.getElementById("btn_2").innerHTML = "Dance of Death"
+          document.getElementById("btn_2").innerHTML = "Border of Life"
           document.getElementById("btn_3").innerHTML = "Bloody Vengeance"
           document.getElementById("btn_4").innerHTML = "Chain Lightning"
           document.getElementById("btn_5").innerHTML = "My Turn"  
+          document.getElementById("btn_6").innerHTML = "Defend - red mage"
 
 }else{
     console.log("removing buttons")
@@ -344,26 +348,14 @@ var button = document.getElementsByClassName('btn');
                 let list_index_buttons = buttons_array.indexOf(this);
                 switch(list_index_buttons){
                     case 0:
-                        console.log("Attack selected")
-                        basic()
+                        console.log("Items selected")
+                        Items()
                     break;
                     case 1:
                         console.log("Spells selected")
                         b_menu.style.visibility = "visible";
                         spellsMenu()
                    
-                    break;
-                    case 2:
-                        console.log("Defend selected")
-                        if (defend_active == false){
-                            defend_timer()
-                        }else{
-                            console.log("already defending")
-                            console.log(defend_active)
-                            //make an actual window for this later
-                        }
-             //cannot be used if already in effect!!! Lasts 2 turns
-                        
                     break;
                     default:
                         console.log("buttons switch - shits fucked")
@@ -407,7 +399,7 @@ var button = document.getElementsByClassName('btn');
                     let list_index_spells = spells_array.indexOf(this);
                     switch(list_index_spells){
                         case 0: //this is working! 
-                            console.log("spell button 0 selected")
+                            console.log("spell button 0 selected") //refactor all this to switches
                             if (ultima.value !== 100){
                                 ultimaNotCharged()
                                 
@@ -420,8 +412,7 @@ var button = document.getElementsByClassName('btn');
                                 Supreme_Altar()
                             }else if (spells_array[0].innerHTML == "Scarlet Subversion"){ //r mage
                                 Scarlet_Subversion()
-                            };
-                                
+                            }
                         break;
                         case 1: //so this is the second spell button...
                             console.log("spell button 1 selected")
@@ -431,9 +422,9 @@ var button = document.getElementsByClassName('btn');
                                 Mirage_Blade()
                             }else if (spells_array[1].innerHTML == "Pierce Evil"){
                                 Pierce_Evil()
-                            }else if (spells_array[1].innerHTML == "Dance of Death"){
-                                Dance_of_Death()
-                            };
+                            }else if (spells_array[1].innerHTML == "Border of Life"){
+                                Borderof_Life()
+                            }
                        
                         break;
                         case 2: //this is the 3rd and so forth
@@ -446,7 +437,7 @@ var button = document.getElementsByClassName('btn');
                                 Angels_Grace()
                             }else if (spells_array[2].innerHTML == "Bloody Vengeance"){
                                 Bloody_Vengeance()
-                            };
+                            }
     
                         break;
                         case 3:
@@ -459,8 +450,7 @@ var button = document.getElementsByClassName('btn');
                                 Rebirth()
                             }else if (spells_array[3].innerHTML == "Chain Lightning"){
                                 Chain_Lightning()
-                            };
-
+                            }
 
                         break;
                         case 4:
@@ -474,6 +464,17 @@ var button = document.getElementsByClassName('btn');
                             }else if (spells_array[4].innerHTML == "My Turn"){
                                 My_Turn()
                             };
+                        case 5://defend 
+                            console.log("spell button 5 selected")
+                            if (spells_array[5].innerHTML == "Defend - knight"){
+                                defend(0)
+                            }else if (spells_array[5].innerHTML == "Defend - dark mage"){
+                                defend(1)
+                            }else if (spells_array[5].innerHTML == "Defend - light mage"){
+                                defend(2)
+                            }else if (spells_array[5].innerHTML == "Defend - red mage"){
+                                defend(3)
+                            }
 
 
                         break;
