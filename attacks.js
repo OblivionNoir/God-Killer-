@@ -568,9 +568,6 @@ var SSList = [];
 function Scarlet_Subversion(){  
     SS_Part2()
     console.log(SScalculation())
-    //hp.value -= (SScalculation())
-    //SS_Final = SScalculation()
-    //console.log(SS_Final)
 };
 
 function SS_Part2(){
@@ -581,8 +578,8 @@ function SS_Part2(){
         i_menu.src = "" //Reset to blank prevent previous image from showing
         i_menu.src = "SS.png"
         i_menu.style.visibility = "visible"
-        const B = new Audio("boom.mp3"); 
-        B.play()
+        const boom = new Audio("boom.mp3"); 
+        boom.play()
         setTimeout(()=>{
             changeBackground()
             i_menu.style.visibility = "hidden"
@@ -634,79 +631,99 @@ function SS_Part2(){
     };
   };
 
-//median damage: 1898
 
+var FinalCL = []//stores the final calculated damage of all 5 strikes for an accurate total. Clear the list when the function ends
 function CLCalc(crit, hit_name){
     if (crit == 1){
         p1.style.visibility = "visible";
-        p1.value = "Critical hit! " + hit_name.toFixed(0)*1.5 + " damage!"//this still has a decimal on it because the multiplier screws with it. 
+        hit_name*=1.5
+        p1.value = "Critical hit! " + hit_name.toFixed(0) + " damage!"
         //Create seperate variable with the multiplied value THEN do the toFixed? 
-        hp.value -= hit_name*1.5.toFixed(0);
+        hp.value -= hit_name.toFixed(0);
+        FinalCL.push(hit_name)//no toFixed yet to avoid a string
     }else{
         p1.style.visibility = "visible";
         p1.value =  hit_name.toFixed(0) + " damage!"
         //p1_2sec()
         hp.value -= hit_name.toFixed(0);
+        FinalCL.push(hit_name)
     }
 };
+//Scale mp cost to 3750 dmg
 var l_sfx = new Audio("LS.mp3")
-  function Chain_Lightning(){ //this needs to be very powerful due to the long execution time, increase the numbers. Aim for ~3k average
-    l_sfx.play()
-    l_sfx.loop = true;
+  function Chain_Lightning(){ //This attack takes 14 seconds to execute. So it must be very powerful!
+    let red_mage_mp = document.getElementById("r_mage_name_mp");
+    if (red_mage_mp.value < 50){ 
+        p1.style.visibility = "visible";
+        p1.value = "Not enough MP!"
+        p1_2sec()
+    }else{
+        red_mage_mp.value -= 50;
+        l_sfx.play()
+        l_sfx.loop = true;
           //hit 1
-          let a = (Math.random() * (150 - 113) + 113)//goes up 1.4x each hit. Exponential
-          //Min is 75% of the max
-          let d1_crit = Math.floor(Math.random() * 14);
-      //hit 2
-          let b = (Math.random() * (210 - 158) + 158)
-          let d2_crit = Math.floor(Math.random() * 11);
-      //hit 3
-          let c = (Math.random() * (294 - 221) + 221)
-          let d3_crit = Math.floor(Math.random()* 8);
-      //hit 4
-          let d = (Math.random() * (412 - 309) + 309)
-          let d4_crit = Math.floor(Math.random()*5);
-      //hit 5
-          let e = (a + b + c + d) 
-          let d5_crit = Math.floor(Math.random()*3);
-  
-          CLCalc(d1_crit, a)
-          ShowLightning(1)
-          timeout_lightning(200)
-  
-          setTimeout(()=>{
-              CLCalc(d2_crit, b)
+              let a = (Math.random() * (163 - 113) + 113)/phase_mdef//goes up 1.35x each hit. Exponential
+              //Min is max -50
+              let d1_crit = Math.floor(Math.random() * 14);
+          //hit 2
+              let b = (Math.random() * (213 - 163) + 163)/phase_mdef
+              let d2_crit = Math.floor(Math.random() * 11);
+          //hit 3
+              let c = (Math.random() * (279 - 229) + 229)/phase_mdef
+              let d3_crit = Math.floor(Math.random()* 8);
+          //hit 4
+              let d = (Math.random() * (371 - 321) + 321)/phase_mdef
+              let d4_crit = Math.floor(Math.random()*5);
+          //hit 5
+              let e = (a + b + c + d) 
+              let d5_crit = Math.floor(Math.random()*3);
+      
+              CLCalc(d1_crit, a)
               ShowLightning(1)
               timeout_lightning(200)
-          }, 2000)
-          
-          setTimeout(()=>{
-              CLCalc(d3_crit, c)
-              ShowLightning(1)
-              timeout_lightning(200)
-          },4000)
-  
-          setTimeout(()=>{
-              CLCalc(d4_crit, d)
-              ShowLightning(1)
-              timeout_lightning(200)
-          }, 6000)
-  
-          setTimeout(()=>{ //5th attack is the sum of all previous, not counting any additional critical damage. 
-            //The 5th hit itself already has a high crit rate so that would be OP and too unpredictable even for this
-              CLCalc(d5_crit, e)
-              ShowLightning(2)
-              timeout_lightning(200)
-              l_sfx.loop = false;
-          }, 8000)
-  
-          setTimeout(()=>{
-              p1.value = "Total damage: " + e.toFixed(0)*2 //this is innacurate because e does not count crits. Get the values from CLCalc for this
-              timeout_i_menu()
-              ending3()
+      
+              setTimeout(()=>{
+                  CLCalc(d2_crit, b)
+                  ShowLightning(1)
+                  timeout_lightning(200)
+              }, 2000)
               
-          }, 12000)
+              setTimeout(()=>{
+                  CLCalc(d3_crit, c)
+                  ShowLightning(1)
+                  timeout_lightning(200)
+              },4000)
+      
+              setTimeout(()=>{
+                  CLCalc(d4_crit, d)
+                  ShowLightning(1)
+                  timeout_lightning(200)
+              }, 6000)
+      
+              setTimeout(()=>{ //5th attack is the sum of all previous, not counting any additional critical damage. 
+                //The 5th hit itself already has a high crit rate so that would be OP and too unpredictable even for this
+                  CLCalc(d5_crit, e)
+                  ShowLightning(2)
+                  timeout_lightning(200)
+                  l_sfx.loop = false;
+              }, 8000)
+      
+              setTimeout(()=>{
+                //console.log(FinalCL)
+                //add values from the list for the total
+                const sum = FinalCL.reduce((a, b) => {
+                    return a + b
+                }, 0);
+                console.log(sum*2)
+                  p1.value = "Total damage: " + sum.toFixed(0)*2 
+                  p1_3sec()
+                  FinalCL = [] //clear the list
+                  timeout_i_menu()
+                  ending3()
+              }, 12000)
 
+    }
+  
     }
 
     function timeout_lightning(time){
