@@ -32,9 +32,9 @@ function cooldown(atk_time){
 
   function defend(character){
     console.log(character + " made it") 
-    //This is a toggle. 
+    //Lasts 20 seconds.
     //If defending, that character can't do anything else but their defense is raised 3x. 
-    //Essential to survive Bleeding Sun at th end
+    //Essential to survive Bleeding Sun at the end
   }
 
   //dark mage attacks
@@ -357,7 +357,7 @@ function addAllyTargets(){
 
 };
 
-
+var h2 = new Audio("heal2.mp3"); 
   //all the usual visual stuff
 
 //not sure how to balance healing yet
@@ -372,7 +372,6 @@ function addAllyTargets(){
         i_menu.src = "" //Reset to blank prevent previous image from showing
         i_menu.src = "AngelsGrace.jpg"
         i_menu.style.visibility = "visible"
-        const h2 = new Audio("heal2.mp3"); 
         h2.play()
         h2.loop = false;
         setTimeout(()=>{                     
@@ -468,7 +467,6 @@ function RebirthPart2(){
         white_mage_mp.value -= 50;
         i_menu.src = "revival.png"
         i_menu.style.visibility = "visible"
-        const h2 = new Audio("heal2.mp3"); //find new sfx
         h2.play()
         h2.loop = false;
         //this can probably be a function
@@ -479,11 +477,37 @@ function RebirthPart2(){
     };
   };
 
+//costs 40% more than angel's grace. Slightly more efficient in terms of mp cost/total amt healed ratio
+  function Chain_Heal(){ //heals all allies 25% of their max hp, but not if they're dead
+    let white_mage_mp = document.getElementById("l_mage_name_mp");
+    if (white_mage_mp.value < 28){
+        p1.style.visibility = "visible";//this should be a function
+        p1.value = "Not enough MP!"
+        p1_3sec()
 
-  function ChainHeal(){ //heals all allies a small amount
-      
-
-  }
+    }else{
+        white_mage_mp.value -= 28;
+        i_menu.src = "";
+        i_menu.src = "chainheal.png"
+        i_menu.style.visibility = "visible"
+        h2.play()
+        //h2.loop = false;
+        timeout_i_menu()
+        if (warrior_dead == false){
+            warrior_hp.value += 138//it won't go over max by default so no need to check. Rare moment of simplicity
+        }
+        if (black_mage_dead == false){
+            black_mage_hp.value += 118
+        }
+        if (white_mage_dead == false){
+            white_mage_hp.value += 100
+        }
+        if (red_mage_dead == false){
+            red_mage_hp.value += 95
+        };
+    };
+  
+  };
 
   function Supreme_Altar(){ //her ult, fully restores party to default state
       //if anyone is dead, change their dead status to false

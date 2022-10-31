@@ -399,7 +399,7 @@ var button = document.getElementsByClassName('btn');
                     let list_index_spells = spells_array.indexOf(this);
                     switch(list_index_spells){
                         case 0: //this is working! 
-                            console.log("spell button 0 selected") //refactor all this to switches
+                            console.log("spell button 0 selected") 
                             switch(true){
                                 case ultima.value!== 100:
                                     ultimaNotCharged()
