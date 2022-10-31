@@ -400,83 +400,132 @@ var button = document.getElementsByClassName('btn');
                     switch(list_index_spells){
                         case 0: //this is working! 
                             console.log("spell button 0 selected") //refactor all this to switches
-                            if (ultima.value !== 100){
-                                ultimaNotCharged()
-                                
-                            }else if (spells_array[0].innerHTML == "Thousand Men"){ //knight
-                                //goes 0, 1, 2, 3, 4, top down
-                                Thousand_Men()
-                            }else if (spells_array[0].innerHTML == "Radiant Supernova"){//d mage
-                                Radiant_Supernova()
-                            }else if (spells_array[0].innerHTML == "Supreme Altar"){ //l mage
-                                Supreme_Altar()
-                            }else if (spells_array[0].innerHTML == "Scarlet Subversion"){ //r mage
-                                Scarlet_Subversion()
-                            }
+                            switch(true){
+                                case ultima.value!== 100:
+                                    ultimaNotCharged()
+                                break;
+
+                                case spells_array[0].innerHTML == "Thousand Men":
+                                    Thousand_Men()
+                                break;
+
+                                case spells_array[0].innerHTML == "Radiant Supernova":
+                                    Radiant_Supernova()
+                                break;
+
+                                case spells_array[0].innerHTML == "Supreme Altar":
+                                    Supreme_Altar()
+                                break;
+
+                                case spells_array[0].innerHTML == "Scarlet Subversion":
+                                    Scarlet_Subversion()
+                                break;
+                            };
                         break;
+
                         case 1: //so this is the second spell button...
                             console.log("spell button 1 selected")
-                            if (spells_array[1].innerHTML == "Shadow Self"){
-                                Shadow_Self()
-                            }else if (spells_array[1].innerHTML == "Mirage Blade"){
-                                Mirage_Blade()
-                            }else if (spells_array[1].innerHTML == "Pierce Evil"){
-                                Pierce_Evil()
-                            }else if (spells_array[1].innerHTML == "Border of Life"){
-                                Borderof_Life()
-                            }
-                       
+                            switch(true){
+                                case spells_array[1].innerHTML == "Shadow Self":
+                                    Shadow_Self()
+                                break;
+
+                                case spells_array[1].innerHTML == "Mirage Blade":
+                                    Mirage_Blade()
+                                break;
+
+                                case spells_array[1].innerHTML == "Pierce Evil":
+                                    Pierce_Evil()
+                                break;
+
+                                case spells_array[1].innerHTML == "Border of Life":
+                                    Borderof_Life()
+                                break;
+                            };
                         break;
+
                         case 2: //this is the 3rd and so forth
                             console.log("spell button 2 selected")
-                            if (spells_array[2].innerHTML == "Whims of Fate"){
-                                Whims_of_Fate()
-                            }else if (spells_array[2].innerHTML == "Entrapment"){
-                                Entrapment()
-                            }else if (spells_array[2].innerHTML == "Angel's Grace"){
-                                Angels_Grace()
-                            }else if (spells_array[2].innerHTML == "Bloody Vengeance"){
-                                Bloody_Vengeance()
-                            }
+                            switch(true){
+                                case spells_array[2].innerHTML == "Whims of Fate":
+                                    Whims_of_Fate()
+                                break;
+
+                                case spells_array[2].innerHTML == "Entrapment":
+                                    Entrapment()
+                                break;
+
+                                case spells_array[2].innerHTML == "Angel's Grace":
+                                    Angels_Grace()
+                                break;
+
+                                case spells_array[2].innerHTML == "Bloody Vengeance":
+                                    Bloody_Vengeance()
+                                break;
+                            };
     
                         break;
-                        case 3:
-                            console.log("spell button 3 selected")
-                            if (spells_array[3].innerHTML == "Rebellion"){
-                                Rebellion()
-                            }else if (spells_array[3].innerHTML == "Black Fire"){
-                                Black_Fire()
-                            }else if (spells_array[3].innerHTML == "Rebirth"){
-                                Rebirth()
-                            }else if (spells_array[3].innerHTML == "Chain Lightning"){
-                                Chain_Lightning()
-                            }
 
+                        case 3:
+                            switch(true){
+                                case spells_array[3].innerHTML == "Rebellion":
+                                    Rebellion()
+                                break;
+
+                                case spells_array[3].innerHTML == "Black Fire":
+                                    Black_Fire()
+                                break;
+
+                                case spells_array[3].innerHTML == "Rebirth":
+                                    Rebirth()
+                                break;
+
+                                case spells_array[3].innerHTML == "Chain Lightning":
+                                    Chain_Lightning()
+                                break;
+                            };
+        
                         break;
                         case 4:
                             console.log("spell button 4 selected")
-                            if (spells_array[4].innerHTML == "Deathblow"){
-                                Deathblow()
-                            }else if (spells_array[4].innerHTML == "Shattered Mirror"){
-                                Shattered_Mirror()
-                            }else if (spells_array[4].innerHTML == "Chain Heal"){
-                                Chain_Heal()
-                            }else if (spells_array[4].innerHTML == "My Turn"){
-                                My_Turn()
+                            switch(true){
+                                case spells_array[4].innerHTML == "Deathblow":
+                                    Deathblow()
+                                break;
+
+                                case spells_array[4].innerHTML == "Shattered Mirror":
+                                    Shattered_Mirror()
+                                break;
+
+                                case spells_array[4].innerHTML == "Chain Heal":
+                                    Chain_Heal()
+                                break;
+
+                                case spells_array[4].innerHTML == "My Turn":
+                                    My_Turn()
+                                break;
                             };
+
+                        break;
                         case 5://defend 
                             console.log("spell button 5 selected")
-                            if (spells_array[5].innerHTML == "Defend - knight"){
-                                defend(0)
-                            }else if (spells_array[5].innerHTML == "Defend - dark mage"){
-                                defend(1)
-                            }else if (spells_array[5].innerHTML == "Defend - light mage"){
-                                defend(2)
-                            }else if (spells_array[5].innerHTML == "Defend - red mage"){
-                                defend(3)
+                            switch(true){
+                                case spells_array[5].innerHTML == "Defend - knight":
+                                    defend(0)
+                                break;
+
+                                case spells_array[5].innerHTML == "Defend - dark mage":
+                                    defend(1)
+                                break;
+
+                                case spells_array[5].innerHTML == "Defend - light mage":
+                                    defend(2)
+                                break;
+
+                                case spells_array[5].innerHTML == "Defend - red mage":
+                                    defend(3)
+                                break;
                             }
-
-
                         break;
                         default:
                             console.log("switch2 - shits fucked")
