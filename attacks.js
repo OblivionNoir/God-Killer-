@@ -506,10 +506,10 @@ function RebirthPart2(){
       document.getElementById("d_mage_name_hp").value = 470;
       document.getElementById("l_mage_name_hp").value = 400;
       document.getElementById("r_mage_name_hp").value = 380;
-      document.getElementById("warrior_name_mp").value = 120;
-      document.getElementById("d_mage_name_mp").value = 260;
-      document.getElementById("l_mage_name_mp").value = 280;
-      document.getElementById("r_mage_name_mp").value = 360;
+      document.getElementById("warrior_name_mp").value = 180;
+      document.getElementById("d_mage_name_mp").value = 390;
+      document.getElementById("l_mage_name_mp").value = 420;
+      document.getElementById("r_mage_name_mp").value = 540;
 
 
       //fix any debuffs 
@@ -639,7 +639,8 @@ function SS_Part2(){
 function CLCalc(crit, hit_name){
     if (crit == 1){
         p1.style.visibility = "visible";
-        p1.value = "Critical hit! " + hit_name.toFixed(0)*1.5 + " damage!"
+        p1.value = "Critical hit! " + hit_name.toFixed(0)*1.5 + " damage!"//this still has a decimal on it because the multiplier screws with it. 
+        //Create seperate variable with the multiplied value THEN do the toFixed? 
         hp.value -= hit_name*1.5.toFixed(0);
     }else{
         p1.style.visibility = "visible";
