@@ -1,7 +1,6 @@
--Remove attack button and attach a unique one to each character, so it scales with the characters phys atk
 -Cannot use multiple attacks at once. Set an attack active state to prevent this. Exceptions are My Turn, Broken Mirror and defend or anything else that waits in the background.
 -Could probably clean some things up with ternaries 
--add items so characters can still be revived if l mage dies
+-Much of this can become functions and shorten the file size
 -css file is messy. Less IDs, more classes. Sve the IDs for JS
 -Gradual transitions as opposed to images just popping in
 -Keep all the numbers as int. No decimals 
