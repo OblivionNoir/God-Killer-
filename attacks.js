@@ -608,6 +608,7 @@ function SS_Part2(){
 }
 function Borderof_Life(){ //adjust for use by red mage
     //Cut defenses in exchange for much higher attack for 20 seconds
+    //Can be paired with SS for an even more high risk high reward combo
     //will require creation of attack stats
     i_menu.src = ""
     i_menu.src = "BOL.png" 
@@ -616,7 +617,7 @@ function Borderof_Life(){ //adjust for use by red mage
     PE.loop = false;
 
     
-};//function ends here
+};
   function Bloody_Vengeance(){
     //ignores def, works like a much stronger basic attack with a slightly higher
     //crit rate. Physical
@@ -702,7 +703,7 @@ var l_sfx = new Audio("LS.mp3")
               ShowLightning(1)
               timeout_lightning(200)
       
-              setTimeout(()=>{
+              setTimeout(()=>{ //could possibly make this into a function that takes in several arguments
                   CLCalc(d2_crit, b)
                   ShowLightning(1)
                   timeout_lightning(200)
