@@ -117,7 +117,7 @@ function countdown_1turn(time_1turn){
 }
 function BLExpire(){
     setTimeout(()=>{
-        BOL_active = false;
+        //BOL_active = false;
         console.log("BL no longer active")
         red_mage_def = 0.9;
         red_mage_mdef = 0.9;
