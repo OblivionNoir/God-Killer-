@@ -559,32 +559,24 @@ function timeout(){
                 case(warrior_hp.value <=0):  //first revert to 0 if negative
                     warrior_hp.value ==0;
                     warrior_dead = true; //add message 
-                    p1.style.visibility= "visible";
-                    p1.value = "Warrior has fallen!"
                     isDead(wa)
                     timeout()
                     break; //do stuff so they can't be attacked or selected while dead
                 case(black_mage_hp.value <=0):
                     black_mage_hp.value ==0;
                     black_mage_dead = true;
-                    p1.style.visibility = "visible";
-                    p1.value = "Dark mage has fallen!"
                     isDead(dmi)
                     timeout()
                     break;
                 case(white_mage_hp.value <=0):
                     white_mage_hp.value ==0;
                     white_mage_dead = true;
-                    p1.style.visibility = "visible";
-                    p1.value = "Light mage has fallen!"
                     isDead(lmi)
                     timeout()
                     break;
                 case(red_mage_hp.value <=0):
                     red_mage_hp.value ==0;
                     red_mage_dead = true;
-                    p1.style.visibility = "visible";
-                    p1.value = "Red mage has fallen!"
                     isDead(rmi)
                     timeout()
                     break;

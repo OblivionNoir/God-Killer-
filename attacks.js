@@ -361,6 +361,7 @@ var h2 = new Audio("heal2.mp3");
   //all the usual visual stuff
 
 //not sure how to balance healing yet
+
   function Angels_Grace_Part2(){
     let white_mage_mp = document.getElementById("l_mage_name_mp");
     if (white_mage_mp.value < 20){
@@ -467,6 +468,7 @@ function RebirthPart2(){
         white_mage_mp.value -= 50;
         i_menu.src = "revival.png"
         i_menu.style.visibility = "visible"
+        const h2 = new Audio("heal2.mp3"); 
         h2.play()
         h2.loop = false;
         //this can probably be a function
@@ -477,37 +479,21 @@ function RebirthPart2(){
     };
   };
 
-//costs 40% more than angel's grace. Slightly more efficient in terms of mp cost/total amt healed ratio
+//costs 40$ more than angel's grace. Slighly more efficient in terms of mp cost/total amt healed ratio
   function Chain_Heal(){ //heals all allies 25% of their max hp, but not if they're dead
-    let white_mage_mp = document.getElementById("l_mage_name_mp");
-    if (white_mage_mp.value < 28){
-        p1.style.visibility = "visible";//this should be a function
-        p1.value = "Not enough MP!"
-        p1_3sec()
-
-    }else{
-        white_mage_mp.value -= 28;
-        i_menu.src = "";
-        i_menu.src = "chainheal.png"
-        i_menu.style.visibility = "visible"
-        h2.play()
-        //h2.loop = false;
-        timeout_i_menu()
-        if (warrior_dead == false){
-            warrior_hp.value += 138//it won't go over max by default so no need to check. Rare moment of simplicity
-        }
-        if (black_mage_dead == false){
-            black_mage_hp.value += 118
-        }
-        if (white_mage_dead == false){
-            white_mage_hp.value += 100
-        }
-        if (red_mage_dead == false){
-            red_mage_hp.value += 95
-        };
-    };
-  
-  };
+    if (warrior_dead == false){
+        warrior_hp.value += 138//it won't go over max by default so no need to check. Rare moment of simplicity
+    }
+    if (black_mage_dead == false){
+        black_mage_hp.value += 117
+    }
+    if (white_mage_dead == false){
+        white_mage_hp.value += 100
+    }
+    if (red_mage_dead == false){
+        red_mage_hp.value += 95
+    }
+  }
 
   function Supreme_Altar(){ //her ult, fully restores party to default state
       //if anyone is dead, change their dead status to false
@@ -606,18 +592,38 @@ function SS_Part2(){
 
 
 }
+//will need an active state to prevent reuse while it's still active, this'll go along with adding the color filters over the portraits once everything is working
+//atk, matk, ev
+BL_adjusted = []
+//2 sec execution time, lasts 25 seconds
+//Can easily get her killed, but opens a window to deal massive damage
+//A martyr attack, of sorts. Hence the name and the spider lilies 
 function Borderof_Life(){ //adjust for use by red mage
-    //Cut defenses in exchange for much higher attack for 20 seconds
-    //Can be paired with SS for an even more high risk high reward combo
-    //will require creation of attack stats
-    i_menu.src = ""
-    i_menu.src = "BOL.png" 
-    i_menu.style.visibility = "visible"
-    PE.play()//find new sfx
-    PE.loop = false;
-
-    
-};
+    //-75% defenses, +50% attacks and evasion
+    let red_mage_mp = document.getElementById("r_mage_name_mp");
+    if (red_mage_mp.value <40){ 
+        p1.style.visibility = "visible";
+        p1.value = "Not enough MP!"
+        p1_2sec()
+    }else{ 
+        red_mage_mp.value -= 40;
+        i_menu.src = ""
+        i_menu.src = "BOL.png" 
+        i_menu.style.visibility = "visible"
+        PE.play()//find new sfx
+        PE.loop = false;
+        red_mage_def *= 0.25.toFixed(1) //for loop wants to be bitchy so we're doing it this way
+        red_mage_mdef *= 0.25.toFixed(1)
+        red_mage_ev *= 1.5.toFixed(0)
+        red_mage_atk *= 1.5.toFixed(0)
+        red_mage_matk *= 1.5.toFixed(0)
+        timeout_i_menu()
+        BL_adjusted.push(red_mage_def, red_mage_mdef, red_mage_ev, red_mage_atk, red_mage_matk)
+        console.log(BL_adjusted)
+        //timer will go in other thread
+        BLExpire()
+    }
+};//function ends here
   function Bloody_Vengeance(){
     //ignores def, works like a much stronger basic attack with a slightly higher
     //crit rate. Physical
@@ -703,7 +709,7 @@ var l_sfx = new Audio("LS.mp3")
               ShowLightning(1)
               timeout_lightning(200)
       
-              setTimeout(()=>{ //could possibly make this into a function that takes in several arguments
+              setTimeout(()=>{
                   CLCalc(d2_crit, b)
                   ShowLightning(1)
                   timeout_lightning(200)
