@@ -5,15 +5,15 @@ function cooldown(atk_time){
 //crit = 1.5x damage, adjust that for the existing spells
   //warrior attacks
 
-  function Thousand_Men(){ //his ult
+  function Thousand_Men(){ //<!--his ultimate, deals heavy damage for several turns-->
 
       counter()
   };
-  function Shadow_Self(){
+  function Shadow_Self(){ //Triples evasion for a set period
 
       counter()
   };
-  function Whims_of_Fate(){
+  function Whims_of_Fate(){//50% chance of missing, 3 50% chances at a critical if no miss. 12.5% chance of triple crit
 
       counter()
 

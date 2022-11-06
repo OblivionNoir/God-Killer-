@@ -7,6 +7,8 @@
   function SScalculation(){
     //ult
     //lower hp = more damage. 
+
+    //ultimas do not take attack/def stats into account because any buffs would make them OP
     var loop_margin = 1; //reset loop margin to prevent numbers getting all negative and fucked up
     for(let i = 0; i < red_mage_hp.value; i++){
         loop_margin *= 1.0055;  //links back to the base dmg of 1000 to increase the multiplier per hp lost
@@ -51,12 +53,12 @@ BL_adjusted = []
 function Borderof_Life(){ //adjust for use by red mage
     //-75% defenses, +50% attacks and evasion
     let red_mage_mp = document.getElementById("r_mage_name_mp");
-    if (red_mage_mp.value <40){ 
+    if (red_mage_mp.value <80){ 
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
         p1_2sec()
     }else{ 
-        red_mage_mp.value -= 40;
+        red_mage_mp.value -= 80;
         i_menu.src = ""
         i_menu.src = "BOL.png" 
         i_menu.style.visibility = "visible"
@@ -226,7 +228,7 @@ var l_sfx = new Audio("LS.mp3")
 
 
 var MT_active = false;
-  function My_Turn(){
+  function My_Turn(){  //maybe use promise for this?
     //Reversal move that waits in the background and waits for her to be targeted. 
     //Only one active at a time 
     //will add a little symbol next to her name to indicate that it's active
