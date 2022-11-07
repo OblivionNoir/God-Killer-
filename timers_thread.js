@@ -12,7 +12,6 @@ function boss_phase1(){
         console.log("made it to interval")
         //Borderof_Life()
         console.log("boss test")
-        bosstest()
         CheckDeadStatus()
         let boss_choice = randNumber(1,11)
         //might be a better way of setting percent chance.
@@ -28,9 +27,7 @@ function boss_phase1(){
     console.log("error"+ trapped)
 }
 };
-function bosstest(){
-    black_mage_hp.value = 0;
-}
+
 var p_2_interval; 
 function boss_phase2(){
     clearInterval(p1_interval)//disable the first interval

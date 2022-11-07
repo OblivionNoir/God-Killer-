@@ -40,6 +40,14 @@ b_menu.style.visibility = "hidden"
 var i_menu = document.getElementById("img_template") //for spells
 i_menu.style.visibility = "hidden"
 
+var mp_labels = document.getElementsByClassName("mp_label")
+var hp_labels = document.getElementsByClassName("hp_label")
+for (let i = 0; i < mp_labels.length; i++){ 
+    mp_labels[i].style.visibility = "hidden";
+}
+for (let i = 0; i < hp_labels.length; i++){
+    hp_labels[i].style.visibility = "hidden";
+}
 //get hp values 
 var warrior_hp = document.getElementById("warrior_name_hp")
 var black_mage_hp = document.getElementById("d_mage_name_hp")
@@ -65,11 +73,12 @@ var combat_buttons = document.getElementsByClassName('btn')
 
 var rain = document.getElementById("rainbg")
 rain.loop = true;
-document.getElementById("i_overlay").style.opacity = "0.20"
+document.getElementById("i_overlay").style.opacity = "0.10"
 
 
 //global sound effects 
 var PE = new Audio("pierceevil.wav");
+
 
 
 //test hp bar 
@@ -147,6 +156,12 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     progress_menu.style.visibility = "visible";
     hp.style.visibility = "visible";
     bn.style.visibility = "visible";
+    for (let i = 0; i < mp_labels.length; i++){ 
+        mp_labels[i].style.visibility = "visible";
+    }
+    for (let i = 0; i < hp_labels.length; i++){
+        hp_labels[i].style.visibility = "visible";
+    }
 
 };
 
@@ -684,10 +699,10 @@ var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the els
             p1_img.style.boxShadow= "1.5vh 1.5vh 1.5h 1.5vh  rgb(130, 3, 3)"
             //roar.loop = false;
             const growl = new Audio('growl.mp3')
-            document.body.style.backgroundImage = "url('trueformbg.png')"   
-            p1_img.src = "trueform.png"
+            document.body.style.backgroundImage = "url('phase3BGV3.jpeg')"   
+            p1_img.src = "phase3V2.jpeg"
             bn.innerHTML = "True Form of the Abomination" 
-            document.getElementById("i_overlay").style.opacity = "0.25"//make it bloodier
+            document.getElementById("i_overlay").style.opacity = "0.20"//make it bloodier
             //sound effect intervals
             setInterval(()=>{
                 roar.play();

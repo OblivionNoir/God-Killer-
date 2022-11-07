@@ -73,6 +73,7 @@ function Borderof_Life(){ //adjust for use by red mage
         BL_adjusted.push(red_mage_def, red_mage_mdef, red_mage_ev, red_mage_atk, red_mage_matk)
         console.log(BL_adjusted)
         //timer will go in other thread
+        ending3()
         BLExpire()
     }
 };//function ends here

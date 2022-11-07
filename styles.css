@@ -12,7 +12,7 @@ html{
 }
 
 body{
-    background-image: url("purveyorbg.png"); 
+    background-image: url("purveyorbgV3.jpeg"); 
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -91,31 +91,59 @@ body{
     border-radius: 8%;
 }
 #battle_menu >div >img{
-    height: 15vh;
+    max-width: 8vw;
     border-radius: 8%;
     opacity: 0.85;
 
 }
 
-#p_menu{
 
-    max-width: fit-content;
-    padding-bottom: -5vh;
-    max-height: 100vh;
-    border-radius: 5%;
-    margin-top: -60vh;
-    font-size: large;
+#p_menu{ /*p menu is the container of bars/labels*/
+ 
+    margin-top: -74vh;
+
 
 }
 #p_menu > div{
-    display: flex;
-    flex-direction: column;
-    display: flex;
-    width: 8vw;
     margin-left: 8.5vw;
-    border-radius: 8%;
 }
 
+#labels{ /*the spacing is a tiny bit off but I have no idea how to fix it*/
+    width: 8vw;
+    border-radius: 8%;
+    margin-left: 8.5vw;
+    z-index: 9;
+    margin-top: -71vh;
+}
+#labels>div:nth-child(2n){ /*mp*/
+    font-size: 1.5vh;
+    display: flex;
+    flex-direction: column;
+    margin-top: 14vh;
+    width: 8vw;
+    border-radius: 8%;
+    z-index: 9;
+}
+
+#labels>div:nth-child(1n){ /*hp*/
+    font-size: 1.2rem;
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 7vh;
+    width: 8vw;
+    border-radius: 8%;
+    z-index: 9;
+}
+
+#p_menu>div>progress{
+    display: flex;
+    flex-direction: column;
+    margin-top: 6vh;
+    min-height: 2vh;
+    width: 8vw;
+    border-radius: 8%;
+}
 
 #menu_template{
     position: absolute;
@@ -127,10 +155,10 @@ body{
     position: absolute;
     max-width: 25vw;
     padding-bottom: 1vh;
-    max-height: 10vh;
+    max-height: 8vh;
     border-top-right-radius: 10%;
     border-bottom-right-radius: 10%;
-    margin-top: -65vh;
+    margin-top: -70vh;
     margin-left: 8vw;
     font-size: large;
     z-index: 4;

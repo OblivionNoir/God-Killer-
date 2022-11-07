@@ -113,3 +113,20 @@ function Randomizer(base_power, min, max){
     //adds a 1-5% pos/neg randomizer to each attack that's used
     //return final_dmg
 }
+
+function defend(character){
+    console.log(character + " made it") 
+    //Lasts 20 seconds.
+    //If defending, that character can't do anything else but their defense is raised 3x. 
+    //Essential to survive Bleeding Sun at the end
+  }
+
+  //switches background back, according to current phase
+function changeBackground(){
+    if (phase3called == true){
+        document.body.style.backgroundImage = "url('trueformbg.png')"
+      }else{
+        document.body.style.backgroundImage = "url('purveyorbg.png')"
+      }
+  
+  }
