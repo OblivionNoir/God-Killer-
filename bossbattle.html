@@ -13,6 +13,10 @@
     <script src = "FPS.js" defer></script>
     <script src = "boss_attacks.js" defer></script>
     <script src = "spell_conditionals.js" defer></script>
+    <script src = "w_attacks.js" defer ></script>
+    <script src = "w_mage_atks.js" defer ></script>
+    <script src = "r_mage_atks.js" defer ></script>
+    <script src = "d_mage_atks.js" defer ></script>
     <link rel = "stylesheet" href = "reset.css">
     <link rel = "stylesheet" href = "styles.css">
 </head>
@@ -20,11 +24,11 @@
     <div id = "i_overlay"></div>
 
     <video autoplay muted loop id = "rainbg" >
-<source src = "video(1).mp4" type="video/mp4" > 
+<source src = "rain3.mp4" type="video/mp4" > 
     </video>
 
         
-        <img src ="purveyor.png" id = "boss_img" class = "child" class = "hide">
+        <img src ="purveyorV3.jpeg" id = "boss_img" class = "child" class = "hide">
         <div id = "box" class = "child" class = "hide">
             <textarea id = "txt_" disabled rows="4" cols="32" ></textarea> <!--remember that this becomes invisible!-->
         </div>
@@ -43,56 +47,44 @@
             <div><button id = "item_b" class = "btn" >Items</button></div>
             <div><button id = "spells_b" class = "btn" >Actions</button></div>
             
-            <div><img src = "newknight.jpeg" id = "knight_img" class = "clickable ally_img"></div>
+            <div><img src = "knightv4.jpeg" id = "knight_img" class = "clickable ally_img"></div>
            
-            <div><img src = "mage3.jpeg" id = "d_mage_img" class = "clickable ally_img"></div> 
+            <div><img src = "dmagev4.jpeg" id = "d_mage_img" class = "clickable ally_img"></div> 
        
-            <div><img src = "whitemage3.jpeg" id = "l_mage_img" class = "clickable ally_img"></div>
+            <div><img src = "lmagev4.jpeg" id = "l_mage_img" class = "clickable ally_img"></div>
 
 
-            <div><img src = "redmage3.jpeg" id = "r_mage_img" class = "clickable ally_img"></div>
+            <div><img src = "rmagev4.jpeg" id = "r_mage_img" class = "clickable ally_img"></div>
     
             <div id = "u_label"></div>
             <div><progress id = "ultima_charge" value = "99" max = "100"></progress></div>
 
 
         </div>  
-<!--try and fix this pile of shit-->
         <div id = "p_menu" class = "hide">
-            <div id = "k_hp" class = "hp_label"></div>
-            <div><progress id = "warrior_name_hp" max="550" value="300" class = "party_hp" ></progress></div>
-            <div id = "k_mp" class = "mp_label"></div>
+            <div><progress id = "warrior_name_hp" max="550" value="300" class = "party_hp" ></progress></div>   
             <div><progress id = "warrior_name_mp" max="180" value="180" class = "party_mp"></progress></div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div id = "b_hp" class = "hp_label"></div>
             <div><progress id = "d_mage_name_hp" max="470" value="100" class = "party_hp"></progress></div>
-            <div id = "b_mp" class = "mp_label"></div>
             <div><progress id = "d_mage_name_mp" max="390" value="390" class = "party_mp"></progress></div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div id = "w_hp" class = "hp_label"></div>
             <div><progress id = "l_mage_name_hp" max = "400" value = "200" class = "party_hp"></progress></div>
-            <div id = "w_mp" class = "mp_label"></div>
             <div><progress id = "l_mage_name_mp" max = "420" value = "420" class = "party_mp"></progress></div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div id = "r_hp" class = "hp_label"></div>
-            <div><progress id = "r_mage_name_hp" max = "380" value = "380" class = "party_hp"></progress></div>
-            <div id = "r_mp" class = "mp_label"></div>
+            <div><progress id = "r_mage_name_hp" max = "380" value = "1" class = "party_hp"></progress></div>
             <div><progress id = "r_mage_name_mp" max = "540" value = "540" class = "party_mp"></progress></div>
+        </div>
+
+        <div id = "labels">
+            <div id = "k_hp" class = "hp_label"></div>
+            <div id = "k_mp" class = "mp_label"></div>
+
+            <div id = "b_hp" class = "hp_label"></div>
+            <div id = "b_mp" class = "mp_label"></div>
+
+            <div id = "w_hp" class = "hp_label"></div>
+            <div id = "w_mp" class = "mp_label"></div>
+
+            <div id = "r_hp" class = "hp_label"></div>
+            <div id = "r_mp" class = "mp_label"></div>
+
         </div>
         <style>
             .hp_label{
@@ -115,13 +107,13 @@
                 <button id = "btn_6" class = "spellbutton">6</button> <!--defend button--> 
         </div>    
     
-        <img src = "bleedingsunpart2.jpg" id = "img_template">
+        <img src = "bleedingsunpart2.jpg" id = "img_template"><!--might be able to just make this blank, but that didn't work before so idk-->
 
-
-    <div id = "boss_name" class = "hide">Novas Mors, The Purveyor of Nascency</div> 
+                                            <!--Anshisei, Bearer of rebirth,　しんせいのにないて-->
+    <div id = "boss_name" class = "hide">アンシセイ, Purveyor of Nascency</div> <!--anshisei comes from the words for equilibrium, life, and death-->
     <!--name comes from latin for "new death"-->
     <div id = "boss_hp_label" class = "hide"></div>
-        <progress id = "HP_bar" value = "45000" max="45000">
+        <progress id = "HP_bar" value = "31000" max="45000">
     </progress>
  <!--make color inside linked to hp percentage-->
     <style>

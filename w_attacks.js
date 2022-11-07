@@ -1,7 +1,3 @@
-  //order of calculation is base damage, then multiply by character stats, divide by boss def, then check for crit
-function cooldown(atk_time){
-    //adjusts cooldown depending on the attack being used to prevent spamming, by disabling mouse click
-}
 //crit = 1.5x damage, adjust that for the existing spells
   //warrior attacks
 

@@ -36,41 +36,40 @@ function SpheresofInsanity(){
     }, 3000);
     
 };
-function Polarity(){
-    document.getElementById("Polarity");
+function Polarity(){ //attemps to lower all defense stats, with a ~40% hit rate on each. Wears off on its own
+    counter()//not sure if I need counter or ending3, check that
+};
+
+
+
+function Crimson_Rain(){//light damage to all party members
+
     counter()
 };
-//switches background back, according to current phase
-function changeBackground(){
-  if (phase3called == true){
-      document.body.style.backgroundImage = "url('trueformbg.png')"
-    }else{
-      document.body.style.backgroundImage = "url('purveyorbg.png')"
-    }
+
+
+function Death_Claw(){ //heavy phys damage to one party member
+
+    counter()
 
 }
-
-
-
-
-
-function Spacial_Rift(){
-
-    counter()
-};
-
 //addin phase 2\\
-function Tendrils_of_the_Night(){
+function Tendrils_of_the_Night(){ //Moderate damage to one ally, heals boss by 2.5x(?) that ammount
 
     counter()
 };
 
-function Halls_of_Oblivion(){
+function Halls_of_Oblivion(){ //randomly removes 1 of your party members temporarily and returns them with 1 hp
 
 }
 
 //add in phase 3\\
-function Nightmare_Nascent(){//
+function Spirit_Crusher(){//extremely heavy damage to one party member and removes any buffs
+
+}
+
+function Nightmare_Nascent(){//Heavy damage to all party members
+    //combo phys/magic attack, defenses are calculated 50/50
 
 
 }

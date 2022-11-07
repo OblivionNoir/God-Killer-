@@ -73,7 +73,7 @@ var combat_buttons = document.getElementsByClassName('btn')
 
 var rain = document.getElementById("rainbg")
 rain.loop = true;
-document.getElementById("i_overlay").style.opacity = "0.10"
+//document.getElementById("i_overlay").style.opacity = "0.10"
 
 
 
@@ -678,8 +678,8 @@ function TestPhase(){
             setTimeout(()=>{
                 const xtraThunder = new Audio("xtrathunder.mp3")
                 xtraThunder.play();
-                document.getElementById("i_overlay").style.opacity = "0.10"
-                document.getElementById("i_overlay").style.backgroundColor = "rgb(183, 3, 3)"
+                rain.src = "video(1).mp4"
+                //document.getElementById("i_overlay").style.backgroundColor = "rgb(183, 3, 3)"
                 xtraThunder.loop = true;
             }, 2000);
         }
@@ -705,7 +705,8 @@ var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the els
             document.body.style.backgroundImage = "url('phase3BGV3.jpeg')"   
             p1_img.src = "phase3V2.jpeg"
             bn.innerHTML = "True Form of the Abomination" 
-            document.getElementById("i_overlay").style.opacity = "0.20"//make it bloodier
+            document.getElementById("i_overlay").style.backgroundColor = "rgb(183, 3, 3)"
+            document.getElementById("i_overlay").style.opacity = "0.15"
             //sound effect intervals
             setInterval(()=>{
                 roar.play();
