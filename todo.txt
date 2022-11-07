@@ -1,5 +1,6 @@
 -For status effects and buffs, add a filter over the character image. Red for debuffs, blue for buffs, a combination of both for BOL. Like a real game would do. Not a million text boxes. Save the text box only for damage dealt by you. 
-
+-Convert stat lists to objects for each character
+-needs fullscreen compatability
 -Cannot use multiple attacks at once. Set an attack active state to prevent this. Exceptions are My Turn, Broken Mirror and defend or anything else that waits in the background.
 -Could probably clean some things up with ternaries 
 -Make those 3 lines that get written for every attack into a function that takes in the image src
