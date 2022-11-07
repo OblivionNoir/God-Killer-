@@ -124,9 +124,9 @@ function defend(character){
   //switches background back, according to current phase
 function changeBackground(){
     if (phase3called == true){
-        document.body.style.backgroundImage = "url('trueformbg.png')"
+        document.body.style.backgroundImage = "url('phase3BGV3.jpeg')"
       }else{
-        document.body.style.backgroundImage = "url('purveyorbg.png')"
+        document.body.style.backgroundImage = "url('purveyorbgV3.jpeg')"
       }
   
   }

@@ -76,6 +76,7 @@ rain.loop = true;
 document.getElementById("i_overlay").style.opacity = "0.10"
 
 
+
 //global sound effects 
 var PE = new Audio("pierceevil.wav");
 
@@ -677,6 +678,8 @@ function TestPhase(){
             setTimeout(()=>{
                 const xtraThunder = new Audio("xtrathunder.mp3")
                 xtraThunder.play();
+                document.getElementById("i_overlay").style.opacity = "0.10"
+                document.getElementById("i_overlay").style.backgroundColor = "rgb(183, 3, 3)"
                 xtraThunder.loop = true;
             }, 2000);
         }
