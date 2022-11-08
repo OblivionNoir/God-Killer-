@@ -261,6 +261,7 @@ function Chain_Heal(){ //heals all allies 25% of their max hp, but not if they'r
   if (red_mage_dead == false){
       red_mage_hp.value += 95
   }
+  ending3()
 }
 
 function Supreme_Altar(){ //her ult, fully restores party to default state

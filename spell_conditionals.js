@@ -3,11 +3,8 @@ turn_counter_value = 0;
 turn_counter = []
  function counter(){
      let UC = document.getElementById("ultima_charge");
-     UC.value +=2;
+     UC.value +=4;
      turn_counter_value +=1;
-     black_mage_mp += 5;
-     white_mage_mp += 5;
-     warrior_mp += 5;
      turn_counter.push(turn_counter_value)
      //return turn_counter
  }
@@ -84,6 +81,8 @@ function makeAllyTargets(){
 function ending3(){ //call after every player attack
     counter() 
     TestPhase()
+    updateBossHP()
+    updatePlayers()
     if (ultima.value ==100){
         AddUltima()
     }
@@ -99,6 +98,7 @@ var u_button = document.getElementById("btn_1")
 function RevertUltima(){
     u_button.classList.remove("rainbowglow");
     ultima.value = 0;
+    u_label.innerHTML = ultima_charge.value.toFixed(0) + "/100"; 
     console.log("removed glow");
 
   }
@@ -130,3 +130,8 @@ function changeBackground(){
       }
   
   }
+
+    //order of calculation is base damage, then multiply by character stats, divide by boss def, then check for crit
+function cooldown(atk_time){
+    //adjusts cooldown depending on the attack being used to prevent spamming, by disabling mouse click
+}

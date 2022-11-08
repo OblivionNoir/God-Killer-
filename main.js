@@ -12,6 +12,7 @@
 //hide elements that get used later
 var worker = new Worker('timers_thread.js'); //worker thread for timers
 
+
 var p1_img = document.getElementById("boss_img");
 p1_img.style.visibility = "hidden";
 p1_img.style.border.color = "rgb(130, 3, 3)"
@@ -76,7 +77,6 @@ rain.loop = true;
 //document.getElementById("i_overlay").style.opacity = "0.10"
 
 
-
 //global sound effects 
 var PE = new Audio("pierceevil.wav");
 
@@ -131,8 +131,11 @@ document.addEventListener('click', function startGame(event) {
 
 });
 
+//boss attacks
 function startBoss(){//this cannot be a constant interval. Causes boss to attack too fast
             //start boss attack rotation 
+            updateBossHP()
+            updatePlayers()
                 switch(true){
                     case(phase2called):
                     boss_phase2()
@@ -163,6 +166,7 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     for (let i = 0; i < hp_labels.length; i++){
         hp_labels[i].style.visibility = "visible";
     }
+
 
 };
 
@@ -652,11 +656,11 @@ function isAlive(partyMember){
 function TestPhase(){
         if (hp.value <=0){
             Victory()
-        }else if (hp.value <30000 && hp.value > 15001 && phase2called == false){
+        }else if (hp.value <40001 && hp.value > 20001 && phase2called == false){
             phase2called = true;
             phase2()
             
-        }else if (hp.value <15001 && phase3called == false){
+        }else if (hp.value <20001 && phase3called == false){
             phase3called = true;
             phase3()
         }else{
