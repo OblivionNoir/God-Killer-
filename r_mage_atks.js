@@ -39,6 +39,7 @@ function SS_Part2(){
             ending3()
             RevertUltima()
             hp.value -= SScalculation()+1000 //not sure why this is only affecting it if she's at max hp, but hey, it works!
+            ending3()
         }, 7000);
     
 
@@ -113,7 +114,7 @@ function Borderof_Life(){ //adjust for use by red mage
 
 var FinalCL = []//stores the final calculated damage of all 5 strikes for an accurate total. Clear the list when the function ends
 function CLCalc(crit, hit_name){
-    if (crit == 1){
+    if (crit === 1){
         p1.style.visibility = "visible";
         hit_name *= 1.5
         console.log(hit_name)
@@ -128,6 +129,7 @@ function CLCalc(crit, hit_name){
         hp.value -= hit_name.toFixed(0);
         FinalCL.push(hit_name)
     }
+    updateBossHP()
 };
 //Scale mp cost to 3750 dmg (this doesn't account for character stats)
 var l_sfx = new Audio("LS.mp3")
@@ -140,19 +142,19 @@ var l_sfx = new Audio("LS.mp3")
     }else{
         red_mage_mp.value -= 50;
         l_sfx.play()
-        l_sfx.loop = true;
+        l_sfx.loop = true;//Not sure why the numbers are way out of the set ranges, but it works, so...yay?
           //hit 1
-              let a = (Math.random() * ((163 - 113) + 113)*red_mage_atk)/phase_mdef//goes up 1.35x each hit. Exponential
+              let a = (Math.random() * ((353 - 313) + 313)*red_mage_atk)/phase_mdef//goes up 1.35x each hit. Exponential
               //Min is max -50
               let d1_crit = Math.floor(Math.random() * 14);
           //hit 2
-              let b = ((Math.random() * (213 - 163) + 163)*red_mage_atk)/phase_mdef
+              let b = ((Math.random() * (403 - 363) + 363)*red_mage_atk)/phase_mdef
               let d2_crit = Math.floor(Math.random() * 11);
           //hit 3
-              let c = ((Math.random() * (279 - 229) + 229)*red_mage_atk)/phase_mdef
+              let c = ((Math.random() * (469 - 429) + 429)*red_mage_atk)/phase_mdef
               let d3_crit = Math.floor(Math.random()* 8);
           //hit 4
-              let d = ((Math.random() * (371 - 321) + 321)*red_mage_atk)/phase_mdef
+              let d = ((Math.random() * (561 - 521) + 521)*red_mage_atk)/phase_mdef
               let d4_crit = Math.floor(Math.random()*5);
           //hit 5
               let e = (a + b + c + d) 
@@ -180,8 +182,7 @@ var l_sfx = new Audio("LS.mp3")
                   timeout_lightning(200)
               }, 6000)
       
-              setTimeout(()=>{ //5th attack is the sum of all previous, not counting any additional critical damage. 
-                //The 5th hit itself already has a high crit rate so that would be OP and too unpredictable even for this
+              setTimeout(()=>{ //5th attack is the sum of all previous, not counting any crits
                   CLCalc(d5_crit, e)
                   ShowLightning(2)
                   timeout_lightning(200)
@@ -194,8 +195,8 @@ var l_sfx = new Audio("LS.mp3")
                 const sum = FinalCL.reduce((a, b) => {
                     return a + b
                 }, 0);
-                console.log(sum*2)
-                  p1.value = "Total damage: " + sum.toFixed(0)*2 
+                console.log(sum)
+                  p1.value = "Total damage: " + sum.toFixed(0)
                   p1_3sec()
                   FinalCL = [] //clear the list
                   timeout_i_menu()
