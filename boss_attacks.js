@@ -42,28 +42,37 @@ function Polarity(){ //attemps to lower all defense stats, with a ~40% hit rate 
 
 
 
-function Crimson_Rain(){//light damage to all party members
-
-    counter()
-};
-
-
 function Death_Claw(){ //heavy phys damage to one party member
 
     counter()
 
 }
-//addin phase 2\\
+
 function Tendrils_of_the_Night(){ //Moderate damage to one ally, heals boss by 2.5x(?) that ammount
 
     counter()
 };
 
+//addin phase 2\\
 function Halls_of_Oblivion(){ //randomly removes 1 of your party members temporarily and returns them with 1 hp
 
 }
 
+function Crimson_Rain(){//light damage to all party members, a modified version of this is always active in phase 3 where you constantly get lightly damaged until you win. 
+
+    counter()
+};
+
 //add in phase 3\\
+function Crimson_Rain_P3(){//use a slightly randomized interval
+    let blood_dmg = Math.floor(Math.random() * 10) + 5;
+    warrior_hp.value -= blood_dmg;
+    black_mage_hp.value -= blood_dmg;
+    white_mage_hp.value -= blood_dmg;
+    red_mage_hp.value -= blood_dmg;
+    setTimeout(Crimson_Rain_P3, 10000)
+}
+
 function Spirit_Crusher(){//extremely heavy damage to one party member and removes any buffs
 
 }

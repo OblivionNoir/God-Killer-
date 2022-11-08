@@ -707,6 +707,7 @@ var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the els
             bn.innerHTML = "True Form of the Abomination" 
             document.getElementById("i_overlay").style.backgroundColor = "rgb(183, 3, 3)"
             document.getElementById("i_overlay").style.opacity = "0.15"
+            Crimson_Rain_P3()
             //sound effect intervals
             setInterval(()=>{
                 roar.play();
