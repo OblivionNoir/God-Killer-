@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'optimus princeps' ;
+    src: url('OptimusPrinceps.ttf');
+}
+body>h1{
+    font-family: 'optimus princeps';
+    justify-content: center;
+    text-align: center;
+    font-size: 9rem;
+    margin-top: 3vh;
+    text-shadow: 0.15rem 0.15rem 1rem rgb(138, 3, 3);
+    color:rgb(138, 3, 3);
+}
+body>h4{
+    font-family: 'optimus princeps';
+    justify-content: center;
+    text-align: center;
+    margin-top: 1vh;
+    font-size: 4rem;
+    color:rgb(138, 3, 3);/*save this as a variable*/
+    text-shadow: 0.15rem 0.15rem 1rem rgb(47, 46, 46);
+}
+body{
+    background-image: url("indexbg.png"); 
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+hr{
+    background-color: black;
+    max-width: 35vw;
+    height: 0.35vh;
+    border: none;
+}
+main{
+    margin-top: 7vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main>button{
+    font-family: 'optimus princeps';
+    background-color: rgba(35, 35, 35, 0.7);
+    border: 0.25rem solid rgb(138, 3, 3);
+    box-shadow: 0.25rem 0.25rem 1rem rgb(138, 3, 3);
+    border-radius: 10%;
+    font-size: 2.5rem;
+    margin-top: 2vh;
+    padding: 1.5em 4.5em 1.5em 4.5em
+}
+main>button:hover{
+    background-color: rgba(138, 3, 3, 0.7);
+    border: 0.25rem solid rgba(35, 35, 35, 0.7);
+    box-shadow: 0.5rem 0.5rem 1.5rem rgb(35, 35, 35);
+}
+body>div{
+    position: relative;
+    font-size: 1.5rem;
+    margin: 18rem 1rem 0 1rem;
+  /*prevents it from breaking the bottom of the page*/
+}
