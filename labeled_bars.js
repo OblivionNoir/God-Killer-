@@ -16,11 +16,12 @@ function updatePlayers(){
    k_mp.innerHTML = "MP: " + warrior_name_mp.value.toFixed(0) + "/180";
     b_hp.innerHTML = "HP: " + d_mage_name_hp.value.toFixed(0) + "/470";
     b_mp.innerHTML = "MP: " + d_mage_name_mp.value.toFixed(0) + "/390";
-    w_mp.innerHTML = "HP: " + l_mage_name_hp.value.toFixed(0) + "/400";
+    w_hp.innerHTML = "HP: " + l_mage_name_hp.value.toFixed(0) + "/400";
     w_mp.innerHTML = "MP: " + l_mage_name_mp.value.toFixed(0) + "/420";
     r_hp.innerHTML = "HP: " + r_mage_name_hp.value.toFixed(0) + "/380";
     r_mp.innerHTML = "MP: " + r_mage_name_mp.value.toFixed(0) + "/540";
     u_label.innerHTML = ultima_charge.value.toFixed(0) + "/100"; 
+    CheckDeadStatus()
 }
 
 

@@ -656,11 +656,11 @@ function isAlive(partyMember){
 function TestPhase(){
         if (hp.value <=0){
             Victory()
-        }else if (hp.value <40001 && hp.value > 20001 && phase2called == false){
+        }else if (hp.value <50001 && hp.value > 25001 && phase2called == false){
             phase2called = true;
             phase2()
             
-        }else if (hp.value <20001 && phase3called == false){
+        }else if (hp.value <= 25001 && phase3called == false){
             phase3called = true;
             phase3()
         }else{
@@ -720,6 +720,11 @@ var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the els
                 growl.play();
                 growl.volume = 0.8;
             },40000) 
+            setTimeout(()=>{
+                p1.style.visibility = "visible"
+                p1.value = "You can feel the blood rain burning your skin..."
+                p1_2sec()
+            }, 5000)
 };
 //check for ultima status and change appearance accordingly
 //attacks, which raise the bar, are done with clicks so this should check every time by default

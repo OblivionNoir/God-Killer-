@@ -62,14 +62,16 @@ function Crimson_Rain(){//light damage to all party members, a modified version 
 
     counter()
 };
-
+ 
 //add in phase 3\\
-function Crimson_Rain_P3(){//use a slightly randomized interval
+
+function Crimson_Rain_P3(){
     let blood_dmg = Math.floor(Math.random() * 10) + 5;
     warrior_hp.value -= blood_dmg;
     black_mage_hp.value -= blood_dmg;
     white_mage_hp.value -= blood_dmg;
     red_mage_hp.value -= blood_dmg;
+    updatePlayers()
     setTimeout(Crimson_Rain_P3, 10000)
 }
 
