@@ -144,17 +144,17 @@ var l_sfx = new Audio("LS.mp3")
         l_sfx.play()
         l_sfx.loop = true;//Not sure why the numbers are way out of the set ranges, but it works, so...yay?
           //hit 1
-              let a = (Math.random() * ((353 - 313) + 313)*red_mage_atk)/phase_mdef//goes up 1.35x each hit. Exponential
+              let a = (Math.random() * ((353 - 313) + 313)*red_mage_matk)/phase_mdef//goes up 1.35x each hit. Exponential
               //Min is max -50
               let d1_crit = Math.floor(Math.random() * 14);
           //hit 2
-              let b = ((Math.random() * (403 - 363) + 363)*red_mage_atk)/phase_mdef
+              let b = ((Math.random() * (403 - 363) + 363)*red_mage_matk)/phase_mdef
               let d2_crit = Math.floor(Math.random() * 11);
           //hit 3
-              let c = ((Math.random() * (469 - 429) + 429)*red_mage_atk)/phase_mdef
+              let c = ((Math.random() * (469 - 429) + 429)*red_mage_matk)/phase_mdef
               let d3_crit = Math.floor(Math.random()* 8);
           //hit 4
-              let d = ((Math.random() * (561 - 521) + 521)*red_mage_atk)/phase_mdef
+              let d = ((Math.random() * (561 - 521) + 521)*red_mage_matk)/phase_mdef
               let d4_crit = Math.floor(Math.random()*5);
           //hit 5
               let e = (a + b + c + d) 
