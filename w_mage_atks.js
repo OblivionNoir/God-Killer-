@@ -4,7 +4,7 @@ function Pierce_Evil(){
     if (white_mage_mp.value <6){
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
-        p1_3sec()
+        p1_timeout(2000)
     }else{ 
         white_mage_mp.value -= 6;
         //visibility image for 3 seconds, then turn it off
@@ -21,13 +21,12 @@ function Pierce_Evil(){
                     hp.value -= ((final_dmg*white_mage_matk)*1.5)/phase_mdef;
                     p1.style.visibility = "visible";
                     p1.value = "Critical hit!"
-                    p1_3sec()
+                    p1_timeout(2000)
                 }else{
                   console.log(final_dmg*white_mage_matk)/phase_mdef
                   hp.value -= (final_dmg*white_mage_matk)/phase_mdef;
                 }  
-            i_menu.style.visibility = "hidden"
-            ending3()
+            hide_i_and_end()
         }, 3000);
         
 
@@ -135,7 +134,7 @@ function Angels_Grace_Part2(){
   if (white_mage_mp.value < 20){
       p1.style.visibility = "visible";
       p1.value = "Not enough MP!"
-      p1_3sec()
+      p1_timeout(2000)
   }else{
       white_mage_mp.value -= 20;
       i_menu.src = "" //Reset to blank prevent previous image from showing
@@ -143,16 +142,14 @@ function Angels_Grace_Part2(){
       i_menu.style.visibility = "visible"
       h2.play()
       h2.loop = false;
-      setTimeout(()=>{                     
-          i_menu.style.visibility = "hidden"
-          ending3()
-      }, 1000);
+      Timer(1000, hide_i_and_end)
+
   };
 };
 function stillAlive(){
   p1.style.visibility = "visible";
   p1.value = "That ally is still alive!"
-  p1_2sec()
+  p1_timeout(2000)
 }
 
 //below here is rebirth stuff. Do not touch angel's grace
@@ -231,7 +228,7 @@ function RebirthPart2(){
   if (white_mage_mp.value < 50){
       p1.style.visibility = "visible";
       p1.value = "Not enough MP!"
-      p1_3sec()
+      p1_timeout(2000)
   }else{
       white_mage_mp.value -= 50;
       i_menu.src = "revival.png"
@@ -240,25 +237,24 @@ function RebirthPart2(){
       h2.play()
       h2.loop = false;
       //this can probably be a function
-      setTimeout(()=>{                     
-          i_menu.style.visibility = "hidden"
-          ending3()
-      }, 4000);
+      Timer(4000, hide_i_and_end)
   };
 };
 
 //costs 40$ more than angel's grace. Slighly more efficient in terms of mp cost/total amt healed ratio
+
+//this still needs a visual! 
 function Chain_Heal(){ //heals all allies 25% of their max hp, but not if they're dead
-  if (warrior_dead == false){
+  if (warrior_dead === false){
       warrior_hp.value += 138//it won't go over max by default so no need to check. Rare moment of simplicity
   }
-  if (black_mage_dead == false){
+  if (black_mage_dead === false){
       black_mage_hp.value += 117
   }
-  if (white_mage_dead == false){
+  if (white_mage_dead === false){
       white_mage_hp.value += 100
   }
-  if (red_mage_dead == false){
+  if (red_mage_dead === false){
       red_mage_hp.value += 95
   }
   ending3()
@@ -272,7 +268,7 @@ function Supreme_Altar(){ //her ult, fully restores party to default state
       isAlive(lmi)
       isAlive(rmi)
     //then fully restore mp and hp
-    document.getElementById("warrior_name_hp").value = 550;
+    document.getElementById("warrior_name_hp").value = 550;//again...maps
     document.getElementById("d_mage_name_hp").value = 470;
     document.getElementById("l_mage_name_hp").value = 400;
     document.getElementById("r_mage_name_hp").value = 380;
@@ -301,8 +297,7 @@ function Supreme_Altar(){ //her ult, fully restores party to default state
     RevertUltima()
         setTimeout(()=>{
             changeBackground()
-            i_menu.style.visibility = "hidden"
-            ending3()
+            hide_i_and_end()
         }, 7000);
 
 };

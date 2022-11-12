@@ -114,6 +114,7 @@ body{
     z-index: 9;
     margin-top: -71vh;
 }
+
 #labels>div:nth-child(2n){ /*mp*/
     font-size: 1.5vh;
     display: flex;

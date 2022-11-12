@@ -16,8 +16,7 @@ function Radiant_Supernova(){ //her ult
             DC.pause()
             Randomizer(5500, 98, 103)//Ultimas have a smaller randomizer so the percentage doesn't knock too much off
                 hp.value -= final_dmg/phase_mdef;
-            i_menu.style.visibility = "hidden"
-            ending3()
+            hide_i_and_end()
             RevertUltima()
         }, 7000);
     
@@ -32,7 +31,7 @@ function Mirage_Blade(){
     if (black_mage_mp.value <22){ 
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
-        p1_2sec()
+        p1_timeout(2000)
     }else{ 
         black_mage_mp.value -= 22;
         i_menu.src = "" //Reset to blank prevent previous image from showing
@@ -53,8 +52,7 @@ function Mirage_Blade(){
                   hp.value -= (final_dmg*black_mage_atk)/phase_def
                 }   
     
-            i_menu.style.visibility = "hidden"
-            ending3()
+            hide_i_and_end()
         }, 3000);
         
     };
@@ -68,7 +66,7 @@ function Entrapment(){ //Makes boss immobile for 2 turns
   if (black_mage_mp.value < 65){
       p1.style.visibility = "visible";
       p1.value = "Not enough MP!"
-      p1_2sec()
+      p1_timeout(2000)
       //ensure it isn't already in effect
   }if (trapped == true){
       //make this an actual window later
@@ -80,10 +78,7 @@ function Entrapment(){ //Makes boss immobile for 2 turns
       i_menu.src = "Entrapment.jpg"
       i_menu.style.visibility = "visible"
       //find sfx
-      setTimeout(()=>{
-          i_menu.style.visibility = "hidden"
-          ending3()
-      }, 3000);
+      Timer(3000, hide_i_and_end)
       //change timer according to phase
       trapped = true;
       CounterSwitch()
@@ -109,7 +104,7 @@ function Black_Fire(){ //moderate spell damage
   if (black_mage_mp.value <14){
       p1.style.visibility = "visible";
       p1.value = "Not enough MP!"
-      p1_3sec()
+      p1_timeout(2000)
   }else{ 
       black_mage_mp.value -= 14;
       //visibility image for 3 seconds, then turn it off
@@ -133,8 +128,7 @@ function Black_Fire(){ //moderate spell damage
                   console.log(final_dmg*black_mage_matk)/phase_mdef
                   hp.value -= (final_dmg*black_mage_matk)/phase_mdef;
               }  
-          i_menu.style.visibility = "hidden"
-          ending3()
+          hide_i_and_end()
       }, 3000);
       
   };
@@ -147,7 +141,7 @@ function Shattered_Mirror(){
   if (black_mage_mp.value < 30){
       p1.style.visibility = "visible";
       p1.value = "Not enough MP!"
-      p1_2sec()
+      p1_timeout(2000)
       //ensure it isn't already in effect
   }if (mirror == true){
       //make this an actual window later
@@ -159,11 +153,7 @@ function Shattered_Mirror(){
       i_menu.src = "shatteredmirror.png"
       i_menu.style.visibility = "visible"
       //find sfx
-      setTimeout(()=>{
-          i_menu.style.visibility = "hidden"
-          ending3()
-
-      }, 3000);
+      Timer(3000, hide_i_and_end)
       //change timer according to phase
       mirror = true;
       CounterSwitch()

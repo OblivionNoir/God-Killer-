@@ -268,7 +268,7 @@ function warrior_menu(){ //0 //when this is reached, we know the warrior has bee
             document.getElementById("btn_1").innerHTML = "Thousand Men"
             document.getElementById("btn_2").innerHTML = "Shadow Self"
             document.getElementById("btn_3").innerHTML = "Whims of Fate"
-            document.getElementById("btn_4").innerHTML = "Rebellion"
+            document.getElementById("btn_4").innerHTML = "Iron Heart"
             document.getElementById("btn_5").innerHTML = "Deathblow"  
             document.getElementById("btn_6").innerHTML = "Defend - knight"//change this to character name
             //from here move to the function that executes it
@@ -488,8 +488,8 @@ var button = document.getElementsByClassName('btn');
 
                         case 3:
                             switch(true){
-                                case spells_array[3].innerHTML == "Rebellion":
-                                    Rebellion()
+                                case spells_array[3].innerHTML == "Iron Heart":
+                                    Iron_Heart()
                                 break;
 
                                 case spells_array[3].innerHTML == "Black Fire":

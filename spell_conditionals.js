@@ -44,7 +44,7 @@ function CounterSwitch(){
 
 }; 
 //replace all the setTimeouts with this 
-function Timer(duration, action){//action = what to do when it finishes, as a function name without the ()
+function Timer(duration, action, arg){//action = what to do when it finishes, as a function name without the ()
     let CountTo = new Date().getTime() + duration;
     let TimerUpdate = setInterval(function(){
     let now = new Date().getTime();
@@ -52,32 +52,29 @@ function Timer(duration, action){//action = what to do when it finishes, as a fu
 
     if (distance <= 0){
         clearInterval(TimerUpdate);
-        action()
+        action(arg)
     }
     }, 1000);
-
 }
+
 function test(){
-    console.log("it works!")
+    console.log("working")
+}
+function hide_i_and_end(){
+    i_menu.style.visibility = "hidden"
+    ending3()
 }
 function randNumber(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
   }
-function timeout_i_menu(){
+
+
+function p1_timeout(time){//make this another timer?
     setTimeout(()=>{
-        i_menu.style.visibility = "hidden"
-    }, 2000)
-}
-function p1_3sec(){
-    setTimeout(()=>{ 
         p1.style.visibility = "hidden"
-    }, 3000)
+    }, time)
 }
-function p1_2sec(){ //should actually have these take in a value instead of creating a new function for each
-    setTimeout(()=>{ 
-        p1.style.visibility = "hidden"
-    },2000)
-}
+
 function timeout_ending(){
     setTimeout(()=>{
         p1.style.visibility = "hidden";
