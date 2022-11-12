@@ -8,7 +8,8 @@
 //initial stats
 //remember to add hover descriptions over the spells!!!
 
-
+var omae = new Audio("omaewa.mp3");
+var NANI = new Audio("nani.mp3");
 //hide elements that get used later
 var worker = new Worker('timers_thread.js'); //worker thread for timers
 
@@ -675,8 +676,8 @@ function TestPhase(){
 
   function phase2(){ 
             console.log("phase 2 triggered")
-            phase_def = 1.4; //update stats for phase 2
-            phase_mdef = 1.3;  
+            phase_def = 1.95; //update stats for phase 2
+            phase_mdef = 1.8;  
             roar.play();
             roar.loop = false;
             setTimeout(()=>{
@@ -694,8 +695,8 @@ function TestPhase(){
 var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the else 
 
  function phase3(){ //PHASE 3
-            phase_def = 1.5; //update stats for phase 3
-            phase_mdef = 1.6;
+            phase_def = 2.6; //update stats for phase 3
+            phase_mdef = 2.4;
             let hellnaw = new Audio("hellnaw.mp3")
             hellnaw.play();
             roar.play();
@@ -720,12 +721,16 @@ var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the els
                 growl.play();
                 growl.volume = 0.8;
             },40000) 
-            setTimeout(()=>{
-                p1.style.visibility = "visible"
-                p1.value = "You can feel the blood rain burning your skin..."
-                p1_2sec()
-            }, 5000)
+            blood_notif()
 };
+
+async function blood_notif(){
+    setTimeout(()=>{
+        p1.style.visibility = "visible"
+        p1.value = "You can feel the blood rain burning your skin..."
+        p1_timeout(4000)
+    }, 5000)
+}
 //check for ultima status and change appearance accordingly
 //attacks, which raise the bar, are done with clicks so this should check every time by default
 //use promises for this instead?

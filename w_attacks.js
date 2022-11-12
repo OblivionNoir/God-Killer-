@@ -4,11 +4,15 @@
   function Thousand_Men(){ //<!--his ultimate, deals heavy damage for several turns-->
 
   };
-  function Shadow_Self(){ //Triples evasion for a set period
-
+  function Shadow_Self(){ //Two quick low/moderate attacks
+//low mp cost, quick cooldown
   
   };
-  function Whims_of_Fate(){//50% chance of missing, 3 50% chances at a critical if no miss. 12.5% chance of triple crit
+  function Whims_of_Fate(){//low accuracy, but if it lands deals very heavy damage (let's say 4000 base) and lowers boss def
+    x = (4000*warrior_atk)/phase_def
+    hp.value -= x
+    console.log(x)
+    ending3()
 
   };
   function Iron_Heart(){
@@ -43,8 +47,7 @@
   }
 
   function Deathblow(){
-    //Like a normal attack but a guaranteed crit. 
-    //very quick cooldown, low mp cost
+    //Slow and heavy
 
   }
 

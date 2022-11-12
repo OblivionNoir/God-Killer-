@@ -1,5 +1,5 @@
-var phase_def = 1.2; //divide by this number 
-var phase_mdef = 1.1;
+var phase_def = 1.3; //divide by this number 
+var phase_mdef = 1.2;
 
 var warrior_def = 1.7; 
 var warrior_mdef = 1.4;
