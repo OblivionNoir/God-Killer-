@@ -19,11 +19,23 @@
     //store in an external list, then return the last value in the list
 };
 function Scarlet_Subversion(){  
-    SS_Part2()
+    phase1_theme.volume = 0.2//switch theme according to phase
+    omae.play()
+    if (red_mage_hp.value ==1){//you get the omae wa mou shindeiru if her hp is at 1
+        setTimeout(()=>{
+            NANI.play()
+        }, 3000)
+        setTimeout(()=>{
+            SS_Part2()
+        }, 6000)
+    }else{
+        SS_Part2()
+    }
     console.log(SScalculation())
 };
 
 function SS_Part2(){
+   
     document.body.style.backgroundImage = "";
     document.body.style.backgroundImage = "url('SSBG.png')"
         //ultimas don't have a crit or mp value
@@ -35,12 +47,13 @@ function SS_Part2(){
         boom.play()
         setTimeout(()=>{
             changeBackground()
-            i_menu.style.visibility = "hidden"
-            ending3()
+            hide_i_and_end()
             RevertUltima()
             hp.value -= SScalculation()+1000 //not sure why this is only affecting it if she's at max hp, but hey, it works!
-            ending3()
+            document.getElementById("boss_hp_label").innerHTML = hp.value.toFixed(0) + "/75000";//won't work as a function, some weird timing issue I assume
+            phase1_theme.volume = 0.7
         }, 7000);
+    
     
 
 
@@ -57,24 +70,23 @@ function Borderof_Life(){ //adjust for use by red mage
     if (red_mage_mp.value <80){ 
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
-        p1_2sec()
+        p1_timeout(2000)
     }else{ 
         red_mage_mp.value -= 80;
-        i_menu.src = ""
+        i_menu.src = ""//this part can be refactored...
         i_menu.src = "BOL.png" 
         i_menu.style.visibility = "visible"
         PE.play()//find new sfx
         PE.loop = false;
-        red_mage_def *= 0.25.toFixed(1) //for loop wants to be bitchy so we're doing it this way
+        red_mage_def *= 0.25.toFixed(1) //use object for this, and stats don't have to be locked to 1 dec point
         red_mage_mdef *= 0.25.toFixed(1)
         red_mage_ev *= 1.5.toFixed(0)
         red_mage_atk *= 1.5.toFixed(0)
         red_mage_matk *= 1.5.toFixed(0)
-        timeout_i_menu()
         BL_adjusted.push(red_mage_def, red_mage_mdef, red_mage_ev, red_mage_atk, red_mage_matk)
         console.log(BL_adjusted)
         //timer will go in other thread
-        ending3()
+        Timer(2000, hide_i_and_end)
         BLExpire()
     }
 };//function ends here
@@ -85,7 +97,7 @@ function Borderof_Life(){ //adjust for use by red mage
     if (red_mage_mp.value <26){ 
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
-        p1_2sec()
+        p1_timeout(2000)
     }else{ 
         red_mage_mp.value -= 26;
         i_menu.src = "" //Reset to blank prevent previous image from showing
@@ -100,13 +112,12 @@ function Borderof_Life(){ //adjust for use by red mage
                     hp.value -= (final_dmg*red_mage_atk)*1.5;
                     p1.style.visibility = "visible";
                     p1.value = "Critical hit!"
-                    p1_3sec()
+                    p1_timeout(2000)
                 }else{
                     console.log(final_dmg*red_mage_atk)
                     hp.value -= (final_dmg*red_mage_atk); //hp = boss hp
                 }
-            i_menu.style.visibility = "hidden"
-            ending3()
+            hide_i_and_end()//no timer needed here, already in one
         }, 3000);
     };
   };
@@ -138,7 +149,7 @@ var l_sfx = new Audio("LS.mp3")
     if (red_mage_mp.value < 50){ 
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
-        p1_2sec()
+        p1_timeout(2000)
     }else{
         red_mage_mp.value -= 50;
         l_sfx.play()
@@ -197,10 +208,9 @@ var l_sfx = new Audio("LS.mp3")
                 }, 0);
                 console.log(sum)
                   p1.value = "Total damage: " + sum.toFixed(0)
-                  p1_3sec()
+                  p1_timeout(3000)
                   FinalCL = [] //clear the list
-                  timeout_i_menu()
-                  ending3()
+                  Timer(2000, hide_i_and_end)
               }, 12000)
 
     }
@@ -239,7 +249,7 @@ var MT_active = false;
     if (red_mage_mp.value < 60){
         p1.style.visibility = "visible";
         p1.value = "Not enough MP!"
-        p1_2sec()
+        p1_timeout(2000)
     }else{
         MT_active = true;
         //can't finish this until boss is set up. It'll use a listener to detect hits on her and disable it.
