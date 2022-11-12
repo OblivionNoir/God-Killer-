@@ -43,7 +43,23 @@ function CounterSwitch(){
     }
 
 }; 
+//replace all the setTimeouts with this 
+function Timer(duration, action){//action = what to do when it finishes, as a function name without the ()
+    let CountTo = new Date().getTime() + duration;
+    let TimerUpdate = setInterval(function(){
+    let now = new Date().getTime();
+    let distance = CountTo - now;
 
+    if (distance <= 0){
+        clearInterval(TimerUpdate);
+        action()
+    }
+    }, 1000);
+
+}
+function test(){
+    console.log("it works!")
+}
 function randNumber(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
   }
