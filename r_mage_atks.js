@@ -65,7 +65,7 @@ BL_adjusted = []
 //Can easily get her killed, but opens a window to deal massive damage
 //A martyr attack, of sorts. Hence the name and the spider lilies 
 function Borderof_Life(){ //adjust for use by red mage
-    //-75% defenses, +50% attacks and evasion
+    //-50% defenses, +50% attacks
     let red_mage_mp = document.getElementById("r_mage_name_mp");
     if (red_mage_mp.value <80){ 
         p1.style.visibility = "visible";
@@ -78,12 +78,17 @@ function Borderof_Life(){ //adjust for use by red mage
         i_menu.style.visibility = "visible"
         PE.play()//find new sfx
         PE.loop = false;
-        red_mage_def *= 0.25.toFixed(1) //use object for this, and stats don't have to be locked to 1 dec point
-        red_mage_mdef *= 0.25.toFixed(1)
-        red_mage_ev *= 1.5.toFixed(0)
-        red_mage_atk *= 1.5.toFixed(0)
-        red_mage_matk *= 1.5.toFixed(0)
-        BL_adjusted.push(red_mage_def, red_mage_mdef, red_mage_ev, red_mage_atk, red_mage_matk)
+        defs.set('red_mage', red_mage_def*0.5)
+        m_defs.set('red_mage', red_mage_mdef*0.5)
+        phys_atks.set('red_mage', red_mage_atk*1.5)
+        m_atks.set('red_mage', red_mage_matk*1.5)
+        
+        BL_adjusted.push(
+            defs.get('red_mage'),
+            m_defs.get('red_mage'), 
+            phys_atks.get('red_mage'), 
+            m_atks.get('red_mage')
+         )
         console.log(BL_adjusted)
         //timer will go in other thread
         Timer(2000, hide_i_and_end)
