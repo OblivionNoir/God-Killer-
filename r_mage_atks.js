@@ -20,8 +20,8 @@
 };
 function Scarlet_Subversion(){  
     phase1_theme.volume = 0.2//switch theme according to phase
-    omae.play()
     if (red_mage_hp.value ==1){//you get the omae wa mou shindeiru if her hp is at 1
+        omae.play()
         setTimeout(()=>{
             NANI.play()
         }, 3000)
