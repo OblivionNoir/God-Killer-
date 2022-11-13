@@ -215,7 +215,6 @@ var active_added = false;
                             if (black_mage_dead == true){
                                 DeadMessage()
                             }else{
-                                //this is not being reached when she is revived
                                 console.log("Dark Mage selected")
                                 d_mage_menu()
                             }

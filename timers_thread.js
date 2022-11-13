@@ -113,14 +113,13 @@ function countdown_1turn(time_1turn){
 
 }
 function BLExpire(){
-    setTimeout(()=>{
+    setTimeout(()=>{ //change this to a timer
         //BOL_active = false;
         console.log("BL no longer active")
-        red_mage_def = 0.9;//should store these in an object like all stats...
+        red_mage_def = 0.9;//use her map for this
         red_mage_mdef = 0.9;
         red_mage_atk = 1.5;
         red_mage_matk = 1.5;
-        red_mage_ev = 0.2;//20%
         //then remove the color filter
     }, 25000)
 }

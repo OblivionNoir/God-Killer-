@@ -13,7 +13,6 @@
     hp.value -= x
     console.log(x)
     ending3()
-
   };
   function Iron_Heart(){
     //Raises everyone's defenses by 25% for 1 minute
@@ -21,10 +20,7 @@
     if(k_mp.value < 20){
       notEnoughMP()
     }else{
-      k_mp.value -= 20
-      i_menu.src = "" 
-      i_menu.src = "rebellion.png"
-      i_menu.style.visibility = "visible"
+      spellStuff(k_mp, 20, "rebellion.png")
       RaiseStats()
       Timer(3000, hide_i_and_end)
     }

@@ -149,6 +149,26 @@ function notEnoughMP(){
     p1_timeout(2000)
 }
 
+function spellStuff(character, price, img){
+    character.value -= price;
+    i_menu.src = ""
+    i_menu.src = img//just pass this as a string
+    i_menu.style.visibility = "visible"
+}
+
+function spellStuffUltima(img){//can't seem to get bg to work here
+    i_menu.src = ""
+    i_menu.src = img//just pass this as a string
+    i_menu.style.visibility = "visible"
+
+}
+
+function critMessage(){
+    p1.style.visibility = "visible";
+    p1.value = "Critical hit!"
+    p1_timeout(2000)
+}
+
     //order of calculation is base damage, then multiply by character stats, divide by boss def, then check for crit
 function cooldown(atk_time){
     //adjusts cooldown depending on the attack being used to prevent spamming, by disabling mouse click

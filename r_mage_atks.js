@@ -40,9 +40,7 @@ function SS_Part2(){
     document.body.style.backgroundImage = "url('SSBG.png')"
         //ultimas don't have a crit or mp value
         //visibility image for 3 seconds, then turn it off
-        i_menu.src = "" //Reset to blank prevent previous image from showing
-        i_menu.src = "SS.png"
-        i_menu.style.visibility = "visible"
+        spellStuffUltima("SS.png")
         const boom = new Audio("boom.mp3"); 
         boom.play()
         setTimeout(()=>{
@@ -51,7 +49,7 @@ function SS_Part2(){
             RevertUltima()
             hp.value -= SScalculation()+1000 //not sure why this is only affecting it if she's at max hp, but hey, it works!
             document.getElementById("boss_hp_label").innerHTML = hp.value.toFixed(0) + "/75000";//won't work as a function, some weird timing issue I assume
-            phase1_theme.volume = 0.7
+            phase1_theme.volume = 0.7//make a function for this like the background switch, every ultima will need it
         }, 7000);
     
     
@@ -70,10 +68,7 @@ function Borderof_Life(){ //adjust for use by red mage
     if (red_mage_mp.value <80){ 
         notEnoughMP()
     }else{ 
-        red_mage_mp.value -= 80;
-        i_menu.src = ""//this part can be refactored...
-        i_menu.src = "BOL.png" 
-        i_menu.style.visibility = "visible"
+        spellStuff(red_mage_mp, 80, "BOL.png")
         PE.play()//find new sfx
         PE.loop = false;
         defs.set('red_mage', red_mage_def*0.5)
@@ -100,10 +95,7 @@ function Borderof_Life(){ //adjust for use by red mage
     if (red_mage_mp.value <26){ 
         notEnoughMP()
     }else{ 
-        red_mage_mp.value -= 26;
-        i_menu.src = "" //Reset to blank prevent previous image from showing
-        i_menu.src = "bloodyvengeance1.png" 
-        i_menu.style.visibility = "visible"
+        spellStuff(red_mage_mp, 26, "bloodyvengeance1.png")
         PE.play()
         PE.loop = false;
         setTimeout(()=>{

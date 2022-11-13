@@ -3,16 +3,13 @@ function Radiant_Supernova(){ //her ult
     document.body.style.backgroundImage = "url('blackhole.png')"
         //ultimas don't have a crit or mp value, and aren't affected by atk stats
         //visibility image for 3 seconds, then turn it off
-        i_menu.src = "" //Reset to blank prevent previous image from showing
-        i_menu.src = "RadiantSupernova.jpeg"
-        i_menu.style.visibility = "visible"
+        spellStuffUltima("RadiantSupernova.jpeg")
         const DC = new Audio("DarkCreepy.mp3"); 
         DC.volume = 0.5;
         DC.play()
         DC.loop = false;
         setTimeout(()=>{
-            changeBackground()
-                                           
+            changeBackground()       
             DC.pause()
             Randomizer(5500, 98, 103)//Ultimas have a smaller randomizer so the percentage doesn't knock too much off
                 hp.value -= final_dmg/phase_mdef;
@@ -31,10 +28,7 @@ function Mirage_Blade(){
     if (black_mage_mp.value <22){ 
         notEnoughMP()
     }else{ 
-        black_mage_mp.value -= 22;
-        i_menu.src = "" //Reset to blank prevent previous image from showing
-        i_menu.src = "MirageBlade.jpg" //i_menu is the image template
-        i_menu.style.visibility = "visible"
+        spellStuff(black_mage_mp, 22, "MirageBlade.jpg")
         PE.play()
         PE.loop = false;
         setTimeout(()=>{
@@ -42,9 +36,7 @@ function Mirage_Blade(){
                 let d_crit = Math.floor(Math.random() * 9); //higher crit rate
                 if (d_crit == 1){
                     hp.value -= ((final_dmg*black_mage_atk)*1.5)/phase_def;
-                    p1.style.visibility = "visible";
-                    p1.value = "Critical hit!"
-                    timeout_ending()
+                    critMessage()
                 }else{
                   console.log(final_dmg*black_mage_atk)/phase_def
                   hp.value -= (final_dmg*black_mage_atk)/phase_def
@@ -70,9 +62,7 @@ function Entrapment(){ //Makes boss immobile for 2 turns
 
   }else{ //execute spell
       black_mage_mp.value -= 65;
-      i_menu.src = "" //Reset to blank prevent previous image from showing
-      i_menu.src = "Entrapment.jpg"
-      i_menu.style.visibility = "visible"
+      spellStuff(black_mage_mp, 65, "Entrapment.jpg")
       //find sfx
       Timer(3000, hide_i_and_end)
       //change timer according to phase
@@ -100,11 +90,7 @@ function Black_Fire(){ //moderate spell damage
   if (black_mage_mp.value <14){
        notEnoughMP()
   }else{ 
-      black_mage_mp.value -= 14;
-      //visibility image for 3 seconds, then turn it off
-      i_menu.src = "" //Reset to blank prevent previous image from showing
-      i_menu.src = "blackfire.png"
-      i_menu.style.visibility = "visible"
+      spellStuff(black_mage_mp, 14, "blackfire.jpg")
       const PE = new Audio("pierceevil.wav"); //find new sfx
       PE.play()
       PE.loop = false;
@@ -113,11 +99,7 @@ function Black_Fire(){ //moderate spell damage
               let d_crit = Math.floor(Math.random() * 16);
               if (d_crit == 1){
                   hp.value -= ((final_dmg*black_mage_matk)*1.5)/phase_mdef;
-                  p1.style.visibility = "visible";
-                  p1.value = "Critical hit!"
-                  setTimeout(()=>{
-                      p1.style.visibility = "hidden"
-                  }, 3000)
+                  critMessage()
               }else{
                   console.log(final_dmg*black_mage_matk)/phase_mdef
                   hp.value -= (final_dmg*black_mage_matk)/phase_mdef;
@@ -140,10 +122,7 @@ function Shattered_Mirror(){
       console.log("mirror already in effect")
 
   }else{ //execute spell
-      black_mage_mp.value -= 30;
-      i_menu.src = "" //Reset to blank prevent previous image from showing
-      i_menu.src = "shatteredmirror.png"
-      i_menu.style.visibility = "visible"
+      spellStuff(black_mage_mp, 30, "shatteredmirror.jpg")
       //find sfx
       Timer(3000, hide_i_and_end)
       //change timer according to phase

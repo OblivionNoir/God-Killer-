@@ -6,11 +6,7 @@ function Pierce_Evil(){
     if (white_mage_mp.value <6){
         notEnoughMP()
     }else{ 
-        white_mage_mp.value -= 6;
-        //visibility image for 3 seconds, then turn it off
-        i_menu.src = "" //Reset to blank prevent previous image from showing
-        i_menu.src = "PierceEvil.jpg"
-        i_menu.style.visibility = "visible"
+        spellStuff(white_mage_mp, 6, "PierceEvil.jpg")
         const PE = new Audio("pierceevil.wav");
         PE.play()
         PE.loop = false;
@@ -19,15 +15,13 @@ function Pierce_Evil(){
                 let l_crit = Math.floor(Math.random() * 16);
                 if (l_crit == 1){
                     hp.value -= ((final_dmg*white_mage_matk)*1.5)/phase_mdef;
-                    p1.style.visibility = "visible";
-                    p1.value = "Critical hit!"
-                    p1_timeout(2000)
+                    critMessage()
                 }else{
                   console.log(final_dmg*white_mage_matk)/phase_mdef
                   hp.value -= (final_dmg*white_mage_matk)/phase_mdef;
                 }  
             hide_i_and_end()
-        }, 3000);
+        }, 2000);
         
 
     };
@@ -134,10 +128,7 @@ function Angels_Grace_Part2(){
   if (white_mage_mp.value < 20){
       notEnoughMP()
   }else{
-      white_mage_mp.value -= 20;
-      i_menu.src = "" //Reset to blank prevent previous image from showing
-      i_menu.src = "AngelsGrace.jpg"
-      i_menu.style.visibility = "visible"
+      spellStuff(white_mage_mp, 20, "AngelsGrace.jpg")
       h2.play()
       h2.loop = false;
       Timer(1000, hide_i_and_end)
@@ -227,9 +218,7 @@ function RebirthPart2(){
   if (white_mage_mp.value < 50){
       notEnoughMP()
   }else{
-      white_mage_mp.value -= 50;
-      i_menu.src = "revival.png"
-      i_menu.style.visibility = "visible"
+      spellStuff(white_mage_mp, 50, "revival.png")
       const h2 = new Audio("heal2.mp3"); 
       h2.play()
       h2.loop = false;
@@ -259,24 +248,9 @@ function Chain_Heal(){ //heals all allies 25% of their max hp, but not if they'r
 
 function Supreme_Altar(){ //her ult, fully restores party to default state
     //if anyone is dead, change their dead status to false
+    document.body.style.backgroundImage = ""
     document.body.style.backgroundImage = "url('altarbg.png')" //find sfx for this
-      isAlive(wa)
-      isAlive(dmi)
-      isAlive(lmi)
-      isAlive(rmi)
-    //then fully restore mp and hp
-    document.getElementById("warrior_name_hp").value = 550;//going to leave this alone, because the hp values are hardcoded in the html. 
-    //Easier that way because of the progress bars
-    //Messing with maps here is a disaster waiting to happen
-    document.getElementById("d_mage_name_hp").value = 470;
-    document.getElementById("l_mage_name_hp").value = 400;
-    document.getElementById("r_mage_name_hp").value = 380;
-    document.getElementById("warrior_name_mp").value = 180;
-    document.getElementById("d_mage_name_mp").value = 390;
-    document.getElementById("l_mage_name_mp").value = 420;
-    document.getElementById("r_mage_name_mp").value = 540;
-
-
+    spellStuffUltima("SupremeAltar.jpg")
     //fix any debuffs, but don't lower it if the value is currently raised
     if (defs.get('warrior')<1.7){
         defs.set('warrior', 1.7)
@@ -341,10 +315,23 @@ function Supreme_Altar(){ //her ult, fully restores party to default state
     if (evs.get('red_mage')>0.2){
         evs.set('red_mage', 0.2)
     };//yanderedev would be proud of this
-    i_menu.src = "SupremeAltar.jpg"
-    i_menu.style.visibility = "visible"
     RevertUltima()
         setTimeout(()=>{
+            isAlive(wa)
+            isAlive(dmi)
+            isAlive(lmi)
+            isAlive(rmi)
+          //then fully restore mp and hp
+          document.getElementById("warrior_name_hp").value = 550;//going to leave this alone, because the hp values are hardcoded in the html. 
+          //Easier that way because of the progress bars
+          //Messing with maps here is a disaster waiting to happen
+          document.getElementById("d_mage_name_hp").value = 470;
+          document.getElementById("l_mage_name_hp").value = 400;
+          document.getElementById("r_mage_name_hp").value = 380;
+          document.getElementById("warrior_name_mp").value = 180;
+          document.getElementById("d_mage_name_mp").value = 390;
+          document.getElementById("l_mage_name_mp").value = 420;
+          document.getElementById("r_mage_name_mp").value = 540;
             changeBackground()
             hide_i_and_end()
         }, 7000);
