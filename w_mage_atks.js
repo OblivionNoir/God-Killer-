@@ -1,3 +1,5 @@
+
+
 function Pierce_Evil(){
     let white_mage_mp = document.getElementById("l_mage_name_mp");
     //see above comment...
@@ -268,7 +270,9 @@ function Supreme_Altar(){ //her ult, fully restores party to default state
       isAlive(lmi)
       isAlive(rmi)
     //then fully restore mp and hp
-    document.getElementById("warrior_name_hp").value = 550;//again...maps
+    document.getElementById("warrior_name_hp").value = 550;//going to leave this alone, because the hp values are hardcoded in the html. 
+    //Easier that way because of the progress bars
+    //Messing with maps here is a disaster waiting to happen
     document.getElementById("d_mage_name_hp").value = 470;
     document.getElementById("l_mage_name_hp").value = 400;
     document.getElementById("r_mage_name_hp").value = 380;
@@ -278,20 +282,70 @@ function Supreme_Altar(){ //her ult, fully restores party to default state
     document.getElementById("r_mage_name_mp").value = 540;
 
 
-    //fix any debuffs 
-    warrior_def = 1.6;
-    warrior_mdef = 1.4;
-    black_mage_def = 1.3;
-    black_mage_mdef = 1.7;
-    white_mage_def = 1.2;
-    white_mage_mdef = 1.8;
-    warrior_ev = 0.05;
-    black_mage_ev = 0.1;
-    white_mage_ev = 0.15;
-    red_mage_def = 1.1;
-    red_mage_mdef = 1.2;
-    red_mage_ev = 0.2;
+    //fix any debuffs, but don't lower it if the value is currently raised
+    if (defs.get('warrior')<1.7){
+        defs.set('warrior', 1.7)
+    }
+    if (m_defs.get('warrior')<1.4){
+        m_defs.set('warrior', 1.4)
+    }
+    if (phys_atks.get('warrior')<1.4){
+        phys_atks.set('warrior', 1.4)
+    }
+    if (m_atks.get('warrior')<1.1){
+        m_atks.set('warrior', 1.1)
+    }
+    if (evs.get('warrior')>0.05){
+        evs.set('warrior', 0.05)
+    };
 
+    if (defs.get('black_mage')<1.3){
+        defs.set('black_mage', 1.3)
+    }
+    if (m_defs.get('black_mage')<1.6){
+        m_defs.set('black_mage', 1.6)
+    }
+    if (phys_atks.get('black_mage')<1.2){
+        phys_atks.set('black_mage', 1.2)
+    }
+    if (m_atks.get('black_mage')<1.4){
+        m_atks.set('black_mage', 1.4)
+    }
+    if (evs.get('black_mage')> 0.1){
+        evs.set('black_mage', 0.1)
+    };
+    
+    if (defs.get('white_mage')<1.2){
+        defs.set('white_mage', 1.2)
+    }
+    if (m_defs.get('white_mage')<1.4){
+        m_defs.set('white_mage', 1.4)
+    }
+    if (phys_atks.get('white_mage')<1){
+        phys_atks.set('white_mage', 1)
+    }
+    if (m_atks.get('white_mage')<1.4){
+        m_atks.set('white_mage', 1.4)
+    }
+    if (evs.get('white_mage')>0.10){
+        evs.set('white_mage', 0.10)
+    };
+
+    if (defs.get('red_mage')<0.9){
+        defs.set('red_mage', 0.9)
+    }
+    if (m_defs.get('red_mage')<0.9){
+        m_defs.set('red_mage', 0.9)
+    }
+    if (phys_atks.get('red_mage')<1.5){
+        phys_atks.set('red_mage', 1.5)
+    }
+    if (m_atks.get('red_mage')<1.5){
+        m_atks.set('red_mage', 1.5)
+    }
+    if (evs.get('red_mage')>0.2){
+        evs.set('red_mage', 0.2)
+    };//yanderedev would be proud of this
     i_menu.src = "SupremeAltar.jpg"
     i_menu.style.visibility = "visible"
     RevertUltima()
