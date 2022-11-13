@@ -4,9 +4,7 @@ function Pierce_Evil(){
     let white_mage_mp = document.getElementById("l_mage_name_mp");
     //see above comment...
     if (white_mage_mp.value <6){
-        p1.style.visibility = "visible";
-        p1.value = "Not enough MP!"
-        p1_timeout(2000)
+        notEnoughMP()
     }else{ 
         white_mage_mp.value -= 6;
         //visibility image for 3 seconds, then turn it off
@@ -134,9 +132,7 @@ var h2 = new Audio("heal2.mp3");
 function Angels_Grace_Part2(){
   let white_mage_mp = document.getElementById("l_mage_name_mp");
   if (white_mage_mp.value < 20){
-      p1.style.visibility = "visible";
-      p1.value = "Not enough MP!"
-      p1_timeout(2000)
+      notEnoughMP()
   }else{
       white_mage_mp.value -= 20;
       i_menu.src = "" //Reset to blank prevent previous image from showing
@@ -147,6 +143,7 @@ function Angels_Grace_Part2(){
       Timer(1000, hide_i_and_end)
 
   };
+
 };
 function stillAlive(){
   p1.style.visibility = "visible";
@@ -228,9 +225,7 @@ function Rebirth(){ //revive a fallen ally with 50% hp
 function RebirthPart2(){
   let white_mage_mp = document.getElementById("l_mage_name_mp");
   if (white_mage_mp.value < 50){
-      p1.style.visibility = "visible";
-      p1.value = "Not enough MP!"
-      p1_timeout(2000)
+      notEnoughMP()
   }else{
       white_mage_mp.value -= 50;
       i_menu.src = "revival.png"

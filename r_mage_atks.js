@@ -68,9 +68,7 @@ function Borderof_Life(){ //adjust for use by red mage
     //-50% defenses, +50% attacks
     let red_mage_mp = document.getElementById("r_mage_name_mp");
     if (red_mage_mp.value <80){ 
-        p1.style.visibility = "visible";
-        p1.value = "Not enough MP!"
-        p1_timeout(2000)
+        notEnoughMP()
     }else{ 
         red_mage_mp.value -= 80;
         i_menu.src = ""//this part can be refactored...
@@ -82,7 +80,7 @@ function Borderof_Life(){ //adjust for use by red mage
         m_defs.set('red_mage', red_mage_mdef*0.5)
         phys_atks.set('red_mage', red_mage_atk*1.5)
         m_atks.set('red_mage', red_mage_matk*1.5)
-        
+
         BL_adjusted.push(
             defs.get('red_mage'),
             m_defs.get('red_mage'), 
@@ -100,9 +98,7 @@ function Borderof_Life(){ //adjust for use by red mage
     //crit rate. Physical
     let red_mage_mp = document.getElementById("r_mage_name_mp");
     if (red_mage_mp.value <26){ 
-        p1.style.visibility = "visible";
-        p1.value = "Not enough MP!"
-        p1_timeout(2000)
+        notEnoughMP()
     }else{ 
         red_mage_mp.value -= 26;
         i_menu.src = "" //Reset to blank prevent previous image from showing
@@ -152,9 +148,7 @@ var l_sfx = new Audio("LS.mp3")
   function Chain_Lightning(){ //This attack takes 14 seconds to execute. So it must be very powerful!
     let red_mage_mp = document.getElementById("r_mage_name_mp");
     if (red_mage_mp.value < 50){ 
-        p1.style.visibility = "visible";
-        p1.value = "Not enough MP!"
-        p1_timeout(2000)
+        notEnoughMP()
     }else{
         red_mage_mp.value -= 50;
         l_sfx.play()
@@ -252,9 +246,7 @@ var MT_active = false;
     //Reflects attack back on the boss for 2x base damage. Doesn't trigger for Bleeding Sun. 
     let red_mage_mp = document.getElementById("r_mage_name_mp");
     if (red_mage_mp.value < 60){
-        p1.style.visibility = "visible";
-        p1.value = "Not enough MP!"
-        p1_timeout(2000)
+        notEnoughMP()
     }else{
         MT_active = true;
         //can't finish this until boss is set up. It'll use a listener to detect hits on her and disable it.

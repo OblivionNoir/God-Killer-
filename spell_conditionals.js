@@ -138,11 +138,16 @@ function defend(character){
 function changeBackground(){
     if (phase3called == true){
         document.body.style.backgroundImage = "url('phase3BGV3.jpeg')"
-      }else{
+    }else{
         document.body.style.backgroundImage = "url('purveyorbgV3.jpeg')"
       }
-  
   }
+
+function notEnoughMP(){
+    p1.style.visibility = "visible";
+    p1.value = "Not enough MP!"
+    p1_timeout(2000)
+}
 
     //order of calculation is base damage, then multiply by character stats, divide by boss def, then check for crit
 function cooldown(atk_time){

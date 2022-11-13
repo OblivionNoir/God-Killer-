@@ -29,9 +29,7 @@ function Mirage_Blade(){
     let black_mage_mp = document.getElementById("d_mage_name_mp");
     //needs to be redefined every use or it references the OLD mp value and only works once
     if (black_mage_mp.value <22){ 
-        p1.style.visibility = "visible";
-        p1.value = "Not enough MP!"
-        p1_timeout(2000)
+        notEnoughMP()
     }else{ 
         black_mage_mp.value -= 22;
         i_menu.src = "" //Reset to blank prevent previous image from showing
@@ -64,9 +62,7 @@ var trapped; //this can just be undefined for now, gets assigned boolean later
 function Entrapment(){ //Makes boss immobile for 2 turns
   let black_mage_mp = document.getElementById("d_mage_name_mp");
   if (black_mage_mp.value < 65){
-      p1.style.visibility = "visible";
-      p1.value = "Not enough MP!"
-      p1_timeout(2000)
+      notEnoughMP()
       //ensure it isn't already in effect
   }if (trapped == true){
       //make this an actual window later
@@ -102,9 +98,7 @@ function Entrapment(){ //Makes boss immobile for 2 turns
 function Black_Fire(){ //moderate spell damage
   let black_mage_mp = document.getElementById("d_mage_name_mp");
   if (black_mage_mp.value <14){
-      p1.style.visibility = "visible";
-      p1.value = "Not enough MP!"
-      p1_timeout(2000)
+       notEnoughMP()
   }else{ 
       black_mage_mp.value -= 14;
       //visibility image for 3 seconds, then turn it off
@@ -139,9 +133,7 @@ function Shattered_Mirror(){
       //ultimas don't count
   let black_mage_mp = document.getElementById("d_mage_name_mp");
   if (black_mage_mp.value < 30){
-      p1.style.visibility = "visible";
-      p1.value = "Not enough MP!"
-      p1_timeout(2000)
+      notEnoughMP()
       //ensure it isn't already in effect
   }if (mirror == true){
       //make this an actual window later

@@ -19,9 +19,7 @@
     //Raises everyone's defenses by 25% for 1 minute
     let k_mp = document.getElementById("warrior_name_mp")
     if(k_mp.value < 20){
-      p1.style.visibility = "visible";
-      p1.value = "Not enough MP!"
-      p1_timeout(2000)
+      notEnoughMP()
     }else{
       k_mp.value -= 20
       i_menu.src = "" 
