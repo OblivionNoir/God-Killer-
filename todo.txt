@@ -4,7 +4,7 @@
 -Could probably clean some things up with ternaries 
 -Gradual transitions as opposed to images just popping in
 -Keep all the numbers as int. No decimals 
--credits: vecteezy.com for the rain and credit the OSTs, pixabay for sfx, game-icons.net for the icons
+-credits: vecteezy.com for the rain and credit the OSTs, pixabay for sfx, game-icons.net for the icons, MJ for art
 -Hover over attacks for descriptions
 -resize all backgrounds to 16:9 so they fit properly
 -replace all "visibility" with "display"
