@@ -50,6 +50,10 @@ for (let i = 0; i < mp_labels.length; i++){
 for (let i = 0; i < hp_labels.length; i++){
     hp_labels[i].style.visibility = "hidden";
 }
+var icons = document.getElementsByClassName("icon")
+for (let i = 0; i < icons.length; i++){
+    icons[i].style.display = "none";
+}
 //get hp values 
 var warrior_hp = document.getElementById("warrior_name_hp")
 var black_mage_hp = document.getElementById("d_mage_name_hp")
@@ -166,6 +170,9 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     }
     for (let i = 0; i < hp_labels.length; i++){
         hp_labels[i].style.visibility = "visible";
+    }
+    for (let i = 0; i < icons.length; i++){
+        icons[i].style.display = "initial";
     }
 
 
@@ -730,12 +737,22 @@ async function blood_notif(){
         p1_timeout(4000)
     }, 5000)
 }
-//check for ultima status and change appearance accordingly
-//attacks, which raise the bar, are done with clicks so this should check every time by default
-//use promises for this instead?
 
+//set image SRCs(or hide it) based on character stats
+//make a seperate function for the blood rain, since it's a one time thing
+//only use this if more than one is being affected, otherwise it's just wasting computational power
+function Icon_Management_Party(stat_map){
+    //loop through the corresponding map to the stat being affected
+    //call it multiple times if there are multiple stat types affected
+    for(let i = 0; i < stat_map.length; i++){
 
-//warrior is 0, dmage is 1, lmage is 2 
+    }
+}
+//for targeting one specific ally
+function Icon_Management_Single(stat_map, ally){
 
+}
+//this one's simple: Def down, Mdef down, and trapped.
+function Icon_Management_Boss(ailment){
 
-
+}

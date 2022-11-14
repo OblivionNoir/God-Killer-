@@ -92,8 +92,5 @@ function Bleeding_Sun2(){ //Defend is required to survive.
   //900 base m damage, r mage will just barely survive with defend. 
   //no defend = everyone dies
 
-    const NANI = new Audio("omaewa.mp3");
-    NANI.play()
-    NANI.loop = false;
     counter()
 };
