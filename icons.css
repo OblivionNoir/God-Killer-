@@ -1,0 +1,85 @@
+.icon{
+    opacity: 0.8;
+    width: 2rem;
+    border-radius: 10%;
+    z-index: 9;
+    border: .1rem dotted black;
+}
+.k_icons{
+    margin-top: 9vh;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
+.k_icons>img{
+    margin-top: 0.25rem;
+}
+
+#k_icon_6{/*put the blood one aligned to the top*/
+    position: absolute;
+    width: 2rem;
+    margin-top: 0.25rem;
+    top: 9vh;
+    left: 1.4vw;
+    border-radius: 10%;
+    z-index: 9;
+}
+
+.d_icons{
+    margin-top: 26vh;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
+.d_icons>img{
+    margin-top: 0.25rem;
+}
+
+#d_icon_6{/*put the blood one aligned to the top*/
+    position: absolute;
+    width: 2rem;
+    margin-top: 0.25rem;
+    top: 26vh;
+    left: 1.4vw;
+    border-radius: 10%;
+    z-index: 9;
+}
+
+.l_icons{
+    margin-top: 43vh;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
+.l_icons>img{
+    margin-top: 0.25rem;
+}
+
+#l_icon_6{/*put the blood one aligned to the top*/
+    position: absolute;
+    width: 2rem;
+    margin-top: 0.25rem;
+    top: 43vh;
+    left: 1.4vw;
+    border-radius: 10%;
+    z-index: 9;
+}
+.r_icons{
+    margin-top: 60vh;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
+.r_icons>img{
+    margin-top: 0.25rem;
+}
+
+#r_icon_6{/*put the blood one aligned to the top*/
+    position: absolute;
+    width: 2rem;
+    margin-top: 0.25rem;
+    top: 60vh;
+    left: 1.4vw;
+    border-radius: 10%;
+    z-index: 9;
+}

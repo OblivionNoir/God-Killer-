@@ -19,6 +19,7 @@
     <script src = "d_mage_atks.js" defer ></script>
     <link rel = "stylesheet" href = "reset.css">
     <link rel = "stylesheet" href = "styles.css">
+    <link rel = "stylesheet" href = "icons.css">
 </head>
 <body>
     <div id = "i_overlay"></div>
@@ -40,16 +41,52 @@
         </textarea> 
     </div>
 
+<div class = "k_icons">
+    <img src = "armorup.png" id = "k_icon_1" class = "icon"><!--6 icon slots of each character, 5 stats and the BL in phase 3-->
+    <img src = "magarmorup.png" id = "k_icon_2" class = "icon">
+    <img src = "physatkup.png" id = "k_icon_3" class = "icon">
+    <img src = "matkup.png" id = "k_icon_4" class = "icon">
+    <img src = "evup.png" id = "k_icon_5" class = "icon">
+</div>
+<img src = "bleedicon.png" id = "k_icon_6" class = "icon">
 
+<div class = "d_icons">
+    <img src = "armorup.png" id = "d_icon_1" class = "icon"><!--6 icon slots of each character, 5 stats and the BL in phase 3-->
+    <img src = "magarmorup.png" id = "d_icon_2" class = "icon">
+    <img src = "physatkup.png" id = "d_icon_3" class = "icon">
+    <img src = "matkup.png" id = "d_icon_4" class = "icon">
+    <img src = "evup.png" id = "d_icon_5" class = "icon">
+</div>
+<img src = "bleedicon.png" id = "d_icon_6" class = "icon">
 
+<div class = "l_icons">
+    <img src = "armorup.png" id = "l_icon_1" class = "icon"><!--6 icon slots of each character, 5 stats and the BL in phase 3-->
+    <img src = "magarmorup.png" id = "l_icon_2" class = "icon">
+    <img src = "physatkup.png" id = "l_icon_3" class = "icon">
+    <img src = "matkup.png" id = "l_icon_4" class = "icon">
+    <img src = "evup.png" id = "l_icon_5" class = "icon">
+</div>
+<img src = "bleedicon.png" id = "l_icon_6" class = "icon">
+
+<div class = "r_icons">
+    <img src = "armorup.png" id = "r_icon_1" class = "icon"><!--6 icon slots of each character, 5 stats and the BL in phase 3-->
+    <img src = "magarmorup.png" id = "r_icon_2" class = "icon">
+    <img src = "physatkup.png" id = "r_icon_3" class = "icon">
+    <img src = "matkup.png" id = "r_icon_4" class = "icon">
+    <img src = "evup.png" id = "r_icon_5" class = "icon">
+</div>
+<img src = "bleedicon.png" id = "r_icon_6" class = "icon">
     <!--treat this similarly to the og textarea, css-wise-->
         <div id = "battle_menu" class = "hide">
             <div><button id = "item_b" class = "btn" >Items</button></div>
             <div><button id = "spells_b" class = "btn" >Actions</button></div>
             
-            <div><img src = "knightv4.jpeg" id = "knight_img" class = "clickable ally_img"></div>
-           
-            <div><img src = "dmagev4.jpeg" id = "d_mage_img" class = "clickable ally_img"></div> 
+
+                <div><img src = "knightv4.jpeg" id = "knight_img" class = "clickable ally_img"></div>
+            
+            
+                <div><img src = "dmagev4.jpeg" id = "d_mage_img" class = "clickable ally_img"></div> 
+         
        
             <div><img src = "lmagev4.jpeg" id = "l_mage_img" class = "clickable ally_img"></div>
 
@@ -68,7 +105,7 @@
             <div><progress id = "d_mage_name_mp" max="390" value="390" class = "party_mp"></progress></div>
             <div><progress id = "l_mage_name_hp" max = "400" value = "200" class = "party_hp"></progress></div>
             <div><progress id = "l_mage_name_mp" max = "420" value = "420" class = "party_mp"></progress></div>
-            <div><progress id = "r_mage_name_hp" max = "380" value = "1" class = "party_hp"></progress></div>
+            <div><progress id = "r_mage_name_hp" max = "375" value = "1" class = "party_hp"></progress></div>
             <div><progress id = "r_mage_name_mp" max = "540" value = "540" class = "party_mp"></progress></div>
         </div>
 
@@ -87,6 +124,7 @@
 
         </div>
         <style>
+   
             .hp_label{
                 color: white;
             }
@@ -113,7 +151,7 @@
     <div id = "boss_name" class = "hide">アンシセイ, 新生の担い手</div> <!--anshisei comes from the words for equilibrium, life, and death-->
     <!--name comes from latin for "new death"-->
     <div id = "boss_hp_label" class = "hide"></div>
-        <progress id = "HP_bar" value = "51000" max="75000">
+        <progress id = "HP_bar" value = "75000" max="75000">
     </progress>
  <!--make color inside linked to hp percentage-->
     <style>
