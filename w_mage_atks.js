@@ -98,7 +98,7 @@ function addAllyTargets(){
       break;
       
       case 3: //rmage
-          amt_healed = 209;
+          amt_healed = 206;
           if (red_mage_dead == true){
               DeadMessage()
           }
@@ -241,7 +241,7 @@ function Chain_Heal(){ //heals all allies 25% of their max hp, but not if they'r
       white_mage_hp.value += 100
   }
   if (red_mage_dead === false){
-      red_mage_hp.value += 95
+      red_mage_hp.value += 93
   }
   ending3()
 }
@@ -327,7 +327,7 @@ function Supreme_Altar(){ //her ult, fully restores party to default state
           //Messing with maps here is a disaster waiting to happen
           document.getElementById("d_mage_name_hp").value = 470;
           document.getElementById("l_mage_name_hp").value = 400;
-          document.getElementById("r_mage_name_hp").value = 380;
+          document.getElementById("r_mage_name_hp").value = 375;
           document.getElementById("warrior_name_mp").value = 180;
           document.getElementById("d_mage_name_mp").value = 390;
           document.getElementById("l_mage_name_mp").value = 420;

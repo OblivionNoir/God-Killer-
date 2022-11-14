@@ -8,12 +8,16 @@
     //ult
     //lower hp = more damage. 
 
-    //ultimas do not take attack/def stats into account because any buffs would make them OP
+//DON'T. TOUCH. THIS. CODE.
     var loop_margin = 1; //reset loop margin to prevent numbers getting all negative and fucked up
     for(let i = 0; i < red_mage_hp.value; i++){
-        loop_margin *= 1.0055;  //links back to the base dmg of 1000 to increase the multiplier per hp lost
-        let z = (9750 - (1000 * loop_margin))//Final damage based on hp
-        SSList.push(z)
+        loop_margin *= 1.0055;  //lowering this actually increases the number. Why? No fuckin clue. 
+        let z = (11500  - (1300 * loop_margin))//Final damage based on hp
+        if (red_mage_hp.value == 1){
+            SSList.push(z+1061)//because the intermediate values are off by 1061, and 1hp is the baseline for calculation
+        }else{
+            SSList.push(z-1061)
+        }
     }
     return SSList[SSList.length - 1];
     //store in an external list, then return the last value in the list
@@ -31,7 +35,6 @@ function Scarlet_Subversion(){
     }else{
         SS_Part2()
     }
-    console.log(SScalculation())
 };
 
 function SS_Part2(){
@@ -47,7 +50,9 @@ function SS_Part2(){
             changeBackground()
             hide_i_and_end()
             RevertUltima()
-            hp.value -= SScalculation()+1000 //not sure why this is only affecting it if she's at max hp, but hey, it works!
+     
+            hp.value -= SScalculation() //no defense for this atk because it scales with the damage and weakens the higher values too much
+            console.log(SScalculation())
             document.getElementById("boss_hp_label").innerHTML = hp.value.toFixed(0) + "/75000";//won't work as a function, some weird timing issue I assume
             phase1_theme.volume = 0.7//make a function for this like the background switch, every ultima will need it
         }, 7000);

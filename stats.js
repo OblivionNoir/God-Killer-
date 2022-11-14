@@ -3,13 +3,13 @@ var phase_mdef = 1.2;
 
 var warrior_def = 1.7; 
 var warrior_mdef = 1.4;
-var warrior_atk = 1.4;
-var warrior_matk = 1.1;
+var warrior_atk = 1.5;
+var warrior_matk = 1;//he doesn't use magic, so it's kinda just for show
 var warrior_ev = 0.05;//5%
 
 var black_mage_def = 1.3;
-var black_mage_mdef = 1.6;
-var black_mage_atk = 1.2;
+var black_mage_mdef = 1.5;
+var black_mage_atk = 1.3;
 var black_mage_matk = 1.4;
 var black_mage_ev = 0.1;//10%
 
