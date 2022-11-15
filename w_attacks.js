@@ -12,6 +12,15 @@
     //defense reduction happens AFTER the damage
     let k_mp = document.getElementById("warrior_name_mp")
     //determine if it will hit, 40% chance
+    let lady_luck = Math.floor(Math.random() * 10);
+    if (lady_luck >3){
+      //miss
+
+    }else{
+      spellStuff(k_mp, 30, "whimsoffate.jpg")
+      Randomizer(3800, 97, 104)//returns final_dmg
+
+    }
 
     x = (3800*warrior_atk)/phase_def
     hp.value -= x
@@ -47,7 +56,7 @@
     }
     Timer(120000, RevertDefs)
   };
-  function RevertDefs(){//Not sure why I'm getting trailing decimals, but it's not a big deal
+  function RevertDefs(){
     for([key, def_val] of defs){
       defs.set(key, (def_val/1.2).toFixed(2))
       console.log(defs.get(key, def_val))
@@ -58,7 +67,7 @@
     }
   }
 
-  function Deathblow(){
+  function Deathblow(){//make this one after I have the whole active/not active sys set up
     //Slow and heavy, 2 turn attack, 5000 base
 
   }
@@ -66,22 +75,6 @@
 
 
 
-  //dark mage attacks
-
- 
-    //assign counter time according to phase
-
-  
-/*
-max hp = 380
-Lets start with 1000 base dmg at max hp, then add a 1.01% multipler per 1 hp lost, so it scales at an increasing speed
-So for example 
-
-
-
-
-
-*/
 
 
 

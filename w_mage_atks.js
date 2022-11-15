@@ -12,14 +12,7 @@ function Pierce_Evil(){
         PE.loop = false;
         setTimeout(()=>{
               Randomizer(500, 95, 106)
-                let l_crit = Math.floor(Math.random() * 16);
-                if (l_crit == 1){
-                    hp.value -= ((final_dmg*white_mage_matk)*1.5)/phase_mdef;
-                    critMessage()
-                }else{
-                  console.log(final_dmg*white_mage_matk)/phase_mdef
-                  hp.value -= (final_dmg*white_mage_matk)/phase_mdef;
-                }  
+               DmgCalculator(m_atks.get("white_mage"), 16, phase_mdef)//needs to follow the map, not the var version
             hide_i_and_end()
         }, 2000);
         

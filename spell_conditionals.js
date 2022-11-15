@@ -169,6 +169,20 @@ function critMessage(){
     p1_timeout(2000)
 }
 
+//get rid of the unique crit names and just use this, user = stat used for damage calc, chance = num to put into math.random
+//def_stat = boss defense to use(phase_def or phase_mdef)
+function DmgCalculator(user, chance, def_stat){
+    let crit = Math.floor(Math.random() * chance); //higher crit rate
+    if (crit == 1){
+        hp.value -= ((final_dmg*user)*1.5)/def_stat;//turn this into a function
+        critMessage()
+    }else{
+      console.log(final_dmg*user)/def_stat
+      hp.value -= (final_dmg*user)/def_stat
+    }   
+
+}
+
     //order of calculation is base damage, then multiply by character stats, divide by boss def, then check for crit
 function cooldown(atk_time){
     //adjusts cooldown depending on the attack being used to prevent spamming, by disabling mouse click

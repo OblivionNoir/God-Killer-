@@ -37,15 +37,7 @@ async function Mirage_Blade(){
         setTimeout(()=>{
                 Randomizer(1200, 95, 106)
                 i_menu.classList.remove("fade");
-                let d_crit = Math.floor(Math.random() * 9); //higher crit rate
-                if (d_crit == 1){
-                    hp.value -= ((final_dmg*black_mage_atk)*1.5)/phase_def;
-                    critMessage()
-                }else{
-                  console.log(final_dmg*black_mage_atk)/phase_def
-                  hp.value -= (final_dmg*black_mage_atk)/phase_def
-                }   
-    
+                DmgCalculator(phys_atks.get("black_mage"), 9, phase_def)
             hide_i_and_end()
         }, 3000);
         
@@ -104,14 +96,7 @@ function Black_Fire(){ //moderate spell damage
       setTimeout(()=>{
               Randomizer(1000, 95, 106)
               i_menu.classList.remove("fade");
-              let d_crit = Math.floor(Math.random() * 16);
-              if (d_crit == 1){
-                  hp.value -= ((final_dmg*black_mage_matk)*1.5)/phase_mdef;
-                  critMessage()
-              }else{
-                  console.log(final_dmg*black_mage_matk)/phase_mdef
-                  hp.value -= (final_dmg*black_mage_matk)/phase_mdef;
-              }  
+              DmgCalculator(m_atks.get("black_mage"), 16, phase_mdef)
           hide_i_and_end()
       }, 3000);
       

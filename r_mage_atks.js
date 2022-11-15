@@ -114,16 +114,7 @@ function Borderof_Life(){ //adjust for use by red mage
         setTimeout(()=>{
              Randomizer(1300, 95, 106)
                 i_menu.classList.remove("fade")
-                let r_crit = Math.floor(Math.random() * 13); 
-                if (r_crit == 1){ 
-                    hp.value -= (final_dmg*red_mage_atk)*1.5;
-                    p1.style.visibility = "visible";
-                    p1.value = "Critical hit!"
-                    p1_timeout(2000)
-                }else{
-                    console.log(final_dmg*red_mage_atk)
-                    hp.value -= (final_dmg*red_mage_atk); //hp = boss hp
-                }
+                DmgCalculator(phys_atks.get("red_mage"), 13, phase_def)
             hide_i_and_end()//no timer needed here, already in one
         }, 3000);
     };
