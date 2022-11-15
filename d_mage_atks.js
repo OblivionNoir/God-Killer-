@@ -3,6 +3,7 @@ function Radiant_Supernova(){ //her ult
     document.body.style.backgroundImage = "url('blackhole.png')"
         //ultimas don't have a crit or mp value, and aren't affected by atk stats
         //visibility image for 3 seconds, then turn it off
+        i_menu.classList.add("fade_long");
         spellStuffUltima("RadiantSupernova.jpeg")
         const DC = new Audio("DarkCreepy.mp3"); 
         DC.volume = 0.5;
@@ -11,8 +12,9 @@ function Radiant_Supernova(){ //her ult
         setTimeout(()=>{
             changeBackground()       
             DC.pause()
-            Randomizer(5500, 98, 103)//Ultimas have a smaller randomizer so the percentage doesn't knock too much off
+            Randomizer(5800, 98, 103)//Ultimas have a smaller randomizer so the percentage doesn't knock too much off
                 hp.value -= final_dmg/phase_mdef;
+                i_menu.classList.remove("fade_long");
             hide_i_and_end()
             RevertUltima()
         }, 7000);
@@ -22,17 +24,19 @@ function Radiant_Supernova(){ //her ult
 
 
 //This one is slighly more expensive because of the double crit rate
-function Mirage_Blade(){ 
+async function Mirage_Blade(){ 
     let black_mage_mp = document.getElementById("d_mage_name_mp");
     //needs to be redefined every use or it references the OLD mp value and only works once
     if (black_mage_mp.value <22){ 
         notEnoughMP()
     }else{ 
+        i_menu.classList.add("fade");
         spellStuff(black_mage_mp, 22, "MirageBlade.jpg")
         PE.play()
         PE.loop = false;
         setTimeout(()=>{
                 Randomizer(1200, 95, 106)
+                i_menu.classList.remove("fade");
                 let d_crit = Math.floor(Math.random() * 9); //higher crit rate
                 if (d_crit == 1){
                     hp.value -= ((final_dmg*black_mage_atk)*1.5)/phase_def;
@@ -61,14 +65,16 @@ function Entrapment(){ //Makes boss immobile for 2 turns
       console.log("already trapped")
 
   }else{ //execute spell
-      black_mage_mp.value -= 65;
+      i_menu.classList.add("fade");
       spellStuff(black_mage_mp, 65, "Entrapment.jpg")
+      setTimeout(()=>{
+        i_menu.classList.remove("fade");
+        //change timer according to phase
+        trapped = true;
+        CounterSwitch()
+        hide_i_and_end()
+      }, 3000)
       //find sfx
-      Timer(3000, hide_i_and_end)
-      //change timer according to phase
-      trapped = true;
-      CounterSwitch()
-
   } 
 }//closes off the first else statement
 
@@ -90,12 +96,14 @@ function Black_Fire(){ //moderate spell damage
   if (black_mage_mp.value <14){
        notEnoughMP()
   }else{ 
-      spellStuff(black_mage_mp, 14, "blackfire.jpg")
+      spellStuff(black_mage_mp, 14, "blackfire.png")
       const PE = new Audio("pierceevil.wav"); //find new sfx
       PE.play()
       PE.loop = false;
+      i_menu.classList.add("fade");
       setTimeout(()=>{
               Randomizer(1000, 95, 106)
+              i_menu.classList.remove("fade");
               let d_crit = Math.floor(Math.random() * 16);
               if (d_crit == 1){
                   hp.value -= ((final_dmg*black_mage_matk)*1.5)/phase_mdef;
@@ -122,13 +130,16 @@ function Shattered_Mirror(){
       console.log("mirror already in effect")
 
   }else{ //execute spell
-      spellStuff(black_mage_mp, 30, "shatteredmirror.jpg")
-      //find sfx
-      Timer(3000, hide_i_and_end)
-      //change timer according to phase
-      mirror = true;
-      CounterSwitch()
-      MirrorLower()
+      i_menu.classList.add("fade");
+      spellStuff(black_mage_mp, 30, "shatteredmirror.png")
+      setTimeout(()=>{
+        i_menu.classList.remove("fade");
+        mirror = true;
+        CounterSwitch()
+        hide_i_and_end()
+        MirrorLower()
+      }, 3000)
+
   } 
 
 }

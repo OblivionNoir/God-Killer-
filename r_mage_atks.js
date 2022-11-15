@@ -46,7 +46,9 @@ function SS_Part2(){
         spellStuffUltima("SS.png")
         const boom = new Audio("boom.mp3"); 
         boom.play()
+        i_menu.classList.add("fade_long")
         setTimeout(()=>{
+            i_menu.classList.remove("fade_long")
             changeBackground()
             hide_i_and_end()
             RevertUltima()
@@ -72,7 +74,8 @@ function Borderof_Life(){ //adjust for use by red mage
     let red_mage_mp = document.getElementById("r_mage_name_mp");
     if (red_mage_mp.value <80){ 
         notEnoughMP()
-    }else{ 
+    }else{  
+        i_menu.classList.add("fade_quick")
         spellStuff(red_mage_mp, 80, "BOL.png")
         PE.play()//find new sfx
         PE.loop = false;
@@ -90,6 +93,10 @@ function Borderof_Life(){ //adjust for use by red mage
         console.log(BL_adjusted)
         //timer will go in other thread
         Timer(2000, hide_i_and_end)
+        setTimeout(()=>{//this one's weird, needs a little buffer for the ani to work but it's not a problem
+            i_menu.classList.remove("fade_quick")
+        }, 2000)
+       
         BLExpire()
     }
 };//function ends here
@@ -100,11 +107,13 @@ function Borderof_Life(){ //adjust for use by red mage
     if (red_mage_mp.value <26){ 
         notEnoughMP()
     }else{ 
+        i_menu.classList.add("fade")
         spellStuff(red_mage_mp, 26, "bloodyvengeance1.png")
         PE.play()
         PE.loop = false;
         setTimeout(()=>{
              Randomizer(1300, 95, 106)
+                i_menu.classList.remove("fade")
                 let r_crit = Math.floor(Math.random() * 13); 
                 if (r_crit == 1){ 
                     hp.value -= (final_dmg*red_mage_atk)*1.5;

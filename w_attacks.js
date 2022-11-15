@@ -25,8 +25,12 @@
     if(k_mp.value < 20){
       notEnoughMP()
     }else{
+      i_menu.classList.add("fade")
       spellStuff(k_mp, 20, "rebellion.png")
-      Timer(3000, hide_i_and_end)
+      setTimeout(()=>{
+        i_menu.classList.remove("fade")
+        hide_i_and_end()
+      }, 3000)
       RaiseDefs()//action happens AFTER the image, remember that
     }
   };

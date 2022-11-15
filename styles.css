@@ -89,11 +89,11 @@ body{
     width: 8vw;
     border-radius: 8%;
 }
-#battle_menu >div >img{
+
+.clickable{
     max-width: 8vw;
     border-radius: 8%;
     opacity: 0.85;
-
 }
 
 
@@ -391,3 +391,38 @@ body{
     border-color: red;
 }
 
+/*add this AFTER the image is displayed, otherwise it just runs when it's hidden which is pointless*/
+.fade{/*add a small fade out effect to attacks*/
+    -webkit-animation-duration: 6s;
+    animation-duration: 6s;
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+    -webkit-animation-fill-mode: none;
+    animation-fill-mode: none;
+}
+
+.fade_long{/*add a small fade out effect to attacks*/
+    -webkit-animation-duration: 14s;
+    animation-duration: 14s;
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+    -webkit-animation-fill-mode: none;
+    animation-fill-mode: none;
+}
+
+.fade_quick{
+        -webkit-animation-duration: 4s;
+        animation-duration: 4s;
+        -webkit-animation-name: fadeOut;
+        animation-name: fadeOut;
+        -webkit-animation-fill-mode: none;
+        animation-fill-mode: none;
+    }
+@-webkit-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+ }
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+ }
