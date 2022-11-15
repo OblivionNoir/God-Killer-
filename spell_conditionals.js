@@ -3,7 +3,7 @@ turn_counter_value = 0;
 turn_counter = []
  function counter(){
      let UC = document.getElementById("ultima_charge");
-     UC.value +=4;
+     UC.value +=50;
      turn_counter_value +=1;
      turn_counter.push(turn_counter_value)
      //return turn_counter
