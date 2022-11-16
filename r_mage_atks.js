@@ -120,27 +120,28 @@ function Borderof_Life(){ //adjust for use by red mage
     };
   };
 
-
-var FinalCL = []//stores the final calculated damage of all 5 strikes for an accurate total. Clear the list when the function ends
+//stores the final calculated damage of all 5 strikes for an accurate total. Clear the list when the function ends
+var FinalCL = []
 function CLCalc(crit, hit_name){
+    let power = (hit_name*(m_atks.get("red_mage"))/phase_mdef)
     if (crit === 1){
         p1.style.visibility = "visible";
         hit_name *= 1.5
-        console.log(hit_name)
-        p1.value = "Critical hit! " + hit_name.toFixed(0) + " damage!"
-        //Create seperate variable with the multiplied value THEN do the toFixed? 
-        hp.value -= hit_name.toFixed(0);
-        FinalCL.push(hit_name)//no toFixed yet to avoid a string
+        p1.value = "Critical hit! " + power.toFixed(0) + " damage!"
+        hp.value -= power.toFixed(0);
+        FinalCL.push(power.toFixed(0))
+        console.log(power)
     }else{
         p1.style.visibility = "visible";
-        p1.value =  hit_name.toFixed(0) + " damage!"
+        p1.value = power.toFixed(0) + " damage!"
         //p1_2sec()
-        hp.value -= hit_name.toFixed(0);
-        FinalCL.push(hit_name)
+        hp.value -= power.toFixed(0);
+        FinalCL.push(power)
+        console.log(power)
     }
     updateBossHP()
 };
-//Scale mp cost to 3750 dmg (this doesn't account for character stats)
+
 var l_sfx = new Audio("LS.mp3")
   function Chain_Lightning(){ //This attack takes 14 seconds to execute. So it must be very powerful!
     let red_mage_mp = document.getElementById("r_mage_name_mp");
@@ -149,19 +150,18 @@ var l_sfx = new Audio("LS.mp3")
     }else{
         red_mage_mp.value -= 50;
         l_sfx.play()
-        l_sfx.loop = true;//Not sure why the numbers are way out of the set ranges, but it works, so...yay?
+        l_sfx.loop = true;
           //hit 1
-              let a = (Math.random() * ((353 - 313) + 313)*red_mage_matk)/phase_mdef//goes up 1.35x each hit. Exponential
-              //Min is max -50
+              let a = (Math.random() * ((353 - 313) + 313))
               let d1_crit = Math.floor(Math.random() * 14);
           //hit 2
-              let b = ((Math.random() * (403 - 363) + 363)*red_mage_matk)/phase_mdef
+              let b = ((Math.random() * (403 - 363) + 363))
               let d2_crit = Math.floor(Math.random() * 11);
           //hit 3
-              let c = ((Math.random() * (469 - 429) + 429)*red_mage_matk)/phase_mdef
+              let c = ((Math.random() * (469 - 429) + 429))
               let d3_crit = Math.floor(Math.random()* 8);
           //hit 4
-              let d = ((Math.random() * (561 - 521) + 521)*red_mage_matk)/phase_mdef
+              let d = ((Math.random() * (561 - 521) + 521))
               let d4_crit = Math.floor(Math.random()*5);
           //hit 5
               let e = (a + b + c + d) 
@@ -203,12 +203,12 @@ var l_sfx = new Audio("LS.mp3")
                     return a + b
                 }, 0);
                 console.log(sum)
+                  Number(sum)
                   p1.value = "Total damage: " + sum.toFixed(0)
                   p1_timeout(3000)
                   FinalCL = [] //clear the list
                   Timer(2000, hide_i_and_end)
               }, 12000)
-
     }
   
     }
