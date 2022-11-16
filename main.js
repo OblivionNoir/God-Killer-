@@ -578,8 +578,7 @@ function timeout(){
 
 
 //spell menu should dissapear and reset while boss is attacking, so it shouldn't be a concern here
-//need to loop through the alive members if someone dies so the buttons work again. Functions?
-//Easiest way is probably a constant refresh in the background, but that's a lot of processing power
+
  function CheckDeadStatus(){ //call after every boss attack
             //adding to 0,1,2, which are the players
             switch(true){
@@ -613,10 +612,20 @@ function timeout(){
             };
     };
     //apply the limitations of the dead status
+//doing weird things if I use the passed values, so make new ones
+var AliveMembers = [wa, dmi, lmi, rmi]
+function ArrayRemove(arr, value) {//man I wish this was python
+    return arr.filter(function(ele){
+        return ele != value;
+    });
+}
+console.log(AliveMembers)
 function isDead(partyMember){
-    //partyMember.style.zIndex = "-1"
-    //remove any active status on the dead party member
-   //partyMember.classList.remove("active")
+    AliveUpdate = ArrayRemove(AliveMembers, partyMember)
+    console.log(AliveUpdate)
+    //remove from list of alive
+    
+    //console.log(AliveMembers)
     active_added = false;
     partyMember.style.opacity = "0.1"//There will be checks in the character selection to make sure they can't be selected
     b_menu.style.visibility = "hidden"
@@ -628,20 +637,28 @@ function isAlive(partyMember){
     switch(partyMember){
         case wa:
             warrior_dead = false;
+            AliveUpdate.push(wa)
+            console.log(AliveMembers)
             warrior_hp.value = 275;
             warrior_menu() //for some fucking reason that only God knows, this is the only way to get the menu to show up again
         break;
         case dmi:
+            AliveUpdate.push(dmi)
             black_mage_dead = false;
+            console.log(AliveMembers)
             black_mage_hp.value = 235;
             d_mage_menu()
         break;
         case lmi:
+            AliveUpdate.push(lmi)
+            console.log(AliveMembers)
             white_mage_dead = false;
             white_mage_hp.value = 200;
             l_mage_menu()
         break;
         case rmi:
+            AliveUpdate.push(rmi)
+            console.log(AliveUpdate)
             red_mage_dead = false;
             red_mage_hp.value = 190;
             r_mage_menu()
