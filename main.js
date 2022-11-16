@@ -589,7 +589,7 @@ function timeout(){
                     timeout()
                     break; //do stuff so they can't be attacked or selected while dead
                 case(black_mage_hp.value <=0):
-                    black_mage_hp.value ==0;
+                    black_mage_hp.value ==0;//make this a function
                     black_mage_dead = true;
                     isDead(dmi)
                     timeout()
@@ -612,22 +612,19 @@ function timeout(){
             };
     };
     //apply the limitations of the dead status
-//doing weird things if I use the passed values, so make new ones
-var AliveMembers = [wa, dmi, lmi, rmi]
-function ArrayRemove(arr, value) {//man I wish this was python
-    return arr.filter(function(ele){
-        return ele != value;
+
+var 員たちは生活して = [wa, dmi, lmi, rmi]
+function ArrayRemove(アレイ, 価) {//man I wish this was python
+    return アレイ.filter(function(何かくそ){
+        return 何かくそ != 価;
     });
 }
-console.log(AliveMembers)
-function isDead(partyMember){
-    AliveUpdate = ArrayRemove(AliveMembers, partyMember)
-    console.log(AliveUpdate)
-    //remove from list of alive
-    
-    //console.log(AliveMembers)
+console.log(員たちは生活して)
+function isDead(一行の員){
+    生活して修正 = ArrayRemove(員たちは生活して, 一行の員)
+    console.log(生活して修正)
     active_added = false;
-    partyMember.style.opacity = "0.1"//There will be checks in the character selection to make sure they can't be selected
+    一行の員.style.opacity = "0.1"//There will be checks in the character selection to make sure they can't be selected
     b_menu.style.visibility = "hidden"
     //hide the buttons too
 }
