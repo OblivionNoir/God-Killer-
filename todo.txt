@@ -1,4 +1,5 @@
 
+-As it is now, you can chain heal spells by clicking each one then the target. This is good, but there's gotta be a way to escape it. 
 -needs fullscreen compatability
 -Cannot use multiple attacks at once. Set an attack active state to prevent this. Exceptions are My Turn, Broken Mirror and defend or anything else that waits in the background.
 -Could probably clean some things up with ternaries 
