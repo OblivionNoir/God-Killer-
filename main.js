@@ -583,36 +583,37 @@ function timeout(){
             //adding to 0,1,2, which are the players
             switch(true){
                 case(warrior_hp.value <=0):  //first revert to 0 if negative
-                    warrior_hp.value ==0;
-                    warrior_dead = true; //add message 
-                    isDead(wa)
-                    timeout()
+                    死物(warrior_hp, wa)
+                    warrior_dead = true;
                     break; //do stuff so they can't be attacked or selected while dead
+
                 case(black_mage_hp.value <=0):
-                    black_mage_hp.value ==0;//make this a function
+                    死物(black_mage_hp, dmi)
                     black_mage_dead = true;
-                    isDead(dmi)
-                    timeout()
                     break;
+
                 case(white_mage_hp.value <=0):
-                    white_mage_hp.value ==0;
+                    死物(black_mage_hp, dmi)
                     white_mage_dead = true;
-                    isDead(lmi)
-                    timeout()
                     break;
+
                 case(red_mage_hp.value <=0):
-                    red_mage_hp.value ==0;
+                    死物(red_mage_hp, rmi)
                     red_mage_dead = true;
-                    isDead(rmi)
-                    timeout()
                     break;
                 default:
                     console.log("nobody is dead")
     
             };
     };
+function 死物(hp_name, name){
+    hp_name.value = 0;
+    isDead(name)    
+    timeout()
+  
+}
     //apply the limitations of the dead status
-
+//hardcore language learning mode activate, all new variables must be in japanese
 var 員たちは生活して = [wa, dmi, lmi, rmi]
 function ArrayRemove(アレイ, 価) {//man I wish this was python
     return アレイ.filter(function(何かくそ){
@@ -634,28 +635,28 @@ function isAlive(partyMember){
     switch(partyMember){
         case wa:
             warrior_dead = false;
-            AliveUpdate.push(wa)
-            console.log(AliveMembers)
+            生活して修正.push(wa)
+            console.log(員たちは生活して)
             warrior_hp.value = 275;
             warrior_menu() //for some fucking reason that only God knows, this is the only way to get the menu to show up again
         break;
         case dmi:
-            AliveUpdate.push(dmi)
+            生活して修正.push(dmi)
             black_mage_dead = false;
-            console.log(AliveMembers)
+            console.log(員たちは生活して)
             black_mage_hp.value = 235;
             d_mage_menu()
         break;
         case lmi:
-            AliveUpdate.push(lmi)
-            console.log(AliveMembers)
+            生活して修正.push(lmi)
+            console.log(員たちは生活して)
             white_mage_dead = false;
             white_mage_hp.value = 200;
             l_mage_menu()
         break;
         case rmi:
-            AliveUpdate.push(rmi)
-            console.log(AliveUpdate)
+            生活して修正.push(rmi)
+            console.log(員たちは生活して)
             red_mage_dead = false;
             red_mage_hp.value = 190;
             r_mage_menu()
