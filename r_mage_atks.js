@@ -152,7 +152,7 @@ var l_sfx = new Audio("LS.mp3")
         l_sfx.play()
         l_sfx.loop = true;
           //hit 1
-              let a = (Math.random() * ((353 - 313) + 313))
+              let a = ((Math.random() * (353 - 313) + 313))
               let d1_crit = Math.floor(Math.random() * 14);
           //hit 2
               let b = ((Math.random() * (403 - 363) + 363))
@@ -203,7 +203,7 @@ var l_sfx = new Audio("LS.mp3")
                     return a + b
                 }, 0);
                 console.log(sum)
-                  Number(sum)
+                  //Number(sum)
                   p1.value = "Total damage: " + sum.toFixed(0)
                   p1_timeout(3000)
                   FinalCL = [] //clear the list
