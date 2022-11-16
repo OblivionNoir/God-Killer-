@@ -53,8 +53,8 @@ function SS_Part2(){
             hide_i_and_end()
             RevertUltima()
      
-            hp.value -= SScalculation() //no defense for this atk because it scales with the damage and weakens the higher values too much
-            console.log(SScalculation())
+            hp.value -= SScalculation()/phase_mdef //no defense for this atk because it scales with the damage and weakens the higher values too much
+            console.log(SScalculation()/phase_mdef)
             document.getElementById("boss_hp_label").innerHTML = hp.value.toFixed(0) + "/75000";//won't work as a function, some weird timing issue I assume
             phase1_theme.volume = 0.7//make a function for this like the background switch, every ultima will need it
         }, 7000);
