@@ -6,6 +6,7 @@ function Pierce_Evil(){
     if (white_mage_mp.value <6){
         notEnoughMP()
     }else{ 
+        i_menu.classList.add("fade_quick");
         spellStuff(white_mage_mp, 6, "PierceEvil.jpg")
         const PE = new Audio("pierceevil.wav");
         PE.play()
@@ -13,6 +14,7 @@ function Pierce_Evil(){
         setTimeout(()=>{
               Randomizer(500, 95, 106)
                DmgCalculator(m_atks.get("white_mage"), 16, phase_mdef)//needs to follow the map, not the var version
+               i_menu.classList.remove("fade_quick");
             hide_i_and_end()
         }, 2000);
         
@@ -40,19 +42,19 @@ function Angels_Grace(){ //moderate healing spell on one ally
 
 };
 
-//Need to add conditional to prevent targeting dead characters!
+//heals 66% of the target's max hp
 function addAllyTargets(){
   console.log(ally_targets)
   const selected_ally = ally_targets.indexOf(this);
   switch(selected_ally){
       case 0: //knight
       //THANK FUCKING GOD IT FINALLY WORKS
-          amt_healed = 303;
+          amt_healed = 363;
           //ensure it doesn't go over max
           if (warrior_dead == true){
               DeadMessage()
           }
-          else if (warrior_hp.value + amt_healed > 550){
+          else if (warrior_hp.value + amt_healed > 550){//no need to check this, remove it
               Angels_Grace_Part2()
               warrior_hp.value = 550;
               //create a seperate function for the imagery/mp subtraction
@@ -63,7 +65,7 @@ function addAllyTargets(){
       break;
 
       case 1: //dark mage
-          amt_healed = 259;
+          amt_healed = 310;
           if (black_mage_dead == true){
               DeadMessage()
           }
@@ -77,7 +79,7 @@ function addAllyTargets(){
       break;
 
       case 2: //light mage
-          amt_healed = 220;
+          amt_healed = 264;
           if (white_mage_dead == true){
               DeadMessage()
           }
@@ -91,7 +93,7 @@ function addAllyTargets(){
       break;
       
       case 3: //rmage
-          amt_healed = 206;
+          amt_healed = 248;
           if (red_mage_dead == true){
               DeadMessage()
           }
@@ -111,20 +113,24 @@ function addAllyTargets(){
 
 };
 
-var h2 = new Audio("heal2.mp3"); 
+
 //all the usual visual stuff
 
 //not sure how to balance healing yet
 
 function Angels_Grace_Part2(){
   let white_mage_mp = document.getElementById("l_mage_name_mp");
-  if (white_mage_mp.value < 20){
+  if (white_mage_mp.value < 33){
       notEnoughMP()
   }else{
-      spellStuff(white_mage_mp, 20, "AngelsGrace.jpg")
+      i_menu.classList.add("fade_fastest");
+      spellStuff(white_mage_mp, 33, "AngelsGrace.jpg")
       h2.play()
       h2.loop = false;
       Timer(1000, hide_i_and_end)
+      setTimeout(()=>{
+            i_menu.classList.remove("fade_fastest");
+      }, 1000)
 
   };
 
@@ -151,7 +157,7 @@ function Rebirth(){ //revive a fallen ally with 50% hp
   };
 
 };
-  function addReviveTargets(){
+  function addReviveTargets(){//could reformat to be used by boss as well, but not worth the mental suffering
       console.log(ally_targets)
       const revived_ally = ally_targets.indexOf(this);
       switch(revived_ally){
@@ -211,32 +217,52 @@ function RebirthPart2(){
   if (white_mage_mp.value < 50){
       notEnoughMP()
   }else{
+    i_menu.classList.add("fade");
       spellStuff(white_mage_mp, 50, "revival.png")
       const h2 = new Audio("heal2.mp3"); 
       h2.play()
       h2.loop = false;
-      //this can probably be a function
-      Timer(4000, hide_i_and_end)
+      Timer(3000, hide_i_and_end)
+      setTimeout(()=>{
+            i_menu.classList.remove("fade");
+      }, 3000)
   };
 };
 
-//costs 40$ more than angel's grace. Slighly more efficient in terms of mp cost/total amt healed ratio
 
-//this still needs a visual! 
-function Chain_Heal(){ //heals all allies 25% of their max hp, but not if they're dead
-  if (warrior_dead === false){
-      warrior_hp.value += 138//it won't go over max by default so no need to check. Rare moment of simplicity
-  }
-  if (black_mage_dead === false){
-      black_mage_hp.value += 117
-  }
-  if (white_mage_dead === false){
-      white_mage_hp.value += 100
-  }
-  if (red_mage_dead === false){
-      red_mage_hp.value += 93
-  }
-  ending3()
+
+
+function Chain_Heal(){ //heals all allies 33% of their max hp, but not if they're dead
+let white_mage_mp = document.getElementById("l_mage_name_mp");
+if (white_mage_mp.value < 50){
+    notEnoughMP()
+}else{
+    i_menu.classList.add("fade");
+    spellStuff(white_mage_mp, 50, "chainheal.png")
+    h2.play()
+    h2.loop = true;
+    
+        setTimeout(()=>{
+            i_menu.classList.remove("fade");
+            h2.pause()
+            hide_i_and_end()
+                //hide_i_and_end()
+            if (warrior_dead === false){
+                warrior_hp.value += 182
+                }
+            if (black_mage_dead === false){
+                black_mage_hp.value += 155
+                }
+            if (white_mage_dead === false){
+                white_mage_hp.value += 132
+                }
+            if (red_mage_dead === false){
+                red_mage_hp.value += 124
+            };
+            updatePlayers()
+        }, 4500);
+    
+    }
 }
 
 function Supreme_Altar(){ //her ult, fully restores party to default state
