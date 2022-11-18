@@ -12,6 +12,7 @@ var omae = new Audio("omaewa.mp3");
 var NANI = new Audio("nani.mp3");
 //hide elements that get used later
 var worker = new Worker('timers_thread.js'); //worker thread for timers
+var ボス = new Worker('boss_phases.js');
 
 
 var p1_img = document.getElementById("boss_img");
@@ -91,7 +92,6 @@ var PE = new Audio("pierceevil.wav");
 /*document.addEventListener("click", function(){
     hp = document.getElementById("HP_bar")
     hp.value -= 700;
-
 })*/
  //todo: add fade out of phase 1 with for loop
 
@@ -131,29 +131,12 @@ document.addEventListener('click', function startGame(event) {
  //check every second for phase change
 
         del_box()
-        startBoss()
+        自動的ボス()//in other thread
     }, 5000);
 
 });
 
-//boss attacks
-function startBoss(){//this cannot be a constant interval. Causes boss to attack too fast
-            //start boss attack rotation 
-            updateBossHP()
-            updatePlayers()
-                switch(true){
-                    case(phase2called):
-                    boss_phase2()
-                break;
-                    case(phase3called):
-                    boss_phase3()
-                break;
-                default: //still in phase 1
-                    boss_phase1()
-                break;
-          };
-    
-}
+
 
 //};
 
@@ -174,9 +157,26 @@ function del_box(){ //SHOWTIME. Delete initial box and make menu appear
     for (let i = 0; i < icons.length; i++){
         icons[i].style.display = "initial";
     }
+    updatePlayers()
+    updateBossHP()
 
 
 };
+                               /*section for basic defend setup*/
+function defend(character){
+    console.log(character + " made it") 
+    //Lasts 40 seconds.
+    //If defending, that character can't do anything else but their defense is raised 3x. 
+    //adds defense up icon with glow effect(both phys and mag)
+    //Essential to survive Bleeding Sun at the end
+  }
+
+
+function revert_defense(){
+    //change back to normal
+
+ };
+
 
 function DeadMessage(){
     p1.style.visibility = "visible";
@@ -698,7 +698,7 @@ function TestPhase(){
   function phase2(){ 
             console.log("phase 2 triggered")
             phase_def = 1.95; //update stats for phase 2
-            phase_mdef = 1.8;  
+            phase_mdef = 1.80;  
             roar.play();
             roar.loop = false;
             setTimeout(()=>{
@@ -716,8 +716,8 @@ function TestPhase(){
 var phase3_theme = new Audio('phase3ost.mp3') //global so it's usable in the else 
 
  function phase3(){ //PHASE 3
-            phase_def = 2.6; //update stats for phase 3
-            phase_mdef = 2.4;
+            phase_def = 2.60; //update stats for phase 3
+            phase_mdef = 2.40;
             let hellnaw = new Audio("hellnaw.mp3")
             hellnaw.play();
             roar.play();
