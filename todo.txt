@@ -1,13 +1,12 @@
 
+-Add a media query for mobile, not compatible message
 -As it is now, you can chain heal spells by clicking each one then the target. This is good, but there's gotta be a way to escape it. 
 -needs fullscreen compatability
 -Cannot use multiple attacks at once. Set an attack active state to prevent this. Exceptions are My Turn, Broken Mirror and defend or anything else that waits in the background.
 -Could probably clean some things up with ternaries 
--Gradual transitions as opposed to images just popping in
 -Keep all the numbers as int. No decimals 
 -credits: vecteezy.com for the rain and credit the OSTs, pixabay for sfx, game-icons.net for the icons, MJ for art
 -Hover over attacks for descriptions
--resize all backgrounds to 16:9 so they fit properly
 -replace all "visibility" with "display"
 -testing
 
