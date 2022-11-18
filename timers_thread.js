@@ -1,94 +1,8 @@
-
-//this whole file is a mess that needs refactoring
-
-var p1_interval; 
-function boss_phase1(){
-    trapped = false;//temp for testing
-    if(trapped == true){
-        //do nothing
-        console.log("trapped")
-    }else if (trapped == false){
-    p1_interval = setInterval(()=>{
-        console.log("made it to interval")
-        //Borderof_Life()
-        console.log("boss test")
-        CheckDeadStatus()
-        let boss_choice = randNumber(1,11)
-        //might be a better way of setting percent chance.
-        //the way this is setup allows multiple attacks. Fix! 
-            /*if (boss_choice == 1 | boss_choice ==2 | boss_choice ==3) //30% chance
-                SpheresofInsanity()  //change this so it checks if ANY party members are <=1/dead
-            else if(boss_choice ==10 | boss_choice ==9 && LastBossAttacks[-1] != "BorderofLife" 
-            && LastBossAttacks[-2] != "BorderofLife" && hp.value <12500 && (!(warrior_hp.value<=1))){
-                Borderof_Life()
-            }*/
-    }, 25000)//gets 5 seconds faster each phase, add a slight randomization 
-}else{
-    console.log("error"+ trapped)
-}
-};
-
-var p_2_interval; 
-function boss_phase2(){
-    clearInterval(p1_interval)//disable the first interval
-    p_2_interval = setInterval(()=>{
+//Timer management
 
 
-
-    }, 20000)
-  };
-
-//phase 3 is never reverted so there's no need to set a stop for it 
-function boss_phase3(){
-    clearInterval(p_2_interval)
-    setInterval(()=>{
-
-
-    }, 15000)
-  };
-function revert_defense(){
-    //change back to normal
-    for (let i = 0; i < defenses.length; i++){{
-        defenses[i] /=2; 
-        console.log(defenses[i])
- };
-
-};
-};
-  //2 turn timer
-function defend_timer(){
-       counter()
-       defend_active = true; //then back to false when the timer expires
-       //double everyone's defenses
-       console.log("defend timer started")
-       for (let i = 0; i < defenses.length; i++){
-              defenses[i] *=2; 
-              console.log(defenses[i])
-       };
-
-        switch(true){
-            case (phase2):
-            
-            break;
-            case (phase3):
-            
-            break;
-            default: //phase 1 time
-            
-                setTimeout(()=>{
-                    defend_active = false;
-                    revert_defense();
-                    //expires when the timeout finished
-                }, 50000) //2 turns +10 sec, which varies by phase so account for that
-                //extra 10 sec so it doesn't expire right before the attack hits 
-              
-            break; 
-        };
-    
-};
-    //phase 1 = 50sec
-    //phase 2 = 40sec
-    //phase 3 = 30sec
+//use a timer for this instead, boss will be blocked from attacking by value being true, which will be set to false after the timer expires
+//deal with that after boss can attack back so I can test it properly
 function trapped_countdown(time){ //2 turn countdown
     //attacks are already disabled by setting trapped to true
     setTimeout(()=>{
@@ -104,22 +18,37 @@ function countdown_p3(){
 
 }
 
-function countdown_1turn(time_1turn){
-    setTimeout(()=>{
-        mirror = false;
-        MirrorRevert()
-        console.log("mirror no longer active")
-    }, time_1turn)
+function Timer(duration, action, arg){//action = what to do when it finishes, as a function name without the ()
+    let CountTo = new Date().getTime() + duration;
+    let TimerUpdate = setInterval(function(){
+    let now = new Date().getTime();
+    let distance = CountTo - now;
 
+    if (distance <= 0){
+        clearInterval(TimerUpdate);
+        action(arg)
+    }
+    }, 1000);
 }
+function p1_timeout(time){//not sure if this is being used, just leave it for now
+    setTimeout(()=>{
+        p1.style.visibility = "hidden"
+    }, time)
+}
+
+function timeout_ending(){
+    setTimeout(()=>{
+        p1.style.visibility = "hidden";
+        ending3()
+    }, 2000)
+}
+
 function BLExpire(){
-    setTimeout(()=>{ //change this to a timer
-        //BOL_active = false;
         console.log("BL no longer active")
         red_mage_def = 0.9;//use her map for this
         red_mage_mdef = 0.9;
         red_mage_atk = 1.5;
         red_mage_matk = 1.5;
         //then remove the color filter
-    }, 25000)
+
 }

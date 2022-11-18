@@ -10,52 +10,6 @@ turn_counter = []
  }
  var LastAttacks = [] //store last attacks used by player, some skills rely on it
 
-//determines appropriate counter to be used 
-function CounterSwitch(){
-    switch(true){
-        case(phase2called == true):
-        if (mirror == true){//use the shorter version for Shattered Mirror
-            counter()
-            countdown_mirror(30000)
-        }else{
-            counter()
-            trapped_countdown(40000)
-        }
-    break;
-        case(phase3called == true):
-        if (mirror == true){
-            counter()
-            countdown_mirror(22500)
-        }else{
-            counter()
-            trapped_countdown(30000)
-        }      
-    break;
-        default://phase 1 
-        if (mirror == true){
-            counter()
-            countdown_1turn(37500)
-        }else{
-            counter()
-            trapped_countdown(50000)
-        }
-    break;
-    }
-
-}; 
-//replace all the setTimeouts with this 
-function Timer(duration, action, arg){//action = what to do when it finishes, as a function name without the ()
-    let CountTo = new Date().getTime() + duration;
-    let TimerUpdate = setInterval(function(){
-    let now = new Date().getTime();
-    let distance = CountTo - now;
-
-    if (distance <= 0){
-        clearInterval(TimerUpdate);
-        action(arg)
-    }
-    }, 1000);
-}
 
 function test(){
     console.log("working")
@@ -69,18 +23,7 @@ function randNumber(min, max) {
   }
 
 
-function p1_timeout(time){//make this another timer?
-    setTimeout(()=>{
-        p1.style.visibility = "hidden"
-    }, time)
-}
 
-function timeout_ending(){
-    setTimeout(()=>{
-        p1.style.visibility = "hidden";
-        ending3()
-    }, 2000)
-}
 //Used for turning the character images into targets for spells
 var ally_targets = []
 function makeAllyTargets(){
@@ -127,15 +70,9 @@ function Randomizer(base_power, min, max){
     //return final_dmg
 }
 
-function defend(character){
-    console.log(character + " made it") 
-    //Lasts 20 seconds.
-    //If defending, that character can't do anything else but their defense is raised 3x. 
-    //Essential to survive Bleeding Sun at the end
-  }
 
   //switches background back, according to current phase
-function changeBackground(){
+async function changeBackground(){
     if (phase3called == true){
         document.body.style.backgroundImage = "url('phase3BGV3.jpeg')"
     }else{
@@ -172,9 +109,9 @@ function critMessage(){
 //get rid of the unique crit names and just use this, user = stat used for damage calc, chance = num to put into math.random
 //def_stat = boss defense to use(phase_def or phase_mdef)
 function DmgCalculator(user, chance, def_stat){
-    let crit = Math.floor(Math.random() * chance); //higher crit rate
+    let crit = Math.floor(Math.random() * chance); 
     if (crit == 1){
-        hp.value -= ((final_dmg*user)*1.5)/def_stat;//turn this into a function
+        hp.value -= ((final_dmg*user)*1.5)/def_stat;
         critMessage()
     }else{
       console.log(final_dmg*user)/def_stat
@@ -182,8 +119,15 @@ function DmgCalculator(user, chance, def_stat){
     }   
 
 }
+//lots of stuff can be refactored into this
+function arbritraryRange(min, max){
+    let val_in_range = Math.floor(Math.random() * (max - min) ) + min;
+    return val_in_range;
+
+}
 
     //order of calculation is base damage, then multiply by character stats, divide by boss def, then check for crit
 function cooldown(atk_time){
     //adjusts cooldown depending on the attack being used to prevent spamming, by disabling mouse click
 }
+
