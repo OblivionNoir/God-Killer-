@@ -5,7 +5,7 @@
 -Cannot use multiple attacks at once. Set an attack active state to prevent this. Exceptions are My Turn, Broken Mirror and defend or anything else that waits in the background.
 -Could probably clean some things up with ternaries 
 -Keep all the numbers as int. No decimals 
--credits: vecteezy.com for the rain and credit the OSTs, pixabay for sfx, game-icons.net for the icons, MJ for art
+-credits: vecteezy.com for the rain and credit the OSTs, pixabay for sfx, game-icons.net for the icons, MJ for art, GamingSoundEffects on yt
 -Hover over attacks for descriptions
 -replace all "visibility" with "display"
 -testing
