@@ -126,11 +126,10 @@ function CLCalc(crit, hit_name){
     let power = (hit_name*(m_atks.get("red_mage"))/phase_mdef)
     if (crit === 1){
         p1.style.visibility = "visible";
-        hit_name *= 1.5
-        p1.value = "Critical hit! " + power.toFixed(0) + " damage!"
-        hp.value -= power.toFixed(0);
-        FinalCL.push(power.toFixed(0))
-        console.log(power)
+        p1.value = "Critical hit! " + (power *1.5).toFixed(0) + " damage!"
+        hp.value -= (power*1.5).toFixed(0);
+        FinalCL.push(power*1.5).toFixed(0)//error seems to be caused by criticals
+        console.log(power*1.5)
     }else{
         p1.style.visibility = "visible";
         p1.value = power.toFixed(0) + " damage!"
@@ -143,7 +142,7 @@ function CLCalc(crit, hit_name){
 };
 
 var l_sfx = new Audio("LS.mp3")
-  function Chain_Lightning(){ //This attack takes 14 seconds to execute. So it must be very powerful!
+ async function Chain_Lightning(){ //This attack takes 14 seconds to execute. So it must be very powerful!
     let red_mage_mp = document.getElementById("r_mage_name_mp");
     if (red_mage_mp.value < 50){ 
         notEnoughMP()
@@ -249,4 +248,3 @@ var MT_active = false;
         //can't finish this until boss is set up. It'll use a listener to detect hits on her and disable it.
     }
   }
-
