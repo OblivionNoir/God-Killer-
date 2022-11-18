@@ -97,7 +97,7 @@ function Borderof_Life(){ //adjust for use by red mage
             i_menu.classList.remove("fade_quick")
         }, 2000)
        
-        BLExpire()
+        Timer(25000, BLExpire)
     }
 };//function ends here
   function Bloody_Vengeance(){
